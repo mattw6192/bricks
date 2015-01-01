@@ -145,7 +145,7 @@ public class Game extends JPanel {
 	}
 	
 	public void gameWon() {
-		JOptionPane.showMessageDialog(this, "You have completed this round.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "You have completed all Levels!.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
 
