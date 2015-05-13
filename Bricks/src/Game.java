@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 public class Game extends JPanel {
 
 	Ball ball = new Ball(this);
-	Ball ball2 = new Ball(this);
-	
+	//Ball ball2 = new Ball(this);
+	Brick brick = new Brick();
 	
 	Racquet racquet = new Racquet(this);
 
@@ -39,7 +39,7 @@ public class Game extends JPanel {
 		ball.move();
 		//ball2.move();
 		racquet.move();
-		ball2.move();
+		//ball2.move();
 		
 	}
 
@@ -50,8 +50,9 @@ public class Game extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		ball.paint(g2d);
-		ball2.paint(g2d);
+		//ball2.paint(g2d);
 		racquet.paint(g2d);
+		brick.paint(g2d);
 	}
 	
 	public void gameOver() {
@@ -63,10 +64,11 @@ public class Game extends JPanel {
 		JFrame frame = new JFrame("Mini Tennis");
 		Game game = new Game();
 		//game.ball.setXa(-3);
-		game.ball2.setXa(2);
-		game.ball2.setX(3);
-		game.ball2.setY(3);
-		game.ball2.setYa(2);
+		
+		//game.ball2.setXa(2);
+		//game.ball2.setX(3);
+		//game.ball2.setY(3);
+		//game.ball2.setYa(2);
 		
 		frame.add(game);
 		frame.setSize(300, 400);
