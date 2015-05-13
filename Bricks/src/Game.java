@@ -12,7 +12,7 @@ public class Game extends JPanel {
 
 	Ball ball = new Ball(this);
 	//Ball ball2 = new Ball(this);
-	Brick brick = new Brick();
+	Brick brick = new Brick(this);
 	
 	Racquet racquet = new Racquet(this);
 
@@ -77,8 +77,23 @@ public class Game extends JPanel {
 		
 		while (true) {
 			game.move();
+			//System.out.println("brick bounds" + game.brick.getBounds());
+			//System.out.println("ball bounds" + game.ball.getBounds());
+			if (game.ball.getBounds() >= game.brick.getY() && game.ball.getBounds() >= game.brick.getX() 
+					&& game.ball.getBounds() =< (game.brick.getY() + game.brick.getHeight())
+					&& game.ball.getBounds() =< (game.brick.getX() + game.brick.getWidth()){
+				System.out.println("Intersection");
+				hideBrick(game.brick);
+			}
 			game.repaint();
+			
 			Thread.sleep(10);
 		}
+		
+	
+	}
+	
+	public static void hideBrick(Brick brick){
+		brick = null;
 	}
 }
