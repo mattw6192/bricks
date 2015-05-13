@@ -81,8 +81,8 @@ public class Game extends JPanel {
 			//System.out.println("ball bounds" + game.ball.getBounds());
 			
 				System.out.println("Intersection");
-				hideBrick(game.brick);
-				game.repaint();
+				game.hideBrick(game.brick);
+				//game.repaint();
 			
 			game.repaint();
 			
@@ -92,7 +92,8 @@ public class Game extends JPanel {
 	
 	}
 	
-	public static void hideBrick(Brick brick){
-		brick = null;
+	public void hideBrick(Brick brick){
+		brick.setX(-100000);
+		
 	}
 }
