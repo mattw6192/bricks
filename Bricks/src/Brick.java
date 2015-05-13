@@ -15,6 +15,26 @@ public class Brick {
 		this.game = game;
 	}
 	
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public static int getY() {
+		return Y;
+	}
+
+	public static int getWidth() {
+		return WIDTH;
+	}
+
+	public static int getHeight() {
+		return HEIGHT;
+	}
+
 	public void paint(Graphics2D g) {
 		g.fillRect(100, 10, 35, 15);
 	}

@@ -79,12 +79,11 @@ public class Game extends JPanel {
 			game.move();
 			//System.out.println("brick bounds" + game.brick.getBounds());
 			//System.out.println("ball bounds" + game.ball.getBounds());
-			if (game.ball.getBounds() >= game.brick.getY() && game.ball.getBounds() >= game.brick.getX() 
-					&& game.ball.getBounds() =< (game.brick.getY() + game.brick.getHeight())
-					&& game.ball.getBounds() =< (game.brick.getX() + game.brick.getWidth()){
+			
 				System.out.println("Intersection");
 				hideBrick(game.brick);
-			}
+				game.repaint();
+			
 			game.repaint();
 			
 			Thread.sleep(10);
