@@ -1,8 +1,10 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,7 +63,7 @@ public class Game extends JPanel {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		JFrame frame = new JFrame("Mini Tennis");
+		JFrame frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		//game.ball.setXa(-3);
 		
@@ -74,26 +76,24 @@ public class Game extends JPanel {
 		frame.setSize(300, 400);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		System.out.println(game.brick.getBounds());
 		while (true) {
 			game.move();
-			//System.out.println("brick bounds" + game.brick.getBounds());
-			//System.out.println("ball bounds" + game.ball.getBounds());
-			
-				System.out.println("Intersection");
-				game.hideBrick(game.brick);
-				//game.repaint();
-			
 			game.repaint();
 			
+			if (game.ball.getBounds().intersects(game.brick.getBounds())){
+				System.out.println("Intersection");
+				hideBrick(game.brick);
+			}
+			//System.out.println(game.ball.getBounds().;
 			Thread.sleep(10);
 		}
 		
 	
 	}
 	
-	public void hideBrick(Brick brick){
-		brick.setX(-100000);
-		
+	public static void hideBrick(Brick brick){
+		brick.setColor(Color.green);
+		//brick = null;
 	}
 }

@@ -1,18 +1,29 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 
 public class Brick {
-	private static final int Y = 330;
-	private static final int WIDTH = 60;
-	private static final int HEIGHT = 10;
-	int x = 0;
+	private static final int Y = 10;
+	private static final int WIDTH = 35;
+	private static final int HEIGHT = 15;
+	int x = 100;
 	int xa = 0;
 	private Game game;
+	private Color color;
 	
 	public Brick(Game game){
 		System.out.println("Made a brick");
 		this.game = game;
+		color = Color.BLACK;
+	}
+	
+	public Color getColor(){
+		return color;
+	}
+	
+	public void setColor(Color newColor){
+		color = newColor;
 	}
 	
 	public int getX() {
@@ -36,6 +47,7 @@ public class Brick {
 	}
 
 	public void paint(Graphics2D g) {
+		g.setColor(color);
 		g.fillRect(100, 10, 35, 15);
 	}
 	
