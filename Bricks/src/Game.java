@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -78,10 +79,11 @@ public class Game extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println(game.brick.getBounds());
 		while (true) {
+			Rectangle temp = game.brick.getBounds();
 			game.move();
 			game.repaint();
 			
-			if (game.ball.getBounds().intersects(game.brick.getBounds())){
+			if (game.ball.getBounds().intersects(temp)){
 				System.out.println("Intersection");
 				hideBrick(game.brick);
 			}
