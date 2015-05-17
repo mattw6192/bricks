@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 
 
 public class Brick {
-	private static int Y = 10;
-	private static int WIDTH;
-	private static int HEIGHT;
+	private int Y = 10;
+	private int WIDTH;
+	private int HEIGHT;
 	int x;
 	int xa = 0;
 	//private Game game;
@@ -40,17 +40,17 @@ public class Brick {
 		this.x = x;
 	}
 
-	public static int getY() {
-		return Y;
-	}
+	//public static int getY() {
+	//	return Y;
+	//}
 
-	public static int getWidth() {
-		return WIDTH;
-	}
+	//public static int getWidth() {
+	//	return WIDTH;
+	//}
 
-	public static int getHeight() {
-		return HEIGHT;
-	}
+	//public static int getHeight() {
+		//return HEIGHT;
+	//}
 
 	public void paint(Graphics2D g) {
 		if (Alive){
