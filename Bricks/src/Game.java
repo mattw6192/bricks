@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,7 +17,9 @@ public class Game extends JPanel {
 
 	Ball ball = new Ball(this);
 	//Ball ball2 = new Ball(this);
-	Brick brick = new Brick(this);
+	static Brick brick = new Brick(100, 10, 35, 15);
+	static Brick brick2 = new Brick(200, 100, 35, 15);
+	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	
 	Racquet racquet = new Racquet(this);
 
@@ -56,6 +60,7 @@ public class Game extends JPanel {
 		//ball2.paint(g2d);
 		racquet.paint(g2d);
 		brick.paint(g2d);
+		brick2.paint(g2d);
 	}
 	
 	public void gameOver() {
@@ -72,21 +77,26 @@ public class Game extends JPanel {
 		//game.ball2.setX(3);
 		//game.ball2.setY(3);
 		//game.ball2.setYa(2);
-		
+		allBricks.add(brick);
+		allBricks.add(brick2);
 		frame.add(game);
 		frame.setSize(300, 400);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		System.out.println(game.brick.getBounds());
+		System.out.println(game.brick2.getBounds());
 		while (true) {
 			Rectangle temp = game.brick.getBounds();
 			game.move();
 			game.repaint();
-			
-			if (game.ball.getBounds().intersects(temp)){
-				System.out.println("Intersection");
-				hideBrick(game.brick);
+			for(int i = 0; i<allBricks.size(); i++){
+				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
+					System.out.println("Intersection with Brick " + i);
+					hideBrick(allBricks.get(i));
+				}
+				
 			}
+			
 			//System.out.println(game.ball.getBounds().;
 			Thread.sleep(10);
 		}
@@ -94,13 +104,13 @@ public class Game extends JPanel {
 	
 	}
 	
-	public static void hideBrick(Brick brick){
-		brick.setColor(Color.BLUE);
+	public static void hideBrick(Brick newbrick){
+		newbrick.setColor(Color.BLUE);
 		//brick = null;
 		
-		brick.getBounds().setBounds(-10, -10, 0, 0);
-		brick.setAlive(false);
-		brick = null;
+		newbrick.getBounds().setBounds(-10, -10, 0, 0);
+		newbrick.setAlive(false);
+		newbrick = null;
 		
 	}
 }

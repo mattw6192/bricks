@@ -4,18 +4,22 @@ import java.awt.Rectangle;
 
 
 public class Brick {
-	private static final int Y = 10;
-	private static final int WIDTH = 35;
-	private static final int HEIGHT = 15;
-	int x = 100;
+	private static int Y = 10;
+	private static int WIDTH;
+	private static int HEIGHT;
+	int x;
 	int xa = 0;
-	private Game game;
+	//private Game game;
 	private Color color;
 	private Boolean Alive;
 	
-	public Brick(Game game){
+	public Brick(int startX,int startY,int startWidth,int startHeight){
 		System.out.println("Made a brick");
-		this.game = game;
+		//this.game = game;
+		x = startX;
+		Y = startY;
+		WIDTH = startWidth;
+		HEIGHT = startHeight;
 		color = Color.BLACK;
 		Alive = true;
 	}
@@ -51,7 +55,7 @@ public class Brick {
 	public void paint(Graphics2D g) {
 		if (Alive){
 			g.setColor(color);
-			g.fillRect(100, 10, 35, 15);
+			g.fillRect(x, Y, WIDTH, HEIGHT);
 		}
 	}
 	
