@@ -93,7 +93,12 @@ public class Game extends JPanel {
 	}
 	
 	public static void hideBrick(Brick brick){
-		brick.setColor(Color.green);
+		brick.setColor(Color.BLUE);
 		//brick = null;
+		
+		brick.getBounds().setBounds(-10, -10, 0, 0);
+		brick.setAlive(false);
+		brick = null;
+		
 	}
 }

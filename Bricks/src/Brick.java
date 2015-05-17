@@ -11,11 +11,13 @@ public class Brick {
 	int xa = 0;
 	private Game game;
 	private Color color;
+	private Boolean Alive;
 	
 	public Brick(Game game){
 		System.out.println("Made a brick");
 		this.game = game;
 		color = Color.BLACK;
+		Alive = true;
 	}
 	
 	public Color getColor(){
@@ -47,10 +49,22 @@ public class Brick {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(color);
-		g.fillRect(100, 10, 35, 15);
+		if (Alive){
+			g.setColor(color);
+			g.fillRect(100, 10, 35, 15);
+		}
 	}
 	
+	
+	
+	public Boolean getAlive() {
+		return Alive;
+	}
+
+	public void setAlive(Boolean alive) {
+		Alive = alive;
+	}
+
 	public Rectangle getBounds() {
 		return new Rectangle(x, Y, WIDTH, HEIGHT);
 	}
