@@ -19,46 +19,46 @@ public class Game extends JPanel {
 	//Ball ball2 = new Ball(this);
 	
 	//top row of bricks from left to right
-	static Brick brick = new Brick(10, 10, 35, 15);
-	static Brick brick2 = new Brick(50, 10, 35, 15);
-	static Brick brick3 = new Brick(90, 10, 35, 15);
-	static Brick brick4 = new Brick(130, 10, 35, 15);
-	static Brick brick5 = new Brick(170, 10, 35, 15);
-	static Brick brick6 = new Brick(210, 10, 35, 15);
-	static Brick brick7 = new Brick(250, 10, 35, 15);
+	static Brick brick = new Brick(10, 10, 35, 15, 4);
+	static Brick brick2 = new Brick(50, 10, 35, 15, 4);
+	static Brick brick3 = new Brick(90, 10, 35, 15, 4);
+	static Brick brick4 = new Brick(130, 10, 35, 15, 4);
+	static Brick brick5 = new Brick(170, 10, 35, 15, 4);
+	static Brick brick6 = new Brick(210, 10, 35, 15, 4);
+	static Brick brick7 = new Brick(250, 10, 35, 15, 4);
 	
 	// second row of bricks from left to right
-	static Brick brick2a = new Brick(28, 30, 35, 15);
-	static Brick brick2b = new Brick(68, 30, 35, 15);
-	static Brick brick2c = new Brick(108, 30, 35, 15);
-	static Brick brick2d = new Brick(148, 30, 35, 15);
-	static Brick brick2e = new Brick(188, 30, 35, 15);
-	static Brick brick2f = new Brick(228, 30, 35, 15);
+	static Brick brick2a = new Brick(28, 30, 35, 15, 4);
+	static Brick brick2b = new Brick(68, 30, 35, 15, 4);
+	static Brick brick2c = new Brick(108, 30, 35, 15, 4);
+	static Brick brick2d = new Brick(148, 30, 35, 15, 4);
+	static Brick brick2e = new Brick(188, 30, 35, 15, 4);
+	static Brick brick2f = new Brick(228, 30, 35, 15, 4);
 	
 	// third row of bricks from left to right
-	static Brick brick3a = new Brick(50, 50, 35, 15);
-	static Brick brick3b = new Brick(90, 50, 35, 15);
-	static Brick brick3c = new Brick(130, 50, 35, 15);
-	static Brick brick3d = new Brick(170, 50, 35, 15);
-	static Brick brick3e = new Brick(210, 50, 35, 15);
+	static Brick brick3a = new Brick(50, 50, 35, 15, 3);
+	static Brick brick3b = new Brick(90, 50, 35, 15, 3);
+	static Brick brick3c = new Brick(130, 50, 35, 15, 3);
+	static Brick brick3d = new Brick(170, 50, 35, 15, 3);
+	static Brick brick3e = new Brick(210, 50, 35, 15, 3);
 	
 	// fourth row of bricks from left to right
-	static Brick brick4a = new Brick(70, 70, 35, 15);
-	static Brick brick4b = new Brick(110, 70, 35, 15);
-	static Brick brick4c = new Brick(150, 70, 35, 15);
-	static Brick brick4d = new Brick(190, 70, 35, 15);
+	static Brick brick4a = new Brick(70, 70, 35, 15, 2);
+	static Brick brick4b = new Brick(110, 70, 35, 15, 2);
+	static Brick brick4c = new Brick(150, 70, 35, 15, 2);
+	static Brick brick4d = new Brick(190, 70, 35, 15, 2);
 	
 	// fifth row of bricks from left to right
-	static Brick brick5a = new Brick(90, 90, 35, 15);
-	static Brick brick5b = new Brick(130, 90, 35, 15);
-	static Brick brick5c = new Brick(170, 90, 35, 15);
+	static Brick brick5a = new Brick(90, 90, 35, 15, 2);
+	static Brick brick5b = new Brick(130, 90, 35, 15, 2);
+	static Brick brick5c = new Brick(170, 90, 35, 15, 2);
 	
 	// sixth row of bricks from left to right
-	static Brick brick6a = new Brick(108, 110, 35, 15);
-	static Brick brick6b = new Brick(148, 110, 35, 15);
+	static Brick brick6a = new Brick(108, 110, 35, 15, 1);
+	static Brick brick6b = new Brick(148, 110, 35, 15, 1);
 	
 	// final row of bricks 
-	static Brick brick7a = new Brick(130, 130, 35, 15);
+	static Brick brick7a = new Brick(130, 130, 35, 15, 4);
 	
 	
 	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -190,20 +190,26 @@ public class Game extends JPanel {
 		allBricks.add(brick6a);
 		allBricks.add(brick6b);
 		allBricks.add(brick7a);
-		
-		for (int i = 0; i < allBricks.size(); i+= 2){ //set the colors of the bricks.
-			allBricks.get(i).setColor(Color.BLUE);
+		for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
+			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
+			if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
+			if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
+			if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
 		}
 		
-		for (Brick b : allBricks){
-			if (b.getColor().equals(Color.BLUE)){
-				b.setHits(3);
-				System.out.println("hits for blue: "+b.getHits());
-			}
-			else{
-				b.setHits(4);
-			}
-		}
+		//for (int i = 0; i < allBricks.size(); i+= 2){ //set the colors of the bricks.
+		//	allBricks.get(i).setColor(Color.BLUE);
+		//}
+		
+		//or (Brick b : allBricks){
+		//	if (b.getColor().equals(Color.BLUE)){
+			//	b.setHits(3);
+				//System.out.println("hits for blue: "+b.getHits());
+		//	}
+			//else{
+				//b.setHits(4);
+			//}
+		//}
 		frame.add(game);
 		frame.setSize(300, 400);
 		frame.setLocationRelativeTo(game);
@@ -214,11 +220,13 @@ public class Game extends JPanel {
 		//System.out.println(game.brick3.getBounds());
 		//System.out.println(game.brick4.getBounds());
 		//System.out.println(game.brick5.getBounds());
+		
 		while (true) {
 			Rectangle temp = game.brick.getBounds();
 			game.move();
 			game.repaint();
 			for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
+				
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					//System.out.println("Intersection with Brick " + i);
 					checkSideHits(allBricks.get(i), game.ball);
@@ -226,8 +234,9 @@ public class Game extends JPanel {
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
 				    
 				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
-					game.ball.xa = game.ball.xa * (-1);
+					//game.ball.xa = game.ball.xa * (-1);
 					
+					if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 					if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
 					if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
 					if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
@@ -258,20 +267,12 @@ public class Game extends JPanel {
 	
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static void checkSideHits(Brick tempBrick, Ball tempBall){
-		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 2)) ){
-			//&& (getBounds().getY() > game.racquet.getBounds().getY())
+		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 1)) ){
 			tempBall.setXa(tempBall.getXa() * (-1));
 			tempBall.setYa(tempBall.getYa() * (-1));
-			System.out.println("Right Side Intersection with Brick");
-			System.out.println("Ball " + tempBall.getBounds());
-			System.out.println("Brick " + tempBrick.getBounds());
-		}else if (((tempBall.getBounds().getX() + tempBall.DIAMETER) <= (tempBrick.getBounds().getX() + 2))){
-			//&& (getBounds().getY()) > game.racquet.getBounds().getY()
+		}else if (((tempBall.getBounds().getX() + tempBall.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
 			tempBall.setXa(tempBall.getXa() * (-1));
 			tempBall.setYa(tempBall.getYa() * (-1));
-			System.out.println("Left Side Intersection with Brick");
-			System.out.println("Ball " + tempBall.getBounds());
-			System.out.println("Brick " + tempBrick.getBounds());
 		}
 	}
 	

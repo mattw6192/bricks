@@ -26,7 +26,7 @@ public class Brick {
 		this.hits -= 1;
 	}
 
-	public Brick(int startX,int startY,int startWidth,int startHeight){
+	public Brick(int startX,int startY,int startWidth,int startHeight, int starthits){
 		//System.out.println("Made a brick");
 		//this.game = game;
 		x = startX;
@@ -35,6 +35,7 @@ public class Brick {
 		HEIGHT = startHeight;
 		color = Color.BLACK;
 		Alive = true;
+		hits = starthits;
 	}
 	
 	public Color getColor(){

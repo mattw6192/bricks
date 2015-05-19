@@ -28,20 +28,12 @@ public class Ball {
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
 			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
-				//&& (getBounds().getY() > game.racquet.getBounds().getY())
 				ya = ya * (-1);
 				xa = xa * (-1);
-				System.out.println("Right Side Intersection");
-				System.out.println("Ball " + getBounds());
-				System.out.println("racquet " + game.racquet.getBounds());
 			// This conditional checks for collisions with the left side of the racquet
 			}else if (((getBounds().getX() + DIAMETER) <= (game.racquet.getBounds().getX() + 3))){
-				//&& (getBounds().getY()) > game.racquet.getBounds().getY()
 				ya = ya * (-1);
 				xa = xa * (-1);
-				System.out.println("Left Side Intersection");
-				System.out.println("Ball " + getBounds());
-				System.out.println("racquet " + game.racquet.getBounds());
 			}
 			else{
 				ya = -1;
