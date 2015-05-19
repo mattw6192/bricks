@@ -25,8 +25,26 @@ public class Ball {
 		if (y + ya > game.getHeight() - DIAMETER)
 			game.gameOver();
 		if (collision()){
-			ya = -1;
-			y = game.racquet.getTopY() - DIAMETER;
+			
+			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 3)) ){
+				//&& (getBounds().getY() > game.racquet.getBounds().getY())
+				ya = ya * (-1);
+				xa = xa * (-1);
+				System.out.println("Right Side Intersection");
+				System.out.println("Ball " + getBounds());
+				System.out.println("racquet " + game.racquet.getBounds());
+			}else if (((getBounds().getX() + DIAMETER) <= (game.racquet.getBounds().getX() + 3))){
+				//&& (getBounds().getY()) > game.racquet.getBounds().getY()
+				ya = ya * (-1);
+				xa = xa * (-1);
+				System.out.println("Left Side Intersection");
+				System.out.println("Ball " + getBounds());
+				System.out.println("racquet " + game.racquet.getBounds());
+			}
+			else{
+				ya = -1;
+				//y = game.racquet.getTopY() - DIAMETER;
+			}
 		}
 		x = x + xa;
 		y = y + ya;
