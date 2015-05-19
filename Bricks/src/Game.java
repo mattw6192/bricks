@@ -224,14 +224,22 @@ public class Game extends JPanel {
 					checkSideHits(allBricks.get(i), game.ball);
 					int currentHits = allBricks.get(i).getHits();
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
-				    game.ball.ya = game.ball.ya * (-1);
+				    
+				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 					game.ball.xa = game.ball.xa * (-1);
+					
+					if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
+					if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
+					if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+					
 					System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
-					if (allBricks.get(i).getHits() <= 0){ // heres where im trying to remove a brick if its hit counter is 0
+					if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
 						
 					}
+
+					
 					
 					
 					
