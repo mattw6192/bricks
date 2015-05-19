@@ -2,7 +2,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Ball {
-	private static final int DIAMETER = 10;
+	static final int DIAMETER = 10;
 	int x = 0;
 	int y = 0;
 	int xa = 1;
@@ -25,14 +25,16 @@ public class Ball {
 		if (y + ya > game.getHeight() - DIAMETER)
 			game.gameOver();
 		if (collision()){
-			
-			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 3)) ){
+			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the racquet
+			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
 				//&& (getBounds().getY() > game.racquet.getBounds().getY())
 				ya = ya * (-1);
 				xa = xa * (-1);
 				System.out.println("Right Side Intersection");
 				System.out.println("Ball " + getBounds());
 				System.out.println("racquet " + game.racquet.getBounds());
+			// This conditional checks for collisions with the left side of the racquet
 			}else if (((getBounds().getX() + DIAMETER) <= (game.racquet.getBounds().getX() + 3))){
 				//&& (getBounds().getY()) > game.racquet.getBounds().getY()
 				ya = ya * (-1);

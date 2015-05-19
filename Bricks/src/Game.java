@@ -206,8 +206,10 @@ public class Game extends JPanel {
 			for(int i = 0; i<allBricks.size(); i++){
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					//System.out.println("Intersection with Brick " + i);
+					checkSideHits(allBricks.get(i), game.ball);
 					hideBrick(allBricks.get(i), game.ball);
 					allBricks.remove(i);
+					
 				}
 			if (allBricks.isEmpty()){
 				game.gameWon();
@@ -219,6 +221,25 @@ public class Game extends JPanel {
 		}
 		
 	
+	}
+	
+	// This method checks for collisons with the sides of bricks and changes the course of the ball accordingly 
+	public static void checkSideHits(Brick tempBrick, Ball tempBall){
+		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 2)) ){
+			//&& (getBounds().getY() > game.racquet.getBounds().getY())
+			tempBall.setXa(tempBall.getXa() * (-1));
+			tempBall.setYa(tempBall.getYa() * (-1));
+			System.out.println("Right Side Intersection with Brick");
+			System.out.println("Ball " + tempBall.getBounds());
+			System.out.println("Brick " + tempBrick.getBounds());
+		}else if (((tempBall.getBounds().getX() + tempBall.DIAMETER) <= (tempBrick.getBounds().getX() + 2))){
+			//&& (getBounds().getY()) > game.racquet.getBounds().getY()
+			tempBall.setXa(tempBall.getXa() * (-1));
+			tempBall.setYa(tempBall.getYa() * (-1));
+			System.out.println("Left Side Intersection with Brick");
+			System.out.println("Ball " + tempBall.getBounds());
+			System.out.println("Brick " + tempBrick.getBounds());
+		}
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
