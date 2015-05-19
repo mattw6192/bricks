@@ -22,8 +22,15 @@ public class Ball {
 			xa = -1;
 		if (y + ya < 0)
 			ya = 1;
-		if (y + ya > game.getHeight() - DIAMETER)
-			game.gameOver();
+		if (y + ya > game.getHeight() - DIAMETER){
+			System.out.println("Lives left: " + (game.Lives - 1));
+			game.Lives = game.Lives - 1;
+		
+			if (game.isGameOver() == true){
+				game.gameOver();
+			}else{
+				game.started = false;
+			}}
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet

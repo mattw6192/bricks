@@ -21,6 +21,7 @@ public class Game extends JPanel implements MouseListener {
 	//Ball ball2 = new Ball(this);
 	
 	Boolean started = false;
+	int Lives = 3;
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -134,6 +135,14 @@ public class Game extends JPanel implements MouseListener {
 		
 	}
 
+	public boolean isGameOver(){
+		if (Lives <= 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
