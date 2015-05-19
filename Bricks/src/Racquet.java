@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
 public class Racquet {
 	private static final int Y = 330;
@@ -9,17 +11,21 @@ public class Racquet {
 	int x = 0;
 	int xa = 0;
 	private Game game;
+	//boolean started = false;
 
 	public Racquet(Game game) {
 		this.game = game;
 	}
 
 	public void move() {
+		
 		if (x + xa > 0 && x + xa < game.getWidth() - WIDTH)
 			x = x + xa;
+		
 	}
 
 	public void paint(Graphics2D g) {
+		g.setColor(Color.GRAY);
 		g.fillRect(x, Y, WIDTH, HEIGHT);
 	}
 
@@ -27,6 +33,16 @@ public class Racquet {
 		xa = 0;
 	}
 
+	public void MousePressed(MouseEvent e){
+		
+		
+	}
+	
+	public void MouseClicked(MouseEvent e){
+		
+	}
+	
+	
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 			xa = -5;

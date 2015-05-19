@@ -7,16 +7,20 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Game extends JPanel {
+public class Game extends JPanel implements MouseListener {
 
-	Ball ball = new Ball(this, 130, 210);
+	Ball ball = new Ball(this, 20, 320);
 	//Ball ball2 = new Ball(this);
+	
+	Boolean started = false;
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -81,12 +85,50 @@ public class Game extends JPanel {
 				racquet.keyPressed(e);
 			}
 		});
+		addMouseListener(new MouseListener(){
+			public void MousePressed(MouseEvent e){
+				if(e.getButton() == MouseEvent.BUTTON1)
+			    {
+			      System.out.println("left button click");
+			    }	    
+			    else if(e.getButton() == MouseEvent.BUTTON3)
+			    {
+			      System.out.println("right button click");;
+			    }
+			}
+
+			public void mouseClicked(MouseEvent arg0) {
+				started = true;
+			}
+
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+		});
 		setFocusable(true);
 	}
 	
 	private void move() {
-		ball.move();
+		//ball.move();
 		//ball2.move();
+		if (started == true){
+			ball.move();
+		}else{
+			ball.setX((int) racquet.getBounds().getX() + 20);
+			ball.setY((int) racquet.getBounds().getY() - 10);
+		}
 		racquet.move();
 		//ball2.move();
 		
@@ -288,6 +330,36 @@ public class Game extends JPanel {
 		int saveYa = saveBall.getYa();
 		saveBall.setYa(saveYa * (-1));
 		
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 }
