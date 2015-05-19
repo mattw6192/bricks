@@ -12,7 +12,16 @@ public class Brick {
 	//private Game game;
 	private Color color;
 	private Boolean Alive;
+	private int hits;
 	
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
+	}
+
 	public Brick(int startX,int startY,int startWidth,int startHeight){
 		//System.out.println("Made a brick");
 		//this.game = game;
@@ -66,7 +75,7 @@ public class Brick {
 	}
 
 	public void setAlive(Boolean alive) {
-		Alive = alive;
+		Alive = false;
 	}
 
 	public Rectangle getBounds() {

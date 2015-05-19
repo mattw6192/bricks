@@ -190,6 +190,20 @@ public class Game extends JPanel {
 		allBricks.add(brick6a);
 		allBricks.add(brick6b);
 		allBricks.add(brick7a);
+		
+		for (int i = 0; i < allBricks.size(); i+= 2){ //set the colors of the bricks.
+			allBricks.get(i).setColor(Color.BLUE);
+		}
+		
+		for (Brick b : allBricks){
+			if (b.getColor().equals(Color.BLUE)){
+				b.setHits(3);
+				System.out.println("hits for blue: "+b.getHits());
+			}
+			else{
+				b.setHits(4);
+			}
+		}
 		frame.add(game);
 		frame.setSize(300, 400);
 		frame.setVisible(true);
@@ -207,8 +221,14 @@ public class Game extends JPanel {
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					//System.out.println("Intersection with Brick " + i);
 					checkSideHits(allBricks.get(i), game.ball);
-					hideBrick(allBricks.get(i), game.ball);
-					allBricks.remove(i);
+					allBricks.get(i).setHits(allBricks.get(i).getHits()-1);
+					System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
+					if (allBricks.get(i).getHits() <= 0){
+						hideBrick(allBricks.get(i), game.ball);
+						allBricks.remove(i);
+					}
+					
+		
 					
 				}
 			if (allBricks.isEmpty()){
@@ -223,7 +243,7 @@ public class Game extends JPanel {
 	
 	}
 	
-	// This method checks for collisons with the sides of bricks and changes the course of the ball accordingly 
+	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static void checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 2)) ){
 			//&& (getBounds().getY() > game.racquet.getBounds().getY())
