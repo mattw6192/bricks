@@ -217,13 +217,15 @@ public class Game extends JPanel {
 			Rectangle temp = game.brick.getBounds();
 			game.move();
 			game.repaint();
-			for(int i = 0; i<allBricks.size(); i++){
+			for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					//System.out.println("Intersection with Brick " + i);
 					checkSideHits(allBricks.get(i), game.ball);
-					allBricks.get(i).setHits(allBricks.get(i).getHits()-1);
+					int currentHits = allBricks.get(i).getHits();
+				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+					
 					System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
-					if (allBricks.get(i).getHits() <= 0){
+					if (allBricks.get(i).getHits() <= 0){ // heres where im trying to remove a brick if its hit counter is 0
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
 					}
@@ -263,7 +265,7 @@ public class Game extends JPanel {
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
-		newbrick.setColor(Color.BLUE);
+		//newbrick.setColor(Color.BLUE);
 		//brick = null;
 		
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);

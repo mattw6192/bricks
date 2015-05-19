@@ -21,6 +21,10 @@ public class Brick {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
+	
+	public void subtractHit(){
+		this.hits -= 1;
+	}
 
 	public Brick(int startX,int startY,int startWidth,int startHeight){
 		//System.out.println("Made a brick");
