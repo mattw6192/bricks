@@ -223,14 +223,14 @@ public class Game extends JPanel {
 					checkSideHits(allBricks.get(i), game.ball);
 					int currentHits = allBricks.get(i).getHits();
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
-					
+		
 					System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
 					if (allBricks.get(i).getHits() <= 0){ // heres where im trying to remove a brick if its hit counter is 0
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
 					}
 					
-		
+					
 					
 				}
 			if (allBricks.isEmpty()){
