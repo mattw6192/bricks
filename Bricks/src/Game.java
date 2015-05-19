@@ -241,7 +241,7 @@ public class Game extends JPanel {
 					if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
 					if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
 					
-					System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
+					//System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
 					if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
