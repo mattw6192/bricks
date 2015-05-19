@@ -14,7 +14,7 @@ public class Brick {
 	private Boolean Alive;
 	
 	public Brick(int startX,int startY,int startWidth,int startHeight){
-		System.out.println("Made a brick");
+		//System.out.println("Made a brick");
 		//this.game = game;
 		x = startX;
 		Y = startY;

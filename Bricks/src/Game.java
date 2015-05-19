@@ -194,11 +194,11 @@ public class Game extends JPanel {
 		frame.setSize(300, 400);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		System.out.println(game.brick.getBounds());
-		System.out.println(game.brick2.getBounds());
-		System.out.println(game.brick3.getBounds());
-		System.out.println(game.brick4.getBounds());
-		System.out.println(game.brick5.getBounds());
+		//System.out.println(game.brick.getBounds());
+		//System.out.println(game.brick2.getBounds());
+		//System.out.println(game.brick3.getBounds());
+		//System.out.println(game.brick4.getBounds());
+		//System.out.println(game.brick5.getBounds());
 		while (true) {
 			Rectangle temp = game.brick.getBounds();
 			game.move();
