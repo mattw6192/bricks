@@ -15,13 +15,52 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel {
 
-	Ball ball = new Ball(this);
+	Ball ball = new Ball(this, 130, 210);
 	//Ball ball2 = new Ball(this);
-	static Brick brick = new Brick(100, 10, 35, 15);
-	static Brick brick2 = new Brick(200, 100, 35, 15);
-	static Brick brick3 = new Brick(200, 10, 35, 15);
-	static Brick brick4 = new Brick(100, 100, 35, 15);
-	static Brick brick5 = new Brick(50, 200, 35, 15);
+	
+	//top row of bricks from left to right
+	static Brick brick = new Brick(10, 10, 35, 15);
+	static Brick brick2 = new Brick(50, 10, 35, 15);
+	static Brick brick3 = new Brick(90, 10, 35, 15);
+	static Brick brick4 = new Brick(130, 10, 35, 15);
+	static Brick brick5 = new Brick(170, 10, 35, 15);
+	static Brick brick6 = new Brick(210, 10, 35, 15);
+	static Brick brick7 = new Brick(250, 10, 35, 15);
+	
+	// second row of bricks from left to right
+	static Brick brick2a = new Brick(28, 30, 35, 15);
+	static Brick brick2b = new Brick(68, 30, 35, 15);
+	static Brick brick2c = new Brick(108, 30, 35, 15);
+	static Brick brick2d = new Brick(148, 30, 35, 15);
+	static Brick brick2e = new Brick(188, 30, 35, 15);
+	static Brick brick2f = new Brick(228, 30, 35, 15);
+	
+	// third row of bricks from left to right
+	static Brick brick3a = new Brick(50, 50, 35, 15);
+	static Brick brick3b = new Brick(90, 50, 35, 15);
+	static Brick brick3c = new Brick(130, 50, 35, 15);
+	static Brick brick3d = new Brick(170, 50, 35, 15);
+	static Brick brick3e = new Brick(210, 50, 35, 15);
+	
+	// fourth row of bricks from left to right
+	static Brick brick4a = new Brick(70, 70, 35, 15);
+	static Brick brick4b = new Brick(110, 70, 35, 15);
+	static Brick brick4c = new Brick(150, 70, 35, 15);
+	static Brick brick4d = new Brick(190, 70, 35, 15);
+	
+	// fifth row of bricks from left to right
+	static Brick brick5a = new Brick(90, 90, 35, 15);
+	static Brick brick5b = new Brick(130, 90, 35, 15);
+	static Brick brick5c = new Brick(170, 90, 35, 15);
+	
+	// sixth row of bricks from left to right
+	static Brick brick6a = new Brick(108, 110, 35, 15);
+	static Brick brick6b = new Brick(148, 110, 35, 15);
+	
+	// final row of bricks 
+	static Brick brick7a = new Brick(130, 130, 35, 15);
+	
+	
 	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	
 	Racquet racquet = new Racquet(this);
@@ -67,10 +106,46 @@ public class Game extends JPanel {
 		brick3.paint(g2d);
 		brick4.paint(g2d);
 		brick5.paint(g2d);
+		brick6.paint(g2d);
+		brick7.paint(g2d);
+		
+		brick2a.paint(g2d);
+		brick2b.paint(g2d);
+		brick2c.paint(g2d);
+		brick2d.paint(g2d);
+		brick2e.paint(g2d);
+		brick2f.paint(g2d);
+		
+		brick3a.paint(g2d);
+		brick3b.paint(g2d);
+		brick3c.paint(g2d);
+		brick3d.paint(g2d);
+		brick3e.paint(g2d);
+		
+		brick4a.paint(g2d);
+		brick4b.paint(g2d);
+		brick4c.paint(g2d);
+		brick4d.paint(g2d);
+		
+		brick5a.paint(g2d);
+		brick5b.paint(g2d);
+		brick5c.paint(g2d);
+		
+		brick6a.paint(g2d);
+		brick6b.paint(g2d);
+		
+		brick7a.paint(g2d);
+		
 	}
 	
 	public void gameOver() {
-		JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+		JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.ERROR_MESSAGE);
+		System.exit(ABORT);
+	}
+	
+	public void gameWon() {
+		
+		JOptionPane.showMessageDialog(this, "You have completed this round.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
 
@@ -92,6 +167,29 @@ public class Game extends JPanel {
 		allBricks.add(brick3);
 		allBricks.add(brick4);
 		allBricks.add(brick5);
+		allBricks.add(brick6);
+		allBricks.add(brick7);
+		allBricks.add(brick2a);
+		allBricks.add(brick2b);
+		allBricks.add(brick2c);
+		allBricks.add(brick2d);
+		allBricks.add(brick2e);
+		allBricks.add(brick2f);
+		allBricks.add(brick3a);
+		allBricks.add(brick3b);
+		allBricks.add(brick3c);
+		allBricks.add(brick3d);
+		allBricks.add(brick3e);
+		allBricks.add(brick4a);
+		allBricks.add(brick4b);
+		allBricks.add(brick4c);
+		allBricks.add(brick4d);
+		allBricks.add(brick5a);
+		allBricks.add(brick5b);
+		allBricks.add(brick5c);
+		allBricks.add(brick6a);
+		allBricks.add(brick6b);
+		allBricks.add(brick7a);
 		frame.add(game);
 		frame.setSize(300, 400);
 		frame.setVisible(true);
@@ -108,10 +206,12 @@ public class Game extends JPanel {
 			for(int i = 0; i<allBricks.size(); i++){
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					System.out.println("Intersection with Brick " + i);
-					hideBrick(allBricks.get(i));
+					hideBrick(allBricks.get(i), game.ball);
 					allBricks.remove(i);
 				}
-				
+			if (allBricks.isEmpty()){
+				game.gameWon();
+			}
 			}
 			
 			//System.out.println(game.ball.getBounds().;
@@ -121,13 +221,17 @@ public class Game extends JPanel {
 	
 	}
 	
-	public static void hideBrick(Brick newbrick){
+	public static void hideBrick(Brick newbrick, Ball saveBall){
 		newbrick.setColor(Color.BLUE);
 		//brick = null;
 		
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
 		newbrick = null;
+		int saveXa = saveBall.getXa();
+		//saveBall.setXa(saveXa * (-1));
+		int saveYa = saveBall.getYa();
+		saveBall.setYa(saveYa * (-1));
 		
 		
 	}

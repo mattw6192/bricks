@@ -9,8 +9,10 @@ public class Ball {
 	int ya = 1;
 	private Game game;
 
-	public Ball(Game game) {
-		this.game= game;
+	public Ball(Game game, int X, int Y) {
+		this.game = game;
+		x = X;
+		y = Y;
 	}
 
 	void move() {
@@ -29,6 +31,8 @@ public class Ball {
 		x = x + xa;
 		y = y + ya;
 	}
+	
+	
 
 	public int getX() {
 		return x;
