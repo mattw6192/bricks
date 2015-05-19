@@ -205,7 +205,7 @@ public class Game extends JPanel {
 			game.repaint();
 			for(int i = 0; i<allBricks.size(); i++){
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
-					System.out.println("Intersection with Brick " + i);
+					//System.out.println("Intersection with Brick " + i);
 					hideBrick(allBricks.get(i), game.ball);
 					allBricks.remove(i);
 				}
