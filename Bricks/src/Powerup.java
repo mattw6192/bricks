@@ -110,17 +110,17 @@ public class Powerup {
 	}
 	
 	public int getPowerNum(){
-		if (ability == "Freeze"){return 1;};
-		if (ability == "Ball Increase"){return 2;};
-		if (ability == "Paddle Increase"){return 3;};
-		if (ability == "Speed Up"){return 4;};
-		if (ability == "Slow Down"){return 5;};
-		if (ability == "Paddle Decrease"){return 6;};
-		if (ability == "Multiple Balls"){return 7;};
-		if (ability == "Ball Decrease"){return 8;};
-		if (ability == "Double Points"){return 9;};
-		if (ability == "Fireball"){return 10;};
-		if (ability == "Metal Ball"){return 11;};
+		if (ability.equals("Freeze")){return 1;};
+		if (ability.equals("Ball Increase")){return 2;};
+		if (ability.equals("Paddle Increase")){return 3;};
+		if (ability.equals("Speed Up")){return 4;};
+		if (ability.equals("Slow Down")){return 5;};
+		if (ability.equals("Paddle Decrease")){return 6;};
+		if (ability.equals("Multiple Balls")){return 7;};
+		if (ability.equals("Ball Decrease")){return 8;};
+		if (ability.equals("Double Points")){return 9;};
+		if (ability.equals("Fireball")){return 10;};
+		if (ability.equals("Metal Ball")){return 11;};
 		return 12;
 		
 	}

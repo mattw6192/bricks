@@ -334,13 +334,13 @@ public class Game extends JPanel implements MouseListener {
 		//System.out.println("Random num " + tempRandNum + " Ball Size Before: " + tempBallSize);
 		if (tempRandNum == 7 || tempRandNum == 2){
 			tempBallSize = tempBallSize + 1;
-			Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+			Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
 			
 			//System.out.println("Ball Increase - New Level " + tempBallSize);
 			return powerup;
 		}
 		tempBallSize = tempBallSize + 1;
-		Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+		Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
 		
 		//System.out.println("Ball Decrease - New Level " + tempBallSize);
 		return powerup;
