@@ -9,6 +9,7 @@ public class Ball {
 	int ya = 1;
 	private Game game;
 	int speed;
+	int ballMods = 0;
 
 	public Ball(Game game, int X, int Y) {
 		this.game = game;
@@ -17,6 +18,18 @@ public class Ball {
 		speed = 1;
 	}
 
+	public void addBallMod(){
+		ballMods = ballMods + 1;
+	}
+	
+	public void SubtractBallMod(){
+		ballMods = ballMods - 1;
+	}
+	
+	public int getBallMods(){
+		return ballMods;
+	}
+	
 	void move() {
 		if (x + xa < 0)
 			xa = 1;
@@ -36,7 +49,8 @@ public class Ball {
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
-			if (game.hold = true){
+			
+			if (game.hold == true){
 				game.started = false;
 			}
 			

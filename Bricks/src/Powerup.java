@@ -6,7 +6,7 @@ public class Powerup {
 	static final int DIAMETER = 10;
 	int x = 0;
 	int y = 0;
-	int xa = 1;
+	int xa = 0;
 	int ya = 1;
 	private Game game;
 	int duration; // duration of the powerup
@@ -28,6 +28,8 @@ public class Powerup {
 		ability = powerup;
 		int caseNumber = getPowerNum();
 		performAction(caseNumber);
+		ballMods = 0;
+		paddleMods = 0;
 	}
 
 	public void performAction(int caseNumber){
@@ -42,12 +44,25 @@ public class Powerup {
 		case 9:
 			break; // not ready
 		case 8:
-			game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
+			
+			if (game.ball.ballMods >= -3){
+				game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
+				game.ball.SubtractBallMod();
+				System.out.println("Ball Decrease - New level "  + game.ball.ballMods);
+			}else{
+				System.out.println("Powerup not availiable - the ball size is too low.");
+			}
 			break; // not ready
 		case 7:
 			break; // not ready
 		case 6:
-			game.racquet.getBounds().width = (int) (game.racquet.getBounds().width * .9);
+			if (game.racquet.racquetMods >= -5){
+				game.racquet.WIDTH = (int) (game.racquet.WIDTH * .9);
+				game.racquet.SubtractRacquetMod();
+				System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
+			}else{
+				System.out.println("Powerup not availiable - the racquet size is too low.");
+			}
 			break; // not ready
 		case 5:
 			if (game.ball.speed > 1){
@@ -64,10 +79,24 @@ public class Powerup {
 			}
 			break; // not ready
 		case 3:
-			game.racquet.getBounds().width = (int) (game.racquet.getBounds().width * 1.1);
+			
+			if (game.racquet.racquetMods < 7){
+				game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.15);
+				game.racquet.addRacquetMod();
+				System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
+			}else{
+				System.out.println("Powerup not availiable - the racquet size is too high.");
+			}
 			break; // not ready
 		case 2:
-			game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
+			if (game.ball.ballMods < 5){
+				game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
+				game.ball.addBallMod();
+				System.out.println("Ball Increase - New level "  + game.ball.ballMods);
+			}else{
+				System.out.println("Powerup not availiable - the ball size is too high.");
+			}
+			
 			break; // not ready
 		case 1:
 			game.hold = true;
