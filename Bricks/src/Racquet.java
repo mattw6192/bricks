@@ -6,17 +6,30 @@ import java.awt.event.MouseEvent;
 
 public class Racquet {
 	private static final int Y = 330;
-	private static final int WIDTH = 60;
-	private static final int HEIGHT = 10;
+	int WIDTH = 60;
+	int HEIGHT = 10;
 	int x = 0;
 	int xa = 0;
 	private Game game;
+	int racquetMods = 0;
 	//boolean started = false;
 
 	public Racquet(Game game) {
 		this.game = game;
 	}
 
+	public void addRacquetMod(){
+		racquetMods = racquetMods + 1;
+	}
+	
+	public void SubtractRacquetMod(){
+		racquetMods = racquetMods - 1;
+	}
+	
+	public int getRacquetMods(){
+		return racquetMods;
+	}
+	
 	public void move() {
 		
 		if (x + xa > 0 && x + xa < game.getWidth() - WIDTH)

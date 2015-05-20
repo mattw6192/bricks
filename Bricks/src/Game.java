@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,10 +20,13 @@ public class Game extends JPanel implements MouseListener {
 
 	Ball ball = new Ball(this, 20, 320);
 	//Ball ball2 = new Ball(this);
-	
+	double tempBallSize = 0;
 	Boolean started = false;
 	int Lives = 3;
 	static int Score = 000000;
+	Boolean hold = false;
+	
+	static Random randNum = new Random();
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -101,6 +105,7 @@ public class Game extends JPanel implements MouseListener {
 
 			public void mouseClicked(MouseEvent arg0) {
 				started = true;
+				hold = false;
 			}
 
 			public void mouseEntered(MouseEvent arg0) {
@@ -127,6 +132,7 @@ public class Game extends JPanel implements MouseListener {
 		//ball2.move();
 		if (started == true){
 			ball.move();
+			//hold = false;
 		}else{
 			ball.setX((int) racquet.getBounds().getX() + 20);
 			ball.setY((int) racquet.getBounds().getY() - 10);
@@ -268,12 +274,13 @@ public class Game extends JPanel implements MouseListener {
 		while (true) {
 			game.move();
 			game.repaint();
-			for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
+			for(int i = 0; i<allBricks.size(); i++){ 
 				
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					Score += 100;
 					checkSideHits(allBricks.get(i), game.ball);
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+				    game.getPowerup(allBricks.get(i));
 				    
 				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 					//game.ball.xa = game.ball.xa * (-1);
@@ -287,7 +294,7 @@ public class Game extends JPanel implements MouseListener {
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
 					}
-					System.out.println("Score is: " + Score);
+					//System.out.println("Score is: " + Score);
 					
 					
 					
@@ -314,6 +321,30 @@ public class Game extends JPanel implements MouseListener {
 			tempBall.setXa(tempBall.getXa() * (-1));
 			tempBall.setYa(tempBall.getYa() * (-1));
 		}
+	}
+	
+	public static int randInt(int min, int max) {
+	    int randomNum = randNum.nextInt((10 - 1) + 1) + 1;
+	    return randomNum;
+	}
+	
+	public Powerup getPowerup(Brick currentBrick){
+		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
+		
+		//System.out.println("Random num " + tempRandNum + " Ball Size Before: " + tempBallSize);
+		if (tempRandNum == 7 || tempRandNum == 2){
+			tempBallSize = tempBallSize + 1;
+			Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+			
+			//System.out.println("Ball Increase - New Level " + tempBallSize);
+			return powerup;
+		}
+		tempBallSize = tempBallSize + 1;
+		Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+		
+		//System.out.println("Ball Decrease - New Level " + tempBallSize);
+		return powerup;
+		
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
