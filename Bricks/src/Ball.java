@@ -2,17 +2,19 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Ball {
-	static final int DIAMETER = 10;
+	static int DIAMETER = 10;
 	int x = 0;
 	int y = 0;
 	int xa = 1;
 	int ya = 1;
 	private Game game;
+	int speed;
 
 	public Ball(Game game, int X, int Y) {
 		this.game = game;
 		x = X;
 		y = Y;
+		speed = 1;
 	}
 
 	void move() {
@@ -34,6 +36,10 @@ public class Ball {
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
+			if (game.hold = true){
+				game.started = false;
+			}
+			
 			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
 				ya = ya * (-1);
 				xa = xa * (-1);

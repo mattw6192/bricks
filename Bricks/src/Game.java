@@ -23,6 +23,7 @@ public class Game extends JPanel implements MouseListener {
 	Boolean started = false;
 	int Lives = 3;
 	static int Score = 000000;
+	Boolean hold = false;
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -101,6 +102,7 @@ public class Game extends JPanel implements MouseListener {
 
 			public void mouseClicked(MouseEvent arg0) {
 				started = true;
+				
 			}
 
 			public void mouseEntered(MouseEvent arg0) {
