@@ -22,6 +22,7 @@ public class Game extends JPanel implements MouseListener {
 	
 	Boolean started = false;
 	int Lives = 3;
+	static int Score = 000000;
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -204,13 +205,10 @@ public class Game extends JPanel implements MouseListener {
 		JFrame frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		//game.ball.setXa(-3);
-		
 		//game.ball2.setXa(2);
 		//game.ball2.setX(3);
 		//game.ball2.setY(3);
 		//game.ball2.setYa(2);
-		
-		
 		
 		
 		allBricks.add(brick);
@@ -266,22 +264,15 @@ public class Game extends JPanel implements MouseListener {
 		frame.setLocationRelativeTo(game);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//System.out.println(game.brick.getBounds());
-		//System.out.println(game.brick2.getBounds());
-		//System.out.println(game.brick3.getBounds());
-		//System.out.println(game.brick4.getBounds());
-		//System.out.println(game.brick5.getBounds());
 		
 		while (true) {
-			Rectangle temp = game.brick.getBounds();
 			game.move();
 			game.repaint();
 			for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
 				
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
-					//System.out.println("Intersection with Brick " + i);
+					Score += 100;
 					checkSideHits(allBricks.get(i), game.ball);
-					int currentHits = allBricks.get(i).getHits();
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
 				    
 				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
@@ -292,13 +283,11 @@ public class Game extends JPanel implements MouseListener {
 					if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
 					if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
 					
-					//System.out.println("Hits for current brick: "+allBricks.get(i).getHits());
 					if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 						hideBrick(allBricks.get(i), game.ball);
 						allBricks.remove(i);
-						
 					}
-
+					System.out.println("Score is: " + Score);
 					
 					
 					
