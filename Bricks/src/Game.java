@@ -129,7 +129,6 @@ public class Game extends JPanel implements MouseListener {
 	
 	private void move() {
 		//ball.move();
-		//ball2.move();
 		if (started == true){
 			ball.move();
 			//hold = false;
@@ -138,8 +137,6 @@ public class Game extends JPanel implements MouseListener {
 			ball.setY((int) racquet.getBounds().getY() - 10);
 		}
 		racquet.move();
-		//ball2.move();
-		
 	}
 
 	public boolean isGameOver(){
@@ -150,7 +147,6 @@ public class Game extends JPanel implements MouseListener {
 		}
 	}
 	
-	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -216,7 +212,6 @@ public class Game extends JPanel implements MouseListener {
 		//game.ball2.setY(3);
 		//game.ball2.setYa(2);
 		
-		
 		allBricks.add(brick);
 		allBricks.add(brick2);
 		allBricks.add(brick3);
@@ -280,8 +275,10 @@ public class Game extends JPanel implements MouseListener {
 					Score += 100;
 					checkSideHits(allBricks.get(i), game.ball);
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
-				    game.getPowerup(allBricks.get(i));
-				    
+				    boolean havePowerup = game.getPowerup();
+				    if (havePowerup == true){
+				    	game.generatePowerup(allBricks.get(i));
+				    }
 				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 					//game.ball.xa = game.ball.xa * (-1);
 					
@@ -295,21 +292,13 @@ public class Game extends JPanel implements MouseListener {
 						allBricks.remove(i);
 					}
 					//System.out.println("Score is: " + Score);
-					
-					
-					
-					
 				}
-			if (allBricks.isEmpty()){
-				game.gameWon();
-			}
-			}
-			
-			//System.out.println(game.ball.getBounds().;
+				if (allBricks.isEmpty()){
+					game.gameWon();
+				}
+		}
 			Thread.sleep(10);
 		}
-		
-	
 	}
 	
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
@@ -324,33 +313,83 @@ public class Game extends JPanel implements MouseListener {
 	}
 	
 	public static int randInt(int min, int max) {
-	    int randomNum = randNum.nextInt((10 - 1) + 1) + 1;
+	    int randomNum = randNum.nextInt((max - min) + 1) + min;
 	    return randomNum;
 	}
 	
-	public Powerup getPowerup(Brick currentBrick){
+	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
 		
-		//System.out.println("Random num " + tempRandNum + " Ball Size Before: " + tempBallSize);
+		//System.out.println("1st Random num " + tempRandNum );
 		if (tempRandNum == 7 || tempRandNum == 2){
-			tempBallSize = tempBallSize + 1;
-			Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
-			
+			//tempBallSize = tempBallSize + 1;
+			//Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
 			//System.out.println("Ball Increase - New Level " + tempBallSize);
-			return powerup;
+			return true;
 		}
-		tempBallSize = tempBallSize + 1;
-		Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
-		
+		//tempBallSize = tempBallSize + 1;
+		//Powerup powerup = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
 		//System.out.println("Ball Decrease - New Level " + tempBallSize);
-		return powerup;
-		
+		return false;	
+	}
+	
+	public void generatePowerup(Brick currentBrick){
+		int tempRandNum2 = randInt(1,12); 
+		switch(tempRandNum2){
+			case 12:
+				System.out.println("Powerup Gained: " + "Extra Life");
+				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
+				break;
+			case 11:
+				System.out.println("Powerup Gained: " + "Metal Ball");
+				Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball");
+				break; // not ready
+			case 10:
+				System.out.println("Powerup Gained: " + "Fireball");
+				Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball");
+				break; // not ready
+			case 9:
+				System.out.println("Powerup Gained: " + "Double Points");
+				Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points");
+				break; // not ready
+			case 8:
+				System.out.println("Powerup Gained: " + "Ball Decrease");
+				Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease");
+				break; // not ready
+			case 7:
+				System.out.println("Powerup Gained: " + "Multiple Balls");
+				Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls");
+				break; // not ready
+			case 6:
+				System.out.println("Powerup Gained: " + "Paddle Decrease");
+				Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease");
+				break; // not ready
+			case 5:
+				System.out.println("Powerup Gained: " + "Slow Down");
+				Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down");
+				break; // not ready
+			case 4:
+				System.out.println("Powerup Gained: " + "Speed Up");
+				Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up");
+				break; // not ready
+			case 3:
+				System.out.println("Powerup Gained: " + "Paddle Increase");
+				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase");
+				break; // not ready
+			case 2:
+				System.out.println("Powerup Gained: " + "Ball Increase");
+				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase");
+				break; // not ready
+			case 1:
+				System.out.println("Powerup Gained: " + "Freeze");
+				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+				break; // not ready
+	}
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
 		//newbrick.setColor(Color.BLUE);
 		//brick = null;
-		
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
 		newbrick = null;
@@ -358,37 +397,25 @@ public class Game extends JPanel implements MouseListener {
 		//saveBall.setXa(saveXa * (-1));
 		int saveYa = saveBall.getYa();
 		saveBall.setYa(saveYa * (-1));
-		
-		
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
-	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 }

@@ -73,8 +73,6 @@ public class Brick {
 		}
 	}
 	
-	
-	
 	public Boolean getAlive() {
 		return Alive;
 	}

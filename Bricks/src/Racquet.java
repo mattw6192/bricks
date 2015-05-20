@@ -32,10 +32,8 @@ public class Racquet {
 	}
 	
 	public void move() {
-		
 		if (x + xa > 0 && x + xa < game.getWidth() - WIDTH)
 			x = x + xa;
-		
 	}
 
 	public void paint(Graphics2D g) {
@@ -48,14 +46,10 @@ public class Racquet {
 	}
 
 	public void MousePressed(MouseEvent e){
-		
-		
 	}
 	
 	public void MouseClicked(MouseEvent e){
-		
 	}
-	
 	
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)

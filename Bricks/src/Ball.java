@@ -49,13 +49,12 @@ public class Ball {
 				game.started = false;
 			}}
 		if (collision()){
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
-			
 			if (game.hold == true){
 				game.started = false;
 			}
 			
+			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the racquet
 			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
 				ya = ya * (-1);
 				xa = xa * (-1);

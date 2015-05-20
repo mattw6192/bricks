@@ -36,7 +36,6 @@ public class Powerup {
 		case 9:
 			break; // not ready
 		case 8:
-			
 			if (game.ball.ballMods >= -3){
 				game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
 				game.ball.SubtractBallMod();
@@ -114,7 +113,6 @@ public class Powerup {
 		if (ability.equals("Fireball")){return 10;};
 		if (ability.equals("Metal Ball")){return 11;};
 		return 12;
-		
 	}
 	
 	void move() {
@@ -140,10 +138,7 @@ public class Powerup {
 			setX(-100); // removes the powerup from the playing field
 			setY(-100); // removes the powerup from the playing field
 		}
-		
 	}
-	
-	
 
 	public int getX() {
 		return x;
