@@ -239,7 +239,7 @@ public class Game extends JPanel implements MouseListener {
 		allBricks.add(brick6a);
 		allBricks.add(brick6b);
 		allBricks.add(brick7a);
-		for(int i = 0; i<allBricks.size(); i++){ // this loop seems like it runs several times for each hit
+		for(int i = 0; i<allBricks.size(); i++){ 
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 			if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
 			if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
