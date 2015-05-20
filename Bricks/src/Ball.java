@@ -9,6 +9,8 @@ public class Ball {
 	int ya = 1;
 	private Game game;
 	int speed;
+	// ballMods represents the modifications made to the ball size
+	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
 	int ballMods = 0;
 
 	public Ball(Game game, int X, int Y) {

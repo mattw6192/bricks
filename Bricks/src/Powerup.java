@@ -12,12 +12,6 @@ public class Powerup {
 	int duration; // duration of the powerup
 	String ability; // the name of the ability
 	Boolean active; // is this powerup active
-	// paddleMods represents the modifications made to the paddle length
-	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
-	int paddleMods = 0;
-	// ballMods represents the modifications made to the ball size
-	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
-	int ballMods = 0;
 
 	public Powerup(Game game, int X, int Y, int time, String powerup) {
 		this.game = game;
@@ -28,8 +22,6 @@ public class Powerup {
 		ability = powerup;
 		int caseNumber = getPowerNum();
 		performAction(caseNumber);
-		ballMods = 0;
-		paddleMods = 0;
 	}
 
 	public void performAction(int caseNumber){

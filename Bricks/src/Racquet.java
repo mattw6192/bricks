@@ -12,7 +12,8 @@ public class Racquet {
 	int xa = 0;
 	private Game game;
 	int racquetMods = 0;
-	//boolean started = false;
+	// paddleMods represents the modifications made to the paddle length
+	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
 
 	public Racquet(Game game) {
 		this.game = game;
