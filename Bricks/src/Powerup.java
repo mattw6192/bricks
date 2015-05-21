@@ -22,82 +22,93 @@ public class Powerup {
 		ability = powerup;
 		int caseNumber = getPowerNum();
 		performAction(caseNumber);
+		setXa(0);
 	}
 
 	public void performAction(int caseNumber){
-		switch(caseNumber){
-		case 12:
-			game.Lives += 1;
-			break;
-		case 11:
-			break; // not ready
-		case 10:
-			break; // not ready
-		case 9:
-			break; // not ready
-		case 8:
-			if (game.ball.ballMods >= -3){
-				game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
-				game.ball.SubtractBallMod();
-				System.out.println("Ball Decrease - New level "  + game.ball.ballMods);
-			}else{
-				System.out.println("Powerup not availiable - the ball size is too low.");
-			}
-			break; // not ready
-		case 7:
-			break; // not ready
-		case 6:
-			if (game.racquet.racquetMods >= -5){
-				game.racquet.WIDTH = (int) (game.racquet.WIDTH * .9);
-				game.racquet.SubtractRacquetMod();
-				System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
-			}else{
-				System.out.println("Powerup not availiable - the racquet size is too low.");
-			}
-			break; // not ready
-		case 5:
-			if (game.ball.speed > 1){
-				game.ball.speed -= 1;
-			}else{
-				System.out.println("Powerup not availiable - the ball speed is too slow.");
-			}
-			break; // not ready
-		case 4:
-			if (game.ball.speed < 3){
-				game.ball.speed += 1;
-			}else{
-				System.out.println("Powerup not availiable - the ball speed is too high.");
-			}
-			break; // not ready
-		case 3:
-			
-			if (game.racquet.racquetMods < 7){
-				game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.15);
-				game.racquet.addRacquetMod();
-				System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
-			}else{
-				System.out.println("Powerup not availiable - the racquet size is too high.");
-			}
-			break; // not ready
-		case 2:
-			if (game.ball.ballMods < 5){
-				game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
-				game.ball.addBallMod();
-				System.out.println("Ball Increase - New level "  + game.ball.ballMods);
-			}else{
-				System.out.println("Powerup not availiable - the ball size is too high.");
-			}
-			
-			break; // not ready
-		case 1:
-			game.hold = true;
-			break; // not ready
+		if (active == true){
+			switch(caseNumber){
+			case 12:
+				game.Lives += 1;
+				break;
+			case 11:
+				break; // not ready
+			case 10:
+				break; // not ready
+			case 9:
+				break; // not ready
+			case 8:
+				if (game.ball.ballMods >= -3){
+					game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
+					game.ball.SubtractBallMod();
+					System.out.println("Ball Decrease - New level "  + game.ball.ballMods);
+				}else{
+					System.out.println("Powerup not availiable - the ball size is too low.");
+				}
+				break; // not ready
+			case 7:
+				break; // not ready
+			case 6:
+				if (game.racquet.racquetMods >= -5){
+					game.racquet.WIDTH = (int) (game.racquet.WIDTH * .9);
+					game.racquet.SubtractRacquetMod();
+					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
+				}else{
+					System.out.println("Powerup not availiable - the racquet size is too low.");
+				}
+				break; // not ready
+			case 5:
+				if (game.ball.speed > 1){
+					game.ball.speed -= 1;
+				}else{
+					System.out.println("Powerup not availiable - the ball speed is too slow.");
+				}
+				break; // not ready
+			case 4:
+				if (game.ball.speed < 3){
+					game.ball.speed += 1;
+				}else{
+					System.out.println("Powerup not availiable - the ball speed is too high.");
+				}
+				break; // not ready
+			case 3:
+				
+				if (game.racquet.racquetMods < 7){
+					game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.15);
+					game.racquet.addRacquetMod();
+					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
+				}else{
+					System.out.println("Powerup not availiable - the racquet size is too high.");
+				}
+				break; // not ready
+			case 2:
+				if (game.ball.ballMods < 5){
+					game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
+					game.ball.addBallMod();
+					System.out.println("Ball Increase - New level "  + game.ball.ballMods);
+				}else{
+					System.out.println("Powerup not availiable - the ball size is too high.");
+				}
+				
+				break; // not ready
+			case 1:
+				game.hold = true;
+				break; // not ready
+		}
 	}
+	}
+	
+	public void setActive(Boolean status){
+		active = status;
+		setXa(0);
+		setYa(0);
+		System.out.println("Powerup Activated");
 	}
 	
 	public void powerupEnd(){
 		game.hold = false;
 		active = false;
+		game.placeHolder.remove(this);
 	}
 	
 	public int getPowerNum(){
@@ -116,28 +127,23 @@ public class Powerup {
 	}
 	
 	void move() {
-		if (x + xa < 0)
-			xa = 1;
-		if (x + xa > game.getWidth() - DIAMETER)
-			xa = -1;
-		if (y + ya < 0)
-			ya = 1;
-		if (y + ya > game.getHeight() - DIAMETER){
-			System.out.println("Lives left: " + (game.Lives - 1));
-			game.Lives = game.Lives - 1;
 		
-			if (game.isGameOver() == true){
-				game.gameOver();
-			}else{
-				game.started = false;
-			}}
+		
+		if (y + ya > game.getHeight() - DIAMETER){
+			System.out.println("Powerup Lost!");
+			powerupEnd();
+		}
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
-			active = true;
+			setActive(true);
+			setXa(0);
+			setYa(0);
 			setX(-100); // removes the powerup from the playing field
 			setY(-100); // removes the powerup from the playing field
 		}
+		x = x + xa;
+		y = y + ya;
 	}
 
 	public int getX() {

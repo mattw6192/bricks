@@ -25,6 +25,8 @@ public class Game extends JPanel implements MouseListener {
 	int Lives = 3;
 	static int Score = 000000;
 	Boolean hold = false;
+	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
+	//static Powerup placeHolder = null;
 	
 	static Random randNum = new Random();
 	
@@ -190,6 +192,12 @@ public class Game extends JPanel implements MouseListener {
 		
 		brick7a.paint(g2d);
 		
+		if (placeHolder.isEmpty() == false){
+			for (int i=0; i<placeHolder.size();i++){
+				placeHolder.get(i).paint(g2d);
+			}
+		}
+		
 	}
 	
 	public void gameOver() {
@@ -269,6 +277,11 @@ public class Game extends JPanel implements MouseListener {
 		while (true) {
 			game.move();
 			game.repaint();
+			if (placeHolder.isEmpty() == false){
+				for (int j=0; j<placeHolder.size();j++){
+					placeHolder.get(j).move();
+				}
+			}
 			for(int i = 0; i<allBricks.size(); i++){ 
 				
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
@@ -277,10 +290,13 @@ public class Game extends JPanel implements MouseListener {
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
 				    boolean havePowerup = game.getPowerup();
 				    if (havePowerup == true){
-				    	game.generatePowerup(allBricks.get(i));
+				    	Powerup savePower = game.generatePowerup(allBricks.get(i));
+				    	placeHolder.add(savePower);
 				    }
 				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 					//game.ball.xa = game.ball.xa * (-1);
+				    
+				    
 					
 					if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 					if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
@@ -296,6 +312,8 @@ public class Game extends JPanel implements MouseListener {
 				if (allBricks.isEmpty()){
 					game.gameWon();
 				}
+				
+				
 		}
 			Thread.sleep(10);
 		}
@@ -333,58 +351,60 @@ public class Game extends JPanel implements MouseListener {
 		return false;	
 	}
 	
-	public void generatePowerup(Brick currentBrick){
+	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = randInt(1,12); 
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
 				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
-				break;
+				return powerup12;
 			case 11:
 				System.out.println("Powerup Gained: " + "Metal Ball");
 				Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball");
-				break; // not ready
+				return powerup11; // not ready
 			case 10:
 				System.out.println("Powerup Gained: " + "Fireball");
 				Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball");
-				break; // not ready
+				return powerup10; // not ready
 			case 9:
 				System.out.println("Powerup Gained: " + "Double Points");
 				Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points");
-				break; // not ready
+				return powerup9; // not ready
 			case 8:
 				System.out.println("Powerup Gained: " + "Ball Decrease");
 				Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease");
-				break; // not ready
+				return powerup8; // not ready
 			case 7:
 				System.out.println("Powerup Gained: " + "Multiple Balls");
 				Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls");
-				break; // not ready
+				return powerup7; // not ready
 			case 6:
 				System.out.println("Powerup Gained: " + "Paddle Decrease");
 				Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease");
-				break; // not ready
+				return powerup6; // not ready
 			case 5:
 				System.out.println("Powerup Gained: " + "Slow Down");
 				Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down");
-				break; // not ready
+				return powerup5; // not ready
 			case 4:
 				System.out.println("Powerup Gained: " + "Speed Up");
 				Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up");
-				break; // not ready
+				return powerup4; // not ready
 			case 3:
 				System.out.println("Powerup Gained: " + "Paddle Increase");
 				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase");
-				break; // not ready
+				return powerup3; // not ready
 			case 2:
 				System.out.println("Powerup Gained: " + "Ball Increase");
 				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase");
-				break; // not ready
+				return powerup2; // not ready
 			case 1:
 				System.out.println("Powerup Gained: " + "Freeze");
 				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
-				break; // not ready
+				return powerup1; // not ready
+			
 	}
+		return null;
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
