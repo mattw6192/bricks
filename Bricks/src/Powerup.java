@@ -110,10 +110,10 @@ public class Powerup {
 	
 	public void powerupEnd(){
 		game.hold = false;
-		active = false;
-		if (game.pointMultiplier > 1){
+		if (game.pointMultiplier > 1 && active == true){
 			game.pointMultiplier = game.pointMultiplier / 2;
 		}
+		active = false;
 		game.placeHolder.remove(this);
 	}
 	
