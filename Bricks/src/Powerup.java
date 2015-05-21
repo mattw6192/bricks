@@ -28,6 +28,7 @@ public class Powerup {
 		if (active == true){
 			switch(caseNumber){
 			case 12:
+				System.out.println("Lives  "  + game.Lives);
 				game.Lives += 1;
 				break;
 			case 11:
@@ -35,6 +36,9 @@ public class Powerup {
 			case 10:
 				break; // not ready
 			case 9:
+				System.out.println("Current Multiplier "  + game.pointMultiplier);
+				game.pointMultiplier = game.pointMultiplier * 2;
+				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
 				break; // not ready
 			case 8:
 				if (game.ball.ballMods >= -3){
@@ -107,6 +111,9 @@ public class Powerup {
 	public void powerupEnd(){
 		game.hold = false;
 		active = false;
+		if (game.pointMultiplier > 1){
+			game.pointMultiplier = game.pointMultiplier / 2;
+		}
 		game.placeHolder.remove(this);
 	}
 	

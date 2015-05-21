@@ -47,6 +47,7 @@ public class Ball {
 				game.gameOver();
 			}else{
 				game.started = false;
+				game.pointMultiplier = 1;
 			}}
 		if (collision()){
 			if (game.hold == true){

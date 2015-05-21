@@ -26,6 +26,7 @@ public class Game extends JPanel implements MouseListener {
 	static int Score = 000000;
 	Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
+	static int pointMultiplier = 1;
 	//static Powerup placeHolder = null;
 	
 	static Random randNum = new Random();
@@ -285,7 +286,7 @@ public class Game extends JPanel implements MouseListener {
 			for(int i = 0; i<allBricks.size(); i++){ 
 				
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
-					Score += 100;
+					Score += (100 * pointMultiplier);
 					checkSideHits(allBricks.get(i), game.ball);
 				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
 				    boolean havePowerup = game.getPowerup();
@@ -353,6 +354,7 @@ public class Game extends JPanel implements MouseListener {
 	
 	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = randInt(1,12); 
+		//int tempRandNum2 = 9; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
