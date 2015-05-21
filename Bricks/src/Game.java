@@ -215,6 +215,9 @@ public class Game extends JPanel implements MouseListener {
 	public static void main(String[] args) throws InterruptedException {
 		JFrame frame = new JFrame("Brick Breaker");
 		Game game = new Game();
+		StartMenu menu = new StartMenu(frame, true);
+		menu.setLocationRelativeTo(game);
+		menu.setVisible(true);
 		//game.ball.setXa(-3);
 		//game.ball2.setXa(2);
 		//game.ball2.setX(3);
