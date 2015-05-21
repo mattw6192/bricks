@@ -20,8 +20,7 @@ public class Powerup {
 		active = false;
 		duration = time;
 		ability = powerup;
-		int caseNumber = getPowerNum();
-		performAction(caseNumber);
+		
 		setXa(0);
 	}
 
@@ -141,6 +140,8 @@ public class Powerup {
 			setYa(0);
 			setX(-100); // removes the powerup from the playing field
 			setY(-100); // removes the powerup from the playing field
+			int caseNumber = getPowerNum();
+			performAction(caseNumber);
 		}
 		x = x + xa;
 		y = y + ya;
