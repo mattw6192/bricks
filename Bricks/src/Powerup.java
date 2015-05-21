@@ -42,7 +42,7 @@ public class Powerup {
 					game.ball.SubtractBallMod();
 					System.out.println("Ball Decrease - New level "  + game.ball.ballMods);
 				}else{
-					System.out.println("Powerup not availiable - the ball size is too low.");
+					System.out.println("Powerup not available - the ball size is too low.");
 				}
 				break; // not ready
 			case 7:
@@ -53,21 +53,21 @@ public class Powerup {
 					game.racquet.SubtractRacquetMod();
 					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
 				}else{
-					System.out.println("Powerup not availiable - the racquet size is too low.");
+					System.out.println("Powerup not available - the racquet size is too low.");
 				}
 				break; // not ready
 			case 5:
 				if (game.ball.speed > 1){
 					game.ball.speed -= 1;
 				}else{
-					System.out.println("Powerup not availiable - the ball speed is too slow.");
+					System.out.println("Powerup not available - the ball speed is too slow.");
 				}
 				break; // not ready
 			case 4:
 				if (game.ball.speed < 3){
 					game.ball.speed += 1;
 				}else{
-					System.out.println("Powerup not availiable - the ball speed is too high.");
+					System.out.println("Powerup not available - the ball speed is too high.");
 				}
 				break; // not ready
 			case 3:
@@ -77,7 +77,7 @@ public class Powerup {
 					game.racquet.addRacquetMod();
 					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
 				}else{
-					System.out.println("Powerup not availiable - the racquet size is too high.");
+					System.out.println("Powerup not available - the racquet size is too high.");
 				}
 				break; // not ready
 			case 2:
@@ -86,7 +86,7 @@ public class Powerup {
 					game.ball.addBallMod();
 					System.out.println("Ball Increase - New level "  + game.ball.ballMods);
 				}else{
-					System.out.println("Powerup not availiable - the ball size is too high.");
+					System.out.println("Powerup not available - the ball size is too high.");
 				}
 				
 				break; // not ready
