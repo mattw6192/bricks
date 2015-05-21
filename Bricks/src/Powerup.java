@@ -3,7 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Powerup {
-	static final int DIAMETER = 10;
+	static final int DIAMETER = 10; //test
 	int x = 0;
 	int y = 0;
 	int xa = 0;
