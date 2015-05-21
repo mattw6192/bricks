@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 public class Powerup {
 	static final int DIAMETER = 10; //test
-	int x = 0;
+	int x = 0; // reverse test
 	int y = 0;
 	int xa = 0;
 	int ya = 1;
