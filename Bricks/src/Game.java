@@ -218,6 +218,8 @@ public class Game extends JPanel implements MouseListener {
 		StartMenu menu = new StartMenu(frame, true);
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
+                Instructions instructions = new Instructions(frame,true);
+                instructions.setLocationRelativeTo(game);
 		//game.ball.setXa(-3);
 		//game.ball2.setXa(2);
 		//game.ball2.setX(3);
