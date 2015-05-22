@@ -27,20 +27,20 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			case 12:
+			case 12: // Extra Life
 				System.out.println("Lives  "  + game.Lives);
 				game.Lives += 1;
 				break;
-			case 11:
+			case 11: // Metal Ball
 				break; // not ready
-			case 10:
+			case 10: // Fireball
 				break; // not ready
-			case 9:
+			case 9: // Double Points
 				System.out.println("Current Multiplier "  + game.pointMultiplier);
 				game.pointMultiplier = game.pointMultiplier * 2;
 				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
 				break; // not ready
-			case 8:
+			case 8: // Smaller Ball
 				if (game.ball.ballMods >= -3){
 					game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
 					game.ball.SubtractBallMod();
@@ -49,9 +49,9 @@ public class Powerup {
 					System.out.println("Powerup not available - the ball size is too low.");
 				}
 				break; // not ready
-			case 7:
+			case 7: // Multiple Balls
 				break; // not ready
-			case 6:
+			case 6: // Smaller Paddle
 				if (game.racquet.racquetMods >= -5){
 					game.racquet.WIDTH = (int) (game.racquet.WIDTH * .9);
 					game.racquet.SubtractRacquetMod();
@@ -60,21 +60,23 @@ public class Powerup {
 					System.out.println("Powerup not available - the racquet size is too low.");
 				}
 				break; // not ready
-			case 5:
-				if (game.ball.speed > 1){
-					game.ball.speed -= 1;
+			case 5: // Slow Down
+				if (game.ball.speed > 0.5){
+					game.ball.speed -= 0.5;
+					System.out.println("Speed Down - game speed" + game.ball.speed);
 				}else{
 					System.out.println("Powerup not available - the ball speed is too slow.");
 				}
 				break; // not ready
-			case 4:
-				if (game.ball.speed < 3){
-					game.ball.speed += 1;
+			case 4: // Speed Up
+				if (game.ball.speed < 2.5){
+					game.ball.speed += 0.5;
+					System.out.println("Speed Up - game speed" + game.ball.speed);
 				}else{
 					System.out.println("Powerup not available - the ball speed is too high.");
 				}
 				break; // not ready
-			case 3:
+			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
 					game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.15);
@@ -84,7 +86,7 @@ public class Powerup {
 					System.out.println("Powerup not available - the racquet size is too high.");
 				}
 				break; // not ready
-			case 2:
+			case 2: // Larger Ball
 				if (game.ball.ballMods < 5){
 					game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
 					game.ball.addBallMod();
@@ -94,7 +96,7 @@ public class Powerup {
 				}
 				
 				break; // not ready
-			case 1:
+			case 1: // Freeze
 				game.hold = true;
 				break; // not ready
 		}

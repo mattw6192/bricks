@@ -3,12 +3,12 @@ import java.awt.Rectangle;
 
 public class Ball {
 	static int DIAMETER = 10;
-	int x = 0;
-	int y = 0;
-	int xa = 1;
-	int ya = 1;
+	float x = 0;
+	float y = 0;
+	float xa = 1;
+	float ya = 1;
 	private Game game;
-	int speed;
+	float speed;
 	// ballMods represents the modifications made to the ball size
 	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
 	int ballMods = 0;
@@ -34,14 +34,15 @@ public class Ball {
 	
 	void move() {
 		if (x + xa < 0)
-			xa = 1;
+			xa = speed;
 		if (x + xa > game.getWidth() - DIAMETER)
-			xa = -1;
+			xa = speed * (-1);
 		if (y + ya < 0)
-			ya = 1;
+			ya = speed;
 		if (y + ya > game.getHeight() - DIAMETER){
 			System.out.println("Lives left: " + (game.Lives - 1));
 			game.Lives = game.Lives - 1;
+			speed = 1;
 		
 			if (game.isGameOver() == true){
 				game.gameOver();
@@ -65,7 +66,7 @@ public class Ball {
 				xa = xa * (-1);
 			}
 			else{
-				ya = -1;
+				ya = speed * (-1);
 				//y = game.racquet.getTopY() - DIAMETER;
 			}
 		}
@@ -75,7 +76,7 @@ public class Ball {
 	
 	
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
@@ -83,7 +84,7 @@ public class Ball {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
@@ -91,7 +92,7 @@ public class Ball {
 		this.y = y;
 	}
 
-	public int getXa() {
+	public float getXa() {
 		return xa;
 	}
 
@@ -99,7 +100,7 @@ public class Ball {
 		this.xa = xa;
 	}
 
-	public int getYa() {
+	public float getYa() {
 		return ya;
 	}
 
@@ -112,10 +113,10 @@ public class Ball {
 	}
 
 	public void paint(Graphics2D g) {
-		g.fillOval(x, y, DIAMETER, DIAMETER);
+		g.fillOval((int) x, (int) y, DIAMETER, DIAMETER);
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, DIAMETER, DIAMETER);
+		return new Rectangle((int) x, (int) y, DIAMETER, DIAMETER);
 	}
 }
