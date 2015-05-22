@@ -33,6 +33,7 @@ public class Ball {
 	}
 	
 	void move() {
+		
 		if (x + xa < 0)
 			xa = speed;
 		if (x + xa > game.getWidth() - DIAMETER)
