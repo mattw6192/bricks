@@ -31,7 +31,7 @@ public class StartMenu extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         gameStarted = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        instructions = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(4, 20, 0, 0));
@@ -46,7 +46,12 @@ public class StartMenu extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Instuctions");
+        instructions.setText("Instuctions");
+        instructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instructionsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +69,7 @@ public class StartMenu extends javax.swing.JDialog {
                 .addGap(115, 115, 115)
                 .addComponent(gameStarted)
                 .addGap(75, 75, 75)
-                .addComponent(jButton1)
+                .addComponent(instructions)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
@@ -79,9 +84,9 @@ public class StartMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(gameStarted)
-                    .addComponent(jButton1))
+                    .addComponent(instructions))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -93,6 +98,10 @@ public class StartMenu extends javax.swing.JDialog {
     private void GameStarted(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GameStarted
         dispose();
     }//GEN-LAST:event_GameStarted
+
+    private void instructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionsActionPerformed
+        
+    }//GEN-LAST:event_instructionsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,10 +144,10 @@ public class StartMenu extends javax.swing.JDialog {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton gameStarted;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton instructions;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
