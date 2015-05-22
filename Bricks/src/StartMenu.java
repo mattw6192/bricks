@@ -9,14 +9,17 @@
  * @author dillonwastrack
  */
 public class StartMenu extends javax.swing.JDialog {
-
+    private boolean wantInstructions = false;
     /**
      * Creates new form StartMenu
      */
     public StartMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,7 +103,8 @@ public class StartMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_GameStarted
 
     private void instructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instructionsActionPerformed
-        
+        wantInstructions = true;
+        dispose();
     }//GEN-LAST:event_instructionsActionPerformed
 
     /**
@@ -143,6 +147,9 @@ public class StartMenu extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+        public boolean getInstructions(){
+        return wantInstructions;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
