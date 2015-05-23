@@ -31,9 +31,13 @@ public class Powerup {
 				System.out.println("Lives  "  + game.Lives);
 				game.Lives += 1;
 				break;
-			case 11: // Metal Ball
+			case 11: // Metal Ball - deals two hits
+				System.out.println("Metalball Activated");
+				game.hasMetalPower = true;
 				break; // not ready
-			case 10: // Fireball
+			case 10: // Fireball - destroys any block one hit
+				System.out.println("Fireball Activated");
+				game.hasFireball = true;
 				break; // not ready
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + game.pointMultiplier);
@@ -117,6 +121,8 @@ public class Powerup {
 		}
 		active = false;
 		game.placeHolder.remove(this);
+		game.hasFireball = false;
+		game.hasMetalPower = false;
 	}
 	
 	public int getPowerNum(){

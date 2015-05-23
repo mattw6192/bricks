@@ -44,6 +44,8 @@ public class Ball {
 			System.out.println("Lives left: " + (game.Lives - 1));
 			game.Lives = game.Lives - 1;
 			speed = 1; 
+			game.hasFireball = false;
+			game.hasMetalPower = false;
 		
 			if (game.isGameOver() == true){
 				game.gameOver();

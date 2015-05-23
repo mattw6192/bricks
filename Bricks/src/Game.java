@@ -27,6 +27,8 @@ public class Game extends JPanel implements MouseListener {
 	Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
+	static Boolean hasFireball = false;
+	static Boolean hasMetalPower = false;
 	//static Powerup placeHolder = null;
 	
 	static Random randNum = new Random();
@@ -296,7 +298,14 @@ public class Game extends JPanel implements MouseListener {
 				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
 					Score += (100 * pointMultiplier);
 					checkSideHits(allBricks.get(i), game.ball);
-				    allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+					if (hasFireball == true){
+						allBricks.get(i).subtractAllHits();
+					}else if(hasMetalPower == true){
+						allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
+					}else{
+						allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+					}
+				    
 				    boolean havePowerup = game.getPowerup();
 				    if (havePowerup == true){
 				    	Powerup savePower = game.generatePowerup(allBricks.get(i));
@@ -362,7 +371,7 @@ public class Game extends JPanel implements MouseListener {
 	
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,12); 
-		int tempRandNum2 = 5; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 11; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
@@ -422,11 +431,12 @@ public class Game extends JPanel implements MouseListener {
 		//brick = null;
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
-		newbrick = null;
+		
 		double saveXa = saveBall.getXa();
 		//saveBall.setXa(saveXa * (-1));
 		double saveYa = saveBall.getYa();
 		saveBall.setYa(saveYa * (-1));
+		newbrick = null;
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
