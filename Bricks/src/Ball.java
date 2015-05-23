@@ -3,12 +3,12 @@ import java.awt.Rectangle;
 
 public class Ball {
 	static int DIAMETER = 10;
-	float x = 0;
-	float y = 0;
-	float xa = 1;
-	float ya = 1;
+	double x = 0;
+	double y = 0;
+	double xa = 1;
+	double ya = 1;
 	private Game game;
-	float speed;
+	double speed;
 	// ballMods represents the modifications made to the ball size
 	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
 	int ballMods = 0;
@@ -33,23 +33,38 @@ public class Ball {
 	}
 	
 	void move() {
-		
 		if (x + xa < 0)
-			xa = speed;
+			xa =  speed;
 		if (x + xa > game.getWidth() - DIAMETER)
-			xa = speed * (-1);
+			xa =  -speed;
 		if (y + ya < 0)
-			ya = speed;
+			ya =  speed;
 		if (y + ya > game.getHeight() - DIAMETER){
-			System.out.println("Lives left: " + (game.Lives - 1));
-			game.Lives = game.Lives - 1;
-			speed = 1;
-		
-			if (game.isGameOver() == true){
+			
+			if (game.isGameOver() == true && game.activeBalls.isEmpty() == true){
 				game.gameOver();
 			}else{
-				game.started = false;
+				//game.started = false;
 				game.pointMultiplier = 1;
+				
+				if (game.activeBalls.size() == 1){
+					if (game.Lives <= 1){
+						game.activeBalls.remove(this);
+						game.gameOver();
+					}
+					game.started = false;
+					game.Lives = game.Lives - 1;
+					System.out.println("Lives left: " + game.Lives);
+					speed = 1;
+					game.hasFireball = false;
+					game.hasMetalPower = false;
+					setX(game.racquet.getBounds().x);
+					setY(game.racquet.getBounds().y - 10);
+					
+				}
+				if (game.activeBalls.size() > 1){
+					game.activeBalls.remove(this);
+				}
 			}}
 		if (collision()){
 			if (game.hold == true){
@@ -67,7 +82,7 @@ public class Ball {
 				xa = xa * (-1);
 			}
 			else{
-				ya = speed * (-1);
+				ya =  -speed;
 				//y = game.racquet.getTopY() - DIAMETER;
 			}
 		}
@@ -78,7 +93,7 @@ public class Ball {
 	
 	
 
-	public float getX() {
+	public double getX() {
 		return x;
 	}
 
@@ -86,7 +101,7 @@ public class Ball {
 		this.x = x;
 	}
 
-	public float getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -94,19 +109,19 @@ public class Ball {
 		this.y = y;
 	}
 
-	public float getXa() {
+	public double getXa() {
 		return xa;
 	}
 
-	public void setXa(int xa) {
-		this.xa = xa;
+	public void setXa(double d) {
+		this.xa = d;
 	}
 
-	public float getYa() {
+	public double getYa() {
 		return ya;
 	}
 
-	public void setYa(int ya) {
+	public void setYa(double ya) {
 		this.ya = ya;
 	}
 
