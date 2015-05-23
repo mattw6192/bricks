@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -94,7 +95,7 @@ public class Game extends JPanel implements MouseListener {
 		addMouseListener(new MouseListener(){
 			public void mouseClicked(MouseEvent arg0) {
 				started = true;
-				hold = false;
+				//hold = false;
 			}
 
 			public void mouseEntered(MouseEvent arg0) {
@@ -302,8 +303,8 @@ public class Game extends JPanel implements MouseListener {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,12); 
-		//int tempRandNum2 = 7; // Set this to a specific number to test one powerup
+		//int tempRandNum2 = randInt(1,12); 
+		int tempRandNum2 = 1; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
@@ -387,4 +388,5 @@ public class Game extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub		
 	}
+
 }

@@ -1,6 +1,15 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+
+
+
+
 
 public class Powerup {
 	static final int DIAMETER = 10; //test
@@ -22,6 +31,8 @@ public class Powerup {
 		ability = powerup;
 		
 		setXa(0);
+		
+		 
 	}
 
 	public void performAction(int caseNumber){
@@ -116,6 +127,14 @@ public class Powerup {
 				
 				break; 
 			case 1: // Freeze
+				int delay = 30000; //milliseconds
+				ActionListener taskPerformer = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						game.hold = false;
+				        System.out.println("Pwerup Ended");
+				    }
+				};
+				new Timer(delay, taskPerformer).start();
 				game.hold = true;
 				break; 
 		}
@@ -130,7 +149,8 @@ public class Powerup {
 	}
 	
 	public void powerupEnd(){
-		game.hold = false;
+		//game.hold = false;
+		
 		if (game.pointMultiplier > 1 && active == true){
 			game.pointMultiplier = game.pointMultiplier / 2;
 		}
