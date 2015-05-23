@@ -30,7 +30,7 @@ public class Game extends JPanel implements MouseListener {
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
 	//static Powerup placeHolder = null;
-	
+	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
 	
 	//top row of bricks from left to right
@@ -81,6 +81,7 @@ public class Game extends JPanel implements MouseListener {
 	Racquet racquet = new Racquet(this);
 
 	public Game() {
+		activeBalls.add(ball);
 		addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -135,11 +136,16 @@ public class Game extends JPanel implements MouseListener {
 	private void move() {
 		//ball.move();
 		if (started == true){
-			ball.move();
+			//ball.move();
+			for (int i =0; i<activeBalls.size(); i++){
+				activeBalls.get(i).move();
+			}
 			//hold = false;
 		}else{
-			ball.setX((int) racquet.getBounds().getX() + 20);
-			ball.setY((int) racquet.getBounds().getY() - 10);
+			for (int i =0; i<activeBalls.size(); i++){
+				activeBalls.get(i).setX((int) racquet.getBounds().getX() + 20);
+				activeBalls.get(i).setY((int) racquet.getBounds().getY() - 10);
+			}
 		}
 		racquet.move();
 	}
@@ -157,8 +163,13 @@ public class Game extends JPanel implements MouseListener {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		ball.paint(g2d);
+		//ball.paint(g2d);
 		//ball2.paint(g2d);
+		if (activeBalls.isEmpty() == false){
+			for (int i=0; i<activeBalls.size();i++){
+				activeBalls.get(i).paint(g2d);
+			}
+		}
 		racquet.paint(g2d);
 		brick.paint(g2d);
 		brick2.paint(g2d);
@@ -200,6 +211,8 @@ public class Game extends JPanel implements MouseListener {
 				placeHolder.get(i).paint(g2d);
 			}
 		}
+		
+		
 		
 	}
 	
@@ -293,44 +306,45 @@ public class Game extends JPanel implements MouseListener {
 					placeHolder.get(j).move();
 				}
 			}
-			for(int i = 0; i<allBricks.size(); i++){ 
+			for (int j = 0; j<activeBalls.size(); j++){
+				for(int i = 0; i<allBricks.size(); i++){ 
 				
-				if (game.ball.getBounds().intersects(allBricks.get(i).getBounds())){
-					Score += (100 * pointMultiplier);
-					checkSideHits(allBricks.get(i), game.ball);
-					if (hasFireball == true){
-						allBricks.get(i).subtractAllHits();
-					}else if(hasMetalPower == true){
-						allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
-					}else{
-						allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
+						Score += (100 * pointMultiplier);
+						checkSideHits(allBricks.get(i), activeBalls.get(j));
+						if (hasFireball == true){
+							allBricks.get(i).subtractAllHits();
+						}else if(hasMetalPower == true){
+							allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
+						}else{
+							allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+						}
+					    
+					    boolean havePowerup = game.getPowerup();
+					    if (havePowerup == true){
+					    	Powerup savePower = game.generatePowerup(allBricks.get(i));
+					    	placeHolder.add(savePower);
+					    }
+					    activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
+						//game.ball.xa = game.ball.xa * (-1);
+					    
+					    
+						
+						if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
+						if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
+						if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
+						if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+						
+						if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
+							hideBrick(allBricks.get(i), activeBalls.get(j));
+							allBricks.remove(i);
+						}
+						//System.out.println("Score is: " + Score);
 					}
-				    
-				    boolean havePowerup = game.getPowerup();
-				    if (havePowerup == true){
-				    	Powerup savePower = game.generatePowerup(allBricks.get(i));
-				    	placeHolder.add(savePower);
-				    }
-				    game.ball.ya = game.ball.ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
-					//game.ball.xa = game.ball.xa * (-1);
-				    
-				    
-					
-					if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
-					if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
-					if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
-					if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
-					
-					if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
-						hideBrick(allBricks.get(i), game.ball);
-						allBricks.remove(i);
+					if (allBricks.isEmpty()){
+						game.gameWon();
 					}
-					//System.out.println("Score is: " + Score);
 				}
-				if (allBricks.isEmpty()){
-					game.gameWon();
-				}
-				
 				
 		}
 			Thread.sleep(10);
@@ -370,8 +384,8 @@ public class Game extends JPanel implements MouseListener {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,12); 
-		//int tempRandNum2 = 11; // Set this to a specific number to test one powerup
+		//int tempRandNum2 = randInt(1,12); 
+		int tempRandNum2 = 7; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");

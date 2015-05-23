@@ -54,6 +54,19 @@ public class Powerup {
 				}
 				break; // not ready
 			case 7: // Multiple Balls
+				
+				
+				if (game.activeBalls.size() <= 5){
+					System.out.println("Multiple Balls Enabled");
+					Ball extraBall1 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+					extraBall1.setXa(1);
+					Ball extraBall2 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+					extraBall2.setXa(-1);
+					game.activeBalls.add(extraBall1);
+					game.activeBalls.add(extraBall2);
+				}else{
+					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
+				}
 				break; // not ready
 			case 6: // Smaller Paddle
 				if (game.racquet.racquetMods >= -5){

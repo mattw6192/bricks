@@ -33,7 +33,6 @@ public class Ball {
 	}
 	
 	void move() {
-		//System.out.println("Speed " + speed + " : " + "Xa " + xa + " : " + "YA " + ya);
 		if (x + xa < 0)
 			xa =  speed;
 		if (x + xa > game.getWidth() - DIAMETER)
@@ -41,17 +40,31 @@ public class Ball {
 		if (y + ya < 0)
 			ya =  speed;
 		if (y + ya > game.getHeight() - DIAMETER){
-			System.out.println("Lives left: " + (game.Lives - 1));
-			game.Lives = game.Lives - 1;
-			speed = 1; 
-			game.hasFireball = false;
-			game.hasMetalPower = false;
-		
-			if (game.isGameOver() == true){
+			
+			if (game.isGameOver() == true && game.activeBalls.isEmpty() == true){
 				game.gameOver();
 			}else{
-				game.started = false;
+				//game.started = false;
 				game.pointMultiplier = 1;
+				
+				if (game.activeBalls.size() == 1){
+					if (game.Lives <= 1){
+						game.activeBalls.remove(this);
+						game.gameOver();
+					}
+					game.started = false;
+					game.Lives = game.Lives - 1;
+					System.out.println("Lives left: " + game.Lives);
+					speed = 1;
+					game.hasFireball = false;
+					game.hasMetalPower = false;
+					setX(game.racquet.getBounds().x);
+					setY(game.racquet.getBounds().y - 10);
+					
+				}
+				if (game.activeBalls.size() > 1){
+					game.activeBalls.remove(this);
+				}
 			}}
 		if (collision()){
 			if (game.hold == true){
