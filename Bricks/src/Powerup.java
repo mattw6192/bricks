@@ -45,15 +45,40 @@ public class Powerup {
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
 				game.hasMetalPower = true;
+				int delay4 = 30000; //milliseconds
+				ActionListener taskPerformer4 = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						game.hasMetalPower = false;
+				        System.out.println("Pwerup Ended");
+				    }
+				};
+				new Timer(delay4, taskPerformer4).start();
 				break; 
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
 				game.hasFireball = true;
+				int delay3 = 30000; //milliseconds
+				ActionListener taskPerformer3 = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						game.hasFireball = false;
+				        System.out.println("Pwerup Ended");
+				    }
+				};
+				new Timer(delay3, taskPerformer3).start();
 				break; 
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + game.pointMultiplier);
 				game.pointMultiplier = game.pointMultiplier * 2;
 				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
+				int delay2 = 30000; //milliseconds
+				ActionListener taskPerformer2 = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						game.pointMultiplier = game.pointMultiplier / 2;
+				        System.out.println("Pwerup Ended");
+				    }
+				};
+				new Timer(delay2, taskPerformer2).start();
+				
 				break; 
 			case 8: // Smaller Ball
 				for (int i=0; i< game.activeBalls.size(); i++){	
@@ -151,13 +176,13 @@ public class Powerup {
 	public void powerupEnd(){
 		//game.hold = false;
 		
-		if (game.pointMultiplier > 1 && active == true){
-			game.pointMultiplier = game.pointMultiplier / 2;
-		}
+		//if (game.pointMultiplier > 1 && active == true){
+			//game.pointMultiplier = game.pointMultiplier / 2;
+		//}
 		active = false;
 		game.placeHolder.remove(this);
-		game.hasFireball = false;
-		game.hasMetalPower = false;
+		//game.hasFireball = false;
+		//game.hasMetalPower = false;
 	}
 	
 	public int getPowerNum(){
