@@ -34,16 +34,16 @@ public class Powerup {
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
 				game.hasMetalPower = true;
-				break; // not ready
+				break; 
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
 				game.hasFireball = true;
-				break; // not ready
+				break; 
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + game.pointMultiplier);
 				game.pointMultiplier = game.pointMultiplier * 2;
 				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
-				break; // not ready
+				break; 
 			case 8: // Smaller Ball
 				for (int i=0; i< game.activeBalls.size(); i++){	
 					if (game.activeBalls.get(i).ballMods >= -3){
@@ -53,10 +53,8 @@ public class Powerup {
 						}else{
 							System.out.println("Powerup not available - the ball size is too low.");
 						}}
-				break; // not ready
+				break; 
 			case 7: // Multiple Balls
-				
-				
 				if (game.activeBalls.size() <= 5){
 					System.out.println("Multiple Balls Enabled");
 					Ball extraBall1 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
@@ -68,7 +66,7 @@ public class Powerup {
 				}else{
 					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
 				}
-				break; // not ready
+				break; 
 			case 6: // Smaller Paddle
 				if (game.racquet.racquetMods >= -5){
 					game.racquet.WIDTH = (int) (game.racquet.WIDTH * .9);
@@ -77,7 +75,7 @@ public class Powerup {
 				}else{
 					System.out.println("Powerup not available - the racquet size is too low.");
 				}
-				break; // not ready
+				break; 
 			case 5: // Slow Down
 				for (int i=0; i < game.activeBalls.size(); i++){
 					if (game.activeBalls.get(i).speed >= 1){
@@ -86,7 +84,7 @@ public class Powerup {
 					}else{
 						System.out.println("Powerup not available - the ball speed is too slow.");
 					}}
-				break; // not ready
+				break; 
 			case 4: // Speed Up
 				for (int i=0; i< game.activeBalls.size();i++){
 					if (game.activeBalls.get(i).speed < 2.5){
@@ -95,7 +93,7 @@ public class Powerup {
 					}else{
 						System.out.println("Powerup not available - the ball speed is too high.");
 					}}
-				break; // not ready
+				break; 
 			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
@@ -105,7 +103,7 @@ public class Powerup {
 				}else{
 					System.out.println("Powerup not available - the racquet size is too high.");
 				}
-				break; // not ready
+				break; 
 			case 2: // Larger Ball
 				for (int i=0; i<game.activeBalls.size(); i++){	
 					if (game.activeBalls.get(i).ballMods < 5){
@@ -116,10 +114,10 @@ public class Powerup {
 						System.out.println("Powerup not available - the ball size is too high.");
 					}}
 				
-				break; // not ready
+				break; 
 			case 1: // Freeze
 				game.hold = true;
-				break; // not ready
+				break; 
 		}
 	}
 	}
