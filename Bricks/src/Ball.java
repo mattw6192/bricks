@@ -73,6 +73,7 @@ public class Ball {
 		}
 		x = x + xa;
 		y = y + ya;
+		
 	}
 	
 	
