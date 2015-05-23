@@ -331,11 +331,11 @@ public class Game extends JPanel implements MouseListener {
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static void checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 1)) ){
-			tempBall.setXa((int) (tempBall.getXa() * (-1)));
-			tempBall.setYa((int) (tempBall.getYa() * (-1)));
+			tempBall.setXa((tempBall.getXa() * (-1)));
+			tempBall.setYa((tempBall.getYa() * (-1)));
 		}else if (((tempBall.getBounds().getX() + tempBall.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
-			tempBall.setXa((int) (tempBall.getXa() * (-1)));
-			tempBall.setYa((int) (tempBall.getYa() * (-1)));
+			tempBall.setXa((tempBall.getXa() * (-1)));
+			tempBall.setYa((tempBall.getYa() * (-1)));
 		}
 	}
 	
@@ -423,9 +423,9 @@ public class Game extends JPanel implements MouseListener {
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
 		newbrick = null;
-		int saveXa = (int) saveBall.getXa();
+		double saveXa = saveBall.getXa();
 		//saveBall.setXa(saveXa * (-1));
-		int saveYa = (int) saveBall.getYa();
+		double saveYa = saveBall.getYa();
 		saveBall.setYa(saveYa * (-1));
 	}
 

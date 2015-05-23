@@ -61,9 +61,9 @@ public class Powerup {
 				}
 				break; // not ready
 			case 5: // Slow Down
-				if (game.ball.speed > 0.5){
+				if (game.ball.speed >= 1){
 					game.ball.speed -= 0.5;
-					System.out.println("Speed Down - game speed" + game.ball.speed);
+					System.out.println("Speed Down - game speed " + game.ball.speed);
 				}else{
 					System.out.println("Powerup not available - the ball speed is too slow.");
 				}
@@ -71,7 +71,7 @@ public class Powerup {
 			case 4: // Speed Up
 				if (game.ball.speed < 2.5){
 					game.ball.speed += 0.5;
-					System.out.println("Speed Up - game speed" + game.ball.speed);
+					System.out.println("Speed Up - game speed " + game.ball.speed);
 				}else{
 					System.out.println("Powerup not available - the ball speed is too high.");
 				}
