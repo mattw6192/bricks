@@ -6,7 +6,7 @@ public class Ball {
 	static int DIAMETER = 10;
 	double x = 0;
 	double y = 0;
-	double xa = 1;
+	double xa = 2;
 	double ya = 1;
 	private Game game;
 	double speed;
@@ -46,11 +46,11 @@ public class Ball {
 	
 	void move() {
 		if (x + xa < 0)
-			xa =  speed;
+			xa =  speed*2;
 		if (x + xa > game.getWidth() - DIAMETER)
-			xa =  -speed;
+			xa =  -speed*2;
 		if (y + ya < 0)
-			ya =  speed;
+			ya =  speed*2;
 		if (y + ya > game.getHeight() - DIAMETER){
 			
 			if (game.isGameOver() == true && game.activeBalls.isEmpty() == true){
