@@ -49,10 +49,12 @@ public class Powerup {
 				ActionListener taskPerformer4 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hasMetalPower = false;
-				        System.out.println("Pwerup Ended");
+				        System.out.println("Powerup Ended");
 				    }
 				};
-				new Timer(delay4, taskPerformer4).start();
+				Timer timer4 = new Timer(delay4, taskPerformer4);
+				timer4.setRepeats(false);
+				timer4.start();
 				break; 
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
@@ -61,10 +63,13 @@ public class Powerup {
 				ActionListener taskPerformer3 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hasFireball = false;
-				        System.out.println("Pwerup Ended");
+				        System.out.println("Powerup Ended");
 				    }
 				};
-				new Timer(delay3, taskPerformer3).start();
+				Timer timer3 = new Timer(delay3, taskPerformer3);
+				timer3.setRepeats(false);
+				timer3.start();
+				
 				break; 
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + game.pointMultiplier);
@@ -77,7 +82,9 @@ public class Powerup {
 				        System.out.println("Pwerup Ended");
 				    }
 				};
-				new Timer(delay2, taskPerformer2).start();
+				Timer timer2 = new Timer(delay2, taskPerformer2);
+				timer2.setRepeats(false);
+				timer2.start();
 				
 				break; 
 			case 8: // Smaller Ball
@@ -159,7 +166,9 @@ public class Powerup {
 				        System.out.println("Pwerup Ended");
 				    }
 				};
-				new Timer(delay, taskPerformer).start();
+				Timer timer = new Timer(delay, taskPerformer);
+				timer.setRepeats(false);
+				timer.start();
 				game.hold = true;
 				break; 
 		}
