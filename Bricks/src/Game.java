@@ -304,7 +304,7 @@ public class Game extends JPanel implements MouseListener {
 	
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,12); 
-		int tempRandNum2 = 11; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 10; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");

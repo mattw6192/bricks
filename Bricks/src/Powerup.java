@@ -44,11 +44,13 @@ public class Powerup {
 				break;
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
-				game.hasMetalPower = true;
+				Game.hasMetalPower = true;
+				Game.activeBalls.get(0).setColor(Color.lightGray);
 				int delay4 = 30000; //milliseconds
 				ActionListener taskPerformer4 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						game.hasMetalPower = false;
+						Game.hasMetalPower = false;
+						Game.activeBalls.get(0).setColor(Color.BLACK);
 				        System.out.println("Powerup Ended");
 				    }
 				};
@@ -58,27 +60,54 @@ public class Powerup {
 				break; 
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
-				game.hasFireball = true;
+				Game.hasFireball = true;
+				
+				ActionListener flashTask = new ActionListener() {
+					public void actionPerformed(ActionEvent evt){
+						boolean hasExecuted = false;
+						if (Game.hasFireball.equals(false)){
+						Game.activeBalls.get(0).setColor(Color.BLACK); hasExecuted = true;}
+						if (Game.activeBalls.get(0).getColor().equals(Color.BLACK) && hasExecuted == false){
+							Game.activeBalls.get(0).setColor(Color.RED);}
+						else if (Game.activeBalls.get(0).getColor().equals(Color.RED)){
+							Game.activeBalls.get(0).setColor(Color.YELLOW);}
+						else if (Game.activeBalls.get(0).getColor().equals(Color.YELLOW)){
+							Game.activeBalls.get(0).setColor(Color.RED);
+						}
+						
+				}
+				};
+				
+				Timer flashTimer = new Timer(100,flashTask);
+				flashTimer.setRepeats(true);
+				flashTimer.start();
+				//if (!flashTimer.isRunning()){flashTimer.restart();}
+				if (Game.hasFireball.equals(false)){flashTimer.stop();
+				Game.activeBalls.get(0).setColor(Color.BLACK);}
+				
 				int delay3 = 30000; //milliseconds
 				ActionListener taskPerformer3 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						game.hasFireball = false;
+						Game.hasFireball = false;
 				        System.out.println("Powerup Ended");
+				        Game.activeBalls.get(0).setColor(Color.BLACK);
+				       
 				    }
 				};
 				Timer timer3 = new Timer(delay3, taskPerformer3);
 				timer3.setRepeats(false);
 				timer3.start();
 				
+				Game.activeBalls.get(0).setColor(Color.BLACK);
 				break; 
 			case 9: // Double Points
-				System.out.println("Current Multiplier "  + game.pointMultiplier);
-				game.pointMultiplier = game.pointMultiplier * 2;
-				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
+				System.out.println("Current Multiplier "  + Game.pointMultiplier);
+				Game.pointMultiplier = Game.pointMultiplier * 2;
+				System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
 				int delay2 = 30000; //milliseconds
 				ActionListener taskPerformer2 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						game.pointMultiplier = game.pointMultiplier / 2;
+						Game.pointMultiplier = Game.pointMultiplier / 2;
 				        System.out.println("Pwerup Ended");
 				    }
 				};
@@ -88,24 +117,26 @@ public class Powerup {
 				
 				break; 
 			case 8: // Smaller Ball
-				for (int i=0; i< game.activeBalls.size(); i++){	
-					if (game.activeBalls.get(i).ballMods >= -3){
-							game.activeBalls.get(i).DIAMETER = (int) (game.activeBalls.get(i).DIAMETER * .9);
-							game.activeBalls.get(i).SubtractBallMod();
-							System.out.println("Ball Decrease - New level "  + game.activeBalls.get(i).ballMods);
+				for (int i=0; i< Game.activeBalls.size(); i++){	
+					if (Game.activeBalls.get(i).ballMods >= -3){
+							Game.activeBalls.get(i);
+						Game.activeBalls.get(i);
+							Ball.DIAMETER = (int) (Ball.DIAMETER * .9);
+							Game.activeBalls.get(i).SubtractBallMod();
+							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods);
 						}else{
 							System.out.println("Powerup not available - the ball size is too low.");
 						}}
 				break; 
 			case 7: // Multiple Balls
-				if (game.activeBalls.size() <= 5){
+				if (Game.activeBalls.size() <= 5){
 					System.out.println("Multiple Balls Enabled");
 					Ball extraBall1 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
 					extraBall1.setXa(1);
 					Ball extraBall2 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
 					extraBall2.setXa(-1);
-					game.activeBalls.add(extraBall1);
-					game.activeBalls.add(extraBall2);
+					Game.activeBalls.add(extraBall1);
+					Game.activeBalls.add(extraBall2);
 				}else{
 					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
 				}
@@ -120,19 +151,19 @@ public class Powerup {
 				}
 				break; 
 			case 5: // Slow Down
-				for (int i=0; i < game.activeBalls.size(); i++){
-					if (game.activeBalls.get(i).speed >= 1){
-						game.activeBalls.get(i).speed -= 0.5;
-						System.out.println("Speed Down - game speed " + game.activeBalls.get(i).speed);
+				for (int i=0; i < Game.activeBalls.size(); i++){
+					if (Game.activeBalls.get(i).speed >= 1){
+						Game.activeBalls.get(i).speed -= 0.5;
+						System.out.println("Speed Down - game speed " + Game.activeBalls.get(i).speed);
 					}else{
 						System.out.println("Powerup not available - the ball speed is too slow.");
 					}}
 				break; 
 			case 4: // Speed Up
-				for (int i=0; i< game.activeBalls.size();i++){
-					if (game.activeBalls.get(i).speed < 2.5){
-						game.activeBalls.get(i).speed += 0.5;
-						System.out.println("Speed Up - game speed " + game.activeBalls.get(i).speed);
+				for (int i=0; i< Game.activeBalls.size();i++){
+					if (Game.activeBalls.get(i).speed < 2.5){
+						Game.activeBalls.get(i).speed += 0.5;
+						System.out.println("Speed Up - game speed " + Game.activeBalls.get(i).speed);
 					}else{
 						System.out.println("Powerup not available - the ball speed is too high.");
 					}}
@@ -148,11 +179,13 @@ public class Powerup {
 				}
 				break; 
 			case 2: // Larger Ball
-				for (int i=0; i<game.activeBalls.size(); i++){	
-					if (game.activeBalls.get(i).ballMods < 5){
-						game.activeBalls.get(i).DIAMETER = (int) (game.activeBalls.get(i).DIAMETER * 1.1);
-						game.activeBalls.get(i).addBallMod();
-						System.out.println("Ball Increase - New level "  + game.activeBalls.get(i).ballMods);
+				for (int i=0; i<Game.activeBalls.size(); i++){	
+					if (Game.activeBalls.get(i).ballMods < 5){
+						Game.activeBalls.get(i);
+						Game.activeBalls.get(i);
+						Ball.DIAMETER = (int) (Ball.DIAMETER * 1.1);
+						Game.activeBalls.get(i).addBallMod();
+						System.out.println("Ball Increase - New level "  + Game.activeBalls.get(i).ballMods);
 					}else{
 						System.out.println("Powerup not available - the ball size is too high.");
 					}}
@@ -189,7 +222,7 @@ public class Powerup {
 			//game.pointMultiplier = game.pointMultiplier / 2;
 		//}
 		active = false;
-		game.placeHolder.remove(this);
+		Game.placeHolder.remove(this);
 		//game.hasFireball = false;
 		//game.hasMetalPower = false;
 	}

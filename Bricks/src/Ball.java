@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -12,12 +13,23 @@ public class Ball {
 	// ballMods represents the modifications made to the ball size
 	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
 	int ballMods = 0;
+	private Color c;
 
 	public Ball(Game game, int X, int Y) {
 		this.game = game;
 		x = X;
 		y = Y;
 		speed = 1;
+		this.c = Color.BLACK;
+		
+	}
+	
+	public void setColor(Color c){
+		this.c = c;
+	}
+	
+	public Color getColor(){
+		return this.c;
 	}
 
 	public void addBallMod(){
@@ -54,12 +66,15 @@ public class Ball {
 					}
 					game.started = false;
 					game.Lives = game.Lives - 1;
+					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 1;
 					game.hasFireball = false;
 					game.hasMetalPower = false;
+					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);
+					this.setColor(Color.BLACK);
 					
 				}
 				if (game.activeBalls.size() > 1){
@@ -130,10 +145,14 @@ public class Ball {
 	}
 
 	public void paint(Graphics2D g) {
+		g.setColor(c);
 		g.fillOval((int) x, (int) y, DIAMETER, DIAMETER);
+		
 	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, DIAMETER, DIAMETER);
 	}
+
+	
 }
