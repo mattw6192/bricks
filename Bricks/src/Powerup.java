@@ -45,13 +45,14 @@ public class Powerup {
 				System.out.println("Double Points - New Multiplier "  + game.pointMultiplier);
 				break; // not ready
 			case 8: // Smaller Ball
-				if (game.ball.ballMods >= -3){
-					game.ball.DIAMETER = (int) (game.ball.DIAMETER * .9);
-					game.ball.SubtractBallMod();
-					System.out.println("Ball Decrease - New level "  + game.ball.ballMods);
-				}else{
-					System.out.println("Powerup not available - the ball size is too low.");
-				}
+				for (int i=0; i< game.activeBalls.size(); i++){	
+					if (game.activeBalls.get(i).ballMods >= -3){
+							game.activeBalls.get(i).DIAMETER = (int) (game.activeBalls.get(i).DIAMETER * .9);
+							game.activeBalls.get(i).SubtractBallMod();
+							System.out.println("Ball Decrease - New level "  + game.activeBalls.get(i).ballMods);
+						}else{
+							System.out.println("Powerup not available - the ball size is too low.");
+						}}
 				break; // not ready
 			case 7: // Multiple Balls
 				
@@ -78,20 +79,22 @@ public class Powerup {
 				}
 				break; // not ready
 			case 5: // Slow Down
-				if (game.ball.speed >= 1){
-					game.ball.speed -= 0.5;
-					System.out.println("Speed Down - game speed " + game.ball.speed);
-				}else{
-					System.out.println("Powerup not available - the ball speed is too slow.");
-				}
+				for (int i=0; i < game.activeBalls.size(); i++){
+					if (game.activeBalls.get(i).speed >= 1){
+						game.activeBalls.get(i).speed -= 0.5;
+						System.out.println("Speed Down - game speed " + game.activeBalls.get(i).speed);
+					}else{
+						System.out.println("Powerup not available - the ball speed is too slow.");
+					}}
 				break; // not ready
 			case 4: // Speed Up
-				if (game.ball.speed < 2.5){
-					game.ball.speed += 0.5;
-					System.out.println("Speed Up - game speed " + game.ball.speed);
-				}else{
-					System.out.println("Powerup not available - the ball speed is too high.");
-				}
+				for (int i=0; i< game.activeBalls.size();i++){
+					if (game.activeBalls.get(i).speed < 2.5){
+						game.activeBalls.get(i).speed += 0.5;
+						System.out.println("Speed Up - game speed " + game.activeBalls.get(i).speed);
+					}else{
+						System.out.println("Powerup not available - the ball speed is too high.");
+					}}
 				break; // not ready
 			case 3: // Larger Paddle
 				
@@ -104,13 +107,14 @@ public class Powerup {
 				}
 				break; // not ready
 			case 2: // Larger Ball
-				if (game.ball.ballMods < 5){
-					game.ball.DIAMETER = (int) (game.ball.DIAMETER * 1.1);
-					game.ball.addBallMod();
-					System.out.println("Ball Increase - New level "  + game.ball.ballMods);
-				}else{
-					System.out.println("Powerup not available - the ball size is too high.");
-				}
+				for (int i=0; i<game.activeBalls.size(); i++){	
+					if (game.activeBalls.get(i).ballMods < 5){
+						game.activeBalls.get(i).DIAMETER = (int) (game.activeBalls.get(i).DIAMETER * 1.1);
+						game.activeBalls.get(i).addBallMod();
+						System.out.println("Ball Increase - New level "  + game.activeBalls.get(i).ballMods);
+					}else{
+						System.out.println("Powerup not available - the ball size is too high.");
+					}}
 				
 				break; // not ready
 			case 1: // Freeze
