@@ -294,7 +294,6 @@ public class Game extends JPanel implements MouseListener {
 	    return randomNum;
 	}
 	
-	//test
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
 		if (tempRandNum == 7 || tempRandNum == 2){
