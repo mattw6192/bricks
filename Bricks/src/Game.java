@@ -2,13 +2,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class Game extends JPanel {
@@ -238,7 +242,19 @@ public class Game extends JPanel {
 				for(int i = 0; i<allBricks.size(); i++){ 
 				
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
+						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (100 * pointMultiplier);
+						allBricks.get(i).setCanBeHit(false);
+						int delay = 500; //milliseconds
+						ActionListener taskPerformer = new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								saveBrickForAction.setCanBeHit(true);
+						        System.out.println("Brick can now be hit again");
+						    }
+						};
+						Timer timer = new Timer(delay, taskPerformer);
+						timer.setRepeats(false);
+						timer.start();
 						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == true){
 							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 							activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 

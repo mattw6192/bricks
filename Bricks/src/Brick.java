@@ -13,9 +13,14 @@ public class Brick {
 	private Color color;
 	private Boolean Alive;
 	private int hits;
+	Boolean canBeHit = true;
 	
 	public int getHits() {
 		return hits;
+	}
+	
+	public void setCanBeHit(Boolean value){
+		canBeHit = value;
 	}
 
 	public void setHits(int hits) {
