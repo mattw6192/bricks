@@ -225,7 +225,8 @@ public class Game extends JPanel {
 		}
 
 		frame.add(game);
-		frame.setSize(300, 400);
+		frame.setSize(1000, 700);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(game);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
