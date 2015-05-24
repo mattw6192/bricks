@@ -17,6 +17,15 @@ public class Game extends JPanel {
 	double tempBallSize = 0;
 	Boolean started = false;
 	int Lives = 3;
+	static String lifeString = "***";
+	public static String getLifeString() {
+		return lifeString;
+	}
+
+	public void setLifeString(String lifeString) {
+		Game.lifeString = lifeString;
+	}
+
 	static int Score = 000000;
 	Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
@@ -217,6 +226,7 @@ public class Game extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		while (true) { //game loop
+			frame.setTitle(Game.getLifeString());
 			game.move();
 			game.repaint();
 			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen

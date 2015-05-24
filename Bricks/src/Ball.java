@@ -66,6 +66,18 @@ public class Ball {
 					}
 					game.started = false;
 					game.Lives = game.Lives - 1;
+					
+					/*this part makes the frames title the number of lives the 
+					 * user has.
+					 */
+					String life = "";
+					for (int i = 0; i < game.Lives;i++){ 
+						life += "*";
+						System.out.println(life);
+					}
+					game.setLifeString(life);
+					
+					
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 1;
