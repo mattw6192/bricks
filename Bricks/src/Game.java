@@ -1,18 +1,13 @@
 import java.awt.Color; 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.Event;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -94,7 +89,7 @@ public class Game extends JPanel implements MouseListener {
 			}
 		});
 		addKeyListener(new KeyListener(){
-			//public void mouseClicked(MouseEvent arg0) {
+			//public void mouseClicked(MouseEvent arg0) { //old code for mouseListener, if we want to go back
 				//started = true;
 				//hold = false;
 			//}
@@ -117,21 +112,7 @@ public class Game extends JPanel implements MouseListener {
 				
 			}
 
-			//public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-			//}
-
-			//public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-			//}
-
-			//public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub	
-			//}
-
-			//public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-			//}
+			
 		});
 		setFocusable(true);
 	}
@@ -302,7 +283,7 @@ public class Game extends JPanel implements MouseListener {
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 1)) ){
 			tempBall.setXa((tempBall.getXa() * (-1)));
 			tempBall.setYa((tempBall.getYa() * (-1)));
-		}else if (((tempBall.getBounds().getX() + tempBall.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
+		}else if (((tempBall.getBounds().getX() + Ball.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
 			tempBall.setXa((tempBall.getXa() * (-1)));
 			tempBall.setYa((tempBall.getYa() * (-1)));
 		}
@@ -381,7 +362,7 @@ public class Game extends JPanel implements MouseListener {
 	public static void hideBrick(Brick newbrick, Ball saveBall){
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
-		double saveXa = saveBall.getXa();
+		//double saveXa = saveBall.getXa();
 		//saveBall.setXa(saveXa * (-1));
 		double saveYa = saveBall.getYa();
 		saveBall.setYa(saveYa * (-1));

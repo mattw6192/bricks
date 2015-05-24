@@ -53,13 +53,13 @@ public class Ball {
 			ya =  speed*2;
 		if (y + ya > game.getHeight() - DIAMETER){
 			
-			if (game.isGameOver() == true && game.activeBalls.isEmpty() == true){
+			if (game.isGameOver() == true && Game.activeBalls.isEmpty() == true){
 				game.gameOver();
 			}else{
 				//game.started = false;
-				game.pointMultiplier = 1;
+				Game.pointMultiplier = 1;
 				
-				if (game.activeBalls.size() == 1){
+				if (Game.activeBalls.size() == 1){
 					if (game.Lives <= 1){
 						Game.activeBalls.remove(this);
 						game.gameOver();
@@ -69,8 +69,8 @@ public class Ball {
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 1;
-					game.hasFireball = false;
-					game.hasMetalPower = false;
+					Game.hasFireball = false;
+					Game.hasMetalPower = false;
 					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);

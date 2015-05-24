@@ -63,8 +63,8 @@ public class Powerup {
 				Game.hasFireball = true;
 				
 				ActionListener flashTask = new ActionListener() {
-					public void actionPerformed(ActionEvent evt){
-						boolean hasExecuted = false;
+					public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
+						boolean hasExecuted = false; 
 						if (Game.hasFireball.equals(false)){
 						Game.activeBalls.get(0).setColor(Color.BLACK); hasExecuted = true;}
 						if (Game.activeBalls.get(0).getColor().equals(Color.BLACK) && hasExecuted == false){
@@ -75,10 +75,10 @@ public class Powerup {
 							Game.activeBalls.get(0).setColor(Color.RED);
 						}
 						
-				}
+					}
 				};
 				
-				Timer flashTimer = new Timer(100,flashTask);
+				Timer flashTimer = new Timer(200,flashTask);
 				flashTimer.setRepeats(true);
 				flashTimer.start();
 				//if (!flashTimer.isRunning()){flashTimer.restart();}
@@ -108,7 +108,7 @@ public class Powerup {
 				ActionListener taskPerformer2 = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						Game.pointMultiplier = Game.pointMultiplier / 2;
-				        System.out.println("Pwerup Ended");
+				        System.out.println("Powerup Ended");
 				    }
 				};
 				Timer timer2 = new Timer(delay2, taskPerformer2);
