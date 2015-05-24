@@ -239,7 +239,14 @@ public class Game extends JPanel {
 				
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
 						Score += (100 * pointMultiplier);
-						checkSideHits(allBricks.get(i), activeBalls.get(j));
+						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == true){
+							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
+							activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
+						}else{
+							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
+						}
+						
+						
 						if (hasFireball == true){
 							allBricks.get(i).subtractAllHits();
 						}else if(hasMetalPower == true){
@@ -253,7 +260,7 @@ public class Game extends JPanel {
 					    	Powerup savePower = game.generatePowerup(allBricks.get(i));
 					    	placeHolder.add(savePower);
 					    }
-					    activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
+					    //activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 						//game.ball.xa = game.ball.xa * (-1);
 					    
 					    
@@ -280,14 +287,17 @@ public class Game extends JPanel {
 	}
 	
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
-	public static void checkSideHits(Brick tempBrick, Ball tempBall){
+	public static boolean checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 1)) ){
-			tempBall.setXa((tempBall.getXa() * (-1)));
-			tempBall.setYa((tempBall.getYa() * (-1)));
+			//tempBall.setXa((tempBall.getXa() * (-1)));
+			//tempBall.setYa((tempBall.getYa() * (-1)));
+			return true;
 		}else if (((tempBall.getBounds().getX() + Ball.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
-			tempBall.setXa((tempBall.getXa() * (-1)));
-			tempBall.setYa((tempBall.getYa() * (-1)));
+			//tempBall.setXa((tempBall.getXa() * (-1)));
+			//tempBall.setYa((tempBall.getYa() * (-1)));
+			return true;
 		}
+		return false;
 	}
 	
 	public static int randInt(int min, int max) {
@@ -305,7 +315,7 @@ public class Game extends JPanel {
 	
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,12); 
-		int tempRandNum2 = 12; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 11; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
@@ -355,6 +365,8 @@ public class Game extends JPanel {
 				System.out.println("Powerup Gained: " + "Freeze");
 				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
 				return powerup1; 
+			default:
+				break;
 			
 	}
 		return null;
