@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Game extends JPanel implements MouseListener {
+public class Game extends JPanel {
 
 	Ball ball = new Ball(this, 20, 320);
 	double tempBallSize = 0;
@@ -361,11 +361,6 @@ public class Game extends JPanel implements MouseListener {
 		saveBall.setYa(saveYa * (-1));
 		newbrick = null;
 	}
-	//unused listeners
-	public void mouseClicked(MouseEvent arg0) {}
-	public void mouseEntered(MouseEvent arg0) {}
-	public void mouseExited(MouseEvent arg0) {}
-	public void mousePressed(MouseEvent arg0) {}
-	public void mouseReleased(MouseEvent arg0) {}
+	
 
 }
