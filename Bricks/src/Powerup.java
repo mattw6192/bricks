@@ -41,6 +41,7 @@ public class Powerup {
 			case 12: // Extra Life
 				System.out.println("Lives  "  + game.Lives);
 				game.Lives += 1;
+				Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
 				break;
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");

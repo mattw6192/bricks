@@ -22,7 +22,7 @@ public class Game extends JPanel {
 		return lifeString;
 	}
 
-	public void setLifeString(String lifeString) {
+	public static void setLifeString(String lifeString) {
 		Game.lifeString = lifeString;
 	}
 
@@ -310,7 +310,6 @@ public class Game extends JPanel {
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
 				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
-				this.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
 				return powerup12;
 			case 11:
 				System.out.println("Powerup Gained: " + "Metal Ball");
