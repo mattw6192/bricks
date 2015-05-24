@@ -61,7 +61,7 @@ public class Ball {
 				
 				if (game.activeBalls.size() == 1){
 					if (game.Lives <= 1){
-						game.activeBalls.remove(this);
+						Game.activeBalls.remove(this);
 						game.gameOver();
 					}
 					game.started = false;
@@ -77,8 +77,8 @@ public class Ball {
 					this.setColor(Color.BLACK);
 					
 				}
-				if (game.activeBalls.size() > 1){
-					game.activeBalls.remove(this);
+				if (Game.activeBalls.size() > 1){
+					Game.activeBalls.remove(this);
 				}
 			}}
 		if (collision()){

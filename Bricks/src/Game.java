@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.Event;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -92,27 +93,45 @@ public class Game extends JPanel implements MouseListener {
 				racquet.keyPressed(e);
 			}
 		});
-		addMouseListener(new MouseListener(){
-			public void mouseClicked(MouseEvent arg0) {
-				started = true;
+		addKeyListener(new KeyListener(){
+			//public void mouseClicked(MouseEvent arg0) {
+				//started = true;
 				//hold = false;
+			//}
+
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {started = true;}
+				
 			}
 
-			public void mouseEntered(MouseEvent arg0) {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
+				
 			}
 
-			public void mouseExited(MouseEvent arg0) {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
+				
 			}
 
-			public void mousePressed(MouseEvent arg0) {
+			//public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			//}
+
+			//public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+			//}
+
+			//public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub	
-			}
+			//}
 
-			public void mouseReleased(MouseEvent arg0) {
+			//public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-			}
+			//}
 		});
 		setFocusable(true);
 	}
