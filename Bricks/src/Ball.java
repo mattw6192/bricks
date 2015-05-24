@@ -46,11 +46,11 @@ public class Ball {
 	
 	void move() {
 		if (x + xa < 0)
-			xa =  speed*2;
+			xa =  speed;
 		if (x + xa > game.getWidth() - DIAMETER)
-			xa =  -speed*2;
+			xa =  -speed;
 		if (y + ya < 0)
-			ya =  speed*2;
+			ya =  speed;
 		if (y + ya > game.getHeight() - DIAMETER){
 			
 			if (game.isGameOver() == true && Game.activeBalls.isEmpty() == true){
