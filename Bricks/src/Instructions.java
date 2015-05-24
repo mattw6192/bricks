@@ -8,6 +8,7 @@
  *
  * @author dillonwastrack
  */
+@SuppressWarnings("serial")
 public class Instructions extends javax.swing.JDialog {
         
     /**

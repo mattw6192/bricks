@@ -97,20 +97,13 @@ public class Game extends JPanel implements MouseListener {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {started = true;}
-				
 			}
 
 			@Override
-			public void keyReleased(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void keyReleased(KeyEvent arg0) {}
 
 			@Override
-			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void keyTyped(KeyEvent arg0) {}
 
 			
 		});
@@ -368,25 +361,11 @@ public class Game extends JPanel implements MouseListener {
 		saveBall.setYa(saveYa * (-1));
 		newbrick = null;
 	}
-
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub	
-	}
-
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub	
-	}
-
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub		
-	}
+	//unused listeners
+	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseEntered(MouseEvent arg0) {}
+	public void mouseExited(MouseEvent arg0) {}
+	public void mousePressed(MouseEvent arg0) {}
+	public void mouseReleased(MouseEvent arg0) {}
 
 }
