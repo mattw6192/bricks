@@ -66,7 +66,7 @@ public class Instructions extends javax.swing.JDialog {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("When the game begins, \nclick the screen to release the ball. \nThen use the left and right arrow keys to move \nthe paddle. If the ball goes off below the screen,\nyou lose a life. After 3 lives are lost, the game ends.");
+        jTextArea1.setText("When the game begins, \npress the spacebar to release the ball. \nThen use the left and right arrow keys to move \nthe paddle. If the ball goes off below the screen,\nyou lose a life. After 3 lives are lost, the game ends.");
         jScrollPane1.setViewportView(jTextArea1);
 
         startGame.setText("Start Game");
