@@ -244,31 +244,25 @@ public class Game extends JPanel {
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
 						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (100 * pointMultiplier);
-						allBricks.get(i).setCanBeHit(false);
-						int delay = 500; //milliseconds
-						ActionListener taskPerformer = new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								saveBrickForAction.setCanBeHit(true);
-						        System.out.println("Brick can now be hit again");
-						    }
-						};
-						Timer timer = new Timer(delay, taskPerformer);
-						timer.setRepeats(false);
-						timer.start();
+						
 						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == true){
 							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 							activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
 						}else{
 							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
+							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1);
+							
 						}
 						
 						
-						if (hasFireball == true){
+						if (hasFireball == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractAllHits();
-						}else if(hasMetalPower == true){
+						}else if(hasMetalPower == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
 						}else{
-							allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+							if (allBricks.get(i).canBeHit == true){
+								allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+							}
 						}
 					    
 					    boolean havePowerup = game.getPowerup();
@@ -279,7 +273,17 @@ public class Game extends JPanel {
 					    //activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 						//game.ball.xa = game.ball.xa * (-1);
 					    
-					    
+					    allBricks.get(i).setCanBeHit(false);
+						int delay = 500; //milliseconds
+						ActionListener taskPerformer = new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								saveBrickForAction.setCanBeHit(true);
+						        //System.out.println("Brick can now be hit again");
+						    }
+						};
+						Timer timer = new Timer(delay, taskPerformer);
+						timer.setRepeats(false);
+						timer.start();
 						
 						if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 						if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
