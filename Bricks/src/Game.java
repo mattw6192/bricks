@@ -226,7 +226,7 @@ public class Game extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		while (true) { //game loop
-			frame.setTitle(Game.getLifeString());
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score );
 			game.move();
 			game.repaint();
 			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen
