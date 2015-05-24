@@ -303,7 +303,8 @@ public class Powerup {
 
 	public void paint(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		g.fillOval(x, y, DIAMETER, DIAMETER);
+		g.fillRect(x, y, DIAMETER, DIAMETER);
+		//g.fillOval(x, y, DIAMETER, DIAMETER);
 	}
 	
 	public Rectangle getBounds() {
