@@ -40,7 +40,7 @@ public class Powerup {
 			switch(caseNumber){
 			case 12: // Extra Life
 				if (game.Lives <= 5){
-					System.out.println("Lives  "  + game.Lives + 1);
+					System.out.println("Lives  "  + (game.Lives + 1));
 					game.Lives += 1;
 					Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
 				}else{

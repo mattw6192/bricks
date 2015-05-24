@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Racquet {
-	private static final int Y = 630;
+	private static final int Y = 330;
 	int WIDTH = 60;
 	int HEIGHT = 10;
 	int x = 0;
@@ -17,7 +17,7 @@ public class Racquet {
 
 	public Racquet(Game game) {
 		this.game = game;
-		x = 450;
+		x = 100;
 	}
 
 	public void addRacquetMod(){

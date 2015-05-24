@@ -246,11 +246,11 @@ public class Game extends JPanel {
 						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (100 * pointMultiplier);
 						
-						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == true){
-							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
-							activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
-						}else{
-							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
+						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == false){
+							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
+							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
+						//}else{
+							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
 							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1);
 							
 						}
@@ -310,11 +310,11 @@ public class Game extends JPanel {
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static boolean checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 1)) ){
-			//tempBall.setXa((tempBall.getXa() * (-1)));
+			tempBall.setXa((tempBall.getXa() * (-1)));
 			//tempBall.setYa((tempBall.getYa() * (-1)));
 			return true;
 		}else if (((tempBall.getBounds().getX() + Ball.DIAMETER) <= (tempBrick.getBounds().getX() + 1))){
-			//tempBall.setXa((tempBall.getXa() * (-1)));
+			tempBall.setXa((tempBall.getXa() * (-1)));
 			//tempBall.setYa((tempBall.getYa() * (-1)));
 			return true;
 		}
