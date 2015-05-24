@@ -205,11 +205,11 @@ public class Game extends JPanel {
 		allBricks.add(brick6a);
 		allBricks.add(brick6b);
 		allBricks.add(brick7a);
-		for(int i = 0; i<allBricks.size(); i++){ 
+		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 			if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
-			if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
-			if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+			if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);}
+			if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} 
 		}
 
 		frame.add(game);
@@ -218,7 +218,7 @@ public class Game extends JPanel {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		while (true) {
+		while (true) { //game loop
 			game.move();
 			game.repaint();
 			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen
