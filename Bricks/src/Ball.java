@@ -75,7 +75,7 @@ public class Ball {
 						life += "*";
 						System.out.println(life);
 					}
-					game.setLifeString(life);
+					Game.setLifeString(life);
 					
 					
 					this.setColor(Color.BLACK);
@@ -155,6 +155,9 @@ public class Ball {
 	private boolean collision() {
 		return game.racquet.getBounds().intersects(getBounds());
 	}
+	
+	
+	
 
 	public void paint(Graphics2D g) {
 		g.setColor(c);

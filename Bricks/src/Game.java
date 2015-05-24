@@ -22,13 +22,6 @@ public class Game extends JPanel {
 	Boolean started = false;
 	int Lives = 3;
 	static String lifeString = "***";
-	public static String getLifeString() {
-		return lifeString;
-	}
-
-	public static void setLifeString(String lifeString) {
-		Game.lifeString = lifeString;
-	}
 
 	static int Score = 000000;
 	Boolean hold = false;
@@ -142,6 +135,14 @@ public class Game extends JPanel {
 		}else{
 			return false;
 		}
+	}
+	
+	public static String getLifeString() {
+		return lifeString;
+	}
+
+	public static void setLifeString(String lifeString) {
+		Game.lifeString = lifeString;
 	}
 	
 	public void paint(Graphics g) {
