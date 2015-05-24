@@ -19,7 +19,7 @@ public class Ball {
 		this.game = game;
 		x = X;
 		y = Y;
-		speed = 1;
+		speed = 2;
 		this.c = Color.BLACK;
 		
 	}
@@ -80,7 +80,7 @@ public class Ball {
 					
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
-					speed = 1;
+					speed = 2;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
 					this.setColor(Color.BLACK);
