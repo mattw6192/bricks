@@ -17,6 +17,7 @@ public class Racquet {
 
 	public Racquet(Game game) {
 		this.game = game;
+		x = 450;
 	}
 
 	public void addRacquetMod(){
