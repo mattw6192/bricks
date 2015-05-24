@@ -39,9 +39,13 @@ public class Powerup {
 		if (active == true){
 			switch(caseNumber){
 			case 12: // Extra Life
-				System.out.println("Lives  "  + game.Lives);
-				game.Lives += 1;
-				Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
+				if (game.Lives <= 5){
+					System.out.println("Lives  "  + game.Lives + 1);
+					game.Lives += 1;
+					Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
+				}else{
+					System.out.println("The Maximum Limit of lives has been reached");
+				}
 				break;
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
