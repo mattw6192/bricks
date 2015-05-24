@@ -397,8 +397,8 @@ public class Game extends JPanel {
 		newbrick.setAlive(false);
 		//double saveXa = saveBall.getXa();
 		//saveBall.setXa(saveXa * (-1));
-		double saveYa = saveBall.getYa();
-		saveBall.setYa(saveYa * (-1));
+		//double saveYa = saveBall.getYa();
+		//saveBall.setYa(saveYa * (-1));
 		newbrick = null;
 	}
 	
