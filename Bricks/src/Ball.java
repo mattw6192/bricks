@@ -6,7 +6,7 @@ public class Ball {
 	static int DIAMETER = 10;
 	double x = 0;
 	double y = 0;
-	double xa = 2;
+	double xa = 1;
 	double ya = 1;
 	private Game game;
 	double speed;
