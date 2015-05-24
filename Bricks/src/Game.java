@@ -78,7 +78,7 @@ public class Game extends JPanel {
 	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	Racquet racquet = new Racquet(this);
 
-	public Game() {
+	public Game() { //comment
 		activeBalls.add(ball);
 		addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {
