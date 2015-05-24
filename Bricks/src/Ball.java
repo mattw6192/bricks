@@ -6,8 +6,8 @@ public class Ball {
 	static int DIAMETER = 10;
 	double x = 0;
 	double y = 0;
-	double xa = 2;
-	double ya = 2;
+	double xa = 1;
+	double ya = 1;
 	private Game game;
 	double speed;
 	// ballMods represents the modifications made to the ball size
@@ -19,7 +19,7 @@ public class Ball {
 		this.game = game;
 		x = X;
 		y = Y;
-		speed = 2;
+		speed = 1;
 		this.c = Color.BLACK;
 		
 	}
@@ -80,7 +80,7 @@ public class Ball {
 					
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
-					speed = 2;
+					speed = 1;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
 					this.setColor(Color.BLACK);

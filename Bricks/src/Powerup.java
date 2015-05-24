@@ -103,19 +103,22 @@ public class Powerup {
 				break; 
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + Game.pointMultiplier);
-				Game.pointMultiplier = Game.pointMultiplier * 2;
-				System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
-				int delay2 = 30000; //milliseconds
-				ActionListener taskPerformer2 = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						Game.pointMultiplier = Game.pointMultiplier / 2;
-				        System.out.println("Powerup Ended");
-				    }
-				};
-				Timer timer2 = new Timer(delay2, taskPerformer2);
-				timer2.setRepeats(false);
-				timer2.start();
-				
+				if (Game.pointMultiplier <= 4){
+					Game.pointMultiplier = Game.pointMultiplier * 2;
+					System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
+					int delay2 = 30000; //milliseconds
+					ActionListener taskPerformer2 = new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							Game.pointMultiplier = Game.pointMultiplier / 2;
+							System.out.println("Powerup Ended");
+						}
+					};
+					Timer timer2 = new Timer(delay2, taskPerformer2);
+					timer2.setRepeats(false);
+					timer2.start();
+				}else{
+					System.out.println("Powerup Not Activated: Current Multiplier is Maxed Out");
+				}
 				break; 
 			case 8: // Smaller Ball
 				for (int i=0; i< Game.activeBalls.size(); i++){	
