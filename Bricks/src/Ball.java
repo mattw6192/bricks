@@ -110,7 +110,7 @@ public class Ball {
 			}
 			else{
 				ya =  -speed;
-				//y = game.racquet.getTopY() - DIAMETER;
+				y = game.racquet.getTopY() - DIAMETER;
 			}
 		}
 		x = x + xa;
