@@ -7,10 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 
-
-
-
-
 public class Powerup {
 	static final int DIAMETER = 10; //test
 	int x = 0; // reverse test
@@ -29,9 +25,7 @@ public class Powerup {
 		active = false;
 		duration = time;
 		ability = powerup;
-		
 		setXa(0);
-		
 		 
 	}
 
@@ -128,8 +122,6 @@ public class Powerup {
 				for (int i=0; i< Game.activeBalls.size(); i++){	
 					if (Game.activeBalls.get(i).ballMods >= -3){
 							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .8);
-							//Game.activeBalls.get(i);
-							//Ball.DIAMETER = (int) (Ball.DIAMETER * .9);
 							Game.activeBalls.get(i).SubtractBallMod();
 							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods);
 						}else{
@@ -190,8 +182,6 @@ public class Powerup {
 				for (int i=0; i<Game.activeBalls.size(); i++){	
 					if (Game.activeBalls.get(i).ballMods < 5){
 						Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * 1.25) ;
-						//Game.activeBalls.get(i);
-						//Ball.DIAMETER = (int) (Ball.DIAMETER * 1.1);
 						Game.activeBalls.get(i).addBallMod();
 						System.out.println("Ball Increase - New level "  + Game.activeBalls.get(i).ballMods);
 					}else{
@@ -224,15 +214,8 @@ public class Powerup {
 	}
 	
 	public void powerupEnd(){
-		//game.hold = false;
-		
-		//if (game.pointMultiplier > 1 && active == true){
-			//game.pointMultiplier = game.pointMultiplier / 2;
-		//}
 		active = false;
 		Game.placeHolder.remove(this);
-		//game.hasFireball = false;
-		//game.hasMetalPower = false;
 	}
 	
 	public int getPowerNum(){
@@ -311,7 +294,6 @@ public class Powerup {
 	public void paint(Graphics2D g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(x, y, DIAMETER, DIAMETER);
-		//g.fillOval(x, y, DIAMETER, DIAMETER);
 	}
 	
 	public Rectangle getBounds() {

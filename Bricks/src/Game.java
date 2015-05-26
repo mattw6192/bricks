@@ -253,10 +253,8 @@ public class Game extends JPanel {
 						//}else{
 							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
 							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1);
-							
 						}
-						
-						
+							
 						if (hasFireball == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractAllHits();
 						}else if(hasMetalPower == true && allBricks.get(i).canBeHit == true){
