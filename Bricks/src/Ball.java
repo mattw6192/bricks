@@ -83,6 +83,7 @@ public class Ball {
 					speed = 2;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
+					Game.placeHolder.clear();
 					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);
