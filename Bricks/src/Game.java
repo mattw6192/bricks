@@ -164,7 +164,7 @@ public class Game extends JPanel {
 	static Brick brick3_7a = new Brick(690, 130, 35, 15, 4);
 	
 
-	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
+    static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	Racquet racquet = new Racquet(this);
 
 	public Game() { //comment
@@ -493,7 +493,7 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,12); 
 		//int tempRandNum2 = randInt(1,2);
-		int tempRandNum2 = 8; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 13; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");

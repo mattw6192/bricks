@@ -32,6 +32,8 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
+			case 13: // Missles
+				Missile m = new Missile(game,game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
 			case 12: // Extra Life
 				if (game.Lives <= 5){
 					System.out.println("Lives  "  + (game.Lives + 1));
