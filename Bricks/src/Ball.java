@@ -154,6 +154,7 @@ public class Ball {
 
 	private boolean collision() {
 		return game.racquet.getBounds().intersects(getBounds());
+		
 	}
 	
 	
