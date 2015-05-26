@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 public class Missile {
 
 	private Game game;
-	private int x;
-	private int y;
+	private int x = 0;
+	private int y = 0;
 	int xa = 0;
 	int ya = 1;
 	static final int DIAMETER = 10;
@@ -21,20 +21,6 @@ public class Missile {
 	
 	void move() {
 		
-		
-		//if (y + ya > game.getHeight() - DIAMETER){
-			//System.out.println("Powerup Lost!");
-			
-		//}
-		if (collision()){
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
-			
-			setXa(0);
-			setYa(0);
-			setX(-100); // removes the powerup from the playing field
-			setY(-100); // removes the powerup from the playing field
-		}
 		x = x + xa;
 		y = y + ya;
 	}
