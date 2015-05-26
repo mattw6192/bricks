@@ -34,6 +34,7 @@ public class Powerup {
 			switch(caseNumber){
 			case 13: // Missles
 				Missile m = new Missile(game,game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+				break;
 			case 12: // Extra Life
 				if (game.Lives <= 5){
 					System.out.println("Lives  "  + (game.Lives + 1));
@@ -232,7 +233,9 @@ public class Powerup {
 		if (ability.equals("Double Points")){return 9;};
 		if (ability.equals("Fireball")){return 10;};
 		if (ability.equals("Metal Ball")){return 11;};
-		return 12;
+		if (ability.equals("Missile")){return 13;}
+		if (ability.equals("Extra Life")){return 12;}
+		return 0;
 	}
 	
 	void move() {

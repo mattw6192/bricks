@@ -495,6 +495,9 @@ public class Game extends JPanel {
 		//int tempRandNum2 = randInt(1,2);
 		int tempRandNum2 = 13; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
+			case 13:
+				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
+				return powerup13;
 			case 12:
 				System.out.println("Powerup Gained: " + "Extra Life");
 				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
