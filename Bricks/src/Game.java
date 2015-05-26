@@ -122,8 +122,8 @@ public class Game extends JPanel {
 			//hold = false;
 		}else{
 			for (int i =0; i<activeBalls.size(); i++){
-				activeBalls.get(i).setX((int) racquet.getBounds().getX() + 20);
-				activeBalls.get(i).setY((int) racquet.getBounds().getY() - 10);
+				activeBalls.get(i).setX((int) racquet.getBounds().getX() + (int) (racquet.getBounds().getWidth() / 2));
+				activeBalls.get(i).setY((int) racquet.getBounds().getY() - (int) (activeBalls.get(i).DIAMETER));
 			}
 		}
 		racquet.move();
@@ -346,7 +346,8 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,12); 
+		//int tempRandNum2 = randInt(1,12); 
+		int tempRandNum2 = randInt(1,2);
 		//int tempRandNum2 = 12; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 12:

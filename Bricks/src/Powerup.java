@@ -127,7 +127,7 @@ public class Powerup {
 			case 8: // Smaller Ball
 				for (int i=0; i< Game.activeBalls.size(); i++){	
 					if (Game.activeBalls.get(i).ballMods >= -3){
-							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .9);
+							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .8);
 							//Game.activeBalls.get(i);
 							//Ball.DIAMETER = (int) (Ball.DIAMETER * .9);
 							Game.activeBalls.get(i).SubtractBallMod();
@@ -189,7 +189,7 @@ public class Powerup {
 			case 2: // Larger Ball
 				for (int i=0; i<Game.activeBalls.size(); i++){	
 					if (Game.activeBalls.get(i).ballMods < 5){
-						Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * 1.1) ;
+						Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * 1.25) ;
 						//Game.activeBalls.get(i);
 						//Ball.DIAMETER = (int) (Ball.DIAMETER * 1.1);
 						Game.activeBalls.get(i).addBallMod();

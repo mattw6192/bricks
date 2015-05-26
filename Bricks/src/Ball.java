@@ -97,7 +97,7 @@ public class Ball {
 			if (game.hold == true){
 				game.started = false;
 			}
-			
+			y = game.racquet.getTopY() - DIAMETER;
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
 			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
@@ -110,7 +110,7 @@ public class Ball {
 			}
 			else{
 				ya =  -speed;
-				y = game.racquet.getTopY() - DIAMETER;
+				
 			}
 		}
 		x = x + xa;
