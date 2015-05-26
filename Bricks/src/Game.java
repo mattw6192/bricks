@@ -21,6 +21,7 @@ public class Game extends JPanel {
 	double tempBallSize = 0;
 	Boolean started = false;
 	int Lives = 3;
+	static ArrayList<Missile> missiles = new ArrayList<Missile>();
 	static String lifeString = "***";
 
 	static int Score = 000000;
@@ -189,7 +190,13 @@ public class Game extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {started = true;}
+				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
+					 started = true;
+					 if (Game.missiles.size()>0){
+						 Game.fireMissile();
+						 Game.missiles.remove(0);
+					 }
+				 }
 			}
 
 			@Override
@@ -551,6 +558,10 @@ public class Game extends JPanel {
 			
 	}
 		return null;
+	}
+	public static Missile fireMissile(){
+		System.out.println("firing missile");
+		return Game.missiles.get(0);
 	}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
