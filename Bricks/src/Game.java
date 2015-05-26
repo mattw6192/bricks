@@ -74,6 +74,95 @@ public class Game extends JPanel {
 	// final row of bricks 
 	static Brick brick7a = new Brick(130, 130, 35, 15, 4);
 	
+	//////////////// Second Pyramid //////////////////////
+	
+	//top row of bricks from left to right
+		static Brick brick2_1 = new Brick(290, 10, 35, 15, 4);
+		static Brick brick2_2 = new Brick(330, 10, 35, 15, 4);
+		static Brick brick2_3 = new Brick(370, 10, 35, 15, 4);
+		static Brick brick2_4 = new Brick(410, 10, 35, 15, 4);
+		static Brick brick2_5 = new Brick(450, 10, 35, 15, 4);
+		static Brick brick2_6 = new Brick(490, 10, 35, 15, 4);
+		static Brick brick2_7 = new Brick(530, 10, 35, 15, 4);
+		
+		// second row of bricks from left to right
+		static Brick brick2_2a = new Brick(308, 30, 35, 15, 4);
+		static Brick brick2_2b = new Brick(348, 30, 35, 15, 4);
+		static Brick brick2_2c = new Brick(388, 30, 35, 15, 4);
+		static Brick brick2_2d = new Brick(428, 30, 35, 15, 4);
+		static Brick brick2_2e = new Brick(468, 30, 35, 15, 4);
+		static Brick brick2_2f = new Brick(508, 30, 35, 15, 4);
+		
+		// third row of bricks from left to right
+		static Brick brick2_3a = new Brick(330, 50, 35, 15, 3);
+		static Brick brick2_3b = new Brick(370, 50, 35, 15, 3);
+		static Brick brick2_3c = new Brick(410, 50, 35, 15, 3);
+		static Brick brick2_3d = new Brick(450, 50, 35, 15, 3);
+		static Brick brick2_3e = new Brick(490, 50, 35, 15, 3);
+		
+		// fourth row of bricks from left to right
+		static Brick brick2_4a = new Brick(350, 70, 35, 15, 2);
+		static Brick brick2_4b = new Brick(390, 70, 35, 15, 2);
+		static Brick brick2_4c = new Brick(430, 70, 35, 15, 2);
+		static Brick brick2_4d = new Brick(470, 70, 35, 15, 2);
+		
+		// fifth row of bricks from left to right
+		static Brick brick2_5a = new Brick(370, 90, 35, 15, 2);
+		static Brick brick2_5b = new Brick(410, 90, 35, 15, 2);
+		static Brick brick2_5c = new Brick(450, 90, 35, 15, 2);
+		
+		// sixth row of bricks from left to right
+		static Brick brick2_6a = new Brick(388, 110, 35, 15, 1);
+		static Brick brick2_6b = new Brick(428, 110, 35, 15, 1);
+		
+		// final row of bricks 
+		static Brick brick2_7a = new Brick(410, 130, 35, 15, 4);
+		
+		///////////// Final / Third Pyramid ////////////////////
+
+		
+	//top row of bricks from left to right
+	static Brick brick3_1 = new Brick(570, 10, 35, 15, 4);
+	static Brick brick3_2 = new Brick(610, 10, 35, 15, 4);
+	static Brick brick3_3 = new Brick(650, 10, 35, 15, 4);
+	static Brick brick3_4 = new Brick(690, 10, 35, 15, 4);
+	static Brick brick3_5 = new Brick(730, 10, 35, 15, 4);
+	static Brick brick3_6 = new Brick(770, 10, 35, 15, 4);
+	static Brick brick3_7 = new Brick(810, 10, 35, 15, 4);
+	
+	// second row of bricks from left to right
+	static Brick brick3_2a = new Brick(588, 30, 35, 15, 4);
+	static Brick brick3_2b = new Brick(628, 30, 35, 15, 4);
+	static Brick brick3_2c = new Brick(668, 30, 35, 15, 4);
+	static Brick brick3_2d = new Brick(708, 30, 35, 15, 4);
+	static Brick brick3_2e = new Brick(748, 30, 35, 15, 4);
+	static Brick brick3_2f = new Brick(788, 30, 35, 15, 4);
+	
+	// third row of bricks from left to right
+	static Brick brick3_3a = new Brick(610, 50, 35, 15, 3);
+	static Brick brick3_3b = new Brick(650, 50, 35, 15, 3);
+	static Brick brick3_3c = new Brick(690, 50, 35, 15, 3);
+	static Brick brick3_3d = new Brick(730, 50, 35, 15, 3);
+	static Brick brick3_3e = new Brick(770, 50, 35, 15, 3);
+	
+	// fourth row of bricks from left to right
+	static Brick brick3_4a = new Brick(630, 70, 35, 15, 2);
+	static Brick brick3_4b = new Brick(670, 70, 35, 15, 2);
+	static Brick brick3_4c = new Brick(710, 70, 35, 15, 2);
+	static Brick brick3_4d = new Brick(750, 70, 35, 15, 2);
+	
+	// fifth row of bricks from left to right
+	static Brick brick3_5a = new Brick(650, 90, 35, 15, 2);
+	static Brick brick3_5b = new Brick(690, 90, 35, 15, 2);
+	static Brick brick3_5c = new Brick(730, 90, 35, 15, 2);
+	
+	// sixth row of bricks from left to right
+	static Brick brick3_6a = new Brick(668, 110, 35, 15, 1);
+	static Brick brick3_6b = new Brick(708, 110, 35, 15, 1);
+	
+	// final row of bricks 
+	static Brick brick3_7a = new Brick(690, 130, 35, 15, 4);
+	
 
 	private static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	Racquet racquet = new Racquet(this);
@@ -217,6 +306,64 @@ public class Game extends JPanel {
 		allBricks.add(brick6a);
 		allBricks.add(brick6b);
 		allBricks.add(brick7a);
+		//
+		allBricks.add(brick2_1);
+		allBricks.add(brick2_2);
+		allBricks.add(brick2_3);
+		allBricks.add(brick2_4);
+		allBricks.add(brick2_5);
+		allBricks.add(brick2_6);
+		allBricks.add(brick2_7);
+		allBricks.add(brick2_2a);
+		allBricks.add(brick2_2b);
+		allBricks.add(brick2_2c);
+		allBricks.add(brick2_2d);
+		allBricks.add(brick2_2e);
+		allBricks.add(brick2_2f);
+		allBricks.add(brick2_3a);
+		allBricks.add(brick2_3b);
+		allBricks.add(brick2_3c);
+		allBricks.add(brick2_3d);
+		allBricks.add(brick2_3e);
+		allBricks.add(brick2_4a);
+		allBricks.add(brick2_4b);
+		allBricks.add(brick2_4c);
+		allBricks.add(brick2_4d);
+		allBricks.add(brick2_5a);
+		allBricks.add(brick2_5b);
+		allBricks.add(brick2_5c);
+		allBricks.add(brick2_6a);
+		allBricks.add(brick2_6b);
+		allBricks.add(brick2_7a);
+		//
+		allBricks.add(brick3_1);
+		allBricks.add(brick3_2);
+		allBricks.add(brick3_3);
+		allBricks.add(brick3_4);
+		allBricks.add(brick3_5);
+		allBricks.add(brick3_6);
+		allBricks.add(brick3_7);
+		allBricks.add(brick3_2a);
+		allBricks.add(brick3_2b);
+		allBricks.add(brick3_2c);
+		allBricks.add(brick3_2d);
+		allBricks.add(brick3_2e);
+		allBricks.add(brick3_2f);
+		allBricks.add(brick3_3a);
+		allBricks.add(brick3_3b);
+		allBricks.add(brick3_3c);
+		allBricks.add(brick3_3d);
+		allBricks.add(brick3_3e);
+		allBricks.add(brick3_4a);
+		allBricks.add(brick3_4b);
+		allBricks.add(brick3_4c);
+		allBricks.add(brick3_4d);
+		allBricks.add(brick3_5a);
+		allBricks.add(brick3_5b);
+		allBricks.add(brick3_5c);
+		allBricks.add(brick3_6a);
+		allBricks.add(brick3_6b);
+		allBricks.add(brick3_7a);
 		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 			if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
@@ -225,7 +372,7 @@ public class Game extends JPanel {
 		}
 
 		frame.add(game);
-		frame.setSize(300, 400);
+		frame.setSize(855, 600);
 		frame.setLocationRelativeTo(game);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Racquet {
-	private static final int Y = 330;
+	private static final int Y = 530;
 	int WIDTH = 60;
 	int HEIGHT = 10;
 	int x = 0;
