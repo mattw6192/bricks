@@ -120,7 +120,7 @@ public class Powerup {
 				break; 
 			case 8: // Smaller Ball
 				for (int i=0; i< Game.activeBalls.size(); i++){	
-					if (Game.activeBalls.get(i).ballMods >= -3){
+					if (Game.activeBalls.get(i).ballMods >= -2){
 							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .8);
 							Game.activeBalls.get(i).SubtractBallMod();
 							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods);
@@ -194,7 +194,7 @@ public class Powerup {
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hold = false;
-				        System.out.println("Pwerup Ended");
+				        System.out.println("Powerup Ended");
 				    }
 				};
 				Timer timer = new Timer(delay, taskPerformer);
