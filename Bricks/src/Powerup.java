@@ -146,10 +146,12 @@ public class Powerup {
 			case 7: // Multiple Balls
 				if (Game.activeBalls.size() <= 5){
 					System.out.println("Multiple Balls Enabled");
-					Ball extraBall1 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+					Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
 					extraBall1.setXa(1);
-					Ball extraBall2 = new Ball(game, game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+					extraBall1.setYa(-1);
+					Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
 					extraBall2.setXa(-1);
+					extraBall2.setYa(-1);
 					Game.activeBalls.add(extraBall1);
 					Game.activeBalls.add(extraBall2);
 				}else{
@@ -225,7 +227,7 @@ public class Powerup {
 		active = status;
 		setXa(0);
 		setYa(0);
-		System.out.println("Powerup Activated");
+		//System.out.println("Powerup Activated");
 	}
 	
 	public void powerupEnd(){
