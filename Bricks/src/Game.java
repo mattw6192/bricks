@@ -398,7 +398,7 @@ public class Game extends JPanel {
 				
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
 						final Brick saveBrickForAction = allBricks.get(i);
-						Score += (100 * pointMultiplier);
+						Score += (10 * pointMultiplier);
 						//sactiveBalls.get(j).xa = activeBalls.get(j).xa * (-1);
 						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == false){
 							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
@@ -498,9 +498,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,12); 
+		int tempRandNum2 = randInt(1,12); 
 		//int tempRandNum2 = randInt(1,2);
-		int tempRandNum2 = 13; // Set this to a specific number to test one powerup
+		//int tempRandNum2 = 13; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 13:
 				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
