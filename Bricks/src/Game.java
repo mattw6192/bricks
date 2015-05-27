@@ -32,6 +32,7 @@ public class Game extends JPanel {
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
+	Boolean powerupsEnabled = true;
 	
 	//top row of bricks from left to right
 	static Brick brick = new Brick(10, 10, 35, 15, 4);
@@ -494,7 +495,24 @@ public class Game extends JPanel {
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
 		if (tempRandNum == 7 || tempRandNum == 2){
-			return true;
+			int delay = 1000; //milliseconds
+			
+			ActionListener taskPerformer = new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					powerupsEnabled = true;
+			    }
+			};
+			
+			if (powerupsEnabled == true){
+				powerupsEnabled = false;
+				Timer timer = new Timer(delay, taskPerformer);
+				timer.setRepeats(false);
+				timer.start();
+				return true;
+			}else{
+				return false;
+			}
+			
 		}
 		return false;	
 	}

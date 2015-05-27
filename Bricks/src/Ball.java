@@ -73,7 +73,7 @@ public class Ball {
 					String life = "";
 					for (int i = 0; i < game.Lives;i++){ 
 						life += "*";
-						System.out.println(life);
+						//System.out.println(life);
 					}
 					Game.setLifeString(life);
 					
