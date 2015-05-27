@@ -400,14 +400,16 @@ public class Game extends JPanel {
 						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (10 * pointMultiplier);
 						//sactiveBalls.get(j).xa = activeBalls.get(j).xa * (-1);
-						if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == false){
-							activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
-							checkNormalHits(allBricks.get(i), activeBalls.get(j));
-							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
-						//}else{
-							//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
-							//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1);
-						}
+						
+						if (hasFireball == false){
+							if (checkSideHits(allBricks.get(i), activeBalls.get(j)) == false){
+								activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
+								checkNormalHits(allBricks.get(i), activeBalls.get(j));
+								//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1); 
+							//}else{
+								//activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); 
+								//activeBalls.get(j).xa = activeBalls.get(j).xa * (-1);
+							}}
 							
 						if (hasFireball == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractAllHits();

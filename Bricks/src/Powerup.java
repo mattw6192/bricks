@@ -96,7 +96,7 @@ public class Powerup {
 					if (Game.hasFireball.equals(false)){flashTimer.stop();
 					saveBall.setColor(Color.BLACK);}
 					
-					int delay3 = 30000; //milliseconds
+					int delay3 = 20000; //milliseconds
 					ActionListener taskPerformer3 = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							Game.hasFireball = false;
@@ -120,7 +120,9 @@ public class Powerup {
 					int delay2 = 30000; //milliseconds
 					ActionListener taskPerformer2 = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							Game.pointMultiplier = Game.pointMultiplier / 2;
+							if (Game.pointMultiplier > 1){
+								Game.pointMultiplier = Game.pointMultiplier / 2;
+							}
 							System.out.println("Powerup Ended");
 						}
 					};
@@ -174,7 +176,7 @@ public class Powerup {
 				break; 
 			case 4: // Speed Up
 				for (int i=0; i< Game.activeBalls.size();i++){
-					if (Game.activeBalls.get(i).speed < 2.5){
+					if (Game.activeBalls.get(i).speed < 3.5){
 						Game.activeBalls.get(i).speed += 0.5;
 						System.out.println("Speed Up - game speed " + Game.activeBalls.get(i).speed);
 					}else{
@@ -252,7 +254,7 @@ public class Powerup {
 		
 		
 		if (y + ya > game.getHeight() - DIAMETER){
-			System.out.println("Powerup Lost!");
+			//System.out.println("Powerup Lost!");
 			powerupEnd();
 		}
 		if (collision()){
