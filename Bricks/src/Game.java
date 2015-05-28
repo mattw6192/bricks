@@ -19,7 +19,7 @@ public class Game extends JPanel {
 
 	Ball ball = new Ball(this, 20, 320);
 	double tempBallSize = 0;
-	Boolean started = false;
+	static Boolean started = false;
 	int Lives = 3;
 	static ArrayList<Missile> missiles = new ArrayList<Missile>();
 	static String lifeString = "***";
@@ -33,137 +33,138 @@ public class Game extends JPanel {
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
+	static int Round = 1;
 	
 	//top row of bricks from left to right
-	static Brick brick = new Brick(10, 10, 35, 15, 4);
-	static Brick brick2 = new Brick(50, 10, 35, 15, 4);
-	static Brick brick3 = new Brick(90, 10, 35, 15, 4);
-	static Brick brick4 = new Brick(130, 10, 35, 15, 4);
-	static Brick brick5 = new Brick(170, 10, 35, 15, 4);
-	static Brick brick6 = new Brick(210, 10, 35, 15, 4);
-	static Brick brick7 = new Brick(250, 10, 35, 15, 4);
+	static Brick brick = new Brick(10, 5, 35, 15, 4);
+	static Brick brick2 = new Brick(50, 5, 35, 15, 4);
+	static Brick brick3 = new Brick(90, 5, 35, 15, 4);
+	static Brick brick4 = new Brick(130, 5, 35, 15, 4);
+	static Brick brick5 = new Brick(170, 5, 35, 15, 4);
+	static Brick brick6 = new Brick(210, 5, 35, 15, 4);
+	static Brick brick7 = new Brick(250, 5, 35, 15, 4);
 	
 	// second row of bricks from left to right
-	static Brick brick2a = new Brick(28, 30, 35, 15, 4);
-	static Brick brick2b = new Brick(68, 30, 35, 15, 4);
-	static Brick brick2c = new Brick(108, 30, 35, 15, 4);
-	static Brick brick2d = new Brick(148, 30, 35, 15, 4);
-	static Brick brick2e = new Brick(188, 30, 35, 15, 4);
-	static Brick brick2f = new Brick(228, 30, 35, 15, 4);
+	static Brick brick2a = new Brick(28, 25, 35, 15, 4);
+	static Brick brick2b = new Brick(68, 25, 35, 15, 4);
+	static Brick brick2c = new Brick(108, 25, 35, 15, 4);
+	static Brick brick2d = new Brick(148, 25, 35, 15, 4);
+	static Brick brick2e = new Brick(188, 25, 35, 15, 4);
+	static Brick brick2f = new Brick(228, 25, 35, 15, 4);
 	
 	// third row of bricks from left to right
-	static Brick brick3a = new Brick(50, 50, 35, 15, 3);
-	static Brick brick3b = new Brick(90, 50, 35, 15, 3);
-	static Brick brick3c = new Brick(130, 50, 35, 15, 3);
-	static Brick brick3d = new Brick(170, 50, 35, 15, 3);
-	static Brick brick3e = new Brick(210, 50, 35, 15, 3);
+	static Brick brick3a = new Brick(50, 45, 35, 15, 3);
+	static Brick brick3b = new Brick(90, 45, 35, 15, 3);
+	static Brick brick3c = new Brick(130, 45, 35, 15, 3);
+	static Brick brick3d = new Brick(170, 45, 35, 15, 3);
+	static Brick brick3e = new Brick(210, 45, 35, 15, 3);
 	
 	// fourth row of bricks from left to right
-	static Brick brick4a = new Brick(70, 70, 35, 15, 2);
-	static Brick brick4b = new Brick(110, 70, 35, 15, 2);
-	static Brick brick4c = new Brick(150, 70, 35, 15, 2);
-	static Brick brick4d = new Brick(190, 70, 35, 15, 2);
+	static Brick brick4a = new Brick(70, 65, 35, 15, 2);
+	static Brick brick4b = new Brick(110, 65, 35, 15, 2);
+	static Brick brick4c = new Brick(150, 65, 35, 15, 2);
+	static Brick brick4d = new Brick(190, 65, 35, 15, 2);
 	
 	// fifth row of bricks from left to right
-	static Brick brick5a = new Brick(90, 90, 35, 15, 2);
-	static Brick brick5b = new Brick(130, 90, 35, 15, 2);
-	static Brick brick5c = new Brick(170, 90, 35, 15, 2);
+	static Brick brick5a = new Brick(90, 85, 35, 15, 2);
+	static Brick brick5b = new Brick(130, 85, 35, 15, 2);
+	static Brick brick5c = new Brick(170, 85, 35, 15, 2);
 	
 	// sixth row of bricks from left to right
-	static Brick brick6a = new Brick(108, 110, 35, 15, 1);
-	static Brick brick6b = new Brick(148, 110, 35, 15, 1);
+	static Brick brick6a = new Brick(108, 105, 35, 15, 1);
+	static Brick brick6b = new Brick(148, 105, 35, 15, 1);
 	
 	// final row of bricks 
-	static Brick brick7a = new Brick(130, 130, 35, 15, 4);
+	static Brick brick7a = new Brick(130, 125, 35, 15, 4);
 	
 	//////////////// Second Pyramid //////////////////////
 	
 	//top row of bricks from left to right
-		static Brick brick2_1 = new Brick(290, 10, 35, 15, 4);
-		static Brick brick2_2 = new Brick(330, 10, 35, 15, 4);
-		static Brick brick2_3 = new Brick(370, 10, 35, 15, 4);
-		static Brick brick2_4 = new Brick(410, 10, 35, 15, 4);
-		static Brick brick2_5 = new Brick(450, 10, 35, 15, 4);
-		static Brick brick2_6 = new Brick(490, 10, 35, 15, 4);
-		static Brick brick2_7 = new Brick(530, 10, 35, 15, 4);
+		static Brick brick2_1 = new Brick(290, 5, 35, 15, 4);
+		static Brick brick2_2 = new Brick(330, 5, 35, 15, 4);
+		static Brick brick2_3 = new Brick(370, 5, 35, 15, 4);
+		static Brick brick2_4 = new Brick(410, 5, 35, 15, 4);
+		static Brick brick2_5 = new Brick(450, 5, 35, 15, 4);
+		static Brick brick2_6 = new Brick(490, 5, 35, 15, 4);
+		static Brick brick2_7 = new Brick(530, 5, 35, 15, 4);
 		
 		// second row of bricks from left to right
-		static Brick brick2_2a = new Brick(308, 30, 35, 15, 4);
-		static Brick brick2_2b = new Brick(348, 30, 35, 15, 4);
-		static Brick brick2_2c = new Brick(388, 30, 35, 15, 4);
-		static Brick brick2_2d = new Brick(428, 30, 35, 15, 4);
-		static Brick brick2_2e = new Brick(468, 30, 35, 15, 4);
-		static Brick brick2_2f = new Brick(508, 30, 35, 15, 4);
+		static Brick brick2_2a = new Brick(308, 25, 35, 15, 4);
+		static Brick brick2_2b = new Brick(348, 25, 35, 15, 4);
+		static Brick brick2_2c = new Brick(388, 25, 35, 15, 4);
+		static Brick brick2_2d = new Brick(428, 25, 35, 15, 4);
+		static Brick brick2_2e = new Brick(468, 25, 35, 15, 4);
+		static Brick brick2_2f = new Brick(508, 25, 35, 15, 4);
 		
 		// third row of bricks from left to right
-		static Brick brick2_3a = new Brick(330, 50, 35, 15, 3);
-		static Brick brick2_3b = new Brick(370, 50, 35, 15, 3);
-		static Brick brick2_3c = new Brick(410, 50, 35, 15, 3);
-		static Brick brick2_3d = new Brick(450, 50, 35, 15, 3);
-		static Brick brick2_3e = new Brick(490, 50, 35, 15, 3);
+		static Brick brick2_3a = new Brick(330, 45, 35, 15, 3);
+		static Brick brick2_3b = new Brick(370, 45, 35, 15, 3);
+		static Brick brick2_3c = new Brick(410, 45, 35, 15, 3);
+		static Brick brick2_3d = new Brick(450, 45, 35, 15, 3);
+		static Brick brick2_3e = new Brick(490, 45, 35, 15, 3);
 		
 		// fourth row of bricks from left to right
-		static Brick brick2_4a = new Brick(350, 70, 35, 15, 2);
-		static Brick brick2_4b = new Brick(390, 70, 35, 15, 2);
-		static Brick brick2_4c = new Brick(430, 70, 35, 15, 2);
-		static Brick brick2_4d = new Brick(470, 70, 35, 15, 2);
+		static Brick brick2_4a = new Brick(350, 65, 35, 15, 2);
+		static Brick brick2_4b = new Brick(390, 65, 35, 15, 2);
+		static Brick brick2_4c = new Brick(430, 65, 35, 15, 2);
+		static Brick brick2_4d = new Brick(470, 65, 35, 15, 2);
 		
 		// fifth row of bricks from left to right
-		static Brick brick2_5a = new Brick(370, 90, 35, 15, 2);
-		static Brick brick2_5b = new Brick(410, 90, 35, 15, 2);
-		static Brick brick2_5c = new Brick(450, 90, 35, 15, 2);
+		static Brick brick2_5a = new Brick(370, 85, 35, 15, 2);
+		static Brick brick2_5b = new Brick(410, 85, 35, 15, 2);
+		static Brick brick2_5c = new Brick(450, 85, 35, 15, 2);
 		
 		// sixth row of bricks from left to right
-		static Brick brick2_6a = new Brick(388, 110, 35, 15, 1);
-		static Brick brick2_6b = new Brick(428, 110, 35, 15, 1);
+		static Brick brick2_6a = new Brick(388, 105, 35, 15, 1);
+		static Brick brick2_6b = new Brick(428, 105, 35, 15, 1);
 		
 		// final row of bricks 
-		static Brick brick2_7a = new Brick(410, 130, 35, 15, 4);
+		static Brick brick2_7a = new Brick(410, 125, 35, 15, 4);
 		
 		///////////// Final / Third Pyramid ////////////////////
 
 		
 	//top row of bricks from left to right
-	static Brick brick3_1 = new Brick(570, 10, 35, 15, 4);
-	static Brick brick3_2 = new Brick(610, 10, 35, 15, 4);
-	static Brick brick3_3 = new Brick(650, 10, 35, 15, 4);
-	static Brick brick3_4 = new Brick(690, 10, 35, 15, 4);
-	static Brick brick3_5 = new Brick(730, 10, 35, 15, 4);
-	static Brick brick3_6 = new Brick(770, 10, 35, 15, 4);
-	static Brick brick3_7 = new Brick(810, 10, 35, 15, 4);
+	static Brick brick3_1 = new Brick(570, 5, 35, 15, 4);
+	static Brick brick3_2 = new Brick(610, 5, 35, 15, 4);
+	static Brick brick3_3 = new Brick(650, 5, 35, 15, 4);
+	static Brick brick3_4 = new Brick(690, 5, 35, 15, 4);
+	static Brick brick3_5 = new Brick(730, 5, 35, 15, 4);
+	static Brick brick3_6 = new Brick(770, 5, 35, 15, 4);
+	static Brick brick3_7 = new Brick(810, 5, 35, 15, 4);
 	
 	// second row of bricks from left to right
-	static Brick brick3_2a = new Brick(588, 30, 35, 15, 4);
-	static Brick brick3_2b = new Brick(628, 30, 35, 15, 4);
-	static Brick brick3_2c = new Brick(668, 30, 35, 15, 4);
-	static Brick brick3_2d = new Brick(708, 30, 35, 15, 4);
-	static Brick brick3_2e = new Brick(748, 30, 35, 15, 4);
-	static Brick brick3_2f = new Brick(788, 30, 35, 15, 4);
+	static Brick brick3_2a = new Brick(588, 25, 35, 15, 4);
+	static Brick brick3_2b = new Brick(628, 25, 35, 15, 4);
+	static Brick brick3_2c = new Brick(668, 25, 35, 15, 4);
+	static Brick brick3_2d = new Brick(708, 25, 35, 15, 4);
+	static Brick brick3_2e = new Brick(748, 25, 35, 15, 4);
+	static Brick brick3_2f = new Brick(788, 25, 35, 15, 4);
 	
 	// third row of bricks from left to right
-	static Brick brick3_3a = new Brick(610, 50, 35, 15, 3);
-	static Brick brick3_3b = new Brick(650, 50, 35, 15, 3);
-	static Brick brick3_3c = new Brick(690, 50, 35, 15, 3);
-	static Brick brick3_3d = new Brick(730, 50, 35, 15, 3);
-	static Brick brick3_3e = new Brick(770, 50, 35, 15, 3);
+	static Brick brick3_3a = new Brick(610, 45, 35, 15, 3);
+	static Brick brick3_3b = new Brick(650, 45, 35, 15, 3);
+	static Brick brick3_3c = new Brick(690, 45, 35, 15, 3);
+	static Brick brick3_3d = new Brick(730, 45, 35, 15, 3);
+	static Brick brick3_3e = new Brick(770, 45, 35, 15, 3);
 	
 	// fourth row of bricks from left to right
-	static Brick brick3_4a = new Brick(630, 70, 35, 15, 2);
-	static Brick brick3_4b = new Brick(670, 70, 35, 15, 2);
-	static Brick brick3_4c = new Brick(710, 70, 35, 15, 2);
-	static Brick brick3_4d = new Brick(750, 70, 35, 15, 2);
+	static Brick brick3_4a = new Brick(630, 65, 35, 15, 2);
+	static Brick brick3_4b = new Brick(670, 65, 35, 15, 2);
+	static Brick brick3_4c = new Brick(710, 65, 35, 15, 2);
+	static Brick brick3_4d = new Brick(750, 65, 35, 15, 2);
 	
 	// fifth row of bricks from left to right
-	static Brick brick3_5a = new Brick(650, 90, 35, 15, 2);
-	static Brick brick3_5b = new Brick(690, 90, 35, 15, 2);
-	static Brick brick3_5c = new Brick(730, 90, 35, 15, 2);
+	static Brick brick3_5a = new Brick(650, 85, 35, 15, 2);
+	static Brick brick3_5b = new Brick(690, 85, 35, 15, 2);
+	static Brick brick3_5c = new Brick(730, 85, 35, 15, 2);
 	
 	// sixth row of bricks from left to right
-	static Brick brick3_6a = new Brick(668, 110, 35, 15, 1);
-	static Brick brick3_6b = new Brick(708, 110, 35, 15, 1);
+	static Brick brick3_6a = new Brick(668, 105, 35, 15, 1);
+	static Brick brick3_6b = new Brick(708, 105, 35, 15, 1);
 	
 	// final row of bricks 
-	static Brick brick3_7a = new Brick(690, 130, 35, 15, 4);
+	static Brick brick3_7a = new Brick(690, 125, 35, 15, 4);
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -267,6 +268,7 @@ public class Game extends JPanel {
 	
 	public void gameOver() {
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
+		Round = 1;
 		System.exit(ABORT);
 	}
 	
@@ -372,6 +374,7 @@ public class Game extends JPanel {
 		allBricks.add(brick3_6a);
 		allBricks.add(brick3_6b);
 		allBricks.add(brick3_7a);
+		//
 		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
 			if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
@@ -454,7 +457,25 @@ public class Game extends JPanel {
 						//System.out.println("Score is: " + Score);
 					}
 					if (allBricks.isEmpty()){
-						game.gameWon();
+						
+						if (Round == 1){
+							Round += 1;
+							started = false;
+							placeHolder.clear();
+							nextRound();
+							hasFireball = false;
+							hasMetalPower = false;
+							Ball saveBall = activeBalls.get(0);
+							activeBalls.clear();
+							activeBalls.add(saveBall);
+							saveBall.speed = 2;
+							saveBall.ballMods = 0;
+							saveBall.DIAMETER = 10;
+							game.racquet.WIDTH = 60;
+						}else if (Round == 2){
+							game.gameWon();
+						}
+						
 					}
 				}
 				
@@ -515,6 +536,289 @@ public class Game extends JPanel {
 			
 		}
 		return false;	
+	}
+	
+	public static void nextRound(){
+		allBricks.clear();
+		
+		//fifteenth row of bricks from left to right
+		 Brick round2_brick_15a = new Brick(130, 285, 35, 15, 4);
+		 Brick round2_brick_15b = new Brick(170, 285, 35, 15, 4);
+		 Brick round2_brick_15c = new Brick(210, 285, 35, 15, 4);
+		 Brick round2_brick_15d = new Brick(250, 285, 35, 15, 4);
+		 Brick round2_brick_15e = new Brick(290, 285, 35, 15, 4);
+		 Brick round2_brick_15f = new Brick(330, 285, 35, 15, 4);
+		 Brick round2_brick_15g = new Brick(370, 285, 35, 15, 4);
+		 Brick round2_brick_15h = new Brick(410, 285, 35, 15, 4);
+		 Brick round2_brick_15i = new Brick(450, 285, 35, 15, 4);
+		 Brick round2_brick_15j = new Brick(490, 285, 35, 15, 4);
+		 Brick round2_brick_15k = new Brick(530, 285, 35, 15, 4);
+		 Brick round2_brick_15l = new Brick(570, 285, 35, 15, 4);
+		 Brick round2_brick_15m = new Brick(610, 285, 35, 15, 4);
+		 Brick round2_brick_15n = new Brick(650, 285, 35, 15, 4);
+		 Brick round2_brick_15o = new Brick(690, 285, 35, 15, 4);
+		
+		//fourteenth row of bricks from left to right
+		 Brick round2_brick_14a = new Brick(150, 265, 35, 15, 4);
+		 Brick round2_brick_14b = new Brick(190, 265, 35, 15, 4);
+		 Brick round2_brick_14c = new Brick(230, 265, 35, 15, 3);
+		 Brick round2_brick_14d = new Brick(270, 265, 35, 15, 3);
+		 Brick round2_brick_14e = new Brick(310, 265, 35, 15, 3);
+		 Brick round2_brick_14f = new Brick(350, 265, 35, 15, 3);
+		 Brick round2_brick_14g = new Brick(390, 265, 35, 15, 3);
+		 Brick round2_brick_14h = new Brick(430, 265, 35, 15, 3);
+		 Brick round2_brick_14i = new Brick(470, 265, 35, 15, 3);
+		 Brick round2_brick_14j = new Brick(510, 265, 35, 15, 3);
+		 Brick round2_brick_14k = new Brick(550, 265, 35, 15, 3);
+		 Brick round2_brick_14l = new Brick(590, 265, 35, 15, 3);
+		 Brick round2_brick_14m = new Brick(630, 265, 35, 15, 4);
+		 Brick round2_brick_14n = new Brick(670, 265, 35, 15, 4);
+		
+		//thirteenth row of bricks from left to right
+		 Brick round2_brick_13a = new Brick(170, 245, 35, 15, 4);
+		 Brick round2_brick_13b = new Brick(210, 245, 35, 15, 4);
+		 Brick round2_brick_13c = new Brick(250, 245, 35, 15, 3);
+		 Brick round2_brick_13d = new Brick(290, 245, 35, 15, 3);
+		 Brick round2_brick_13e = new Brick(330, 245, 35, 15, 2);
+		 Brick round2_brick_13f = new Brick(370, 245, 35, 15, 2);
+		 Brick round2_brick_13g = new Brick(410, 245, 35, 15, 1);
+		 Brick round2_brick_13h = new Brick(450, 245, 35, 15, 2);
+		 Brick round2_brick_13i = new Brick(490, 245, 35, 15, 2);
+		 Brick round2_brick_13j = new Brick(530, 245, 35, 15, 3);
+		 Brick round2_brick_13k = new Brick(570, 245, 35, 15, 3);
+		 Brick round2_brick_13l = new Brick(610, 245, 35, 15, 4);
+		 Brick round2_brick_13m = new Brick(650, 245, 35, 15, 4);
+		
+		//Twelfth row of bricks from left to right
+		 Brick round2_brick_12a = new Brick(190, 225, 35, 15, 4);
+		 Brick round2_brick_12b = new Brick(230, 225, 35, 15, 4);
+		 Brick round2_brick_12c = new Brick(270, 225, 35, 15, 3);
+		 Brick round2_brick_12d = new Brick(310, 225, 35, 15, 3);
+		 Brick round2_brick_12e = new Brick(350, 225, 35, 15, 2);
+		 Brick round2_brick_12f = new Brick(390, 225, 35, 15, 2);
+		 Brick round2_brick_12g = new Brick(430, 225, 35, 15, 2);
+		 Brick round2_brick_12h = new Brick(470, 225, 35, 15, 2);
+		 Brick round2_brick_12i = new Brick(510, 225, 35, 15, 3);
+		 Brick round2_brick_12j = new Brick(550, 225, 35, 15, 3);
+		 Brick round2_brick_12k = new Brick(590, 225, 35, 15, 4);
+		 Brick round2_brick_12l = new Brick(630, 225, 35, 15, 4);
+		
+		//eleventh row of bricks from left to right
+		 Brick round2_brick_11a = new Brick(210, 205, 35, 15, 4);
+		 Brick round2_brick_11b = new Brick(250, 205, 35, 15, 4);
+		 Brick round2_brick_11c = new Brick(290, 205, 35, 15, 3);
+		 Brick round2_brick_11d = new Brick(330, 205, 35, 15, 3);
+		 Brick round2_brick_11e = new Brick(370, 205, 35, 15, 2);
+		 Brick round2_brick_11f = new Brick(410, 205, 35, 15, 1);
+		 Brick round2_brick_11g = new Brick(450, 205, 35, 15, 2);
+		 Brick round2_brick_11h = new Brick(490, 205, 35, 15, 3);
+		 Brick round2_brick_11i = new Brick(530, 205, 35, 15, 3);
+		 Brick round2_brick_11j = new Brick(570, 205, 35, 15, 4);
+		 Brick round2_brick_11k = new Brick(610, 205, 35, 15, 4);
+		
+		//tenth row of bricks from left to right
+		 Brick round2_brick_10a = new Brick(230, 185, 35, 15, 4);
+		 Brick round2_brick_10b = new Brick(270, 185, 35, 15, 4);
+		 Brick round2_brick_10c = new Brick(310, 185, 35, 15, 3);
+		 Brick round2_brick_10d = new Brick(350, 185, 35, 15, 3);
+		 Brick round2_brick_10e = new Brick(390, 185, 35, 15, 2);
+		 Brick round2_brick_10f = new Brick(430, 185, 35, 15, 2);
+		 Brick round2_brick_10g = new Brick(470, 185, 35, 15, 3);
+		 Brick round2_brick_10h = new Brick(510, 185, 35, 15, 3);
+		 Brick round2_brick_10i = new Brick(550, 185, 35, 15, 4);
+		 Brick round2_brick_10j = new Brick(590, 185, 35, 15, 4);
+		 
+		//ninth row of bricks from left to right
+		 Brick round2_brick_9a = new Brick(250, 165, 35, 15, 4);
+		 Brick round2_brick_9b = new Brick(290, 165, 35, 15, 3);
+		 Brick round2_brick_9c = new Brick(330, 165, 35, 15, 3);
+		 Brick round2_brick_9d = new Brick(370, 165, 35, 15, 2);
+		 Brick round2_brick_9e = new Brick(410, 165, 35, 15, 1);
+		 Brick round2_brick_9f = new Brick(450, 165, 35, 15, 2);
+		 Brick round2_brick_9g = new Brick(490, 165, 35, 15, 3);
+		 Brick round2_brick_9h = new Brick(530, 165, 35, 15, 3);
+		 Brick round2_brick_9i = new Brick(570, 165, 35, 15, 4);
+		
+		//eighth row of bricks from left to right
+		 Brick round2_brick_8a = new Brick(270, 145, 35, 15, 4);
+		 Brick round2_brick_8b = new Brick(310, 145, 35, 15, 3);
+		 Brick round2_brick_8c = new Brick(350, 145, 35, 15, 3);
+		 Brick round2_brick_8d = new Brick(390, 145, 35, 15, 2);
+		 Brick round2_brick_8e = new Brick(430, 145, 35, 15, 2);
+		 Brick round2_brick_8f = new Brick(470, 145, 35, 15, 3);
+		 Brick round2_brick_8g = new Brick(510, 145, 35, 15, 3);
+		 Brick round2_brick_8h = new Brick(550, 145, 35, 15, 4);
+		
+		//seventh row of bricks from left to right
+		 Brick round2_brick_7a = new Brick(290, 125, 35, 15, 4);
+		 Brick round2_brick_7b = new Brick(330, 125, 35, 15, 3);
+		 Brick round2_brick_7c = new Brick(370, 125, 35, 15, 2);
+		 Brick round2_brick_7d = new Brick(410, 125, 35, 15, 1);
+		 Brick round2_brick_7e = new Brick(450, 125, 35, 15, 2);
+		 Brick round2_brick_7f = new Brick(490, 125, 35, 15, 3);
+		 Brick round2_brick_7g = new Brick(530, 125, 35, 15, 4);
+		
+		// sixth row of bricks from left to right
+		 Brick round2_brick_6a = new Brick(308, 105, 35, 15, 4);
+		 Brick round2_brick_6b = new Brick(348, 105, 35, 15, 3);
+		 Brick round2_brick_6c = new Brick(388, 105, 35, 15, 2);
+		 Brick round2_brick_6d = new Brick(428, 105, 35, 15, 2);
+		 Brick round2_brick_6e = new Brick(468, 105, 35, 15, 3);
+		 Brick round2_brick_6f = new Brick(508, 105, 35, 15, 4);
+		
+		// fifth row of bricks from left to right
+		 Brick round2_brick_5a = new Brick(330, 85, 35, 15, 4);
+		 Brick round2_brick_5b = new Brick(370, 85, 35, 15, 3);
+		 Brick round2_brick_5c = new Brick(410, 85, 35, 15, 1);
+		 Brick round2_brick_5d = new Brick(450, 85, 35, 15, 3);
+		 Brick round2_brick_5e = new Brick(490, 85, 35, 15, 4);
+		
+		// fourth row of bricks from left to right
+		 Brick round2_brick_4a = new Brick(350, 65, 35, 15, 4);
+		 Brick round2_brick_4b = new Brick(390, 65, 35, 15, 3);
+		 Brick round2_brick_4c = new Brick(430, 65, 35, 15, 3);
+		 Brick round2_brick_4d = new Brick(470, 65, 35, 15, 4);
+		
+		// third row of bricks from left to right
+		 Brick round2_brick_3a = new Brick(370, 45, 35, 15, 4);
+		 Brick round2_brick_3b = new Brick(410, 45, 35, 15, 3);
+		 Brick round2_brick_3c = new Brick(450, 45, 35, 15, 4);
+		
+		// second row of bricks from left to right
+		 Brick round2_brick_2a = new Brick(388, 25, 35, 15, 4);
+		 Brick round2_brick_2b = new Brick(428, 25, 35, 15, 4);
+		
+		// top row of bricks 
+		 Brick round2_brick_1a = new Brick(410, 5, 35, 15, 4);
+		 
+		 
+		 allBricks.add(round2_brick_1a);
+		 allBricks.add(round2_brick_2a);
+		 allBricks.add(round2_brick_2b);
+		 allBricks.add(round2_brick_3a);
+		 allBricks.add(round2_brick_3b);
+		 allBricks.add(round2_brick_3c);
+		 allBricks.add(round2_brick_4a);
+		 allBricks.add(round2_brick_4b);
+		 allBricks.add(round2_brick_4c);
+		 allBricks.add(round2_brick_4d);
+		 allBricks.add(round2_brick_5a);
+		 allBricks.add(round2_brick_5b);
+		 allBricks.add(round2_brick_5c);
+		 allBricks.add(round2_brick_5d);
+		 allBricks.add(round2_brick_5e);
+		 allBricks.add(round2_brick_6a);
+		 allBricks.add(round2_brick_6b);
+		 allBricks.add(round2_brick_6c);
+		 allBricks.add(round2_brick_6d);
+		 allBricks.add(round2_brick_6e);
+		 allBricks.add(round2_brick_6f);
+		 allBricks.add(round2_brick_7a);
+		 allBricks.add(round2_brick_7b);
+		 allBricks.add(round2_brick_7c);
+		 allBricks.add(round2_brick_7d);
+		 allBricks.add(round2_brick_7e);
+		 allBricks.add(round2_brick_7f);
+		 allBricks.add(round2_brick_7g);
+		 allBricks.add(round2_brick_8a);
+		 allBricks.add(round2_brick_8b);
+		 allBricks.add(round2_brick_8c);
+		 allBricks.add(round2_brick_8d);
+		 allBricks.add(round2_brick_8e);
+		 allBricks.add(round2_brick_8f);
+		 allBricks.add(round2_brick_8g);
+		 allBricks.add(round2_brick_8h);
+		 allBricks.add(round2_brick_9a);
+		 allBricks.add(round2_brick_9b);
+		 allBricks.add(round2_brick_9c);
+		 allBricks.add(round2_brick_9d);
+		 allBricks.add(round2_brick_9e);
+		 allBricks.add(round2_brick_9f);
+		 allBricks.add(round2_brick_9g);
+		 allBricks.add(round2_brick_9h);
+		 allBricks.add(round2_brick_9i);
+		 allBricks.add(round2_brick_10a);
+		 allBricks.add(round2_brick_10b);
+		 allBricks.add(round2_brick_10c);
+		 allBricks.add(round2_brick_10d);
+		 allBricks.add(round2_brick_10e);
+		 allBricks.add(round2_brick_10f);
+		 allBricks.add(round2_brick_10g);
+		 allBricks.add(round2_brick_10h);
+		 allBricks.add(round2_brick_10i);
+		 allBricks.add(round2_brick_10j);
+		 allBricks.add(round2_brick_11a);
+		 allBricks.add(round2_brick_11b);
+		 allBricks.add(round2_brick_11c);
+		 allBricks.add(round2_brick_11d);
+		 allBricks.add(round2_brick_11e);
+		 allBricks.add(round2_brick_11f);
+		 allBricks.add(round2_brick_11g);
+		 allBricks.add(round2_brick_11h);
+		 allBricks.add(round2_brick_11i);
+		 allBricks.add(round2_brick_11j);
+		 allBricks.add(round2_brick_11k);
+		 allBricks.add(round2_brick_12a);
+		 allBricks.add(round2_brick_12b);
+		 allBricks.add(round2_brick_12c);
+		 allBricks.add(round2_brick_12d);
+		 allBricks.add(round2_brick_12e);
+		 allBricks.add(round2_brick_12f);
+		 allBricks.add(round2_brick_12g);
+		 allBricks.add(round2_brick_12h);
+		 allBricks.add(round2_brick_12i);
+		 allBricks.add(round2_brick_12j);
+		 allBricks.add(round2_brick_12k);
+		 allBricks.add(round2_brick_12l);
+		 allBricks.add(round2_brick_13a);
+		 allBricks.add(round2_brick_13b);
+		 allBricks.add(round2_brick_13c);
+		 allBricks.add(round2_brick_13d);
+		 allBricks.add(round2_brick_13e);
+		 allBricks.add(round2_brick_13f);
+		 allBricks.add(round2_brick_13g);
+		 allBricks.add(round2_brick_13h);
+		 allBricks.add(round2_brick_13i);
+		 allBricks.add(round2_brick_13j);
+		 allBricks.add(round2_brick_13k);
+		 allBricks.add(round2_brick_13l);
+		 allBricks.add(round2_brick_13m);
+		 allBricks.add(round2_brick_14a);
+		 allBricks.add(round2_brick_14b);
+		 allBricks.add(round2_brick_14c);
+		 allBricks.add(round2_brick_14d);
+		 allBricks.add(round2_brick_14e);
+		 allBricks.add(round2_brick_14f);
+		 allBricks.add(round2_brick_14g);
+		 allBricks.add(round2_brick_14h);
+		 allBricks.add(round2_brick_14i);
+		 allBricks.add(round2_brick_14j);
+		 allBricks.add(round2_brick_14k);
+		 allBricks.add(round2_brick_14l);
+		 allBricks.add(round2_brick_14m);
+		 allBricks.add(round2_brick_14n);
+		 allBricks.add(round2_brick_15a);
+		 allBricks.add(round2_brick_15b);
+		 allBricks.add(round2_brick_15c);
+		 allBricks.add(round2_brick_15d);
+		 allBricks.add(round2_brick_15e);
+		 allBricks.add(round2_brick_15f);
+		 allBricks.add(round2_brick_15g);
+		 allBricks.add(round2_brick_15h);
+		 allBricks.add(round2_brick_15i);
+		 allBricks.add(round2_brick_15j);
+		 allBricks.add(round2_brick_15k);
+		 allBricks.add(round2_brick_15l);
+		 allBricks.add(round2_brick_15m);
+		 allBricks.add(round2_brick_15n);
+		 allBricks.add(round2_brick_15o);
+		 
+		 for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
+				if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
+				if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
+				if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);}
+				if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} 
+			}
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
