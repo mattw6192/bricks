@@ -874,8 +874,8 @@ public class Game extends JPanel {
 				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase");
 				return powerup2; 
 			case 1:
-				System.out.println("Powerup Gained: " + "Freeze");
-				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Freeze");
+				System.out.println("Powerup Gained: " + "Magnet");
+				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet");
 				return powerup1; 
 			default:
 				break;

@@ -206,7 +206,7 @@ public class Powerup {
 					}}
 				
 				break; 
-			case 1: // Freeze
+			case 1: // Magnet
 				int delay = 30000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -236,7 +236,7 @@ public class Powerup {
 	}
 	
 	public int getPowerNum(){
-		if (ability.equals("Freeze")){return 1;};
+		if (ability.equals("Magnet")){return 1;};
 		if (ability.equals("Ball Increase")){return 2;};
 		if (ability.equals("Paddle Increase")){return 3;};
 		if (ability.equals("Speed Up")){return 4;};
