@@ -29,7 +29,7 @@ public class Game extends JPanel {
 	Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = true;
+	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -157,7 +157,7 @@ public class Game extends JPanel {
 	}
 	
 	public void gameWon() {
-		JOptionPane.showMessageDialog(this, "You have completed all Levels!.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Congratulation! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
 
