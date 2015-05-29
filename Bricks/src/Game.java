@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,13 +29,14 @@ public class Game extends JPanel {
 	Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = false;
+	static Boolean hasFireball = true;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
 	
+	private static boolean isPaused = false;
 	
 	
 
@@ -57,6 +59,8 @@ public class Game extends JPanel {
 			}
 		});
 		addKeyListener(new KeyListener(){
+		
+
 			//public void mouseClicked(MouseEvent arg0) { //old code for mouseListener, if we want to go back
 				//started = true;
 				//hold = false;
@@ -71,6 +75,8 @@ public class Game extends JPanel {
 						 Game.missiles.remove(0);
 					 }
 				 }
+				 if (arg0.getKeyCode() == KeyEvent.VK_P){ isPaused = true;}
+				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE && isPaused == true) {isPaused = false;}
 			}
 
 			@Override
@@ -233,14 +239,17 @@ public class Game extends JPanel {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		while (true) { //game loop
+			if (!isPaused){
 			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score );
 			game.move();
 			game.repaint();
+			
 			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen
 				for (int j=0; j<placeHolder.size();j++){
 					placeHolder.get(j).move();
 				}
 			}
+			
 			for (int j = 0; j<activeBalls.size(); j++){
 				for(int i = 0; i<allBricks.size(); i++){ 
 				
@@ -327,6 +336,13 @@ public class Game extends JPanel {
 		}
 			Thread.sleep(10);
 		}
+			else{
+				Thread.sleep(100);
+				frame.setTitle("Game Paused, press space to continue");
+				
+			}
+		}
+		
 	}
 	
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
@@ -352,6 +368,7 @@ public class Game extends JPanel {
 			tempBall.setY((int) (tempBrick.getBounds().getY() + tempBrick.getBounds().getHeight()));
 		}
 	}
+	
 	
 	public static int randInt(int min, int max) {
 	    int randomNum = randNum.nextInt((max - min) + 1) + min;
