@@ -73,7 +73,7 @@ public class Ball {
 					String life = "";
 					for (int i = 0; i < game.Lives;i++){ 
 						life += "*";
-						System.out.println(life);
+						//System.out.println(life);
 					}
 					Game.setLifeString(life);
 					
@@ -83,6 +83,7 @@ public class Ball {
 					speed = 2;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
+					Game.placeHolder.clear();
 					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);
