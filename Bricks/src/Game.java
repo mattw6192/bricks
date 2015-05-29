@@ -261,7 +261,13 @@ public class Game extends JPanel {
 			for (int i=0; i<placeHolder.size();i++){
 				placeHolder.get(i).paint(g2d);
 			}
-		}	
+		}
+		if (missiles.isEmpty()==false){
+			for (Missile m : missiles){
+				m.paint(g2d);
+			}
+		}
+		
 	}
 	
 	public void gameOver() {
