@@ -310,7 +310,8 @@ public class Game extends JPanel {
 							saveBall.ballMods = 0;
 							saveBall.DIAMETER = 10;
 							game.racquet.WIDTH = 60;
-						}else if (Round == maxRound ){
+						}
+						if (Round == maxRound ){
 							game.gameWon();
 						}
 						
