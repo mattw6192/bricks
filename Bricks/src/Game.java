@@ -26,10 +26,10 @@ public class Game extends JPanel {
 	static String lifeString = "***";
 
 	static int Score = 000000;
-	Boolean hold = false;
+	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = false;
+	static Boolean hasFireball = true;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -314,6 +314,7 @@ public class Game extends JPanel {
 						if (Round < maxRound){
 							Round += 1;
 							started = false;
+							hold = false;
 							placeHolder.clear();
 							nextRound();
 							hasFireball = false;
@@ -323,8 +324,10 @@ public class Game extends JPanel {
 							activeBalls.add(saveBall);
 							saveBall.speed = 2;
 							saveBall.ballMods = 0;
-							saveBall.DIAMETER = 10;
+							saveBall.DIAMETER = 12;
 							game.racquet.WIDTH = 60;
+							game.racquet.racquetMods = 0;
+
 						}
 						if (Round == maxRound ){
 							game.gameWon();
@@ -338,7 +341,8 @@ public class Game extends JPanel {
 		}
 			else{
 				Thread.sleep(100);
-				frame.setTitle("Game Paused, press space to continue");
+				frame.setTitle("Game Paused: Press space to continue");
+				
 				
 			}
 		}

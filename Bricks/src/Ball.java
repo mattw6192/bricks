@@ -3,7 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Ball {
-	static int DIAMETER = 10;
+	static int DIAMETER = 12;
 	double x = 0;
 	double y = 0;
 	double xa = 2;
@@ -81,13 +81,23 @@ public class Ball {
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 2;
+					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
 					Game.placeHolder.clear();
+					Game.activeBalls.clear();
+					Game.activeBalls.add(this);
+					ballMods = 0;
+					DIAMETER = 12;
+					game.racquet.WIDTH = 60;
+					game.racquet.racquetMods = 0;
 					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);
 					this.setColor(Color.BLACK);
+					
+					//
+					
 					
 				}
 				if (Game.activeBalls.size() > 1){
