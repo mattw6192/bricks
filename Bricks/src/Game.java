@@ -36,7 +36,8 @@ public class Game extends JPanel {
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
 	
-	private static boolean isPaused = false;
+	private static boolean isPaused = false; // true if user has paused the game
+	private static boolean hasQuit = false;  // true if user has quit the game
 	
 	
 
@@ -156,8 +157,12 @@ public class Game extends JPanel {
 		System.exit(ABORT);
 	}
 	
+	public void nextRoundMessage(){
+		JOptionPane.showMessageDialog(this, "Now get ready for the next round!", "Great Job!", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
 	public void gameWon() {
-		JOptionPane.showMessageDialog(this, "Congratulation! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(this, "Congratulations! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
 
@@ -312,6 +317,7 @@ public class Game extends JPanel {
 					if (allBricks.isEmpty()){
 						
 						if (Round < maxRound){
+							
 							Round += 1;
 							started = false;
 							hold = false;
@@ -331,6 +337,9 @@ public class Game extends JPanel {
 						}
 						if (Round == maxRound ){
 							game.gameWon();
+						}
+						if (Round < maxRound) {
+							game.nextRoundMessage();
 						}
 						
 					}
@@ -361,6 +370,12 @@ public class Game extends JPanel {
 			return true;
 		}
 		return false;
+	}
+	
+	public static void quitGame(){ 
+		if (hasQuit == true){
+			
+		}
 	}
 	
 	public static void checkNormalHits(Brick tempBrick, Ball tempBall){
