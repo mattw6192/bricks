@@ -248,9 +248,9 @@ public class Game extends JPanel {
 		
 		while (true) { //game loop
 			if (!isPaused){
-			if (game.currentPowerups.size() > 0){ // out of bounds exception here, need to make a collection of powerups
+			if (game.placeHolder.size() > 0){ // out of bounds exception here, need to make a collection of powerups
 				//for (String p : currentPowerups)
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+game.currentPowerups.toString());
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerup:  "+game.placeHolder.toString());
 			}
 			else{
 				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+"None");
