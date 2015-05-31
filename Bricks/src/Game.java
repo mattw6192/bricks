@@ -338,12 +338,10 @@ public class Game extends JPanel {
 				
 		}
 			Thread.sleep(10);
-		}
+		}   // else statement contains pause feature
 			else{
 				Thread.sleep(100);
 				frame.setTitle("Game Paused: Press space to continue");
-				
-				
 			}
 		}
 		
