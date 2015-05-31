@@ -250,10 +250,10 @@ public class Game extends JPanel {
 			if (!isPaused){
 			if (game.placeHolder.size() > 0){ // out of bounds exception here, need to make a collection of powerups
 				//for (String p : currentPowerups)
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerup:  "+game.placeHolder.toString());
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+game.placeHolder.toString());
 			}
 			else{
-				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+"None");
+				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
 
 			}
 			game.move();
