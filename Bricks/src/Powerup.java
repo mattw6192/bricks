@@ -427,6 +427,11 @@ public class Powerup {
 		//System.out.println("Powerup Activated");
 	}
 	
+	@Override
+	public String toString(){
+		return this.ability;
+	}
+	
 	public void powerupEnd(){
 		active = false;
 		Game.placeHolder.remove(this);

@@ -246,6 +246,7 @@ public class Game extends JPanel {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
 		while (true) { //game loop
 			if (!isPaused){
 			if (game.placeHolder.size() > 0){ // out of bounds exception here, need to make a collection of powerups
