@@ -37,6 +37,8 @@ public class Game extends JPanel {
 	static int Round = 1;
 	static boolean hasPowerup = false; 
 	
+	static ArrayList<String> currentPowerups = new ArrayList<String>(); // Collection of names of active powerups
+	
 	private static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
 	
@@ -246,8 +248,9 @@ public class Game extends JPanel {
 		
 		while (true) { //game loop
 			if (!isPaused){
-			if (game.placeHolder.size() > 0 && game.hasPowerup == true){
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+game.placeHolder.get(0).ability);
+			if (game.currentPowerups.size() > 0){ // out of bounds exception here, need to make a collection of powerups
+				//for (String p : currentPowerups)
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+game.currentPowerups.toString());
 			}
 			else{
 				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+"None");
