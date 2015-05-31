@@ -35,6 +35,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
+	static boolean hasPowerup = false; 
 	
 	private static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
@@ -245,7 +246,13 @@ public class Game extends JPanel {
 		
 		while (true) { //game loop
 			if (!isPaused){
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score );
+			if (game.placeHolder.size() > 0 && game.hasPowerup == true){
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+game.placeHolder.get(0).ability);
+			}
+			else{
+				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Active Powerup:  "+"None");
+
+			}
 			game.move();
 			game.repaint();
 			
@@ -356,6 +363,14 @@ public class Game extends JPanel {
 		
 	}
 	
+	public static boolean isHasPowerup() {
+		return hasPowerup;
+	}
+
+	public static void setHasPowerup(boolean hasPowerup) {
+		Game.hasPowerup = hasPowerup;
+	}
+
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static boolean checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 2)) ){ // right side
