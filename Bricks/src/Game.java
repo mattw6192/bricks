@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.Semaphore;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,7 +22,7 @@ public class Game extends JPanel {
 	static Boolean started = false;
 	int Lives = 3;
 	static ArrayList<Missile> missiles = new ArrayList<Missile>();
-	static String lifeString = "***";
+	static String lifeString = "***"; // displays the user's lives in the JFrame title
 
 	static int Score = 000000;
 	static Boolean hold = false;
@@ -35,9 +34,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
-	static boolean hasPowerup = false; 
 	
-	static ArrayList<String> currentPowerups = new ArrayList<String>(); // Collection of names of active powerups
 	
 	private static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
@@ -48,7 +45,7 @@ public class Game extends JPanel {
 	private static int maxRound = 4;
 	Racquet racquet = new Racquet(this);
 
-	public Game() { //comment
+	public Game() { 
 		activeBalls.add(ball);
 		addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {
@@ -94,6 +91,7 @@ public class Game extends JPanel {
 		setFocusable(true);
 	}
 	
+	@SuppressWarnings("static-access")
 	private void move() {
 		if (started == true){
 			for (int i =0; i<activeBalls.size(); i++){
@@ -249,13 +247,11 @@ public class Game extends JPanel {
 		
 		while (true) { //game loop
 			if (!isPaused){
-			if (game.placeHolder.size() > 0){ // out of bounds exception here, need to make a collection of powerups
-				//for (String p : currentPowerups)
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+game.placeHolder.toString());
+			if (Game.placeHolder.size() > 0){ 
+			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString());
 			}
 			else{
 				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
-
 			}
 			game.move();
 			game.repaint();
@@ -367,13 +363,6 @@ public class Game extends JPanel {
 		
 	}
 	
-	public static boolean isHasPowerup() {
-		return hasPowerup;
-	}
-
-	public static void setHasPowerup(boolean hasPowerup) {
-		Game.hasPowerup = hasPowerup;
-	}
 
 	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
 	public static boolean checkSideHits(Brick tempBrick, Ball tempBall){
