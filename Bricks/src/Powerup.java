@@ -32,26 +32,22 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			case 13: // Missiles
+			case 13: // Missiles NOT FINISHED YET
 				Missile m = new Missile(game,game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
 				Game.missiles.add(m);
-				//Game.setHasPowerup(true);
 				break;
+				
 			case 12: // Extra Life
 				if (game.Lives <= 5){
 					System.out.println("Lives  "  + (game.Lives + 1));
 					game.Lives += 1;
 					Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
-					//Game.setHasPowerup(true);
-					//Game.currentPowerups.add("Extra Life");
 					
 					int delayLifeDisplay = 10; //milliseconds
 					ActionListener lifeDisplayOff = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							//Game.setHasPowerup(false); // set hasPowerup to false to display current powerup as false
-							//Game.currentPowerups.remove("Extra Life");
 					        System.out.println("Powerup Ended");
-					        powerupEnd();
+					        powerupEnd(); // remove the powerup from available powerups display
 					    }
 					};
 					Timer timeLifeDisplay = new Timer(delayLifeDisplay, lifeDisplayOff);
@@ -63,16 +59,14 @@ public class Powerup {
 				}
 				
 				break;
-				//powerup display finished *
 				
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
 				
 				if (Game.hasFireball == false){
 					Game.hasMetalPower = true;
-					powerupEnd();
-					//Game.setHasPowerup(true); // set hasPowerup to true to display current powerup on jframe title
-					//Game.currentPowerups.add("Metalball");
+					powerupEnd(); // remove the powerup from available powerups display
+
 					for (int i=0; i<Game.activeBalls.size(); i++){
 						Game.activeBalls.get(i).setColor(Color.lightGray);
 						final Ball saveBall = Game.activeBalls.get(i);
@@ -80,8 +74,6 @@ public class Powerup {
 						ActionListener taskPerformer4 = new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
 								Game.hasMetalPower = false;
-								//Game.setHasPowerup(false); // set hasPowerup to false to display current powerup as false
-								//Game.currentPowerups.remove("Metalball");
 								saveBall.setColor(Color.BLACK);
 						        System.out.println("Powerup Ended");
 						    
@@ -94,15 +86,14 @@ public class Powerup {
 					}
 					
 				}
-				//powerup display finished *
 				
-				break; 
+				break;
+				
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
 				Game.hasFireball = true;
-				powerupEnd();
-				//Game.setHasPowerup(true); // set hasPowerup to true to display current powerup on jframe title
-				//Game.currentPowerups.add("Fireball");
+				powerupEnd(); // remove the powerup from available powerups display
+				
 				for (int i=0; i<Game.activeBalls.size();i++){
 					final Ball saveBall = Game.activeBalls.get(i);
 					
@@ -136,10 +127,6 @@ public class Powerup {
 							Game.hasFireball = false;
 					        System.out.println("Powerup Ended");
 					        saveBall.setColor(Color.BLACK);
-					        //Game.setHasPowerup(false); // set powerup display back to None.
-					        //Game.currentPowerups.remove("Fireball");
-					        
-					       
 					    }
 					};
 					Timer timer3 = new Timer(delay3, taskPerformer3);
@@ -149,31 +136,28 @@ public class Powerup {
 					
 					saveBall.setColor(Color.BLACK);
 				}
-				//powerup display finished *
 				
 				break; 
+				
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + Game.pointMultiplier);
 				if (Game.pointMultiplier <= 4){
 					Game.pointMultiplier = Game.pointMultiplier * 2;
 					System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
 					int delay2 = 30000; //milliseconds
-					powerupEnd();
-					//Game.setHasPowerup(true); // set hasPowerup to true to display current powerup on jframe title
-					//Game.currentPowerups.add("Double Points");
+					powerupEnd(); // remove the powerup from available powerups display
+
 					
-					// Action Listener
+					// End the powerup after the timer finishes
 					ActionListener taskPerformer2 = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							if (Game.pointMultiplier > 1){
 								Game.pointMultiplier = Game.pointMultiplier / 2;
-								//Game.setHasPowerup(false);
-								//Game.currentPowerups.remove("Double Points");
 							}
 							System.out.println("Powerup Ended");
 						}
 					};
-					// Action Listener
+
 					Timer timer2 = new Timer(delay2, taskPerformer2);
 					timer2.setRepeats(false);
 					timer2.start();
@@ -181,9 +165,9 @@ public class Powerup {
 				}else{
 					System.out.println("Powerup Not Activated: Current Multiplier is Maxed Out");
 				}
-				//powerup display finished *
 				
 				break; 
+				
 			case 8: // Smaller Ball
 				//boolean hasBallMods = false;
 				for (int i=0; i< Game.activeBalls.size(); i++){	
@@ -191,19 +175,17 @@ public class Powerup {
 							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .8);
 							Game.activeBalls.get(i).SubtractBallMod();
 							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods);
-							//Game.setHasPowerup(true);
+
 							//hasBallMods = true;
 							
 							// Action Listener
 							ActionListener smallBallStop = new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
-									//Game.setHasPowerup(false);
-									//Game.currentPowerups.remove("Smaller Ball");
 									System.out.println("Powerup Ended");
-									powerupEnd();
+									powerupEnd(); // remove the powerup from available powerups display
 								}
 							};
-							// Action Listener
+
 							int delaySmallBall = 10; //milliseconds
 							Timer timerSmallBall = new Timer(delaySmallBall, smallBallStop);
 							timerSmallBall.setRepeats(false);
@@ -214,9 +196,7 @@ public class Powerup {
 							System.out.println("Powerup not available - the ball size is too low.");
 						}
 				}
-				//Game.currentPowerups.add("Smaller Ball");
 				break; 
-				//powerup display finished *
 				
 			case 7: // Multiple Balls
 				if (Game.activeBalls.size() <= 5){
@@ -227,22 +207,18 @@ public class Powerup {
 					Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
 					extraBall2.setXa(-1);
 					extraBall2.setYa(-1);
-					//Game.currentPowerups.add("Multiple Balls");
 					Game.activeBalls.add(extraBall1);
 					Game.activeBalls.add(extraBall2);
-					powerupEnd();
+					powerupEnd(); // remove the powerup from available powerups display
 					
-					//Game.setHasPowerup(true);
 					
 					ActionListener multipleBallsDisplay = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							//Game.setHasPowerup(false);
-							//Game.currentPowerups.remove("Multiple Balls");
 							System.out.println("Powerup Ended");
 							
 						}
 					};
-					int multBallDisplayDuration = 3000; //how long the powerup will be displayed on the title
+					int multBallDisplayDuration = 3000; // how long the powerup will be displayed on the title
 					Timer timerMultBalls = new Timer(multBallDisplayDuration, multipleBallsDisplay);
 					timerMultBalls.setRepeats(false);
 					timerMultBalls.start();
@@ -253,27 +229,23 @@ public class Powerup {
 					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
 				}
 				
-				//powerup Display finished *
 				break; 
+				
 			case 6: // Smaller Paddle
 				if (game.racquet.racquetMods >= -5){
 					game.racquet.WIDTH = (int) (game.racquet.WIDTH * .8);
 					game.racquet.SubtractRacquetMod();
 					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
-					powerupEnd();
+					powerupEnd(); // remove the powerup from available powerups display
 					
-					//Game.setHasPowerup(true);
-					//Game.currentPowerups.add("Smaller Paddle");
 					
 					ActionListener smallPaddleDisplay = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-							//Game.setHasPowerup(false);
-							//Game.currentPowerups.remove("Smaller Paddle");
 							System.out.println("Powerup Ended");
 							
 						}
 					};
-					int smallPaddleDisplayDuration = 3000; //milliseconds
+					int smallPaddleDisplayDuration = 3000; // milliseconds
 					Timer smallRacquetTimer = new Timer(smallPaddleDisplayDuration, smallPaddleDisplay);
 					smallRacquetTimer.setRepeats(false);
 					smallRacquetTimer.start();
@@ -282,86 +254,67 @@ public class Powerup {
 				else{
 					System.out.println("Powerup not available - the racquet size is too low.");
 				}
-				//powerup Display finished *
+		
 				break; 
+				
 			case 5: // Slow Down
 				
-				boolean isSlow = false;
 				for (int i=0; i < Game.activeBalls.size(); i++){
 					if (Game.activeBalls.get(i).speed >= 1){
 						Game.activeBalls.get(i).speed -= 0.5;
 						System.out.println("Speed Down - game speed " + Game.activeBalls.get(i).speed);
-						//Game.setHasPowerup(true);
+						
 						
 					}else{
-						isSlow = true;
 						System.out.println("Powerup not available - the ball speed is too slow.");
 					}
 				}
-				powerupEnd();
+				powerupEnd(); // remove the powerup from available powerups display
 				
-				if (isSlow == false){
-					//Game.currentPowerups.add("Slow Down");
-				}
 				
 				ActionListener slowDownDisplayEnd = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						//Game.setHasPowerup(false);
-						//Game.currentPowerups.remove("Slow Down");
-						System.out.println("Powerup Ended");
-						
+						System.out.println("Powerup Ended");	
 					}
 				};
-				int slowDownDisplayDuration = 3000; //milliseconds
+				int slowDownDisplayDuration = 3000; // milliseconds
 				Timer slowDownDisplay = new Timer(slowDownDisplayDuration, slowDownDisplayEnd);
 				slowDownDisplay.setRepeats(false);
 				slowDownDisplay.start();
 				
-				//powerup Display finished *
 				break; 
 				
 			case 4: // Speed Up
 				
-				boolean isFast = false;
+				
 				
 				for (int i=0; i< Game.activeBalls.size();i++){
 					if (Game.activeBalls.get(i).speed < 3.5){
 						Game.activeBalls.get(i).speed += 0.5;
 						System.out.println("Speed Up - game speed " + Game.activeBalls.get(i).speed);
-						//Game.setHasPowerup(true);
 					}else{
-						isFast = true;
 						System.out.println("Powerup not available - the ball speed is too high.");
 					}
 				}
-				powerupEnd();
-				
-				if (isFast == false) {
-					//Game.currentPowerups.add("Speed Up");
-				}
+				powerupEnd(); // remove the powerup from available powerups display
 				
 				ActionListener speedUpDisplayEnd = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						//Game.setHasPowerup(false);
-						System.out.println("Powerup Ended");
-						
+						System.out.println("Powerup Ended");	
 					}
 				};
-				int speedUpDisplayDuration = 3000; //milliseconds
+				int speedUpDisplayDuration = 3000; // milliseconds
 				Timer speedUpDisplay = new Timer(speedUpDisplayDuration, speedUpDisplayEnd);
 				speedUpDisplay.setRepeats(false);
 				speedUpDisplay.start();
 				
-				//powerup Display finished *
 				break; 
 			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
 					game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.25);
 					game.racquet.addRacquetMod();
-					//Game.setHasPowerup(true);
-					//Game.currentPowerups.add("Larger Paddle");
-					powerupEnd();
+					powerupEnd(); // remove the powerup from available powerups display
 					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
 				}else{
 					System.out.println("Powerup not available - the racquet size is too high.");
@@ -369,63 +322,47 @@ public class Powerup {
 				
 				ActionListener largerPaddleDisplayEnd = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						//Game.setHasPowerup(false);
-						//Game.currentPowerups.remove("Larger Paddle");
-						System.out.println("Powerup Ended");
-						
+						System.out.println("Powerup Ended");	
 					}
 				};
-				int largerPaddleDisplayDuration = 3000; //milliseconds
+				int largerPaddleDisplayDuration = 3000; // milliseconds
 				Timer largerPaddleDisplay = new Timer(largerPaddleDisplayDuration, largerPaddleDisplayEnd);
 				largerPaddleDisplay.setRepeats(false);
 				largerPaddleDisplay.start();
-				
-				//powerup display finished *
+		
 				break; 
 			case 2: // Larger Ball
 				
-				boolean isLarge = false;
 				for (int i=0; i<Game.activeBalls.size(); i++){	
 					if (Game.activeBalls.get(i).ballMods < 5){
 						Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * 1.25) ;
 						Game.activeBalls.get(i).addBallMod();
-						//Game.setHasPowerup(true);
-						//Game.currentPowerups.add("Larger Ball");
 						System.out.println("Ball Increase - New level "  + Game.activeBalls.get(i).ballMods);
 					}else{
-						isLarge = true;
 						System.out.println("Powerup not available - the ball size is too high.");
 					}
 				}
-				powerupEnd();
-				if (isLarge == false){
-					//Game.currentPowerups.remove("Larger Ball");
-				}
-				
+				powerupEnd(); // remove the powerup from available powerups display
+
 				ActionListener largerBallDisplayEnd = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						//Game.setHasPowerup(false);
 						System.out.println("Powerup Ended");
 						
 					}
 				};
-				int largerBallDisplayDuration = 3000; //milliseconds
+				int largerBallDisplayDuration = 3000; // milliseconds
 				Timer largerBallDisplay = new Timer(largerBallDisplayDuration, largerBallDisplayEnd);
 				largerBallDisplay.setRepeats(false);
 				largerBallDisplay.start();
 				
-				//powerup Display finished *
+
 				break; 
 			case 1: // Magnet
-				int delay = 30000; //milliseconds
-				//Game.setHasPowerup(true);
-				//Game.currentPowerups.add("Magnet");
-				powerupEnd();
+				int delay = 30000; // milliseconds
+				powerupEnd(); // remove the powerup from available powerups display
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hold = false;
-						//Game.setHasPowerup(false);
-						//Game.currentPowerups.remove("Magnet");
 				        System.out.println("Powerup Ended");
 				        
 				    }
@@ -435,7 +372,7 @@ public class Powerup {
 				timer.start();
 				game.hold = true;
 				
-				//powerup Display finished *
+
 				break; 
 		}
 	}
