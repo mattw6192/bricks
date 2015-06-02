@@ -74,7 +74,7 @@ public class Game extends JPanel {
 			public void keyPressed(KeyEvent arg0) {
 				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
 					 started = true;
-					 if (missiles.size()>0){
+					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
 						 Game.missiles.get(0).setX(racquet.getX() + 25);
 						 hasShot = true;
