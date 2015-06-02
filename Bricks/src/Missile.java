@@ -22,16 +22,16 @@ public class Missile {
 void move() {
 		
 		
-		if (y + ya > game.getHeight() - DIAMETER){
-			//System.out.println("Powerup Lost!");
+		if (y - ya < - 150){
+			System.out.println("Missile reached the top");
+			Game.hasShot = false;
 			Game.missiles.remove(this);
-			//Game.hasShot = false;
 		}
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
-			Game.missiles.remove(this);
-			game.hasShot = false;
+			//Game.missiles.remove(this);
+			//game.hasShot = false;
 			//Game.hasShot = false;
 			//setXa(0);
 			//setYa(0);
@@ -76,6 +76,7 @@ void move() {
 	}
 	
 	private boolean collision() {
+		if (Game.missiles.size()>0){
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
 			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){
 				System.out.println("Brick hits before: "+Game.allBricks.get(i).getHits());
@@ -93,6 +94,7 @@ void move() {
 				
 				return true;
 			}
+		}
 		}return false;
 	}
 	
