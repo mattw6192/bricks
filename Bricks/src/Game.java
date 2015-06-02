@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") // test
 public class Game extends JPanel {
 
 	Ball ball = new Ball(this, 20, 320);

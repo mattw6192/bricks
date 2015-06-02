@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class Ball { // try this????
+public class Ball { 
 	static int DIAMETER = 12;
 	double x = 0;
 	double y = 0;
