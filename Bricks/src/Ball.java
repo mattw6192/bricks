@@ -58,6 +58,8 @@ public class Ball {
 			}else{
 				//game.started = false;
 				Game.pointMultiplier = 1;
+				Game.missiles.clear();
+				Game.hasShot = false;
 				
 				if (Game.activeBalls.size() == 1){
 					if (game.Lives <= 1){

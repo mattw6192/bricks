@@ -23,7 +23,6 @@ void move() {
 		
 		
 		if (y - ya < - 150){
-			System.out.println("Missile reached the top");
 			Game.hasShot = false;
 			Game.missiles.remove(this);
 		}
@@ -79,7 +78,6 @@ void move() {
 		if (Game.missiles.size()>0){
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
 			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){
-				System.out.println("Brick hits before: "+Game.allBricks.get(i).getHits());
 				Game.allBricks.get(i).subtractTwoHits();
 				
 				if (Game.allBricks.get(i).getHits() == 4){Game.allBricks.get(i).setColor(Color.BLACK);}
