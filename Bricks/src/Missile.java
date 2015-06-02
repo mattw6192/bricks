@@ -1,6 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class Missile {
@@ -11,11 +16,18 @@ public class Missile {
 	int xa = 0;
 	int ya = 3;
 	static final int DIAMETER = 10;
+	public static BufferedImage image;
 
 	public Missile(Game game, int X, int Y){
 		this.game = game;
 		this.x = X;
 		this.y = Y;
+		try {
+			image = ImageIO.read(new File("/Users/dillonwastrack/git/bricks/Bricks/src/images/lil stevie.jpeg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -88,7 +100,6 @@ void move() {
 				if (Game.allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 					Game.hideBrick(Game.allBricks.get(i), Game.activeBalls.get(0));
 					Game.allBricks.remove(i);
-					System.out.println("Remaining bricks: "+Game.allBricks.size());
 					if (Game.allBricks.isEmpty()){
 						if (Game.Round < Game.maxRound){
 							
@@ -134,8 +145,9 @@ void move() {
 	}
 	
 	public void paint(Graphics2D g) {
-		g.setColor(Color.RED);
-		g.fillRect(x, y, DIAMETER, DIAMETER);
+		g.drawImage(image, 0, 0, null);
+		//g.setColor(Color.RED);
+		//g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
 	
 	 

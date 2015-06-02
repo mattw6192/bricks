@@ -331,7 +331,6 @@ public class Game extends JPanel {
 						if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 							hideBrick(allBricks.get(i), activeBalls.get(j));
 							allBricks.remove(i);
-							System.out.println("Remaining bricks: "+Game.allBricks.size());
 						}
 						//System.out.println("Score is: " + Score);
 					}
