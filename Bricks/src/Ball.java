@@ -25,7 +25,7 @@ public class Ball {
 	}
 	
 	public void setColor(Color c){
-		this.c = c;
+		this.c = c; // test
 	}
 	
 	public Color getColor(){
