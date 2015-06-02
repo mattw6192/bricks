@@ -28,7 +28,7 @@ public class Game extends JPanel {
 	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = false;
+	static Boolean hasFireball = true;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -320,7 +320,7 @@ public class Game extends JPanel {
 						    }
 						};
 						Timer timer = new Timer(delay, taskPerformer);
-						timer.setRepeats(false);
+						timer.setRepeats(false); 
 						timer.start();
 						
 						if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
