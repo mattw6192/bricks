@@ -88,6 +88,38 @@ void move() {
 				if (Game.allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 					Game.hideBrick(Game.allBricks.get(i), Game.activeBalls.get(0));
 					Game.allBricks.remove(i);
+					System.out.println("Remaining bricks: "+Game.allBricks.size());
+					if (Game.allBricks.isEmpty()){
+						if (Game.Round < Game.maxRound){
+							
+							Game.Round += 1;
+							Game.started = false;
+							Game.hold = false;
+							Game.placeHolder.clear();
+							Game.nextRound();
+							Game.hasFireball = false;
+							Game.hasMetalPower = false;
+							Game.hasShot = false;
+							Game.missileCount = 0;
+							Game.missiles.clear();
+							Ball saveBall = Game.activeBalls.get(0);
+							Game.activeBalls.clear();
+							Game.activeBalls.add(saveBall);
+							saveBall.speed = 2;
+							saveBall.ballMods = 0;
+							saveBall.DIAMETER = 12;
+							game.racquet.setWIDTH(60);
+							game.racquet.racquetMods = 0;
+
+						}
+						if (Game.Round == Game.maxRound ){
+							game.gameWon();
+						}
+						if (Game.Round < Game.maxRound) {
+							game.nextRoundMessage();
+						}
+						
+					}
 				}
 				
 				

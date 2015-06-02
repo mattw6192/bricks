@@ -36,7 +36,7 @@ public class Powerup {
 				Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 				Game.missiles.add(m);
 				game.setMissileCount(game.getMissileCount() + 1);
-				System.out.println("Missile added");
+				//System.out.println("Missile added");
 				powerupEnd();
 				break;
 				

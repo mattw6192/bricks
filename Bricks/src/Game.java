@@ -40,12 +40,12 @@ public class Game extends JPanel {
 	private static boolean hasQuit = false;  // true if user has quit the game
 	
 	static boolean hasShot = false; // missile stuff
-	private static int missileCount = 0;   // missile stuff
+	static int missileCount = 0;   // missile stuff
 	
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
-	private static int maxRound = 4;
+	static int maxRound = 4;
 	Racquet racquet = new Racquet(this);
 
 	public Game() { 
@@ -331,6 +331,7 @@ public class Game extends JPanel {
 						if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 							hideBrick(allBricks.get(i), activeBalls.get(j));
 							allBricks.remove(i);
+							System.out.println("Remaining bricks: "+Game.allBricks.size());
 						}
 						//System.out.println("Score is: " + Score);
 					}
