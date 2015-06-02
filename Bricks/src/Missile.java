@@ -15,7 +15,7 @@ public class Missile {
 	private int y;
 	int xa = 0;
 	int ya = 3;
-	static final int DIAMETER = 10;
+	static final int DIAMETER = 50; //was 10 when missile was red square
 	public static BufferedImage image;
 
 	public Missile(Game game, int X, int Y){
@@ -23,7 +23,7 @@ public class Missile {
 		this.x = X;
 		this.y = Y;
 		try {
-			image = ImageIO.read(new File("/Users/dillonwastrack/git/bricks/Bricks/src/images/lil stevie.jpeg"));
+			image = ImageIO.read((getClass().getResource("/images/lil stevie.jpeg")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,7 +145,7 @@ void move() {
 	}
 	
 	public void paint(Graphics2D g) {
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(image, x, y, null);
 		//g.setColor(Color.RED);
 		//g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
