@@ -15,19 +15,19 @@ public class Missile {
 	private int y;
 	int xa = 0;
 	int ya = 3;
-	static final int DIAMETER = 50; //was 10 when missile was red square
-	public static BufferedImage image;
+	static final int DIAMETER = 10; //was 10 when missile was red square (increasing diameter without overall size might enable destroying nearby bricks
+	//public static BufferedImage image;
 
 	public Missile(Game game, int X, int Y){
 		this.game = game;
 		this.x = X;
 		this.y = Y;
-		try {
-			image = ImageIO.read((getClass().getResource("/images/lil stevie.jpeg")));
-		} catch (IOException e) {
+		//try {
+			//image = ImageIO.read((getClass().getResource("/images/lil stevie.jpeg")));
+		///} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		
 	}
 	
@@ -145,9 +145,9 @@ void move() {
 	}
 	
 	public void paint(Graphics2D g) {
-		g.drawImage(image, x, y, null);
-		//g.setColor(Color.RED);
-		//g.fillRect(x, y, DIAMETER, DIAMETER);
+		//g.drawImage(image, x, y, null);
+		g.setColor(Color.RED);
+		g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
 	
 	 

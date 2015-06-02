@@ -232,12 +232,12 @@ public class Game extends JPanel {
         }
         
         for (int i=0; i<21; i++){
-        	Brick brick = new Brick((40 * i) + 10, 5, 35, 15, randInt(1,4));
+        	Brick brick = new Brick((40 * i) + 10, 165, 35, 15, randInt(1,4));
         	allBricks.add(brick);
         }
         
         for (int i=0; i<21; i++){
-        	Brick brick = new Brick((40 * i) + 10, 5, 35, 15, randInt(1,4));
+        	Brick brick = new Brick((40 * i) + 10, 185, 35, 15, randInt(1,4));
         	allBricks.add(brick);
         }
         
