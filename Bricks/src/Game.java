@@ -39,6 +39,9 @@ public class Game extends JPanel {
 	private static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
 	
+	static boolean hasShot = false; // missile stuff
+	private static int missileCount = 0;   // missile stuff
+	
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -71,9 +74,12 @@ public class Game extends JPanel {
 			public void keyPressed(KeyEvent arg0) {
 				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
 					 started = true;
-					 if (Game.missiles.size()>0){
-						 Game.fireMissile();
-						 Game.missiles.remove(0);
+					 if (missiles.size()>0){
+						 //Game.fireMissile();
+						 Game.missiles.get(0).setX(racquet.getX() + 25);
+						 hasShot = true;
+						 //Game.missiles.remove(0);
+						 // change hasShot to false in the collision part of the missile
 					 }
 				 }
 				 if (arg0.getKeyCode() == KeyEvent.VK_P){ isPaused = true;}
@@ -94,8 +100,15 @@ public class Game extends JPanel {
 	@SuppressWarnings("static-access")
 	private void move() {
 		if (started == true){
+			
 			for (int i =0; i<activeBalls.size(); i++){
 				activeBalls.get(i).move();
+			}
+			if (hasShot == true && Game.missiles.size()>0){
+				//for (Missile m : Game.missiles){
+				//for (int i = 0; i<missiles.size();i++){
+					missiles.get(0).move();
+				//}
 			}
 			//hold = false;
 		}else{
@@ -144,10 +157,10 @@ public class Game extends JPanel {
 				placeHolder.get(i).paint(g2d);
 			}
 		}
-		if (missiles.isEmpty()==false){
-			for (Missile m : missiles){
-				m.paint(g2d);
-			}
+		if (missiles.isEmpty()==false && hasShot == true){
+			//for (Missile m : missiles){
+				missiles.get(0).paint(g2d);
+			//}
 		}
 		
 	}
@@ -332,13 +345,16 @@ public class Game extends JPanel {
 							nextRound();
 							hasFireball = false;
 							hasMetalPower = false;
+							hasShot = false;
+							missileCount = 0;
+							missiles.clear();
 							Ball saveBall = activeBalls.get(0);
 							activeBalls.clear();
 							activeBalls.add(saveBall);
 							saveBall.speed = 2;
 							saveBall.ballMods = 0;
 							saveBall.DIAMETER = 12;
-							game.racquet.WIDTH = 60;
+							game.racquet.setWIDTH(60);
 							game.racquet.racquetMods = 0;
 
 						}
@@ -402,7 +418,7 @@ public class Game extends JPanel {
 	
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
-		if (tempRandNum == 7 || tempRandNum == 2){
+		//if (tempRandNum == 7 || tempRandNum == 2){ //uncomment this if statement to randomize powerups
 			int delay = 1000; //milliseconds
 			
 			ActionListener taskPerformer = new ActionListener() {
@@ -421,8 +437,8 @@ public class Game extends JPanel {
 				return false;
 			}
 			
-		}
-		return false;	
+		//}
+		//return false;	
 	}
 	
 	public static void nextRound(){
@@ -1091,10 +1107,10 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,12); 
+		int tempRandNum2 = randInt(1,13); 
 		//int tempRandNum2 = randInt(1,2);
 		//int tempRandNum2 = 7; // Set this to a specific number to test one powerup
-		switch(tempRandNum2){
+		switch(13){
 			case 13:
 				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
 				return powerup13;
@@ -1152,10 +1168,10 @@ public class Game extends JPanel {
 	}
 		return null;
 	}
-	public static Missile fireMissile(){
-		System.out.println("firing missile");
-		return Game.missiles.get(0);
-	}
+	//public static Missile fireMissile(){
+	//	System.out.println("firing missile");
+	//	return Game.missiles.get(0);
+	//}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
@@ -1165,6 +1181,14 @@ public class Game extends JPanel {
 		//double saveYa = saveBall.getYa();
 		//saveBall.setYa(saveYa * (-1));
 		newbrick = null;
+	}
+
+	public int getMissileCount() {
+		return missileCount;
+	}
+
+	public void setMissileCount(int missileCount) {
+		this.missileCount = missileCount;
 	}
 	
 

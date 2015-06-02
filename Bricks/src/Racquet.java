@@ -6,11 +6,13 @@ import java.awt.event.MouseEvent;
 
 public class Racquet {
 	private static final int Y = 530;
-	int WIDTH = 60;
-	int HEIGHT = 10;
-	int x = 0;
-	int xa = 0;
+	private int WIDTH = 60;
+	private int HEIGHT = 10;
+	private int x = 0;
+	private int xa = 0;
 	private Game game;
+	
+
 	int racquetMods = 0;
 	// paddleMods represents the modifications made to the paddle length
 	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
@@ -18,6 +20,11 @@ public class Racquet {
 	public Racquet(Game game) {
 		this.game = game;
 		x = 100;
+	}
+	
+
+	public int getX() {
+		return x;
 	}
 
 	public void addRacquetMod(){
@@ -33,13 +40,13 @@ public class Racquet {
 	}
 	
 	public void move() {
-		if (x + xa > 0 && x + xa < game.getWidth() - WIDTH)
+		if (x + xa > 0 && x + xa < game.getWidth() - getWIDTH())
 			x = x + xa;
 	}
 
 	public void paint(Graphics2D g) {
 		g.setColor(Color.GRAY);
-		g.fillRect(x, Y, WIDTH, HEIGHT);
+		g.fillRect(x, Y, getWIDTH(), HEIGHT);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -60,11 +67,21 @@ public class Racquet {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, Y, WIDTH, HEIGHT);
+		return new Rectangle(x, Y, getWIDTH(), HEIGHT);
 	}
 
 	public int getTopY() {
 		return Y;
+	}
+
+
+	public int getWIDTH() {
+		return WIDTH;
+	}
+
+
+	public void setWIDTH(int wIDTH) {
+		WIDTH = wIDTH;
 	}
 }
 

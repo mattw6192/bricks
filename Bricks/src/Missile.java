@@ -6,23 +6,41 @@ import java.awt.Rectangle;
 public class Missile {
 
 	private Game game;
-	private int x = 0;
-	private int y = 0;
+	private int x;
+	private int y;
 	int xa = 0;
-	int ya = 1;
+	int ya = 3;
 	static final int DIAMETER = 10;
 
 	public Missile(Game game, int X, int Y){
 		this.game = game;
-		x = X;
-		y = Y;
+		this.x = X;
+		this.y = Y;
 		
 	}
 	
-	void move() {
+void move() {
 		
-		x = x + xa;
-		y = y + ya;
+		
+		if (y + ya > game.getHeight() - DIAMETER){
+			//System.out.println("Powerup Lost!");
+			Game.missiles.remove(this);
+			//Game.hasShot = false;
+		}
+		if (collision()){
+			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the racquet
+			Game.missiles.remove(this);
+			game.hasShot = false;
+			//Game.hasShot = false;
+			//setXa(0);
+			//setYa(0);
+			//setX(-100); // removes the powerup from the playing field
+			//setY(-100); // removes the powerup from the playing field
+
+		}
+		x = x - xa;
+		y = y - ya;
 	}
 
 	public int getX() {
@@ -58,10 +76,24 @@ public class Missile {
 	}
 	
 	private boolean collision() {
-		for (Brick b : Game.allBricks){
-			if (b.getBounds().intersects(getBounds())){ return true; }
-		}
-		return false;
+		for(int i = 0; i<Game.allBricks.size(); i++){ 
+			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){
+				System.out.println("Brick hits before: "+Game.allBricks.get(i).getHits());
+				Game.allBricks.get(i).subtractHit();
+				
+				if (Game.allBricks.get(i).getHits() == 4){Game.allBricks.get(i).setColor(Color.BLACK);}
+				if (Game.allBricks.get(i).getHits() == 3){Game.allBricks.get(i).setColor(Color.BLUE);}
+				if (Game.allBricks.get(i).getHits() == 2){Game.allBricks.get(i).setColor(Color.GREEN);} // update the color
+				if (Game.allBricks.get(i).getHits() == 1){Game.allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+				
+				if (Game.allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
+					Game.hideBrick(Game.allBricks.get(i), Game.activeBalls.get(0));
+					Game.allBricks.remove(i);
+				}
+				
+				return true;
+			}
+		}return false;
 	}
 	
 	public Rectangle getBounds() {
@@ -69,8 +101,9 @@ public class Missile {
 	}
 	
 	public void paint(Graphics2D g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.RED);
 		g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
+	
 	 
 }

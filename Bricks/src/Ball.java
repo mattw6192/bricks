@@ -89,7 +89,7 @@ public class Ball {
 					Game.activeBalls.add(this);
 					ballMods = 0;
 					DIAMETER = 12;
-					game.racquet.WIDTH = 60;
+					game.racquet.setWIDTH(60);
 					game.racquet.racquetMods = 0;
 					this.setColor(Color.BLACK);
 					setX(game.racquet.getBounds().x);

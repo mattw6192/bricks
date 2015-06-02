@@ -33,8 +33,11 @@ public class Powerup {
 		if (active == true){
 			switch(caseNumber){
 			case 13: // Missiles NOT FINISHED YET
-				Missile m = new Missile(game,game.racquet.getBounds().x + 5, game.racquet.getBounds().y - 10);
+				Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 				Game.missiles.add(m);
+				game.setMissileCount(game.getMissileCount() + 1);
+				System.out.println("Missile added");
+				powerupEnd();
 				break;
 				
 			case 12: // Extra Life
@@ -233,7 +236,7 @@ public class Powerup {
 				
 			case 6: // Smaller Paddle
 				if (game.racquet.racquetMods >= -5){
-					game.racquet.WIDTH = (int) (game.racquet.WIDTH * .8);
+					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * .8));
 					game.racquet.SubtractRacquetMod();
 					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
 					powerupEnd(); // remove the powerup from available powerups display
@@ -309,10 +312,11 @@ public class Powerup {
 				speedUpDisplay.start();
 				
 				break; 
+				
 			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
-					game.racquet.WIDTH = (int) (game.racquet.WIDTH * 1.25);
+					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * 1.25));
 					game.racquet.addRacquetMod();
 					powerupEnd(); // remove the powerup from available powerups display
 					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
@@ -407,8 +411,8 @@ public class Powerup {
 		if (ability.equals("Double Points")){return 9;};
 		if (ability.equals("Fireball")){return 10;};
 		if (ability.equals("Metal Ball")){return 11;};
-		if (ability.equals("Missile")){return 13;}
 		if (ability.equals("Extra Life")){return 12;}
+		if (ability.equals("Missile")){return 13;}
 		return 0;
 	}
 	
