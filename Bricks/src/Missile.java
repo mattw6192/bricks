@@ -90,6 +90,7 @@ void move() {
 					Game.allBricks.remove(i);
 				}
 				
+				
 				return true;
 			}
 		}
