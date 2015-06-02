@@ -1,8 +1,8 @@
-import java.awt.Color; // test test test
+import java.awt.Color; 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-public class Ball {
+public class Ball { // try this????
 	static int DIAMETER = 12;
 	double x = 0;
 	double y = 0;
@@ -25,7 +25,7 @@ public class Ball {
 	}
 	
 	public void setColor(Color c){
-		this.c = c; // test
+		this.c = c; 
 	}
 	
 	public Color getColor(){
