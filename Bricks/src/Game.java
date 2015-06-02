@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-@SuppressWarnings("serial") // test
+@SuppressWarnings("serial")
 public class Game extends JPanel {
 
 	Ball ball = new Ball(this, 20, 320);
@@ -41,6 +41,9 @@ public class Game extends JPanel {
 	
 	static boolean hasShot = false; // missile stuff
 	static int missileCount = 0;   // missile stuff
+	
+	static ArrayList<MachineGun> bullets = new ArrayList<MachineGun>(); // machine gun stuff
+	static boolean hasGun = false;
 	
 	
 
@@ -110,8 +113,14 @@ public class Game extends JPanel {
 					missiles.get(0).move();
 				//}
 			}
+			if (bullets.size()>0){
+				for (int i = 0; i < bullets.size(); i++){
+					bullets.get(i).move();
+				}
+			}
 			//hold = false;
-		}else{
+		}
+		else{
 			for (int i =0; i<activeBalls.size(); i++){
 				activeBalls.get(i).setX((int) racquet.getBounds().getX() + (int) (racquet.getBounds().getWidth() / 2));
 				activeBalls.get(i).setY((int) racquet.getBounds().getY() - (int) (activeBalls.get(i).DIAMETER));
@@ -161,6 +170,11 @@ public class Game extends JPanel {
 			//for (Missile m : missiles){
 				missiles.get(0).paint(g2d);
 			//}
+		}
+		if (bullets.isEmpty()==false){
+			for (int i = 0; i < bullets.size(); i++){
+				bullets.get(i).paint(g2d);
+			}
 		}
 		
 	}
@@ -1110,7 +1124,10 @@ public class Game extends JPanel {
 		int tempRandNum2 = randInt(1,13); 
 		//int tempRandNum2 = randInt(1,2);
 		//int tempRandNum2 = 7; // Set this to a specific number to test one powerup
-		switch(13){
+		switch(14){
+			case 14:
+				Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun");
+				return powerup14;
 			case 13:
 				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
 				return powerup13;

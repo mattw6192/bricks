@@ -32,11 +32,42 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			case 13: // Missiles NOT FINISHED YET
+			case 14:
+				if (Game.hasGun == false){
+					Game.hasGun = true;
+					int delayShot = 250;
+					int timeForGun = 10000;
+					Game.bullets.clear();
+					ActionListener shootGun = new ActionListener(){
+						public void actionPerformed(ActionEvent evt){
+								MachineGun mgLeft = new MachineGun(game,game.racquet.getX(),game.racquet.getTopY());
+								MachineGun mgRight = new MachineGun(game,game.racquet.getX() + game.racquet.getWIDTH() - 10,game.racquet.getTopY());
+								Game.bullets.add(mgLeft);
+								Game.bullets.add(mgRight);
+						}
+					};
+					final Timer timeShot = new Timer(delayShot, shootGun);
+					timeShot.setRepeats(true);
+					timeShot.start();
+					
+					ActionListener endGun = new ActionListener(){
+						public void actionPerformed(ActionEvent evt){
+							Game.hasGun = false;
+							timeShot.stop();
+						}
+					};
+					
+					Timer gunTime = new Timer(timeForGun, endGun);
+					gunTime.setRepeats(false);
+					gunTime.start();
+				}
+				break;
+				
+				
+			case 13: 
 				Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 				Game.missiles.add(m);
 				game.setMissileCount(game.getMissileCount() + 1);
-				//System.out.println("Missile added");
 				powerupEnd();
 				break;
 				
@@ -413,6 +444,7 @@ public class Powerup {
 		if (ability.equals("Metal Ball")){return 11;};
 		if (ability.equals("Extra Life")){return 12;}
 		if (ability.equals("Missile")){return 13;}
+		if (ability.equals("Machine Gun")){return 14;}
 		return 0;
 	}
 	
