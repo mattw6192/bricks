@@ -79,7 +79,7 @@ void move() {
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
 			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){
 				System.out.println("Brick hits before: "+Game.allBricks.get(i).getHits());
-				Game.allBricks.get(i).subtractHit();
+				Game.allBricks.get(i).subtractTwoHits();
 				
 				if (Game.allBricks.get(i).getHits() == 4){Game.allBricks.get(i).setColor(Color.BLACK);}
 				if (Game.allBricks.get(i).getHits() == 3){Game.allBricks.get(i).setColor(Color.BLUE);}
