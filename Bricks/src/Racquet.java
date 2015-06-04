@@ -22,7 +22,10 @@ public class Racquet {
 		x = 100;
 	}
 	
-
+	public void setRacquetMods(int num){
+		racquetMods = num;
+	}
+	
 	public int getX() {
 		return x;
 	}
@@ -80,8 +83,8 @@ public class Racquet {
 	}
 
 
-	public void setWIDTH(int wIDTH) {
-		WIDTH = wIDTH;
+	public void setWIDTH(int num) {
+		WIDTH = num;
 	}
 }
 

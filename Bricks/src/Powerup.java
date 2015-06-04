@@ -32,7 +32,52 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			case 14:
+			case 15: // Insanity Mode
+				game.racquet.setRacquetMods(-4);
+				game.racquet.setWIDTH(24);
+				game.hasFireball = false;
+				game.hasMetalPower = false;
+				game.hasGun = false;
+				System.out.println("Insanity Mode - Good Luck!! ");
+				game.placeHolder.remove(this);
+				for (int i=0; i< Game.activeBalls.size(); i++){	
+						Game.activeBalls.get(i).DIAMETER = 9;
+						Game.activeBalls.get(i).setBallMods(-1);
+						Game.activeBalls.get(i).speed = 4.0;
+						game.started = false;
+						
+				}	
+						//hasBallMods = true;
+					
+						// Action Listener
+				ActionListener insanityMode = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						System.out.println("Amazing! You Survived!!! - 10,000 Points!!!");
+						game.Score += 10000;
+						game.racquet.setRacquetMods(0);
+						game.racquet.setWIDTH(60);
+						for (int i=0; i< Game.activeBalls.size(); i++){	
+							Game.activeBalls.get(i).DIAMETER = 10;
+							Game.activeBalls.get(i).setBallMods(0);
+							Game.activeBalls.get(i).speed = 2;
+							Game.activeBalls.get(i).setX((int) game.racquet.getBounds().getX() + (int) (game.racquet.getBounds().getWidth() / 2));
+							Game.activeBalls.get(i).setY((int) game.racquet.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
+					}
+						
+						
+						powerupEnd(); // remove the powerup from available powerups display
+					}
+				};
+
+				int DelayDuration = 60000; //milliseconds
+				Timer insanityTimer = new Timer(DelayDuration, insanityMode);
+				insanityTimer.setRepeats(false);
+				insanityTimer.start();
+				
+				
+				
+				break; 
+			case 14: // Machine Gun
 				if (Game.hasGun == false){
 					Game.hasGun = true;
 					int delayShot = 250;
@@ -64,7 +109,7 @@ public class Powerup {
 				break;
 				
 				
-			case 13: 
+			case 13: // Missiles
 				Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 				Game.missiles.add(m);
 				game.setMissileCount(game.getMissileCount() + 1);
@@ -208,7 +253,7 @@ public class Powerup {
 					if (Game.activeBalls.get(i).ballMods >= -1){
 							Game.activeBalls.get(i).DIAMETER = (int) (Game.activeBalls.get(i).DIAMETER * .8);
 							Game.activeBalls.get(i).SubtractBallMod();
-							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods);
+							System.out.println("Ball Decrease - New level "  + Game.activeBalls.get(i).ballMods + " DIAMETER " + Game.activeBalls.get(i).DIAMETER);
 
 							//hasBallMods = true;
 							
@@ -266,10 +311,10 @@ public class Powerup {
 				break; 
 				
 			case 6: // Smaller Paddle
-				if (game.racquet.racquetMods >= -5){
+				if (game.racquet.racquetMods >= -3){
 					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * .8));
 					game.racquet.SubtractRacquetMod();
-					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods);
+					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods + " WIDTH " + game.racquet.getWIDTH());
 					powerupEnd(); // remove the powerup from available powerups display
 					
 					
@@ -445,6 +490,7 @@ public class Powerup {
 		if (ability.equals("Extra Life")){return 12;}
 		if (ability.equals("Missile")){return 13;}
 		if (ability.equals("Machine Gun")){return 14;}
+		if (ability.equals("Insanity Mode")){return 15;}
 		return 0;
 	}
 	

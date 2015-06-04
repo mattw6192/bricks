@@ -24,6 +24,11 @@ public class Ball {
 		
 	}
 	
+	
+	public void setBallMods(int num){
+		ballMods = num;
+	}
+	
 	public void setColor(Color c){
 		this.c = c; 
 	}

@@ -36,7 +36,7 @@ public class Game extends JPanel {
 	static int Round = 1;
 	
 	
-	private static boolean isPaused = false; // true if user has paused the game
+	static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
 	
 	static boolean hasShot = false; // missile stuff
@@ -432,7 +432,7 @@ public class Game extends JPanel {
 	
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
-		//if (tempRandNum == 7 || tempRandNum == 2){ //uncomment this if statement to randomize powerups
+		if (tempRandNum == 7 || tempRandNum == 2){ //uncomment this if statement to randomize powerups
 			int delay = 1000; //milliseconds
 			
 			ActionListener taskPerformer = new ActionListener() {
@@ -451,8 +451,99 @@ public class Game extends JPanel {
 				return false;
 			}
 			
-		//}
-		//return false;	
+		}
+		return false;	
+	}
+	
+	public Powerup generatePowerup(Brick currentBrick){
+		//int tempRandNum2 = randInt(1,13); 
+		//int tempRandNum2 = randInt(1,2);
+		int tempRandNum2 = 15; // Set this to a specific number to test one powerup
+		switch(tempRandNum2){
+			case 15:
+				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode");
+				return powerup15;
+			case 14:
+				Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun");
+				return powerup14;
+			case 13:
+				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
+				return powerup13;
+			case 12:
+				System.out.println("Powerup Gained: " + "Extra Life");
+				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
+				return powerup12;
+			case 11:
+				System.out.println("Powerup Gained: " + "Metal Ball");
+				Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball");
+				return powerup11; 
+			case 10:
+				System.out.println("Powerup Gained: " + "Fireball");
+				Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball");
+				return powerup10; 
+			case 9:
+				System.out.println("Powerup Gained: " + "Double Points");
+				Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points");
+				return powerup9; 
+			case 8:
+				System.out.println("Powerup Gained: " + "Ball Decrease");
+				Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease");
+				return powerup8; 
+			case 7:
+				System.out.println("Powerup Gained: " + "Multiple Balls");
+				Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls");
+				return powerup7; 
+			case 6:
+				System.out.println("Powerup Gained: " + "Paddle Decrease");
+				Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease");
+				return powerup6; 
+			case 5:
+				System.out.println("Powerup Gained: " + "Slow Down");
+				Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down");
+				return powerup5; 
+			case 4:
+				System.out.println("Powerup Gained: " + "Speed Up");
+				Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up");
+				return powerup4; 
+			case 3:
+				System.out.println("Powerup Gained: " + "Paddle Increase");
+				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase");
+				return powerup3; 
+			case 2:
+				System.out.println("Powerup Gained: " + "Ball Increase");
+				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase");
+				return powerup2; 
+			case 1:
+				System.out.println("Powerup Gained: " + "Magnet");
+				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet");
+				return powerup1; 
+			default:
+				break;
+			
+	}
+		return null;
+	}
+	//public static Missile fireMissile(){
+	//	System.out.println("firing missile");
+	//	return Game.missiles.get(0);
+	//}
+	
+	public static void hideBrick(Brick newbrick, Ball saveBall){
+		newbrick.getBounds().setBounds(-10, -10, 0, 0);
+		newbrick.setAlive(false);
+		//double saveXa = saveBall.getXa();
+		//saveBall.setXa(saveXa * (-1));
+		//double saveYa = saveBall.getYa();
+		//saveBall.setYa(saveYa * (-1));
+		newbrick = null;
+	}
+
+	public int getMissileCount() {
+		return missileCount;
+	}
+
+	public void setMissileCount(int missileCount) {
+		this.missileCount = missileCount;
 	}
 	
 	public static void nextRound(){
@@ -1118,94 +1209,6 @@ public class Game extends JPanel {
 				if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);}
 				if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} 
 			}
-	}
-	
-	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,13); 
-		//int tempRandNum2 = randInt(1,2);
-		//int tempRandNum2 = 7; // Set this to a specific number to test one powerup
-		switch(14){
-			case 14:
-				Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun");
-				return powerup14;
-			case 13:
-				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile");
-				return powerup13;
-			case 12:
-				System.out.println("Powerup Gained: " + "Extra Life");
-				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life");
-				return powerup12;
-			case 11:
-				System.out.println("Powerup Gained: " + "Metal Ball");
-				Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball");
-				return powerup11; 
-			case 10:
-				System.out.println("Powerup Gained: " + "Fireball");
-				Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball");
-				return powerup10; 
-			case 9:
-				System.out.println("Powerup Gained: " + "Double Points");
-				Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points");
-				return powerup9; 
-			case 8:
-				System.out.println("Powerup Gained: " + "Ball Decrease");
-				Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease");
-				return powerup8; 
-			case 7:
-				System.out.println("Powerup Gained: " + "Multiple Balls");
-				Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls");
-				return powerup7; 
-			case 6:
-				System.out.println("Powerup Gained: " + "Paddle Decrease");
-				Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease");
-				return powerup6; 
-			case 5:
-				System.out.println("Powerup Gained: " + "Slow Down");
-				Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down");
-				return powerup5; 
-			case 4:
-				System.out.println("Powerup Gained: " + "Speed Up");
-				Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up");
-				return powerup4; 
-			case 3:
-				System.out.println("Powerup Gained: " + "Paddle Increase");
-				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase");
-				return powerup3; 
-			case 2:
-				System.out.println("Powerup Gained: " + "Ball Increase");
-				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase");
-				return powerup2; 
-			case 1:
-				System.out.println("Powerup Gained: " + "Magnet");
-				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet");
-				return powerup1; 
-			default:
-				break;
-			
-	}
-		return null;
-	}
-	//public static Missile fireMissile(){
-	//	System.out.println("firing missile");
-	//	return Game.missiles.get(0);
-	//}
-	
-	public static void hideBrick(Brick newbrick, Ball saveBall){
-		newbrick.getBounds().setBounds(-10, -10, 0, 0);
-		newbrick.setAlive(false);
-		//double saveXa = saveBall.getXa();
-		//saveBall.setXa(saveXa * (-1));
-		//double saveYa = saveBall.getYa();
-		//saveBall.setYa(saveYa * (-1));
-		newbrick = null;
-	}
-
-	public int getMissileCount() {
-		return missileCount;
-	}
-
-	public void setMissileCount(int missileCount) {
-		this.missileCount = missileCount;
 	}
 	
 
