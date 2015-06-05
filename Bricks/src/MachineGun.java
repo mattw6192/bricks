@@ -82,8 +82,9 @@ void move() {
 	private boolean collision() {
 		if (Game.bullets.size()>0){
 			
-		for(int i = 0; i<Game.allBricks.size(); i++){ 
-			for (int j = 0; j < Game.bullets.size(); j++){
+		for (int j = 0; j < Game.bullets.size(); j++){
+			for(int i = 0; i<Game.allBricks.size(); i++){ 
+			
 				
 			if (Game.bullets.get(j).getBounds().intersects(Game.allBricks.get(i).getBounds())){
 				Game.allBricks.get(i).subtractHit();

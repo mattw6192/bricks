@@ -78,17 +78,21 @@ public class Powerup {
 				
 				break; 
 			case 14: // Machine Gun
+				game.placeHolder.remove(this);
 				if (Game.hasGun == false){
 					Game.hasGun = true;
 					int delayShot = 250;
 					int timeForGun = 10000;
 					Game.bullets.clear();
+					
 					ActionListener shootGun = new ActionListener(){
 						public void actionPerformed(ActionEvent evt){
+							if (Game.hasGun == true){
 								MachineGun mgLeft = new MachineGun(game,game.racquet.getX(),game.racquet.getTopY());
 								MachineGun mgRight = new MachineGun(game,game.racquet.getX() + game.racquet.getWIDTH() - 10,game.racquet.getTopY());
 								Game.bullets.add(mgLeft);
 								Game.bullets.add(mgRight);
+							}
 						}
 					};
 					final Timer timeShot = new Timer(delayShot, shootGun);

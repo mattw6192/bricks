@@ -102,6 +102,11 @@ public class Ball {
 					setX(game.racquet.getBounds().x);
 					setY(game.racquet.getBounds().y - 10);
 					this.setColor(Color.BLACK);
+					game.hasShot = false;
+					game.bullets.clear();
+					game.hasGun = false;
+					game.missileCount = 0;
+					game.missiles.clear();
 					
 					//
 					

@@ -362,6 +362,8 @@ public class Game extends JPanel {
 							hasShot = false;
 							missileCount = 0;
 							missiles.clear();
+							hasGun = false;
+							bullets.clear();
 							Ball saveBall = activeBalls.get(0);
 							activeBalls.clear();
 							activeBalls.add(saveBall);
@@ -458,7 +460,7 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,13); 
 		//int tempRandNum2 = randInt(1,2);
-		int tempRandNum2 = 15; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 14; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode");
@@ -548,6 +550,11 @@ public class Game extends JPanel {
 	
 	public static void nextRound(){
 		allBricks.clear();
+		hasShot = false;
+		bullets.clear();
+		hasGun = false;
+		missileCount = 0;
+		missiles.clear();
 		if (Round == 2){
 		
 			//fifteenth row of bricks from left to right
