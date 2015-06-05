@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-// test comment
+
 
 public class MachineGun {
 	private Game game;
