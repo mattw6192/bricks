@@ -68,6 +68,8 @@ public class Powerup {
 						powerupEnd(); // remove the powerup from available powerups display
 					}
 				};
+				
+				
 
 				int DelayDuration = 60000; //milliseconds
 				Timer insanityTimer = new Timer(DelayDuration, insanityMode);
