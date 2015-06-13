@@ -353,6 +353,7 @@ public class Game extends JPanel {
 						if (Round < maxRound){
 							
 							Round += 1;
+							bullets.clear();
 							started = false;
 							hold = false;
 							placeHolder.clear();

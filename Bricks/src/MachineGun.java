@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 
 public class MachineGun {
@@ -10,18 +14,18 @@ public class MachineGun {
 	int xa = 0;
 	int ya = 3;
 	static final int DIAMETER = 10; //was 10 when missile was red square (increasing diameter without overall size might enable destroying nearby bricks
-	//public static BufferedImage image;
+	public static BufferedImage image;
 
 	public MachineGun(Game game, int X, int Y){
 		this.game = game;
 		this.x = X;
 		this.y = Y;
-		//try {
-			//image = ImageIO.read((getClass().getResource("/images/lil stevie.jpeg")));
-		///} catch (IOException e) {
+		try {
+			image = ImageIO.read((getClass().getResource("/images/coolbrule.gif")));
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
-		//}
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -102,6 +106,7 @@ void move() {
 						if (Game.Round < Game.maxRound){
 							
 							Game.Round += 1;
+							Game.bullets.clear();
 							Game.started = false;
 							Game.hold = false;
 							Game.placeHolder.clear();
@@ -144,8 +149,8 @@ void move() {
 	}
 	
 	public void paint(Graphics2D g) {
-		//g.drawImage(image, x, y, null);
-		g.setColor(Color.RED);
-		g.fillRect(x, y, DIAMETER, DIAMETER);
+		g.drawImage(image, x, y, null);
+		//g.setColor(Color.RED);
+		//g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
 }

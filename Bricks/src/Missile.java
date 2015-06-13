@@ -104,6 +104,7 @@ void move() {
 						if (Game.Round < Game.maxRound){
 							
 							Game.Round += 1;
+							Game.bullets.clear();
 							Game.started = false;
 							Game.hold = false;
 							Game.placeHolder.clear();
