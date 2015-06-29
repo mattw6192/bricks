@@ -209,6 +209,20 @@ public class Game extends JPanel {
 	}
 	
 	public void gameWon() {
+		// this part decides if the player's score is in the top 10 all time
+	    int numTen = 0;
+		for ( int i = 0; i<scores.size(); i++){
+			if (scores.get(i) < scores.get(i+1)){
+				numTen = scores.get(i);
+			}
+		}
+		//this part adds the high score to the list
+		if (Score > numTen){
+			scores.add(Score);
+		}
+		//trims the scores list to be the top 10
+		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
+		Collections.sort(scores);
 		JOptionPane.showMessageDialog(this, "Congratulations! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
