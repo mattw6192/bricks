@@ -200,6 +200,7 @@ public class Game extends JPanel {
 		StartMenu menu = new StartMenu(frame, true);
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
+		
                 Instructions instructions = new Instructions(frame,true);
                 instructions.setLocationRelativeTo(game);
                 if (menu.getInstructions()==true){
