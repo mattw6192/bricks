@@ -1,12 +1,14 @@
 import java.awt.Color; 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.List;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -44,6 +46,8 @@ public class Game extends JPanel {
 	
 	static ArrayList<MachineGun> bullets = new ArrayList<MachineGun>(); // machine gun stuff
 	static boolean hasGun = false;
+	
+	static ArrayList<Integer> scores = new ArrayList<Integer>();
 	
 	
 
@@ -180,6 +184,21 @@ public class Game extends JPanel {
 	}
 	
 	public void gameOver() {
+		
+		// this part decides if the player's score is in the top 10 all time
+	    int numTen = 0;
+		for ( int i = 0; i<scores.size(); i++){
+			if (scores.get(i) < scores.get(i+1)){
+				numTen = scores.get(i);
+			}
+		}
+		//this part adds the high score to the list
+		if (Score > numTen){
+			scores.add(Score);
+		}
+		//trims the scores list to be the top 10
+		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
+		Collections.sort(scores);
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
 		System.exit(ABORT);
