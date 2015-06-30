@@ -33,7 +33,7 @@ public class Powerup {
 		setXa(0);
 		FillColor = color;
 		try {
-			image = ImageIO.read((getClass().getResource("/images/coolbrule.gif")));
+			image = ImageIO.read((getClass().getResource("/images/Skull_and_crossbones.svg")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -579,8 +579,13 @@ public class Powerup {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(FillColor);
-		g.fillRect(x, y, DIAMETER, DIAMETER);
+		if (ability == "Insanity Mode"){
+			g.drawImage(image, x, y, null);
+		}else{
+			g.setColor(FillColor);
+			g.fillRect(x, y, DIAMETER, DIAMETER);
+		
+		}
 	}
 	
 	public Rectangle getBounds() {
