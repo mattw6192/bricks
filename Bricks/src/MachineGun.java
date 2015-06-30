@@ -92,6 +92,7 @@ void move() {
 				
 			if (Game.bullets.get(j).getBounds().intersects(Game.allBricks.get(i).getBounds())){
 				Game.allBricks.get(i).subtractHit();
+				Game.Score += 1;
 				Game.bullets.remove(j);
 				
 				if (Game.allBricks.get(i).getHits() == 4){Game.allBricks.get(i).setColor(Color.BLACK);}
