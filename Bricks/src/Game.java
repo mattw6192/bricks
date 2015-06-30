@@ -184,7 +184,7 @@ public class Game extends JPanel {
 	}
 	
 	public void gameOver() {
-		
+		//test
 		// this part decides if the player's score is in the top 10 all time
 	    int numTen = 0;
 		for ( int i = 0; i<scores.size(); i++){
