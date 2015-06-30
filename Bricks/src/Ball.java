@@ -6,8 +6,8 @@ public class Ball {
 	static int DIAMETER = 12;
 	double x = 0;
 	double y = 0;
-	double xa = 2;
-	double ya = 2;
+	double xa;
+	double ya;
 	private Game game;
 	double speed;
 	// ballMods represents the modifications made to the ball size
@@ -20,6 +20,8 @@ public class Ball {
 		x = X;
 		y = Y;
 		speed = 2;
+		xa = speed;
+		ya = speed;
 		this.c = Color.BLACK;
 		
 	}

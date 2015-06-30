@@ -293,9 +293,15 @@ public class Powerup {
 					Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
 					extraBall1.setXa(1);
 					extraBall1.setYa(-1);
+					extraBall1.speed = game.ball.speed;
+					extraBall1.DIAMETER = game.ball.DIAMETER;
+					extraBall1.ballMods = game.ball.ballMods;
 					Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
 					extraBall2.setXa(-1);
 					extraBall2.setYa(-1);
+					extraBall2.speed = game.ball.speed;
+					extraBall2.DIAMETER = game.ball.DIAMETER;
+					extraBall2.ballMods = game.ball.ballMods;
 					Game.activeBalls.add(extraBall1);
 					Game.activeBalls.add(extraBall2);
 					powerupEnd(); // remove the powerup from available powerups display
