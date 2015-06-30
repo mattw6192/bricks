@@ -3,7 +3,10 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 
@@ -18,6 +21,7 @@ public class Powerup {
 	String ability; // the name of the ability
 	Boolean active; // is this powerup active
 	Color FillColor; // Color of the powerup
+	public static BufferedImage image;
 
 	public Powerup(Game game, int X, int Y, int time, String powerup, Color color) {
 		this.game = game;
@@ -28,6 +32,12 @@ public class Powerup {
 		ability = powerup;
 		setXa(0);
 		FillColor = color;
+		try {
+			image = ImageIO.read((getClass().getResource("/images/coolbrule.gif")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 	}
 
