@@ -17,8 +17,9 @@ public class Powerup {
 	int duration; // duration of the powerup
 	String ability; // the name of the ability
 	Boolean active; // is this powerup active
+	Color FillColor; // Color of the powerup
 
-	public Powerup(Game game, int X, int Y, int time, String powerup) {
+	public Powerup(Game game, int X, int Y, int time, String powerup, Color color) {
 		this.game = game;
 		x = X;
 		y = Y;
@@ -26,12 +27,15 @@ public class Powerup {
 		duration = time;
 		ability = powerup;
 		setXa(0);
+		FillColor = color;
 		 
 	}
 
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
+			
+			
 			case 15: // Insanity Mode
 				game.racquet.setRacquetMods(-4);
 				game.racquet.setWIDTH(24);
@@ -559,7 +563,7 @@ public class Powerup {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(Color.WHITE);
+		g.setColor(FillColor);
 		g.fillRect(x, y, DIAMETER, DIAMETER);
 	}
 	
