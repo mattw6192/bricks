@@ -493,7 +493,7 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,13); 
+		int tempRandNum2 = randInt(1,14); 
 		//int tempRandNum2 = randInt(1,2);
 		//int tempRandNum2 = 14; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
