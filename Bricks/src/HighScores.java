@@ -113,6 +113,7 @@ public class HighScores extends javax.swing.JDialog{
                     .addGroup(layout.createSequentialGroup()
                     	.addGap(100,100,100)
                     	.addComponent(LocalScoreLabel))
+                    	.addGap(15,15,15)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

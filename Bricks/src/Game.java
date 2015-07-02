@@ -1,4 +1,5 @@
 import java.awt.Color; 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.List;
@@ -59,6 +60,7 @@ public class Game extends JPanel {
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	static int maxRound = 4;
 	Racquet racquet = new Racquet(this);
+	private static JFrame frame;
 	static HighScores TempscoreWindow;
 	static Game TempGame;
 
@@ -194,9 +196,21 @@ public class Game extends JPanel {
 		 //read in the list of scores to the scores arraylist
 		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
 	     String line = in.readLine();
+	     int numTracker = 0;
+	     String subLine = line.substring(2).trim();
 	     while(line != null){
-	       scores.add(Integer.parseInt(line));
+	       
+	       scores.add(Integer.parseInt(subLine));
 	       line = in.readLine();
+	       if (numTracker == 8){
+	    	   System.out.println(line.substring(3) + " " + numTracker);
+	    	   subLine = line.substring(3).trim();  
+	    	   break;
+	       }else{
+	    	   System.out.println(line.substring(2) + " " + numTracker);
+	    	   subLine = line.substring(2).trim();  
+	       }
+	       numTracker += 1;
 	     }
 	     in.close();
 		// this part decides if the player's score is in the top 10 all time
@@ -219,18 +233,21 @@ public class Game extends JPanel {
 			FileWriter fileToSave = new FileWriter("scores.dat");
 			for (int i=0; i<scores.size();i++){
 				System.out.println("writing successful");
-	    		fileToSave.append(scores.get(i).toString());
+	    		fileToSave.append((i+ 1) + ". " + scores.get(i).toString());
 	    		fileToSave.write("\n");
 	    		}
 			fileToSave.close();
 			}
 			catch (IOException e1) {}
-    	
+		HighScores scoreWindow = new HighScores(frame, true);
+		TempscoreWindow = scoreWindow;
+		scoreWindow.setLocationRelativeTo(TempGame);
+		scoreWindow.setVisible(false);
     	
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
 		TempscoreWindow.setLocalScores(TempGame);
-		setVisible(false);
+		frame.setVisible(false);
 		TempscoreWindow.setVisible(true);
 		System.exit(ABORT);
 	}
@@ -279,7 +296,7 @@ public class Game extends JPanel {
 	}
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-		JFrame frame = new JFrame("Brick Breaker");
+		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		TempGame = game;
 		StartMenu menu = new StartMenu(frame, true);
