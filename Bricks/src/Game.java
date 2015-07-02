@@ -42,7 +42,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
-	
+
 	
 	static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
