@@ -110,9 +110,9 @@ public class HighScores extends javax.swing.JDialog{
                     .addGroup(layout.createSequentialGroup()
                     	.addGap(100,100,100)
                     	.addComponent(closeButton))
-                    //.addGroup(layout.createSequentialGroup()
-                    	//.addGap(100,100,100)
-                    	.addComponent(exitButton)//)
+                    .addGroup(layout.createSequentialGroup()
+                    	.addGap(100,100,100)
+                    	.addComponent(exitButton))
                     	.addGap(15,15,15)
         );
         layout.setVerticalGroup(
@@ -124,12 +124,12 @@ public class HighScores extends javax.swing.JDialog{
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 //.addGap(15,15,15)
                 .addComponent(LocalScoreLabel)
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(closeButton))
             //.addGroup(layout.createSequentialGroup()
                 .addComponent(exitButton)//)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();

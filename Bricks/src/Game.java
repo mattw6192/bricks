@@ -232,10 +232,11 @@ public class Game extends JPanel {
 		try {
 			FileWriter fileToSave = new FileWriter("scores.dat");
 			for (int i=0; i<scores.size();i++){
-				System.out.println("writing successful");
+				
 	    		fileToSave.append((i+ 1) + ". " + scores.get(i).toString());
 	    		fileToSave.write("\n");
 	    		}
+			System.out.println("writing successful");
 			fileToSave.close();
 			}
 			catch (IOException e1) {}
