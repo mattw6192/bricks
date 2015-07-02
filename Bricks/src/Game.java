@@ -278,7 +278,7 @@ public class Game extends JPanel {
 		Game game = new Game();
 		StartMenu menu = new StartMenu(frame, true);
 		//highscore stuff
-		HighScores scoreWindow = new HighScores(frame, true);
+		HighScores scoreWindow = new HighScores(frame, true, game);
 		scoreWindow.setLocationRelativeTo(game);
 		scoreWindow.setVisible(true);
 		//end highscore stuff
