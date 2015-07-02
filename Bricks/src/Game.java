@@ -59,6 +59,8 @@ public class Game extends JPanel {
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
 	static int maxRound = 4;
 	Racquet racquet = new Racquet(this);
+	static HighScores TempscoreWindow;
+	static Game TempGame;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -227,6 +229,9 @@ public class Game extends JPanel {
     	
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
+		TempscoreWindow.setLocalScores(TempGame);
+		setVisible(false);
+		TempscoreWindow.setVisible(true);
 		System.exit(ABORT);
 	}
 	
@@ -276,11 +281,13 @@ public class Game extends JPanel {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		JFrame frame = new JFrame("Brick Breaker");
 		Game game = new Game();
+		TempGame = game;
 		StartMenu menu = new StartMenu(frame, true);
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true);
+		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(game);
-		scoreWindow.setVisible(true);
+		scoreWindow.setVisible(false);
 		//end highscore stuff
 		
 		menu.setLocationRelativeTo(game);

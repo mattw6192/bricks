@@ -26,6 +26,11 @@ public class HighScores extends javax.swing.JDialog{
         super(parent, modal);
         initComponents();
     }
+    
+    public void setLocalScores(Game thisGame){
+    	LocalScoreLabel.setText("Your Score is: " + thisGame.Score);
+    	
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +47,7 @@ public class HighScores extends javax.swing.JDialog{
         jTextArea1 = new javax.swing.JTextArea();
         closeButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        LocalScoreLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,13 +103,16 @@ public class HighScores extends javax.swing.JDialog{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                    	//.addGap(15,15,15)
+                .addContainerGap(15, Short.MAX_VALUE))
+              .addGroup(layout.createSequentialGroup()
+                    	.addGap(100,100,100)
                     	.addComponent(closeButton))
                     .addGroup(layout.createSequentialGroup()
-                    	//.addGap(15,15,15)
+                    	.addGap(100,100,100)
                     	.addComponent(exitButton))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                    	.addGap(100,100,100)
+                    	.addComponent(LocalScoreLabel))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +121,12 @@ public class HighScores extends javax.swing.JDialog{
                 .addComponent(scoreLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15,15,15)
+                //.addGap(15,15,15)
                 .addComponent(closeButton)
-                .addGap(15,15,15)
+                //.addGap(15,15,15)
                 .addComponent(exitButton)
+                //.addGap(15,15,15)
+                .addComponent(LocalScoreLabel)
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
@@ -133,5 +144,6 @@ public class HighScores extends javax.swing.JDialog{
     private javax.swing.JLabel scoreLabel;
     private javax.swing.JButton closeButton;
     private javax.swing.JButton exitButton;
+    private javax.swing.JLabel LocalScoreLabel;
     // End of variables declaration//GEN-END:variables
 }
