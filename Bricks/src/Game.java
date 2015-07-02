@@ -54,6 +54,8 @@ public class Game extends JPanel {
 	static boolean hasGun = false;
 	
 	static ArrayList<Integer> scores = new ArrayList<Integer>();
+        
+        static HighScores scoreWindow;
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -227,6 +229,7 @@ public class Game extends JPanel {
     	
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
+                scoreWindow.setVisible(true);
 		System.exit(ABORT);
 	}
 	
@@ -278,9 +281,9 @@ public class Game extends JPanel {
 		Game game = new Game();
 		StartMenu menu = new StartMenu(frame, true);
 		//highscore stuff
-		HighScores scoreWindow = new HighScores(frame, true, game);
+		scoreWindow = new HighScores(frame, true, game);
 		scoreWindow.setLocationRelativeTo(game);
-		scoreWindow.setVisible(true);
+		scoreWindow.setVisible(false);
 		//end highscore stuff
 		
 		menu.setLocationRelativeTo(game);
