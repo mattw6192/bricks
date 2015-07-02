@@ -1,7 +1,10 @@
+import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import javax.swing.JButton;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,11 +40,36 @@ public class HighScores extends javax.swing.JDialog{
         scoreLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        closeButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         scoreLabel.setText("High Scores");
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
 
+			private void exitButtonActionPerformed(ActionEvent evt) {
+				System.exit(ABORT);
+				
+			}
+        });
+        
+        closeButton.setText("Close");
+        
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+
+			private void closeButtonActionPerformed(ActionEvent evt) {
+				setVisible(false);
+				
+			}
+        });
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -69,7 +97,13 @@ public class HighScores extends javax.swing.JDialog{
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                    	//.addGap(15,15,15)
+                    	.addComponent(closeButton))
+                    .addGroup(layout.createSequentialGroup()
+                    	//.addGap(15,15,15)
+                    	.addComponent(exitButton))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,6 +112,10 @@ public class HighScores extends javax.swing.JDialog{
                 .addComponent(scoreLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15,15,15)
+                .addComponent(closeButton)
+                .addGap(15,15,15)
+                .addComponent(exitButton)
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
@@ -87,12 +125,13 @@ public class HighScores extends javax.swing.JDialog{
     /**
      * @param args the command line arguments
      */
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel scoreLabel;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JButton exitButton;
     // End of variables declaration//GEN-END:variables
 }
