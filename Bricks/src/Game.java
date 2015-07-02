@@ -209,7 +209,7 @@ public class Game extends JPanel {
 			scores.add(Score);
 		}
 		//trims the scores list to be the top 10
-		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
+		if (scores.size()>9){scores.subList(9, scores.size()-1).clear();}
 		Collections.sort(scores);
 		Collections.reverse(scores);
 		//finally, write all the scores to the scores file
