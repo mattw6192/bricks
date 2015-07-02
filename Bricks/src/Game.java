@@ -7,6 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -48,7 +54,6 @@ public class Game extends JPanel {
 	static boolean hasGun = false;
 	
 	static ArrayList<Integer> scores = new ArrayList<Integer>();
-	
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -105,7 +110,7 @@ public class Game extends JPanel {
 	}
 	
 	@SuppressWarnings("static-access")
-	private void move() {
+	private void move() throws IOException {
 		if (started == true){
 			
 			for (int i =0; i<activeBalls.size(); i++){
@@ -183,11 +188,18 @@ public class Game extends JPanel {
 		
 	}
 	
-	public void gameOver() {
-		//test
+	public void gameOver() throws IOException {
+		 //read in the list of scores to the scores arraylist
+		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
+	     String line = in.readLine();
+	     while(line != null){
+	       scores.add(Integer.parseInt(line));
+	       line = in.readLine();
+	     }
+	     in.close();
 		// this part decides if the player's score is in the top 10 all time
 	    int numTen = 0;
-		for ( int i = 0; i<scores.size(); i++){
+		for ( int i = 0; i<scores.size()-1; i++){
 			if (scores.get(i) < scores.get(i+1)){
 				numTen = scores.get(i);
 			}
@@ -199,6 +211,20 @@ public class Game extends JPanel {
 		//trims the scores list to be the top 10
 		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
 		Collections.sort(scores);
+		Collections.reverse(scores);
+		//finally, write all the scores to the scores file
+		try {
+			FileWriter fileToSave = new FileWriter("scores.dat");
+			for (int i=0; i<scores.size();i++){
+				System.out.println("writing successful");
+	    		fileToSave.append(scores.get(i).toString());
+	    		fileToSave.write("\n");
+	    		}
+			fileToSave.close();
+			}
+			catch (IOException e1) {}
+    	
+    	
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
 		System.exit(ABORT);
@@ -208,10 +234,18 @@ public class Game extends JPanel {
 		JOptionPane.showMessageDialog(this, "Now get ready for the next round!", "Great Job!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void gameWon() {
+	public void gameWon() throws IOException {
+		 //read in the list of scores to the scores arraylist
+		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
+	     String line = in.readLine();
+	     while(line != null){
+	       scores.add(Integer.parseInt(line));
+	       line = in.readLine();
+	     }
+	     in.close();
 		// this part decides if the player's score is in the top 10 all time
 	    int numTen = 0;
-		for ( int i = 0; i<scores.size(); i++){
+		for ( int i = 0; i<scores.size()-1; i++){
 			if (scores.get(i) < scores.get(i+1)){
 				numTen = scores.get(i);
 			}
@@ -223,14 +257,32 @@ public class Game extends JPanel {
 		//trims the scores list to be the top 10
 		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
 		Collections.sort(scores);
+		Collections.reverse(scores);
+		//finally, write all the scores to the scores file
+		try {
+			FileWriter fileToSave = new FileWriter("scores.dat");
+			for (int i=0; i<scores.size();i++){
+				System.out.println("writing successful");
+	    		fileToSave.append(scores.get(i).toString());
+	    		fileToSave.write("\n");
+	    		}
+			fileToSave.close();
+			}
+			catch (IOException e1) {}
 		JOptionPane.showMessageDialog(this, "Congratulations! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		JFrame frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		StartMenu menu = new StartMenu(frame, true);
+		//highscore stuff
+		HighScores scoreWindow = new HighScores(frame, true);
+		scoreWindow.setLocationRelativeTo(game);
+		scoreWindow.setVisible(true);
+		//end highscore stuff
+		
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
 		

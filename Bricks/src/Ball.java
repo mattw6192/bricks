@@ -1,6 +1,7 @@
 import java.awt.Color; 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.IOException;
 
 public class Ball { 
 	static int DIAMETER = 12;
@@ -51,7 +52,7 @@ public class Ball {
 		return ballMods;
 	}
 	
-	void move() {
+	void move() throws IOException {
 		if (x + xa < 0)
 			xa =  speed;
 		if (x + xa > game.getWidth() - DIAMETER)

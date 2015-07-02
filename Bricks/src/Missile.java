@@ -31,7 +31,7 @@ public class Missile {
 		
 	}
 	
-void move() {
+void move() throws IOException {
 		
 		
 		if (y - ya < - 150){
@@ -86,7 +86,7 @@ void move() {
 		this.ya = ya;
 	}
 	
-	private boolean collision() {
+	private boolean collision() throws IOException {
 		if (Game.missiles.size()>0){
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
 			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){

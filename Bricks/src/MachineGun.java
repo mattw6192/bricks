@@ -29,7 +29,7 @@ public class MachineGun {
 		
 	}
 	
-void move() {
+void move() throws IOException {
 		
 		
 		if (y - ya < - 150){
@@ -83,7 +83,7 @@ void move() {
 		this.ya = ya;
 	}
 	
-	private boolean collision() {
+	private boolean collision() throws IOException {
 		if (Game.bullets.size()>0){
 			
 		for (int j = 0; j < Game.bullets.size(); j++){
