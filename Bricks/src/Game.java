@@ -42,6 +42,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
+	static HighScores scoreWindow;
 	
 	
 	static boolean isPaused = false; // true if user has paused the game
@@ -227,6 +228,7 @@ public class Game extends JPanel {
     	
 		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
+		scoreWindow.setVisible(true);
 		System.exit(ABORT);
 	}
 	
@@ -278,9 +280,9 @@ public class Game extends JPanel {
 		Game game = new Game();
 		StartMenu menu = new StartMenu(frame, true);
 		//highscore stuff
-		HighScores scoreWindow = new HighScores(frame, true);
+		scoreWindow = new HighScores(frame, true);
 		scoreWindow.setLocationRelativeTo(game);
-		scoreWindow.setVisible(true);
+		scoreWindow.setVisible(false);
 		//end highscore stuff
 		
 		menu.setLocationRelativeTo(game);
