@@ -16,7 +16,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -54,7 +57,8 @@ public class Game extends JPanel {
 	static ArrayList<MachineGun> bullets = new ArrayList<MachineGun>(); // machine gun stuff
 	static boolean hasGun = false;
 	
-	static ArrayList<Integer> scores = new ArrayList<Integer>();
+	//static ArrayList<Integer> scores = new ArrayList<Integer>();
+	Map<Integer, String> scores = new TreeMap<Integer, String>(Collections.reverseOrder());
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -199,43 +203,64 @@ public class Game extends JPanel {
 	     int numTracker = 0;
 	     String subLine = line.substring(2).trim();
 	     while(line != null){
-	       
-	       scores.add(Integer.parseInt(subLine));
+	       String[] ar=line.split(":");
+	       System.out.println("score: "+ar[0]);
+	       scores.put(Integer.parseInt(ar[1].trim()), ar[0]);
 	       line = in.readLine();
-	       if (numTracker == 8){
-	    	   System.out.println(line.substring(3) + " " + numTracker);
-	    	   subLine = line.substring(3).trim();  
-	    	   break;
-	       }else{
-	    	   System.out.println(line.substring(2) + " " + numTracker);
-	    	   subLine = line.substring(2).trim();  
-	       }
-	       numTracker += 1;
+	       //if (numTracker == 8){
+	    	 //  System.out.println(line.substring(3) + " " + numTracker);
+	    	  // subLine = line.substring(3).trim();  
+	    	  // break;
+	       //}else{
+	    	//   System.out.println(line.substring(2) + " " + numTracker);
+	    	//   subLine = line.substring(2).trim();  
+	      // }
+	      // numTracker += 1;
 	     }
 	     in.close();
 		// this part decides if the player's score is in the top 10 all time
-	    int numTen = 0;
-		for ( int i = 0; i<scores.size()-1; i++){
-			if (scores.get(i) < scores.get(i+1)){
-				numTen = scores.get(i);
+	     
+	    //int numTen = 0;
+		//for ( int i = 0; i<scores.size()-1; i++){
+			//if (scores. < scores.get(i+1)){
+				//numTen = scores.get(i);
+			//}
+		//}
+	     
+	     Integer min = Collections.min(scores.keySet());
+		//this part adds the high score to the list
+		if (Score > min){
+			EnterName nameBox = new EnterName(frame, true);
+			nameBox.setLocationRelativeTo(frame);
+			nameBox.setVisible(true);
+			String user = nameBox.getUserName();
+			scores.put(Score, user);
+			String userPlace = scores.get(Score);
+			ArrayList keys = new ArrayList(scores.values());
+			for (int i = 0; i < keys.size();i++){
+				if (keys.get(i).equals(userPlace)){
+					String finalUser = String.valueOf(i+1)+"."+userPlace;
+					scores.remove(Score);
+					scores.put(Score, finalUser);
+					break;
+				}
 			}
 		}
-		//this part adds the high score to the list
-		if (Score > numTen){
-			scores.add(Score);
-		}
 		//trims the scores list to be the top 10
-		if (scores.size()>9){scores.subList(9, scores.size()-1).clear();}
-		Collections.sort(scores);
-		Collections.reverse(scores);
+		if (scores.size()>9){
+			scores.remove(min);
+		}
+		//Collections.sort(scores.keySet());
+		//Collections.reverseOrder(scores.keySet());
 		//finally, write all the scores to the scores file
 		try {
 			FileWriter fileToSave = new FileWriter("scores.dat");
-			for (int i=0; i<scores.size();i++){
-				
-	    		fileToSave.append((i+ 1) + ". " + scores.get(i).toString());
-	    		fileToSave.write("\n");
-	    		}
+			//int scorePlace = 1;
+			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
+			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
+			    fileToSave.write("\n");
+			    //scorePlace += 1;
+			}
 			System.out.println("writing successful");
 			fileToSave.close();
 			}
@@ -258,40 +283,78 @@ public class Game extends JPanel {
 	}
 	
 	public void gameWon() throws IOException {
-		 //read in the list of scores to the scores arraylist
+		//read in the list of scores to the scores arraylist
 		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
 	     String line = in.readLine();
+	     int numTracker = 0;
+	     String subLine = line.substring(2).trim();
 	     while(line != null){
-	       scores.add(Integer.parseInt(line));
+	       String[] ar=line.split(":");
+	       System.out.println("score: "+ar[0]);
+	       scores.put(Integer.parseInt(ar[1].trim()), ar[0]);
 	       line = in.readLine();
+	       //if (numTracker == 8){
+	    	 //  System.out.println(line.substring(3) + " " + numTracker);
+	    	  // subLine = line.substring(3).trim();  
+	    	  // break;
+	       //}else{
+	    	//   System.out.println(line.substring(2) + " " + numTracker);
+	    	//   subLine = line.substring(2).trim();  
+	      // }
+	      // numTracker += 1;
 	     }
 	     in.close();
 		// this part decides if the player's score is in the top 10 all time
-	    int numTen = 0;
-		for ( int i = 0; i<scores.size()-1; i++){
-			if (scores.get(i) < scores.get(i+1)){
-				numTen = scores.get(i);
+	     
+	    //int numTen = 0;
+		//for ( int i = 0; i<scores.size()-1; i++){
+			//if (scores. < scores.get(i+1)){
+				//numTen = scores.get(i);
+			//}
+		//}
+	     
+	     Integer min = Collections.min(scores.keySet());
+		//this part adds the high score to the list
+		if (Score > min){
+			EnterName nameBox = new EnterName(frame, true);
+			nameBox.setLocationRelativeTo(frame);
+			nameBox.setVisible(true);
+			String user = nameBox.getUserName();
+			scores.put(Score, user);
+			String userPlace = scores.get(Score);
+			ArrayList keys = new ArrayList(scores.values());
+			for (int i = 0; i < keys.size();i++){
+				if (keys.get(i).equals(userPlace)){
+					String finalUser = String.valueOf(i+1)+"."+userPlace;
+					scores.remove(Score);
+					scores.put(Score, finalUser);
+					break;
+				}
 			}
 		}
-		//this part adds the high score to the list
-		if (Score > numTen){
-			scores.add(Score);
-		}
 		//trims the scores list to be the top 10
-		if (scores.size()>10){scores.subList(10, scores.size()-1).clear();}
-		Collections.sort(scores);
-		Collections.reverse(scores);
+		if (scores.size()>9){
+			scores.remove(min);
+		}
+		//Collections.sort(scores.keySet());
+		//Collections.reverseOrder(scores.keySet());
 		//finally, write all the scores to the scores file
 		try {
 			FileWriter fileToSave = new FileWriter("scores.dat");
-			for (int i=0; i<scores.size();i++){
-				System.out.println("writing successful");
-	    		fileToSave.append(scores.get(i).toString());
-	    		fileToSave.write("\n");
-	    		}
+			//int scorePlace = 1;
+			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
+			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
+			    fileToSave.write("\n");
+			    //scorePlace += 1;
+			}
+			System.out.println("writing successful");
 			fileToSave.close();
 			}
 			catch (IOException e1) {}
+		HighScores scoreWindow = new HighScores(frame, true);
+		TempscoreWindow = scoreWindow;
+		scoreWindow.setLocationRelativeTo(TempGame);
+		scoreWindow.setVisible(false);
 		JOptionPane.showMessageDialog(this, "Congratulations! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}
