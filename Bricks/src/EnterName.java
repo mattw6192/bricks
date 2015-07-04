@@ -89,10 +89,19 @@ public class EnterName extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String userName = jTextField1.getText();
+         this.userName = jTextField1.getText();
+         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
+    public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	/**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -139,5 +148,6 @@ public class EnterName extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
+    private String userName;
     // End of variables declaration//GEN-END:variables
 }

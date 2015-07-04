@@ -55,6 +55,7 @@ public class Game extends JPanel {
 	static boolean hasGun = false;
 	
 	static ArrayList<Integer> scores = new ArrayList<Integer>();
+	//Map<String, Integer> scores = new HashMap<String, Integer>();
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
@@ -223,6 +224,10 @@ public class Game extends JPanel {
 		//this part adds the high score to the list
 		if (Score > numTen){
 			scores.add(Score);
+			EnterName nameBox = new EnterName(frame, true);
+			nameBox.setLocationRelativeTo(frame);
+			nameBox.setVisible(true);
+			String user = nameBox.getUserName();
 		}
 		//trims the scores list to be the top 10
 		if (scores.size()>9){scores.subList(9, scores.size()-1).clear();}
