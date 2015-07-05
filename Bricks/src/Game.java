@@ -245,6 +245,8 @@ public class Game extends JPanel {
 					break;
 				}
 			}
+		}else{
+			JOptionPane.showMessageDialog(this, "What have I done wrong?", "Game Over!!!", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));	
 		}
 		//trims the scores list to be the top 10
 		if (scores.size()>9){
@@ -270,7 +272,7 @@ public class Game extends JPanel {
 		scoreWindow.setLocationRelativeTo(TempGame);
 		scoreWindow.setVisible(false);
     	
-		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
+		
 		Round = 1;
 		TempscoreWindow.setLocalScores(TempGame);
 		frame.setVisible(false);
