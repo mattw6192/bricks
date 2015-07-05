@@ -10,7 +10,8 @@
  */
 public class EnterName extends javax.swing.JDialog {
 
-    /**
+    private String userName;
+	/**
      * Creates new form EnterName
      */
     public EnterName(java.awt.Frame parent, boolean modal) {
