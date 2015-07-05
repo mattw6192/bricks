@@ -33,7 +33,7 @@ public class Powerup {
 		setXa(0);
 		FillColor = color;
 		try {
-			image = ImageIO.read((getClass().getResource("/images/skull_and_bones.png")));
+			image = ImageIO.read((getClass().getResource("/images/skull_and_bones2.png")));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
