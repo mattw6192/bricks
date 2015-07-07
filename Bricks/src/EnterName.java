@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +13,7 @@
 public class EnterName extends javax.swing.JDialog {
 
     private String userName;
+    java.awt.event.ActionEvent TempEventSave;
 	/**
      * Creates new form EnterName
      */
@@ -41,16 +44,62 @@ public class EnterName extends javax.swing.JDialog {
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TempEventSave = evt;
+            	jTextField1ActionPerformed(evt);
             }
+        });
+        
+        jTextField1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
         });
 
         jButton1.setText("Submit");
+        
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
+                TempEventSave = evt;
+            	jButton1ActionPerformed(evt);
+            } 
         });
+        
+        jButton1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });
+        		
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
