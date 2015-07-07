@@ -249,7 +249,7 @@ public class Game extends JPanel {
 			JOptionPane.showMessageDialog(this, "What have I done wrong?", "Game Over!!!", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));	
 		}
 		//trims the scores list to be the top 10
-		if (scores.size()>9){
+		if (scores.size()>10){
 			scores.remove(min);
 		}
 		//Collections.sort(scores.keySet());
@@ -257,11 +257,11 @@ public class Game extends JPanel {
 		//finally, write all the scores to the scores file
 		try {
 			FileWriter fileToSave = new FileWriter("scores.dat");
-			//int scorePlace = 1;
+			int scorePlace = 1;
 			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
-			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
+			    fileToSave.append(entry.getValue() + ": " + entry.getKey().toString());
 			    fileToSave.write("\n");
-			    //scorePlace += 1;
+			    scorePlace += 1;
 			}
 			System.out.println("writing successful");
 			fileToSave.close();
@@ -335,7 +335,7 @@ public class Game extends JPanel {
 			}
 		}
 		//trims the scores list to be the top 10
-		if (scores.size()>9){
+		if (scores.size()>10){
 			scores.remove(min);
 		}
 		//Collections.sort(scores.keySet());
@@ -343,11 +343,11 @@ public class Game extends JPanel {
 		//finally, write all the scores to the scores file
 		try {
 			FileWriter fileToSave = new FileWriter("scores.dat");
-			//int scorePlace = 1;
+			int scorePlace = 1;
 			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
 			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
 			    fileToSave.write("\n");
-			    //scorePlace += 1;
+			    scorePlace += 1;
 			}
 			System.out.println("writing successful");
 			fileToSave.close();
