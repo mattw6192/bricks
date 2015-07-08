@@ -143,7 +143,6 @@ public class EnterName extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     	 Boolean check = checkIfEmpty(); // checks if the name has at least two characters
-    	 System.out.println(jTextField1.getText().length());
     	 if (check == false){
     		System.out.println("' " + jTextField1.getText() + "'");
     		this.userName = jTextField1.getText(); 

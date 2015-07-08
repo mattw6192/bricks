@@ -284,7 +284,7 @@ public class Game extends JPanel {
 					    fileToSave.write("\n");
 					    scorePlace += 1;
 					}
-					System.out.println("writing successful");
+					//System.out.println("writing successful");
 					fileToSave.close();
 					}
 					catch (IOException e1) {}
