@@ -203,7 +203,7 @@ public class Game extends JPanel {
 	     String subLine = line.substring(2).trim();
 	     while(line != null){
 	       String[] ar=line.split(":");
-	       System.out.println("score: "+ar[0]);
+	       //System.out.println("score: "+ar[0]);
 	       if (numTracker <= 9){
    		   ar[0] = ar[0].substring(2);
    	   }else if (numTracker == 10){
