@@ -40,7 +40,7 @@ public class Game extends JPanel {
 	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = false;
+	static Boolean hasFireball = true;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -418,33 +418,13 @@ public class Game extends JPanel {
 					}
 					if (allBricks.isEmpty()){
 						if (Round < maxRound){
-							Ball saveBall = activeBalls.get(0);
-							saveBall.setX(game.racquet.getBounds().x);
-							saveBall.setY(game.racquet.getBounds().y - 10);
-							game.nextRoundMessage();
-							Round += 1;
-							bullets.clear();
-							started = false;
-							hold = false;
-							placeHolder.clear();
-							nextRound();
-							hasFireball = false;
-							hasMetalPower = false;
-							hasShot = false;
-							missileCount = 0;
-							missiles.clear();
-							hasGun = false;
-							bullets.clear();
-							activeBalls.clear();
-							activeBalls.add(saveBall);
-							saveBall.speed = 2;
-							saveBall.ballMods = 0;
-							saveBall.DIAMETER = 12;
-							game.racquet.setWIDTH(60);
-							game.racquet.racquetMods = 0;
+							nextRound(game);
 						}
 						if (Round == maxRound ){
 							game.gameWon();
+						}
+						if (Round < maxRound){
+							game.nextRoundMessage();
 						}
 					}
 				}	
@@ -609,13 +589,31 @@ public class Game extends JPanel {
 		this.missileCount = missileCount;
 	}
 	
-	public static void nextRound(){
-		allBricks.clear();
-		hasShot = false;
+	public static void nextRound(Game thisGame){
+		Ball saveBall = activeBalls.get(0);
+		saveBall.setX(thisGame.racquet.getBounds().x);
+		saveBall.setY(thisGame.racquet.getBounds().y - 10);
+		Round += 1;
 		bullets.clear();
-		hasGun = false;
+		started = false;
+		hold = false;
+		placeHolder.clear();
+		//hasFireball = false;
+		hasMetalPower = false;
+		hasShot = false;
 		missileCount = 0;
 		missiles.clear();
+		hasGun = false;
+		bullets.clear();
+		activeBalls.clear();
+		activeBalls.add(saveBall);
+		saveBall.speed = 2;
+		saveBall.ballMods = 0;
+		saveBall.DIAMETER = 12;
+		thisGame.racquet.setWIDTH(60);
+		thisGame.racquet.racquetMods = 0;
+		
+		allBricks.clear();
 		if (Round == 2){
 			Round2 round = new Round2(TempGame);
 		}else if (Round == 3){

@@ -104,39 +104,16 @@ void move() throws IOException {
 					Game.allBricks.remove(i);
 					if (Game.allBricks.isEmpty()){
 						if (Game.Round < Game.maxRound){
-							
-							Game.Round += 1;
-							Game.bullets.clear();
-							Game.started = false;
-							Game.hold = false;
-							Game.placeHolder.clear();
-							Game.nextRound();
-							Game.hasFireball = false;
-							Game.hasMetalPower = false;
-							Game.hasShot = false;
-							Game.missileCount = 0;
-							Game.missiles.clear();
-							Ball saveBall = Game.activeBalls.get(0);
-							Game.activeBalls.clear();
-							Game.activeBalls.add(saveBall);
-							saveBall.speed = 2;
-							saveBall.ballMods = 0;
-							saveBall.DIAMETER = 12;
-							game.racquet.setWIDTH(60);
-							game.racquet.racquetMods = 0;
-
+							Game.nextRound(game);
 						}
 						if (Game.Round == Game.maxRound ){
 							game.gameWon();
 						}
-						if (Game.Round < Game.maxRound) {
+						if (Game.Round < Game.maxRound){
 							game.nextRoundMessage();
 						}
-						
 					}
 				}
-				
-				
 				return true;
 			}
 		}
