@@ -35,7 +35,7 @@ public class Game extends JPanel {
 	int Lives = 3;
 	static ArrayList<Missile> missiles = new ArrayList<Missile>();
 	static String lifeString = "***"; // displays the user's lives in the JFrame title
-
+	static ArrayList<String> users = new ArrayList<String>();
 	static int Score = 000000;
 	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
@@ -67,6 +67,7 @@ public class Game extends JPanel {
 	private static JFrame frame;
 	static HighScores TempscoreWindow;
 	static Game TempGame;
+	int saveTempScore = Score;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -196,86 +197,107 @@ public class Game extends JPanel {
 		
 	}
 	
-	public void gameOver() throws IOException {
-		 //read in the list of scores to the scores arraylist
-		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
+	public void processHighScores()  throws IOException {
+		BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
 	     String line = in.readLine();
 	     int numTracker = 0;
 	     String subLine = line.substring(2).trim();
 	     while(line != null){
 	       String[] ar=line.split(":");
-	       System.out.println("score: "+ar[0]);
+	       if (numTracker < 9){
+   		   ar[0] = ar[0].substring(2);
+   	   }else if (numTracker >= 9){
+   		   ar[0] = ar[0].substring(3);
+   	   }
+	       numTracker += 1;
 	       scores.put(Integer.parseInt(ar[1].trim()), ar[0]);
 	       line = in.readLine();
-	       //if (numTracker == 8){
-	    	 //  System.out.println(line.substring(3) + " " + numTracker);
-	    	  // subLine = line.substring(3).trim();  
-	    	  // break;
-	       //}else{
-	    	//   System.out.println(line.substring(2) + " " + numTracker);
-	    	//   subLine = line.substring(2).trim();  
-	      // }
-	      // numTracker += 1;
 	     }
 	     in.close();
-		// this part decides if the player's score is in the top 10 all time
-	     
-	    //int numTen = 0;
-		//for ( int i = 0; i<scores.size()-1; i++){
-			//if (scores. < scores.get(i+1)){
-				//numTen = scores.get(i);
-			//}
-		//}
 	     
 	     Integer min = Collections.min(scores.keySet());
+	     
+	     
 		//this part adds the high score to the list
 		if (Score > min){
 			EnterName nameBox = new EnterName(frame, true);
 			nameBox.setLocationRelativeTo(frame);
 			nameBox.setVisible(true);
 			String user = nameBox.getUserName();
+			String saveOldUser = null;
+			if (scores.get(Score) != null){
+				saveOldUser = scores.get(Score);
+			}
 			scores.put(Score, user);
-			String userPlace = scores.get(Score);
+			String userPlace = scores.get(Score); // location (rank) of the score
 			ArrayList keys = new ArrayList(scores.values());
 			for (int i = 0; i < keys.size();i++){
 				if (keys.get(i).equals(userPlace)){
-					String finalUser = String.valueOf(i+1)+"."+userPlace;
+					String finalUser = userPlace;
 					scores.remove(Score);
-					scores.put(Score, finalUser);
+					saveTempScore = Score;
+					checkForCopies(saveOldUser, finalUser, Score); // checks to see if there is a high score with the same value
+					scores.put(saveTempScore, finalUser);
+					Score = saveTempScore;
+					//scores.put(Score, userPlace);
 					break;
 				}
 			}
+;		}else{
+			JOptionPane.showMessageDialog(this, "What have I done wrong?", "Game Over!!!", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));	
 		}
 		//trims the scores list to be the top 10
-		if (scores.size()>9){
+		if (scores.size()>10){
 			scores.remove(min);
 		}
 		//Collections.sort(scores.keySet());
 		//Collections.reverseOrder(scores.keySet());
-		//finally, write all the scores to the scores file
-		try {
-			FileWriter fileToSave = new FileWriter("scores.dat");
-			//int scorePlace = 1;
-			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
-			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
-			    fileToSave.write("\n");
-			    //scorePlace += 1;
-			}
-			System.out.println("writing successful");
-			fileToSave.close();
-			}
-			catch (IOException e1) {}
+		writeHighScores();
 		HighScores scoreWindow = new HighScores(frame, true);
 		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(TempGame);
 		scoreWindow.setVisible(false);
-    	
-		JOptionPane.showMessageDialog(this, "What have I done wrong?", "Oh no...", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));
 		Round = 1;
 		TempscoreWindow.setLocalScores(TempGame);
 		frame.setVisible(false);
 		TempscoreWindow.setVisible(true);
+	}
+	
+	public void checkForCopies(String saveOldUser, String finalUser, int tempScore){
+		if (saveOldUser != null){
+			scores.put(tempScore, saveOldUser);
+			if (scores.get(tempScore-1) != null){
+				String newOldUser = scores.get(tempScore - 1);
+				String newFinUser = finalUser;
+				checkForCopies(newOldUser, newFinUser, tempScore-1);
+				scores.put(tempScore-1, newOldUser);
+			}
+			saveTempScore  = saveTempScore -1;
+			
+		}else{
+			scores.put(tempScore, finalUser);
+		}
+	}
+	
+	public void gameOver()  throws IOException {
+		 //read in the list of scores to the scores arraylist
+		processHighScores();
 		System.exit(ABORT);
+	}
+	
+	public void writeHighScores(){
+		//finally, write all the scores to the scores file
+				try {
+					FileWriter fileToSave = new FileWriter("scores.dat");
+					int scorePlace = 1;
+					for (Map.Entry<Integer,String> entry : scores.entrySet()) {
+					    fileToSave.append(scorePlace + "."+ entry.getValue() + ": " + entry.getKey().toString());
+					    fileToSave.write("\n");
+					    scorePlace += 1;
+					}
+					fileToSave.close();
+					}
+					catch (IOException e1) {}
 	}
 	
 	public void nextRoundMessage(){
@@ -284,77 +306,7 @@ public class Game extends JPanel {
 	
 	public void gameWon() throws IOException {
 		//read in the list of scores to the scores arraylist
-		 BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
-	     String line = in.readLine();
-	     int numTracker = 0;
-	     String subLine = line.substring(2).trim();
-	     while(line != null){
-	       String[] ar=line.split(":");
-	       System.out.println("score: "+ar[0]);
-	       scores.put(Integer.parseInt(ar[1].trim()), ar[0]);
-	       line = in.readLine();
-	       //if (numTracker == 8){
-	    	 //  System.out.println(line.substring(3) + " " + numTracker);
-	    	  // subLine = line.substring(3).trim();  
-	    	  // break;
-	       //}else{
-	    	//   System.out.println(line.substring(2) + " " + numTracker);
-	    	//   subLine = line.substring(2).trim();  
-	      // }
-	      // numTracker += 1;
-	     }
-	     in.close();
-		// this part decides if the player's score is in the top 10 all time
-	     
-	    //int numTen = 0;
-		//for ( int i = 0; i<scores.size()-1; i++){
-			//if (scores. < scores.get(i+1)){
-				//numTen = scores.get(i);
-			//}
-		//}
-	     
-	     Integer min = Collections.min(scores.keySet());
-		//this part adds the high score to the list
-		if (Score > min){
-			EnterName nameBox = new EnterName(frame, true);
-			nameBox.setLocationRelativeTo(frame);
-			nameBox.setVisible(true);
-			String user = nameBox.getUserName();
-			scores.put(Score, user);
-			String userPlace = scores.get(Score);
-			ArrayList keys = new ArrayList(scores.values());
-			for (int i = 0; i < keys.size();i++){
-				if (keys.get(i).equals(userPlace)){
-					String finalUser = String.valueOf(i+1)+"."+userPlace;
-					scores.remove(Score);
-					scores.put(Score, finalUser);
-					break;
-				}
-			}
-		}
-		//trims the scores list to be the top 10
-		if (scores.size()>9){
-			scores.remove(min);
-		}
-		//Collections.sort(scores.keySet());
-		//Collections.reverseOrder(scores.keySet());
-		//finally, write all the scores to the scores file
-		try {
-			FileWriter fileToSave = new FileWriter("scores.dat");
-			//int scorePlace = 1;
-			for (Map.Entry<Integer,String> entry : scores.entrySet()) {
-			    fileToSave.append(entry.getValue() + ":"+" "+ entry.getKey().toString());
-			    fileToSave.write("\n");
-			    //scorePlace += 1;
-			}
-			System.out.println("writing successful");
-			fileToSave.close();
-			}
-			catch (IOException e1) {}
-		HighScores scoreWindow = new HighScores(frame, true);
-		TempscoreWindow = scoreWindow;
-		scoreWindow.setLocationRelativeTo(TempGame);
-		scoreWindow.setVisible(false);
+		processHighScores();
 		JOptionPane.showMessageDialog(this, "Congratulations! You have completed all of the levels.", "Winner!", JOptionPane.INFORMATION_MESSAGE);
 		System.exit(ABORT);
 	}

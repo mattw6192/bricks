@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +12,7 @@
  */
 public class StartMenu extends javax.swing.JDialog {
     private boolean wantInstructions = false;
+    java.awt.event.ActionEvent TempEventSave;
     /**
      * Creates new form StartMenu
      */
@@ -46,15 +49,54 @@ public class StartMenu extends javax.swing.JDialog {
         gameStarted.setText("Play Game");
         gameStarted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GameStarted(evt);
+                TempEventSave = evt;
+            	GameStarted(evt);
             }
+        });
+        
+        gameStarted.addKeyListener(new java.awt.event.KeyListener(){
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					GameStarted(TempEventSave);
+				}
+				if (arg0.getKeyCode() == 37 || arg0.getKeyCode() == 39){
+					gameStarted.transferFocus();
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
         });
 
         instructions.setText("Instuctions");
         instructions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instructionsActionPerformed(evt);
+                TempEventSave = evt;
+            	instructionsActionPerformed(evt);
             }
+        });
+        
+        instructions.addKeyListener(new java.awt.event.KeyListener(){
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					instructionsActionPerformed(TempEventSave);
+				}
+				if (arg0.getKeyCode() == 37 || arg0.getKeyCode() == 39){
+					instructions.transferFocus();
+				}}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
         });
 
         jButton1.setText("Quit");

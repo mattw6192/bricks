@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +13,7 @@
 public class EnterName extends javax.swing.JDialog {
 
     private String userName;
+    java.awt.event.ActionEvent TempEventSave;
 	/**
      * Creates new form EnterName
      */
@@ -41,16 +44,62 @@ public class EnterName extends javax.swing.JDialog {
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TempEventSave = evt;
+            	jTextField1ActionPerformed(evt);
             }
+        });
+        
+        jTextField1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
         });
 
         jButton1.setText("Submit");
+        
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
+                TempEventSave = evt;
+            	jButton1ActionPerformed(evt);
+            } 
         });
+        
+        jButton1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });
+        		
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,10 +142,25 @@ public class EnterName extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         this.userName = jTextField1.getText();
-         setVisible(false);
+    	 Boolean check = checkIfEmpty(); // checks if the name has at least two characters
+    	 if (check == false){
+    		this.userName = jTextField1.getText(); 
+    		setVisible(false);
+    	 }else{
+    		 System.out.println("You must enter a name with at least 2 characters.");
+    	 }
+    	
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public boolean checkIfEmpty(){
+    	if (jTextField1.getText().length() >= 2) {
+    		return false; // true means it is not empty
+    	}
+    	this.userName = "Guest";
+    	return true;
+    }
+    
     public String getUserName() {
 		return userName;
 	}
