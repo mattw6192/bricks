@@ -44,8 +44,7 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			
-			
+
 			case 15: // Insanity Mode
 				game.racquet.setRacquetMods(-4);
 				game.racquet.setWIDTH(24);
@@ -63,7 +62,7 @@ public class Powerup {
 				}	
 						//hasBallMods = true;
 					
-						// Action Listener
+				// Action Listener
 				ActionListener insanityMode = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						System.out.println("Amazing! You Survived!!! - 10,000 Points!!!");
@@ -77,21 +76,13 @@ public class Powerup {
 							Game.activeBalls.get(i).setX((int) game.racquet.getBounds().getX() + (int) (game.racquet.getBounds().getWidth() / 2));
 							Game.activeBalls.get(i).setY((int) game.racquet.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
 					}
-						
-						
 						powerupEnd(); // remove the powerup from available powerups display
 					}
 				};
-				
-				
-
 				int DelayDuration = 60000; //milliseconds
 				Timer insanityTimer = new Timer(DelayDuration, insanityMode);
 				insanityTimer.setRepeats(false);
 				insanityTimer.start();
-				
-				
-				
 				break; 
 			case 14: // Machine Gun
 				game.placeHolder.remove(this);
@@ -156,7 +147,6 @@ public class Powerup {
 				}else{
 					System.out.println("The Maximum Limit of lives has been reached");
 				}
-				
 				break;
 				
 			case 11: // Metal Ball - deals two hits
@@ -165,7 +155,6 @@ public class Powerup {
 				if (Game.hasFireball == false){
 					Game.hasMetalPower = true;
 					powerupEnd(); // remove the powerup from available powerups display
-
 					for (int i=0; i<Game.activeBalls.size(); i++){
 						Game.activeBalls.get(i).setColor(Color.lightGray);
 						final Ball saveBall = Game.activeBalls.get(i);
@@ -175,17 +164,13 @@ public class Powerup {
 								Game.hasMetalPower = false;
 								saveBall.setColor(Color.BLACK);
 						        System.out.println("Powerup Ended");
-						    
 						    }
 						};
 						Timer timer4 = new Timer(delay4, taskPerformer4);
 						timer4.setRepeats(false);
 						timer4.start();
-						
-					}
-					
+					}	
 				}
-				
 				break;
 				
 			case 10: // Fireball - destroys any block one hit
@@ -208,7 +193,6 @@ public class Powerup {
 							else if (saveBall.getColor().equals(Color.YELLOW)){
 								saveBall.setColor(Color.RED);
 							}
-							
 						}
 					};
 					
@@ -231,11 +215,8 @@ public class Powerup {
 					Timer timer3 = new Timer(delay3, taskPerformer3);
 					timer3.setRepeats(false);
 					timer3.start();
-					
-					
 					saveBall.setColor(Color.BLACK);
 				}
-				
 				break; 
 				
 			case 9: // Double Points

@@ -11,11 +11,6 @@ import javax.swing.JButton;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-/**
- *
- * @author dillonwastrack
- */
 public class HighScores extends javax.swing.JDialog{
 
     /**
@@ -65,7 +60,6 @@ public class HighScores extends javax.swing.JDialog{
         });
         
         closeButton.setText("Close");
-        
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -88,7 +82,6 @@ public class HighScores extends javax.swing.JDialog{
         }
         in.close();
         
-        //jTextArea1.setText("scores.dat");
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

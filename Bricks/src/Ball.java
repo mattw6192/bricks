@@ -24,7 +24,6 @@ public class Ball {
 		xa = speed;
 		ya = speed;
 		this.c = Color.BLACK;
-		
 	}
 	
 	
@@ -64,7 +63,6 @@ public class Ball {
 			if (game.isGameOver() == true && Game.activeBalls.isEmpty() == true){
 				game.gameOver();
 			}else{
-				//game.started = false;
 				Game.pointMultiplier = 1;
 				Game.missiles.clear();
 				Game.hasShot = false;
@@ -83,11 +81,8 @@ public class Ball {
 					String life = "";
 					for (int i = 0; i < game.Lives;i++){ 
 						life += "*";
-						//System.out.println(life);
 					}
 					Game.setLifeString(life);
-					
-					
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 2;
@@ -110,10 +105,6 @@ public class Ball {
 					game.hasGun = false;
 					game.missileCount = 0;
 					game.missiles.clear();
-					
-					//
-					
-					
 				}
 				if (Game.activeBalls.size() > 1){
 					Game.activeBalls.remove(this);
@@ -136,12 +127,10 @@ public class Ball {
 			}
 			else{
 				ya =  -speed;
-				
 			}
 		}
 		x = x + xa;
 		y = y + ya;
-		
 	}
 	
 	
@@ -180,21 +169,14 @@ public class Ball {
 
 	private boolean collision() {
 		return game.racquet.getBounds().intersects(getBounds());
-		
 	}
 	
-	
-	
-
 	public void paint(Graphics2D g) {
 		g.setColor(c);
 		g.fillOval((int) x, (int) y, DIAMETER, DIAMETER);
-		
 	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, DIAMETER, DIAMETER);
 	}
-
-	
 }

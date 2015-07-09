@@ -19,8 +19,6 @@ public class StartMenu extends javax.swing.JDialog {
     public StartMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
     }
 
 
