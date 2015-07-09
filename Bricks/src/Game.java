@@ -454,7 +454,6 @@ public class Game extends JPanel {
 		}
 		return false;
 	}
-
 	public static void colorBricks(){
 		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
