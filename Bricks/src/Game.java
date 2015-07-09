@@ -204,9 +204,9 @@ public class Game extends JPanel {
 	     while(line != null){
 	       String[] ar=line.split(":");
 	       //System.out.println("score: "+ar[0]);
-	       if (numTracker <= 9){
+	       if (numTracker < 9){
    		   ar[0] = ar[0].substring(2);
-   	   }else if (numTracker == 10){
+   	   }else if (numTracker >= 9){
    		   ar[0] = ar[0].substring(3);
    	   }
 	       numTracker += 1;
@@ -233,15 +233,23 @@ public class Game extends JPanel {
 			nameBox.setLocationRelativeTo(frame);
 			nameBox.setVisible(true);
 			String user = nameBox.getUserName();
+			String saveOldUser = null;
+			if (scores.get(Score) != null){
+				saveOldUser = scores.get(Score);
+			}
 			scores.put(Score, user);
-			String userPlace = scores.get(Score);
+			String userPlace = scores.get(Score); // location (rank) of the score
 			ArrayList keys = new ArrayList(scores.values());
 			for (int i = 0; i < keys.size();i++){
+				System.out.println(keys.get(i));
 				if (keys.get(i).equals(userPlace)){
-					String finalUser = userPlace; // This is where the numbering issues occurs -- once it sets a value, it needs to re-evaluate all the others numbers
-					//String.valueOf(i+1)+"."+ // this was removed from the line above
+					String finalUser = userPlace;
 					scores.remove(Score);
-					scores.put(Score, finalUser);
+					System.out.println(scores.get(Score));
+					
+					checkForCopies(saveOldUser, finalUser, Score);
+					
+					//scores.put(Score, userPlace);
 					break;
 				}
 			}
@@ -265,6 +273,21 @@ public class Game extends JPanel {
 		TempscoreWindow.setLocalScores(TempGame);
 		frame.setVisible(false);
 		TempscoreWindow.setVisible(true);
+	}
+	
+	public void checkForCopies(String saveOldUser, String finalUser, int tempScore){
+		if (saveOldUser != null){
+			scores.put(tempScore, saveOldUser);
+			if (scores.get(tempScore-1) != null){
+				String newOldUser = finalUser;
+				String newFinUser = scores.get(tempScore - 1);
+				checkForCopies(newOldUser, newFinUser, tempScore-1);
+			}
+			scores.put(tempScore-1, finalUser);
+			
+		}else{
+			scores.put(tempScore, finalUser);
+		}
 	}
 	
 	public void gameOver()  throws IOException {

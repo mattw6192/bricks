@@ -156,7 +156,6 @@ public class EnterName extends javax.swing.JDialog {
 
     public boolean checkIfEmpty(){
     	if (jTextField1.getText().length() >= 2) {
-    		System.out.println("Empty Name _ Empty");
     		return false; // true means it is not empty
     	}
     	this.userName = "Guest";
