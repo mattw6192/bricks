@@ -188,6 +188,8 @@ public class Powerup {
 					
 					ActionListener flashTask = new ActionListener() {
 						public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
+							for (int i=0; i<Game.activeBalls.size();i++){
+								final Ball saveBall = Game.activeBalls.get(i);
 							boolean hasExecuted = false; 
 							if (Game.hasFireball.equals(false)){
 							saveBall.setColor(Color.BLACK); hasExecuted = true;}
@@ -197,6 +199,7 @@ public class Powerup {
 								saveBall.setColor(Color.YELLOW);}
 							else if (saveBall.getColor().equals(Color.YELLOW)){
 								saveBall.setColor(Color.RED);
+							}
 							}
 						}
 					};
