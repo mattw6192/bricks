@@ -35,7 +35,7 @@ public class Game extends JPanel {
 	int Lives = 3;
 	static ArrayList<Missile> missiles = new ArrayList<Missile>();
 	static String lifeString = "***"; // displays the user's lives in the JFrame title
-
+	static ArrayList<String> users = new ArrayList<String>();
 	static int Score = 000000;
 	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
@@ -241,14 +241,11 @@ public class Game extends JPanel {
 			String userPlace = scores.get(Score); // location (rank) of the score
 			ArrayList keys = new ArrayList(scores.values());
 			for (int i = 0; i < keys.size();i++){
-				System.out.println(keys.get(i));
 				if (keys.get(i).equals(userPlace)){
 					String finalUser = userPlace;
 					scores.remove(Score);
-					System.out.println(scores.get(Score));
 					
 					checkForCopies(saveOldUser, finalUser, Score);
-					
 					//scores.put(Score, userPlace);
 					break;
 				}
