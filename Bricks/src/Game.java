@@ -47,7 +47,6 @@ public class Game extends JPanel {
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
 	
-	
 	static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
 	
@@ -112,8 +111,6 @@ public class Game extends JPanel {
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {}
-
-			
 		});
 		setFocusable(true);
 	}
@@ -194,7 +191,6 @@ public class Game extends JPanel {
 				bullets.get(i).paint(g2d);
 			}
 		}
-		
 	}
 	
 	public void processHighScores()  throws IOException {
@@ -242,12 +238,11 @@ public class Game extends JPanel {
 					//scores.put(Score, userPlace);
 					break;
 				}
-			}
-;		}else{
+			};
+		}else{
 			JOptionPane.showMessageDialog(this, "What have I done wrong?", "Game Over!!!", JOptionPane.ERROR_MESSAGE,new javax.swing.ImageIcon(getClass().getResource("/images/bill gates.jpg")));	
 		}
-		//trims the scores list to be the top 10
-		if (scores.size()>10){
+		if (scores.size()>10){ //trims the scores list to be the top 10
 			scores.remove(min);
 		}
 		//Collections.sort(scores.keySet());
@@ -273,14 +268,12 @@ public class Game extends JPanel {
 				scores.put(tempScore-1, newOldUser);
 			}
 			saveTempScore  = saveTempScore -1;
-			
 		}else{
 			scores.put(tempScore, finalUser);
 		}
 	}
 	
-	public void gameOver()  throws IOException {
-		 //read in the list of scores to the scores arraylist
+	public void gameOver()  throws IOException { 		//read in the list of scores to the scores arraylist
 		processHighScores();
 		System.exit(ABORT);
 	}
@@ -316,6 +309,7 @@ public class Game extends JPanel {
 		Game game = new Game();
 		TempGame = game;
 		StartMenu menu = new StartMenu(frame, true);
+		
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true);
 		TempscoreWindow = scoreWindow;
@@ -326,15 +320,13 @@ public class Game extends JPanel {
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
 		
-                Instructions instructions = new Instructions(frame,true);
-                instructions.setLocationRelativeTo(game);
-                if (menu.getInstructions()==true){
-                    instructions.setVisible(true);
-                }
+        Instructions instructions = new Instructions(frame,true);
+        instructions.setLocationRelativeTo(game);
+        if (menu.getInstructions()==true){
+        	instructions.setVisible(true);
+        }
         Round1 round = new Round1(TempGame);
         colorBricks();
-        
-		//
 		
 		frame.add(game);
 		frame.setSize(855, 600);
@@ -363,7 +355,6 @@ public class Game extends JPanel {
 			
 			for (int j = 0; j<activeBalls.size(); j++){
 				for(int i = 0; i<allBricks.size(); i++){ 
-				
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
 						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (10 * pointMultiplier);
@@ -385,7 +376,7 @@ public class Game extends JPanel {
 							allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
 						}else{
 							if (allBricks.get(i).canBeHit == true){
-								allBricks.get(i).subtractHit(); // this is where im subtracting a hit for every hit with the ball
+								allBricks.get(i).subtractHit(); // this is where im subtracting a hit from brick
 							}
 						}
 					    
@@ -402,31 +393,24 @@ public class Game extends JPanel {
 						ActionListener taskPerformer = new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
 								saveBrickForAction.setCanBeHit(true);
-						        //System.out.println("Brick can now be hit again");
 						    }
 						};
 						Timer timer = new Timer(delay, taskPerformer);
 						timer.setRepeats(false); 
 						timer.start();
 						
-						if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
-						if (allBricks.get(i).getHits() == 3){allBricks.get(i).setColor(Color.BLUE);}
-						if (allBricks.get(i).getHits() == 2){allBricks.get(i).setColor(Color.GREEN);} // update the color
-						if (allBricks.get(i).getHits() == 1){allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+						colorBricks();
 						
 						if (allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 							hideBrick(allBricks.get(i), activeBalls.get(j));
 							allBricks.remove(i);
 						}
-						//System.out.println("Score is: " + Score);
 					}
 					if (allBricks.isEmpty()){
-						
 						if (Round < maxRound){
 							Ball saveBall = activeBalls.get(0);
 							saveBall.setX(game.racquet.getBounds().x);
 							saveBall.setY(game.racquet.getBounds().y - 10);
-							//saveBall
 							game.nextRoundMessage();
 							Round += 1;
 							bullets.clear();
@@ -441,7 +425,6 @@ public class Game extends JPanel {
 							missiles.clear();
 							hasGun = false;
 							bullets.clear();
-							
 							activeBalls.clear();
 							activeBalls.add(saveBall);
 							saveBall.speed = 2;
@@ -449,15 +432,12 @@ public class Game extends JPanel {
 							saveBall.DIAMETER = 12;
 							game.racquet.setWIDTH(60);
 							game.racquet.racquetMods = 0;
-
 						}
 						if (Round == maxRound ){
 							game.gameWon();
 						}
-						
 					}
-				}
-				
+				}	
 		}
 			Thread.sleep(10);
 		}   // else statement contains pause feature
@@ -466,7 +446,6 @@ public class Game extends JPanel {
 				frame.setTitle("Game Paused: Press space to continue");
 			}
 		}
-		
 	}
 	
 
@@ -486,11 +465,11 @@ public class Game extends JPanel {
 		return false;
 	}
 	
-	public static void quitGame(){ 
-		if (hasQuit == true){
-			
-		}
-	}
+	//public static void quitGame(){ 
+	//	if (hasQuit == true){
+	//		
+	//	}
+	//}
 	
 	public static void colorBricks(){
 		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
@@ -516,10 +495,9 @@ public class Game extends JPanel {
 	}
 	
 	public boolean getPowerup(){
-		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup
-		if (tempRandNum == 7 || tempRandNum == 2){ //uncomment this if statement to randomize powerups
+		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
+		if (tempRandNum == 7 || tempRandNum == 2){ 
 			int delay = 1000; //milliseconds
-			
 			ActionListener taskPerformer = new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
 					powerupsEnabled = true;
@@ -535,7 +513,6 @@ public class Game extends JPanel {
 			}else{
 				return false;
 			}
-			
 		}
 		return false;	
 	}
@@ -604,22 +581,13 @@ public class Game extends JPanel {
 				return powerup1; 
 			default:
 				break;
-			
 	}
 		return null;
 	}
-	//public static Missile fireMissile(){
-	//	System.out.println("firing missile");
-	//	return Game.missiles.get(0);
-	//}
 	
 	public static void hideBrick(Brick newbrick, Ball saveBall){
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
-		//double saveXa = saveBall.getXa();
-		//saveBall.setXa(saveXa * (-1));
-		//double saveYa = saveBall.getYa();
-		//saveBall.setYa(saveYa * (-1));
 		newbrick = null;
 	}
 
@@ -641,12 +609,8 @@ public class Game extends JPanel {
 		if (Round == 2){
 			Round2 round = new Round2(TempGame);
 		}else if (Round == 3){
-			Round3 round = new Round3(TempGame);
-				
+			Round3 round = new Round3(TempGame);	
 		}
 		colorBricks(); 
-		 
 	}
-	
-
 }
