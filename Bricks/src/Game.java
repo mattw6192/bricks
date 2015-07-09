@@ -204,26 +204,16 @@ public class Game extends JPanel {
 	     String subLine = line.substring(2).trim();
 	     while(line != null){
 	       String[] ar=line.split(":");
-	       //System.out.println("score: "+ar[0]);
 	       if (numTracker < 9){
    		   ar[0] = ar[0].substring(2);
    	   }else if (numTracker >= 9){
    		   ar[0] = ar[0].substring(3);
    	   }
 	       numTracker += 1;
-	       //System.out.println(ar[0]);
 	       scores.put(Integer.parseInt(ar[1].trim()), ar[0]);
 	       line = in.readLine();
 	     }
 	     in.close();
-		// this part decides if the player's score is in the top 10 all time
-	     
-	    //int numTen = 0;
-		//for ( int i = 0; i<scores.size()-1; i++){
-			//if (scores. < scores.get(i+1)){
-				//numTen = scores.get(i);
-			//}
-		//}
 	     
 	     Integer min = Collections.min(scores.keySet());
 	     
@@ -246,8 +236,9 @@ public class Game extends JPanel {
 					String finalUser = userPlace;
 					scores.remove(Score);
 					saveTempScore = Score;
-					checkForCopies(saveOldUser, finalUser, Score);
+					checkForCopies(saveOldUser, finalUser, Score); // checks to see if there is a high score with the same value
 					scores.put(saveTempScore, finalUser);
+					Score = saveTempScore;
 					//scores.put(Score, userPlace);
 					break;
 				}
@@ -266,8 +257,6 @@ public class Game extends JPanel {
 		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(TempGame);
 		scoreWindow.setVisible(false);
-   	
-		
 		Round = 1;
 		TempscoreWindow.setLocalScores(TempGame);
 		frame.setVisible(false);
@@ -292,8 +281,7 @@ public class Game extends JPanel {
 	
 	public void gameOver()  throws IOException {
 		 //read in the list of scores to the scores arraylist
-		 processHighScores();
-		 
+		processHighScores();
 		System.exit(ABORT);
 	}
 	
@@ -307,7 +295,6 @@ public class Game extends JPanel {
 					    fileToSave.write("\n");
 					    scorePlace += 1;
 					}
-					//System.out.println("writing successful");
 					fileToSave.close();
 					}
 					catch (IOException e1) {}
