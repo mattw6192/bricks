@@ -67,6 +67,7 @@ public class Game extends JPanel {
 	private static JFrame frame;
 	static HighScores TempscoreWindow;
 	static Game TempGame;
+	int saveTempScore = Score;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -244,8 +245,9 @@ public class Game extends JPanel {
 				if (keys.get(i).equals(userPlace)){
 					String finalUser = userPlace;
 					scores.remove(Score);
-					
+					saveTempScore = Score;
 					checkForCopies(saveOldUser, finalUser, Score);
+					scores.put(saveTempScore, finalUser);
 					//scores.put(Score, userPlace);
 					break;
 				}
@@ -276,11 +278,12 @@ public class Game extends JPanel {
 		if (saveOldUser != null){
 			scores.put(tempScore, saveOldUser);
 			if (scores.get(tempScore-1) != null){
-				String newOldUser = finalUser;
-				String newFinUser = scores.get(tempScore - 1);
+				String newOldUser = scores.get(tempScore - 1);
+				String newFinUser = finalUser;
 				checkForCopies(newOldUser, newFinUser, tempScore-1);
+				scores.put(tempScore-1, newOldUser);
 			}
-			scores.put(tempScore-1, finalUser);
+			saveTempScore  = saveTempScore -1;
 			
 		}else{
 			scores.put(tempScore, finalUser);
