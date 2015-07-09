@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +12,9 @@
  */
 public class EnterName extends javax.swing.JDialog {
 
-    /**
+    private String userName;
+    java.awt.event.ActionEvent TempEventSave;
+	/**
      * Creates new form EnterName
      */
     public EnterName(java.awt.Frame parent, boolean modal) {
@@ -40,32 +44,81 @@ public class EnterName extends javax.swing.JDialog {
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TempEventSave = evt;
+            	jTextField1ActionPerformed(evt);
             }
+        });
+        
+        jTextField1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
         });
 
         jButton1.setText("Submit");
+        
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
+                TempEventSave = evt;
+            	jButton1ActionPerformed(evt);
+            } 
         });
+        
+        jButton1.addKeyListener(new java.awt.event.KeyListener(){
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10){
+					jButton1ActionPerformed(TempEventSave);
+				}
+				//System.out.println(arg0.getKeyCode()); // ENTER Key_Code is 10;
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub	
+			}
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+			}
+        	
+        });
+        		
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addGap(100, 100, 100))
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,10 +142,25 @@ public class EnterName extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         this.userName = jTextField1.getText();
-         setVisible(false);
+    	 Boolean check = checkIfEmpty(); // checks if the name has at least two characters
+    	 if (check == false){
+    		this.userName = jTextField1.getText(); 
+    		setVisible(false);
+    	 }else{
+    		 System.out.println("You must enter a name with at least 2 characters.");
+    	 }
+    	
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public boolean checkIfEmpty(){
+    	if (jTextField1.getText().length() >= 2) {
+    		return false; // true means it is not empty
+    	}
+    	this.userName = "Guest";
+    	return true;
+    }
+    
     public String getUserName() {
 		return userName;
 	}
@@ -148,6 +216,5 @@ public class EnterName extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
-    private String userName;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,14 +12,13 @@
  */
 public class StartMenu extends javax.swing.JDialog {
     private boolean wantInstructions = false;
+    java.awt.event.ActionEvent TempEventSave;
     /**
      * Creates new form StartMenu
      */
     public StartMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
     }
 
 
@@ -69,9 +70,9 @@ public class StartMenu extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(119, 119, 119)
                 .addComponent(gameStarted)
-                .addGap(75, 75, 75)
+                .addGap(67, 67, 67)
                 .addComponent(instructions)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -87,9 +88,9 @@ public class StartMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gameStarted)
-                    .addComponent(instructions))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(instructions)
+                    .addComponent(gameStarted))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
