@@ -97,6 +97,7 @@ public class Game extends JPanel {
 					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
 						 Game.missiles.get(0).setX(racquet.getX() + 25);
+						 Game.missileCount = Game.missileCount - 1;
 						 hasShot = true;
 						 //Game.missiles.remove(0);
 						 // change hasShot to false in the collision part of the missile
@@ -338,12 +339,21 @@ public class Game extends JPanel {
 		
 		while (true) { //game loop
 			if (!isPaused){
-			if (Game.placeHolder.size() > 0){ 
-			frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString());
-			}
-			else{
-				frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
-			}
+				if (Game.missileCount == 0){
+					if (Game.placeHolder.size() > 0){ 
+					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString());
+					}
+					else{
+						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
+					}
+				}else{
+					if (Game.placeHolder.size() > 0){ 
+						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString() + "    Missiles: " + missileCount);
+						}
+						else{
+							frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
+						}
+				}
 			game.move();
 			game.repaint();
 			
@@ -518,9 +528,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,15); 
+		//int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(1,2);
-		//int tempRandNum2 = 15; // Set this to a specific number to test one powerup
+		int tempRandNum2 = 13; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);

@@ -121,10 +121,15 @@ public class Powerup {
 				
 				
 			case 13: // Missiles
-				Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
-				Game.missiles.add(m);
-				game.setMissileCount(game.getMissileCount() + 1);
-				powerupEnd();
+				if (Game.missileCount <= 4){
+					Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
+					Game.missiles.add(m);
+					game.setMissileCount(game.getMissileCount() + 1);
+					game.placeHolder.remove(m);
+					powerupEnd();
+				}else{
+					System.out.println("You have reached the maximum number of missiles.");
+				}
 				break;
 				
 			case 12: // Extra Life

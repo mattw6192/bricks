@@ -37,6 +37,7 @@ void move() throws IOException {
 		if (y - ya < - 150){
 			Game.hasShot = false;
 			Game.missiles.remove(this);
+			//Game.missileCount = Game.missileCount - 1;
 		}
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
