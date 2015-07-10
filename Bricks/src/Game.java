@@ -40,7 +40,7 @@ public class Game extends JPanel {
 	static Boolean hold = false;
 	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = true;
+	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -501,8 +501,8 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,15); 
-		int tempRandNum2 = randInt(7,10);
+		int tempRandNum2 = randInt(1,15); 
+		//int tempRandNum2 = randInt(7,10);
 		//int tempRandNum2 = 10; // Set this to a specific number to test one powerup
 		switch(tempRandNum2){
 			case 15:
