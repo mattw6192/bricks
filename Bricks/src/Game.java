@@ -61,7 +61,7 @@ public class Game extends JPanel {
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
-	static int maxRound = 4;
+	static int maxRound = 5;
 	Racquet racquet = new Racquet(this);
 	private static JFrame frame;
 	static HighScores TempscoreWindow;
@@ -619,6 +619,10 @@ public class Game extends JPanel {
 			activeBalls.add(saveBall);
 		}else if (Round == 3){
 			Round3 round = new Round3(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
+		}else if (Round == 4){
+			Round4 round = new Round4(TempGame);	
 			activeBalls.clear();
 			activeBalls.add(saveBall);
 		}
