@@ -328,9 +328,9 @@ public class Game extends JPanel {
             instructions.setLocationRelativeTo(game);
         	instructions.setVisible(true);
         }
-        if (menu.getScores()==true){
-        	scoreWindow.setVisible(true);
-        }
+        //if (menu.getScores()==true){
+        //	scoreWindow.setVisible(true);
+        //}
         Round1 round = new Round1(TempGame);
         colorBricks();
 		

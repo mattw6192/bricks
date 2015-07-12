@@ -8,11 +8,10 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * 
+ * @author dillonwastrack
  */
 public class StartMenu extends javax.swing.JDialog {
     private boolean wantInstructions = false;
-    private boolean wantScores = false;
     java.awt.event.ActionEvent TempEventSave;
     /**
      * Creates new form StartMenu
@@ -118,8 +117,7 @@ public class StartMenu extends javax.swing.JDialog {
                     .addComponent(exit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                //.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50,50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,7 +133,7 @@ public class StartMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_instructionsActionPerformed
 
     private void highScoresGameStarted(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highScoresGameStarted
-        wantScores = true;
+        
         dispose();
     }//GEN-LAST:event_highScoresGameStarted
 
@@ -188,9 +186,6 @@ public class StartMenu extends javax.swing.JDialog {
         public boolean getInstructions(){
         return wantInstructions;
     }
-        public boolean getScores(){
-        	return wantScores;
-        }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exit;
