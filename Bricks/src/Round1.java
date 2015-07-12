@@ -43,11 +43,7 @@ public class Round1 {
 		//Brick brick2_7e = new Brick(450, 125, 35, 15, 4);
 		//Brick brick2_7f = new Brick(490, 125, 35, 15, 4);
 		//Brick brick2_7g = new Brick(530, 125, 35, 15, 4);
-		
-		
-		 
-		
-			
+
 		// eighth row of bricks from left to right
 		Brick brick2_8a = new Brick(268, 145, 35, 15, 1);
 		//Brick brick2_8b = new Brick(308, 145, 35, 15, 4);

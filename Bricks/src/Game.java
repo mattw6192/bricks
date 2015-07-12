@@ -61,7 +61,7 @@ public class Game extends JPanel {
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
-	static int maxRound = 6;
+	static int maxRound = 7;
 	Racquet racquet = new Racquet(this);
 	private static JFrame frame;
 	static HighScores TempscoreWindow;
@@ -479,6 +479,7 @@ public class Game extends JPanel {
 	
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
+		//int tempRandNum = 2; // use this to automatically recieve a powerup everytime a brick is hit by a ball
 		if (tempRandNum == 7 || tempRandNum == 2){ 
 			int delay = 1000; //milliseconds
 			ActionListener taskPerformer = new ActionListener() {
@@ -503,7 +504,7 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 10; // Set this to a specific number to test one powerup
+		//int tempRandNum2 = 3;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
@@ -553,6 +554,7 @@ public class Game extends JPanel {
 			case 3:
 				System.out.println("Powerup Gained: " + "Paddle Increase");
 				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase", Color.GREEN);
+				//Powerup powerup3 = new Powerup(this, 800, 5, 0, "Paddle Increase", Color.GREEN);
 				return powerup3; 
 			case 2:
 				System.out.println("Powerup Gained: " + "Ball Increase");
@@ -591,17 +593,19 @@ public class Game extends JPanel {
 		started = false;
 		hold = false;
 		placeHolder.clear();
-		//hasFireball = false;
+		hasFireball = false;
 		hasMetalPower = false;
 		hasShot = false;
 		missileCount = 0;
 		missiles.clear();
 		hasGun = false;
 		bullets.clear();
+		thisGame.racquet.setX(100);
 		//activeBalls.clear();
 		if (activeBalls.size()>1){ 
 			activeBalls.clear();
-			Ball newBall = new Ball(thisGame, thisGame.racquet.getBounds().x, thisGame.racquet.getBounds().y - 10);
+			Ball newBall = new Ball(thisGame, 20, 320);
+			//Ball newBall = new Ball(thisGame, thisGame.racquet.getBounds().x, thisGame.racquet.getBounds().y - 10);
 			activeBalls.add(newBall);
 		}
 		activeBalls.add(saveBall);
@@ -627,6 +631,10 @@ public class Game extends JPanel {
 			activeBalls.add(saveBall);
 		}else if (Round == 5){
 			Round5 round = new Round5(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
+		}else if (Round == 6){
+			Round6 round = new Round6(TempGame);	
 			activeBalls.clear();
 			activeBalls.add(saveBall);
 		}

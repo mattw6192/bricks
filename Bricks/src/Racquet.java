@@ -19,7 +19,7 @@ public class Racquet {
 
 	public Racquet(Game game) {
 		this.game = game;
-		x = 100;
+		setX(100);
 	}
 	
 	public void setRacquetMods(int num){
@@ -43,13 +43,13 @@ public class Racquet {
 	}
 	
 	public void move() {
-		if (x + xa > 0 && x + xa < game.getWidth() - getWIDTH())
-			x = x + xa;
+		if (getX() + xa > 0 && getX() + xa < game.getWidth() - getWIDTH())
+			setX(getX() + xa);
 	}
 
 	public void paint(Graphics2D g) {
 		g.setColor(Color.GRAY);
-		g.fillRect(x, Y, getWIDTH(), HEIGHT);
+		g.fillRect(getX(), Y, getWIDTH(), HEIGHT);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -70,7 +70,7 @@ public class Racquet {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(x, Y, getWIDTH(), HEIGHT);
+		return new Rectangle(getX(), Y, getWIDTH(), HEIGHT);
 	}
 
 	public int getTopY() {
@@ -85,6 +85,10 @@ public class Racquet {
 
 	public void setWIDTH(int num) {
 		WIDTH = num;
+	}
+
+	void setX(int x) {
+		this.x = x;
 	}
 }
 

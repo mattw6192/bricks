@@ -407,6 +407,10 @@ public class Powerup {
 			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
+					if (game.racquet.getX() > 400){
+						double increaseAmount = game.racquet.getWIDTH() * 0.25;
+						game.racquet.setX((int) game.racquet.getX() - (int) increaseAmount);
+					}
 					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * 1.25));
 					game.racquet.addRacquetMod();
 					powerupEnd(); // remove the powerup from available powerups display
