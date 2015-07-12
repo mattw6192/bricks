@@ -92,8 +92,8 @@ public class Game extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
-					 started = true;
+				 if (arg0.getKeyCode() == KeyEvent.VK_E) {
+					 
 					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
 						 Game.missiles.get(0).setX(racquet.getX() + 25);
@@ -105,6 +105,7 @@ public class Game extends JPanel {
 				 }
 				 if (arg0.getKeyCode() == KeyEvent.VK_P){ isPaused = true;}
 				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE && isPaused == true) {isPaused = false;}
+				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE && started == false) {started = true;}
 			}
 
 			@Override
@@ -502,9 +503,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,15); 
+		int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		int tempRandNum2 = 11;
+		//int tempRandNum2 = 13;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
