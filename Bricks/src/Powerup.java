@@ -51,6 +51,9 @@ public class Powerup {
 				game.hasFireball = false;
 				game.hasMetalPower = false;
 				game.hasGun = false;
+				if (game.pointMultiplier <= 4){
+					game.pointMultiplier = game.pointMultiplier  * 2;
+				}
 				System.out.println("Insanity Mode - Good Luck!! ");
 				game.placeHolder.remove(this);
 				for (int i=0; i< Game.activeBalls.size(); i++){	
@@ -75,6 +78,7 @@ public class Powerup {
 							Game.activeBalls.get(i).speed = 2;
 							Game.activeBalls.get(i).setX((int) game.racquet.getBounds().getX() + (int) (game.racquet.getBounds().getWidth() / 2));
 							Game.activeBalls.get(i).setY((int) game.racquet.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
+							Game.pointMultiplier = 1;
 					}
 						powerupEnd(); // remove the powerup from available powerups display
 					}
@@ -156,7 +160,7 @@ public class Powerup {
 				
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
-				
+				Game.placeHolder.remove(this);
 				if (Game.hasFireball == false){
 					Game.hasMetalPower = true;
 					powerupEnd(); // remove the powerup from available powerups display

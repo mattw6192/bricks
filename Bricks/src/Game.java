@@ -479,7 +479,7 @@ public class Game extends JPanel {
 	
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
-		//int tempRandNum = 2; // use this to automatically recieve a powerup everytime a brick is hit by a ball
+		//int tempRandNum = 2; // use this to automatically receive a powerup everytime a brick is hit by a ball
 		if (tempRandNum == 7 || tempRandNum == 2){ 
 			int delay = 1000; //milliseconds
 			ActionListener taskPerformer = new ActionListener() {
@@ -502,9 +502,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,15); 
+		//int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 3;
+		int tempRandNum2 = 11;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
