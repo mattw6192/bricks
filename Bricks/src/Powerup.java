@@ -55,7 +55,7 @@ public class Powerup {
 					game.pointMultiplier = game.pointMultiplier  * 2;
 				}
 				System.out.println("Insanity Mode - Good Luck!! ");
-				game.placeHolder.remove(this);
+				game.droppedPowerups.remove(this);
 				for (int i=0; i< Game.activeBalls.size(); i++){	
 						Game.activeBalls.get(i).DIAMETER = 9;
 						Game.activeBalls.get(i).setBallMods(-1);
@@ -89,7 +89,7 @@ public class Powerup {
 				insanityTimer.start();
 				break; 
 			case 14: // Machine Gun
-				game.placeHolder.remove(this);
+				game.droppedPowerups.remove(this);
 				if (Game.hasGun == false){
 					Game.hasGun = true;
 					int delayShot = 250;
@@ -129,7 +129,7 @@ public class Powerup {
 					Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 					Game.missiles.add(m);
 					game.setMissileCount(game.getMissileCount() + 1);
-					game.placeHolder.remove(m);
+					game.droppedPowerups.remove(m);
 					powerupEnd();
 				}else{
 					System.out.println("You have reached the maximum number of missiles.");
@@ -160,7 +160,7 @@ public class Powerup {
 				
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
-				Game.placeHolder.remove(this);
+				Game.droppedPowerups.remove(this);
 				if (Game.hasFireball == false){
 					Game.hasMetalPower = true;
 					powerupEnd(); // remove the powerup from available powerups display
@@ -495,7 +495,7 @@ public class Powerup {
 	
 	public void powerupEnd(){
 		active = false;
-		Game.placeHolder.remove(this);
+		Game.droppedPowerups.remove(this);
 	}
 	
 	public int getPowerNum(){

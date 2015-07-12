@@ -90,7 +90,7 @@ public class Ball {
 					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
-					Game.placeHolder.clear();
+					Game.droppedPowerups.clear();
 					Game.activeBalls.clear();
 					Game.activeBalls.add(this);
 					ballMods = 0;

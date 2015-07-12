@@ -38,7 +38,7 @@ public class Game extends JPanel {
 	static ArrayList<String> users = new ArrayList<String>();
 	static int Score = 000000;
 	static Boolean hold = false;
-	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
+	static ArrayList<Powerup> droppedPowerups = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
@@ -177,9 +177,9 @@ public class Game extends JPanel {
 				allBricks.get(i).paint(g2d);
 			}
 		}
-		if (placeHolder.isEmpty() == false){
-			for (int i=0; i<placeHolder.size();i++){
-				placeHolder.get(i).paint(g2d);
+		if (droppedPowerups.isEmpty() == false){
+			for (int i=0; i<droppedPowerups.size();i++){
+				droppedPowerups.get(i).paint(g2d);
 			}
 		}
 		if (missiles.isEmpty()==false && hasShot == true){
@@ -340,15 +340,15 @@ public class Game extends JPanel {
 		while (true) { //game loop
 			if (!isPaused){
 				if (Game.missileCount == 0){
-					if (Game.placeHolder.size() > 0){ 
-					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString());
+					if (Game.droppedPowerups.size() > 0){ 
+					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
 					}
 					else{
 						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
 					}
 				}else{
-					if (Game.placeHolder.size() > 0){ 
-						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString() + "    Missiles: " + missileCount);
+					if (Game.droppedPowerups.size() > 0){ 
+						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
 						}
 						else{
 							frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
@@ -357,9 +357,9 @@ public class Game extends JPanel {
 			game.move();
 			game.repaint();
 			
-			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen
-				for (int j=0; j<placeHolder.size();j++){
-					placeHolder.get(j).move();
+			if (droppedPowerups.isEmpty() == false){ // droppedPowerups is powerups on screen
+				for (int j=0; j<droppedPowerups.size();j++){
+					droppedPowerups.get(j).move();
 				}
 			}
 			
@@ -393,7 +393,7 @@ public class Game extends JPanel {
 					    boolean havePowerup = game.getPowerup();
 					    if (havePowerup == true){
 					    	Powerup savePower = game.generatePowerup(allBricks.get(i));
-					    	placeHolder.add(savePower);
+					    	droppedPowerups.add(savePower);
 					    }
 					    //activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 						//game.ball.xa = game.ball.xa * (-1);
@@ -592,7 +592,7 @@ public class Game extends JPanel {
 		bullets.clear();
 		started = false;
 		hold = false;
-		placeHolder.clear();
+		droppedPowerups.clear();
 		hasFireball = false;
 		hasMetalPower = false;
 		hasShot = false;
