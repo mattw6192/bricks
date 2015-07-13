@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -85,45 +87,44 @@ public class HighScores extends javax.swing.JDialog{
         jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(scoreLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
-              .addGroup(layout.createSequentialGroup()
-                    	.addGap(100,100,100)
-                    	.addComponent(LocalScoreLabel))
-                    .addGroup(layout.createSequentialGroup()
-                    	.addGap(100,100,100)
-                    	.addComponent(closeButton))
-                    .addGroup(layout.createSequentialGroup()
-                    	.addGap(100,100,100)
-                    	.addComponent(exitButton))
-                    	.addGap(15,15,15)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(132)
+        					.addComponent(scoreLabel))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(45)
+        					.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(100)
+        					.addComponent(LocalScoreLabel)))
+        			.addContainerGap(45, Short.MAX_VALUE))
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        			.addContainerGap(59, Short.MAX_VALUE)
+        			.addComponent(exitButton)
+        			.addGap(51)
+        			.addComponent(closeButton)
+        			.addGap(70))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(scoreLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                //.addGap(15,15,15)
-                .addComponent(LocalScoreLabel)
-                .addContainerGap(30, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(closeButton))
-            //.addGroup(layout.createSequentialGroup()
-                .addComponent(exitButton)//)
-                .addContainerGap(75, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(15)
+        			.addComponent(scoreLabel)
+        			.addGap(18)
+        			.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(LocalScoreLabel)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(30)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(closeButton)
+        						.addComponent(exitButton))))
+        			.addContainerGap(104, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
