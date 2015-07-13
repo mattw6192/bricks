@@ -310,7 +310,7 @@ public class Game extends JPanel {
 		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		TempGame = game;
-		StartMenu menu = new StartMenu(frame, true);
+		startMenu4 menu = new startMenu4(frame, true);
 		
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true);
@@ -328,9 +328,9 @@ public class Game extends JPanel {
             instructions.setLocationRelativeTo(game);
         	instructions.setVisible(true);
         }
-        //if (menu.getScores()==true){
-        //	scoreWindow.setVisible(true);
-        //}
+        if (menu.getScores()==true){
+        	scoreWindow.setVisible(true);
+        }
         Round1 round = new Round1(TempGame);
         colorBricks();
 		
