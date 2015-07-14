@@ -51,8 +51,11 @@ public class Powerup {
 				game.hasFireball = false;
 				game.hasMetalPower = false;
 				game.hasGun = false;
+				if (game.pointMultiplier <= 4){
+					game.pointMultiplier = game.pointMultiplier  * 2;
+				}
 				System.out.println("Insanity Mode - Good Luck!! ");
-				game.placeHolder.remove(this);
+				game.droppedPowerups.remove(this);
 				for (int i=0; i< Game.activeBalls.size(); i++){	
 						Game.activeBalls.get(i).DIAMETER = 9;
 						Game.activeBalls.get(i).setBallMods(-1);
@@ -75,6 +78,7 @@ public class Powerup {
 							Game.activeBalls.get(i).speed = 2;
 							Game.activeBalls.get(i).setX((int) game.racquet.getBounds().getX() + (int) (game.racquet.getBounds().getWidth() / 2));
 							Game.activeBalls.get(i).setY((int) game.racquet.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
+							Game.pointMultiplier = 1;
 					}
 						powerupEnd(); // remove the powerup from available powerups display
 					}
@@ -85,7 +89,7 @@ public class Powerup {
 				insanityTimer.start();
 				break; 
 			case 14: // Machine Gun
-				game.placeHolder.remove(this);
+				game.droppedPowerups.remove(this);
 				if (Game.hasGun == false){
 					Game.hasGun = true;
 					int delayShot = 250;
@@ -125,7 +129,7 @@ public class Powerup {
 					Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 					Game.missiles.add(m);
 					game.setMissileCount(game.getMissileCount() + 1);
-					game.placeHolder.remove(m);
+					game.droppedPowerups.remove(m);
 					powerupEnd();
 				}else{
 					System.out.println("You have reached the maximum number of missiles.");
@@ -156,7 +160,7 @@ public class Powerup {
 				
 			case 11: // Metal Ball - deals two hits
 				System.out.println("Metalball Activated");
-				
+				Game.droppedPowerups.remove(this);
 				if (Game.hasFireball == false){
 					Game.hasMetalPower = true;
 					powerupEnd(); // remove the powerup from available powerups display
@@ -188,6 +192,8 @@ public class Powerup {
 					
 					ActionListener flashTask = new ActionListener() {
 						public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
+							for (int i=0; i<Game.activeBalls.size();i++){
+								final Ball saveBall = Game.activeBalls.get(i);
 							boolean hasExecuted = false; 
 							if (Game.hasFireball.equals(false)){
 							saveBall.setColor(Color.BLACK); hasExecuted = true;}
@@ -197,6 +203,7 @@ public class Powerup {
 								saveBall.setColor(Color.YELLOW);}
 							else if (saveBall.getColor().equals(Color.YELLOW)){
 								saveBall.setColor(Color.RED);
+							}
 							}
 						}
 					};
@@ -404,6 +411,10 @@ public class Powerup {
 			case 3: // Larger Paddle
 				
 				if (game.racquet.racquetMods < 7){
+					if (game.racquet.getX() > 400){
+						double increaseAmount = game.racquet.getWIDTH() * 0.25;
+						game.racquet.setX((int) game.racquet.getX() - (int) increaseAmount);
+					}
 					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * 1.25));
 					game.racquet.addRacquetMod();
 					powerupEnd(); // remove the powerup from available powerups display
@@ -484,7 +495,7 @@ public class Powerup {
 	
 	public void powerupEnd(){
 		active = false;
-		Game.placeHolder.remove(this);
+		Game.droppedPowerups.remove(this);
 	}
 	
 	public int getPowerNum(){

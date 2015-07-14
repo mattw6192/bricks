@@ -38,9 +38,9 @@ public class Game extends JPanel {
 	static ArrayList<String> users = new ArrayList<String>();
 	static int Score = 000000;
 	static Boolean hold = false;
-	static ArrayList<Powerup> placeHolder = new ArrayList<Powerup>();
+	static ArrayList<Powerup> droppedPowerups = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
-	static Boolean hasFireball = true;
+	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
@@ -61,7 +61,7 @@ public class Game extends JPanel {
 	
 
     static ArrayList<Brick> allBricks = new ArrayList<Brick>();
-	static int maxRound = 4;
+	static int maxRound = 7;
 	Racquet racquet = new Racquet(this);
 	private static JFrame frame;
 	static HighScores TempscoreWindow;
@@ -92,8 +92,8 @@ public class Game extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
-					 started = true;
+				 if (arg0.getKeyCode() == KeyEvent.VK_E) {
+					 
 					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
 						 Game.missiles.get(0).setX(racquet.getX() + 25);
@@ -105,6 +105,7 @@ public class Game extends JPanel {
 				 }
 				 if (arg0.getKeyCode() == KeyEvent.VK_P){ isPaused = true;}
 				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE && isPaused == true) {isPaused = false;}
+				 if (arg0.getKeyCode() == KeyEvent.VK_SPACE && started == false) {started = true;}
 			}
 
 			@Override
@@ -177,9 +178,9 @@ public class Game extends JPanel {
 				allBricks.get(i).paint(g2d);
 			}
 		}
-		if (placeHolder.isEmpty() == false){
-			for (int i=0; i<placeHolder.size();i++){
-				placeHolder.get(i).paint(g2d);
+		if (droppedPowerups.isEmpty() == false){
+			for (int i=0; i<droppedPowerups.size();i++){
+				droppedPowerups.get(i).paint(g2d);
 			}
 		}
 		if (missiles.isEmpty()==false && hasShot == true){
@@ -309,7 +310,7 @@ public class Game extends JPanel {
 		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		TempGame = game;
-		StartMenu menu = new StartMenu(frame, true);
+		startMenu4 menu = new startMenu4(frame, true);
 		
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true);
@@ -321,10 +322,14 @@ public class Game extends JPanel {
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
 		
-        Instructions instructions = new Instructions(frame,true);
-        instructions.setLocationRelativeTo(game);
+        
         if (menu.getInstructions()==true){
+        	Instructions instructions = new Instructions(frame,true);
+            instructions.setLocationRelativeTo(game);
         	instructions.setVisible(true);
+        }
+        if (menu.getScores()==true){
+        	scoreWindow.setVisible(true);
         }
         Round1 round = new Round1(TempGame);
         colorBricks();
@@ -340,15 +345,15 @@ public class Game extends JPanel {
 		while (true) { //game loop
 			if (!isPaused){
 				if (Game.missileCount == 0){
-					if (Game.placeHolder.size() > 0){ 
-					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString());
+					if (Game.droppedPowerups.size() > 0){ 
+					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
 					}
 					else{
 						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
 					}
 				}else{
-					if (Game.placeHolder.size() > 0){ 
-						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.placeHolder.toString() + "    Missiles: " + missileCount);
+					if (Game.droppedPowerups.size() > 0){ 
+						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
 						}
 						else{
 							frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
@@ -357,9 +362,9 @@ public class Game extends JPanel {
 			game.move();
 			game.repaint();
 			
-			if (placeHolder.isEmpty() == false){ // placeholder is powerups on screen
-				for (int j=0; j<placeHolder.size();j++){
-					placeHolder.get(j).move();
+			if (droppedPowerups.isEmpty() == false){ // droppedPowerups is powerups on screen
+				for (int j=0; j<droppedPowerups.size();j++){
+					droppedPowerups.get(j).move();
 				}
 			}
 			
@@ -393,7 +398,7 @@ public class Game extends JPanel {
 					    boolean havePowerup = game.getPowerup();
 					    if (havePowerup == true){
 					    	Powerup savePower = game.generatePowerup(allBricks.get(i));
-					    	placeHolder.add(savePower);
+					    	droppedPowerups.add(savePower);
 					    }
 					    //activeBalls.get(j).ya = activeBalls.get(j).ya * (-1); //update coordinates of ball to avoid multiple hits at the same time
 						//game.ball.xa = game.ball.xa * (-1);
@@ -479,6 +484,7 @@ public class Game extends JPanel {
 	
 	public boolean getPowerup(){
 		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
+		//int tempRandNum = 2; // use this to automatically receive a powerup everytime a brick is hit by a ball
 		if (tempRandNum == 7 || tempRandNum == 2){ 
 			int delay = 1000; //milliseconds
 			ActionListener taskPerformer = new ActionListener() {
@@ -501,9 +507,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,15); 
-		//int tempRandNum2 = randInt(1,2);
-		int tempRandNum2 = 13; // Set this to a specific number to test one powerup
+		int tempRandNum2 = randInt(1,15); 
+		//int tempRandNum2 = randInt(7,10);
+		//int tempRandNum2 = 13;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
@@ -553,6 +559,7 @@ public class Game extends JPanel {
 			case 3:
 				System.out.println("Powerup Gained: " + "Paddle Increase");
 				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase", Color.GREEN);
+				//Powerup powerup3 = new Powerup(this, 800, 5, 0, "Paddle Increase", Color.GREEN);
 				return powerup3; 
 			case 2:
 				System.out.println("Powerup Gained: " + "Ball Increase");
@@ -590,15 +597,22 @@ public class Game extends JPanel {
 		bullets.clear();
 		started = false;
 		hold = false;
-		placeHolder.clear();
-		//hasFireball = false;
+		droppedPowerups.clear();
+		hasFireball = false;
 		hasMetalPower = false;
 		hasShot = false;
 		missileCount = 0;
 		missiles.clear();
 		hasGun = false;
 		bullets.clear();
-		activeBalls.clear();
+		thisGame.racquet.setX(100);
+		//activeBalls.clear();
+		if (activeBalls.size()>1){ 
+			activeBalls.clear();
+			Ball newBall = new Ball(thisGame, 20, 320);
+			//Ball newBall = new Ball(thisGame, thisGame.racquet.getBounds().x, thisGame.racquet.getBounds().y - 10);
+			activeBalls.add(newBall);
+		}
 		activeBalls.add(saveBall);
 		saveBall.speed = 2;
 		saveBall.ballMods = 0;
@@ -607,10 +621,27 @@ public class Game extends JPanel {
 		thisGame.racquet.racquetMods = 0;
 		
 		allBricks.clear();
+		
 		if (Round == 2){
 			Round2 round = new Round2(TempGame);
+			activeBalls.clear();
+			activeBalls.add(saveBall);
 		}else if (Round == 3){
 			Round3 round = new Round3(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
+		}else if (Round == 4){
+			Round4 round = new Round4(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
+		}else if (Round == 5){
+			Round5 round = new Round5(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
+		}else if (Round == 6){
+			Round6 round = new Round6(TempGame);	
+			activeBalls.clear();
+			activeBalls.add(saveBall);
 		}
 		colorBricks(); 
 	}

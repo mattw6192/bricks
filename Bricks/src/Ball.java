@@ -67,6 +67,7 @@ public class Ball {
 				Game.missiles.clear();
 				Game.hasShot = false;
 				
+				
 				if (Game.activeBalls.size() == 1){
 					if (game.Lives <= 1){
 						Game.activeBalls.remove(this);
@@ -89,16 +90,17 @@ public class Ball {
 					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
-					Game.placeHolder.clear();
+					Game.droppedPowerups.clear();
 					Game.activeBalls.clear();
 					Game.activeBalls.add(this);
 					ballMods = 0;
 					DIAMETER = 12;
 					game.racquet.setWIDTH(60);
 					game.racquet.racquetMods = 0;
+					game.racquet.setX(100);
 					this.setColor(Color.BLACK);
-					setX(game.racquet.getBounds().x);
-					setY(game.racquet.getBounds().y - 10);
+					setX(20);
+					setY(320);
 					this.setColor(Color.BLACK);
 					game.hasShot = false;
 					game.bullets.clear();
