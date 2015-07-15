@@ -1,3 +1,4 @@
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,13 +16,19 @@ import javax.swing.GroupLayout;
  */
 public class HighScores extends javax.swing.JDialog{
 
+	boolean hasStarted;
+	Frame parentFrame;
+	startMenu4 menu;
     /**
      * Creates new form HighScores
      * @throws IOException 
      */
-    public HighScores(java.awt.Frame parent, boolean modal) throws IOException {
+    public HighScores(java.awt.Frame parent, boolean modal, startMenu4 tempMenu, boolean ifStarted, Frame tempFrame) throws IOException {
         super(parent, modal);
         initComponents();
+        hasStarted = ifStarted;
+        menu = tempMenu;
+        parentFrame = tempFrame;
     }
     
     public void setLocalScores(Game thisGame){
@@ -64,12 +71,22 @@ public class HighScores extends javax.swing.JDialog{
         closeButton.setText("Close");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closeButtonActionPerformed(evt);
+                if (hasStarted == true){
+                	closeButtonActionPerformed(evt);
+                }else if (hasStarted == false){
+                	closeButtonReturnAction(evt);
+                }
             }
 
 			private void closeButtonActionPerformed(ActionEvent evt) {
+				setVisible(false);	
+				parentFrame.setVisible(true);
+			}
+			
+			private void closeButtonReturnAction(ActionEvent evt) {
 				setVisible(false);
-				
+				parentFrame.setVisible(false);
+				menu.setVisible(true);
 			}
         });
         jTextArea1.setEditable(false);

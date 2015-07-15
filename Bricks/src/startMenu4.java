@@ -21,6 +21,7 @@ public class startMenu4 extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private boolean wantInstructions = false;
 	private boolean wantScores = false;
+	private boolean wantStart = false;
 	java.awt.event.ActionEvent TempEventSave;
 
 	/**
@@ -69,6 +70,7 @@ public class startMenu4 extends JDialog {
 				}
 
 				private void GameStarted() {
+					wantStart = true;
 					dispose();
 					
 				}
@@ -189,5 +191,21 @@ public class startMenu4 extends JDialog {
 	
 	public boolean getScores(){
 		return wantScores;
+	}
+	
+	public boolean getStart(){
+		return wantStart;
+	}
+	
+	public void setStart(boolean value){
+		wantStart = value;
+	}
+	
+	public void setScores(boolean value){
+		wantScores = value;
+	}
+	
+	public void setInstructions(boolean value){
+		wantInstructions = value;
 	}
 }

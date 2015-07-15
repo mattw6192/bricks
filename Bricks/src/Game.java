@@ -67,6 +67,7 @@ public class Game extends JPanel {
 	static HighScores TempscoreWindow;
 	static Game TempGame;
 	int saveTempScore = Score;
+	static startMenu4 menu;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -250,7 +251,7 @@ public class Game extends JPanel {
 		//Collections.sort(scores.keySet());
 		//Collections.reverseOrder(scores.keySet());
 		writeHighScores();
-		HighScores scoreWindow = new HighScores(frame, true);
+		HighScores scoreWindow = new HighScores(frame, true, menu, true,frame);
 		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(TempGame);
 		scoreWindow.setVisible(false);
@@ -310,10 +311,10 @@ public class Game extends JPanel {
 		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
 		TempGame = game;
-		startMenu4 menu = new startMenu4(frame, true);
+		menu = new startMenu4(frame, true);
 		
 		//highscore stuff
-		HighScores scoreWindow = new HighScores(frame, true);
+		HighScores scoreWindow = new HighScores(frame, true, menu, false, frame);
 		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(game);
 		scoreWindow.setVisible(false);
@@ -322,23 +323,31 @@ public class Game extends JPanel {
 		menu.setLocationRelativeTo(game);
 		menu.setVisible(true);
 		
+        while (menu.getStart() == false){
+	        if (menu.getInstructions()==true){
+	        	Instructions instructions = new Instructions(frame,true);
+	            instructions.setLocationRelativeTo(game);
+	        	instructions.setVisible(true);
+	        	menu.setInstructions(false);
+	        }
+	        if (menu.getScores()==true){
+	        	scoreWindow.setVisible(true);
+	        	menu.setScores(false);
+	        }
+        }
+        if (menu.getStart() == true){
+        	Round1 round = new Round1(TempGame);
+        	frame.setVisible(true);
+        	menu.setStart(false);
+        }
         
-        if (menu.getInstructions()==true){
-        	Instructions instructions = new Instructions(frame,true);
-            instructions.setLocationRelativeTo(game);
-        	instructions.setVisible(true);
-        }
-        if (menu.getScores()==true){
-        	scoreWindow.setVisible(true);
-        }
-        Round1 round = new Round1(TempGame);
         colorBricks();
 		
 		frame.add(game);
 		frame.setSize(855, 600);
 		frame.setLocation(300, 50);
 		//frame.setLocationRelativeTo(game);
-		frame.setVisible(true);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
