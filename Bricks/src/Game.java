@@ -346,17 +346,17 @@ public class Game extends JPanel {
 			if (!isPaused){
 				if (Game.missileCount == 0){
 					if (Game.droppedPowerups.size() > 0){ 
-					frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
+					frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
 					}
 					else{
-						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
+						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
 					}
 				}else{
 					if (Game.droppedPowerups.size() > 0){ 
-						frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
+						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
 						}
 						else{
-							frame.setTitle("Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
+							frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
 						}
 				}
 			game.move();
@@ -507,9 +507,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,15); 
+		int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		int tempRandNum2 = 8;
+		//int tempRandNum2 = 8;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
