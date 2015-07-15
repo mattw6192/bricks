@@ -507,9 +507,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,15); 
+		//int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 13;
+		int tempRandNum2 = 8;
 		switch(tempRandNum2){
 			case 15:
 				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
