@@ -1,3 +1,5 @@
+import java.awt.Frame;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,13 +12,14 @@
  */
 @SuppressWarnings("serial")
 public class Instructions extends javax.swing.JDialog {
-        
+    static startMenu4 saveFrame;
     /**
      * Creates new form Instructions
      */
-    public Instructions(java.awt.Frame parent, boolean modal) {
+    public Instructions(Frame parent, boolean modal, startMenu4 menu) {
         super(parent, modal);
         initComponents();
+        saveFrame = menu;
     }
 
     /**
@@ -137,7 +140,8 @@ public class Instructions extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void startGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startGameActionPerformed
-        dispose();
+        saveFrame.setStart(true);
+    	dispose();
     }//GEN-LAST:event_startGameActionPerformed
 
     /**
@@ -170,7 +174,7 @@ public class Instructions extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Instructions dialog = new Instructions(new javax.swing.JFrame(), true);
+                Instructions dialog = new Instructions(new javax.swing.JFrame(), true, saveFrame);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

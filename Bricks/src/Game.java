@@ -335,7 +335,7 @@ public class Game extends JPanel {
 		
         while (menu.getStart() == false){
 	        if (menu.getInstructions()==true){
-	        	Instructions instructions = new Instructions(frame,true);
+	        	Instructions instructions = new Instructions(frame,true, menu);
 	            instructions.setLocationRelativeTo(game);
 	        	instructions.setVisible(true);
 	        	menu.setInstructions(false);
