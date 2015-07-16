@@ -59,6 +59,7 @@ public class PowerupInstructions extends JPanel {
 		txtrYouBetterLeave.setBounds(240, 264, 164, 75);
 		add(txtrYouBetterLeave);
 		
+		
 
 
 	}

@@ -1,3 +1,4 @@
+import java.applet.AudioClip;
 import java.awt.Color; 
 import java.awt.Component;
 import java.awt.Graphics;
@@ -21,6 +22,14 @@ import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -313,6 +322,7 @@ public class Game extends JPanel {
 		TempGame = game;
 		menu = new startMenu4(frame, true);
 		
+		
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true, menu, false, frame);
 		TempscoreWindow = scoreWindow;
@@ -395,12 +405,15 @@ public class Game extends JPanel {
 							}}
 							
 						if (hasFireball == true && allBricks.get(i).canBeHit == true){
+							Sound.BrickHit.play();
 							allBricks.get(i).subtractAllHits();
 						}else if(hasMetalPower == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
+							Sound.BrickHit.play();
 						}else{
 							if (allBricks.get(i).canBeHit == true){
 								allBricks.get(i).subtractHit(); // this is where im subtracting a hit from brick
+								Sound.BrickHit.play();
 							}
 						}
 					    

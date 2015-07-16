@@ -1,7 +1,16 @@
 import java.awt.Color; 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
 import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Ball { 
 	static int DIAMETER = 12;
@@ -15,6 +24,7 @@ public class Ball {
 	// -1 means the size was decreased once, 0 means no changes, 1 means one increase
 	int ballMods = 0;
 	private Color c;
+	Clip audioClip;
 
 	public Ball(Game game, int X, int Y) {
 		this.game = game;
@@ -24,6 +34,7 @@ public class Ball {
 		xa = speed;
 		ya = speed;
 		this.c = Color.BLACK;
+
 	}
 	
 	
@@ -116,6 +127,7 @@ public class Ball {
 			if (game.hold == true){
 				game.started = false;
 			}
+			Sound.BALL.play();
 			y = game.racquet.getTopY() - DIAMETER;
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
