@@ -155,6 +155,7 @@ public class Powerup {
 					timeLifeDisplay.start();
 					
 				}else{
+					game.droppedPowerups.remove(this);
 					System.out.println("The Maximum Limit of lives has been reached");
 				}
 				break;
@@ -288,8 +289,8 @@ public class Powerup {
 					}
 					else{
 						game.droppedPowerups.remove(this);
-							System.out.println("Powerup not available - the ball size is too low.");
-						}
+						System.out.println("Powerup not available - the ball size is too low.");
+					}
 				}
 				break; 
 				
