@@ -531,9 +531,9 @@ public class Game extends JPanel {
 	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		//int tempRandNum2 = randInt(1,15); 
+		int tempRandNum2 = randInt(1,19); 
 		//int tempRandNum2 = randInt(7,10);
-		int tempRandNum2 = 19;
+		//int tempRandNum2 = 19;
 		switch(tempRandNum2){
 		case 19:
 			System.out.println("Powerup Gained: " + "Golden Borey");
