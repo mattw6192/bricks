@@ -44,7 +44,32 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-
+			case 18:
+				int rand = Game.randInt(0,10);
+				if (rand <= 3){ // Removes 1% of points
+					game.Score -= game.Score * 0.1;
+				}else if (rand <= 6){ // removes 5% of points
+					game.Score -= game.Score * 0.5;
+				}else if (rand <= 9){ // removes 10% of points
+					game.Score -= game.Score * 0.10;
+				}else if (rand == 10){ // removes 25% of points
+					game.Score -= game.Score * 0.25;
+				}
+				powerupEnd();
+				break;
+			case 17:
+				int randomNum = Game.randInt(0,10);
+				if (randomNum <= 5){ // add 1,000 points
+					game.Score += 1000;
+				}else if (randomNum <= 8){ // add 2,500 points
+					game.Score += 2500;
+				}else if (randomNum <= 9){ // add 5,000 points
+					game.Score += 5000;
+				}else if (randomNum == 10){ // add 7,500 points
+					game.Score += 7500;
+				}
+				powerupEnd();
+				break;
 			case 16: // Lose a life
 				if (game.Lives > 1){
 					System.out.println("Lives  "  + (game.Lives - 1));
@@ -548,6 +573,8 @@ public class Powerup {
 		if (ability.equals("Machine Gun")){return 14;}
 		if (ability.equals("Insanity Mode")){return 15;}
 		if (ability.equals("Lose a Life")){return 16;}
+		if (ability.equals("Gain Extra Points")){return 17;}
+		if (ability.equals("Lose Extra Points")){return 18;}
 		return 0;
 	}
 	

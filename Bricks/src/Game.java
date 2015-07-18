@@ -532,9 +532,17 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		int tempRandNum2 = 16;
+		int tempRandNum2 = 18;
 		switch(tempRandNum2){
-			case 16:
+		case 18:
+			System.out.println("Powerup Gained: " + "Lose Extra Points");
+			Powerup powerup18 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose Extra Points", Color.RED);
+			return powerup18;
+		case 17:
+			System.out.println("Powerup Gained: " + "Gain Extra Points");
+			Powerup powerup17 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Gain Extra Points", Color.GREEN);
+			return powerup17;
+		case 16:
 				System.out.println("Powerup Gained: " + "Lose a Life");
 				Powerup powerup16 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose a Life", Color.RED);
 				return powerup16;
