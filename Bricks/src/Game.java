@@ -51,6 +51,7 @@ public class Game extends JPanel {
 	static int pointMultiplier = 1;
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
+	static Boolean hasBoreyMode = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
@@ -506,8 +507,8 @@ public class Game extends JPanel {
 	}
 	
 	public boolean getPowerup(){
-		//int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
-		int tempRandNum = 7; // use this to automatically receive a powerup everytime a brick is hit by a ball
+		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
+		//int tempRandNum = 7; // use this to automatically receive a powerup everytime a brick is hit by a ball
 		if (tempRandNum == 7 || tempRandNum == 2){ 
 			int delay = 1000; //milliseconds
 			ActionListener taskPerformer = new ActionListener() {
@@ -532,8 +533,12 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		//int tempRandNum2 = randInt(1,15); 
 		//int tempRandNum2 = randInt(7,10);
-		int tempRandNum2 = 18;
+		int tempRandNum2 = 19;
 		switch(tempRandNum2){
+		case 19:
+			System.out.println("Powerup Gained: " + "Golden Borey");
+			Powerup powerup19 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Golden Borey", Color.GREEN);
+			return powerup19;
 		case 18:
 			System.out.println("Powerup Gained: " + "Lose Extra Points");
 			Powerup powerup18 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose Extra Points", Color.RED);

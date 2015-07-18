@@ -44,7 +44,127 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
-			case 18:
+			case 19: // Golden Borey
+				if (game.hasBoreyMode == false){	
+					game.hasBoreyMode = true;
+					game.racquet.setRacquetMods(4);
+					game.racquet.setWIDTH(150);
+					game.hasGun = true;
+					Game.hasFireball = true;
+					powerupEnd(); // remove the powerup from available powerups display
+					game.droppedPowerups.remove(this);
+					if (Game.activeBalls.size() <= 5){
+						System.out.println("Multiple Balls Enabled");
+						Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+						extraBall1.setXa(1);
+						extraBall1.setYa(-1);
+						extraBall1.speed = game.ball.speed;
+						extraBall1.DIAMETER = game.ball.DIAMETER;
+						extraBall1.ballMods = game.ball.ballMods;
+						Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+						extraBall2.setXa(-1);
+						extraBall2.setYa(-1);
+						extraBall2.speed = game.ball.speed;
+						extraBall2.DIAMETER = game.ball.DIAMETER;
+						extraBall2.ballMods = game.ball.ballMods;
+						Game.activeBalls.add(extraBall1);
+						Game.activeBalls.add(extraBall2);
+						powerupEnd(); // remove the powerup from available powerups display
+					}else{
+						game.droppedPowerups.remove(this);
+					}
+					if (Game.activeBalls.size() <= 5){
+						System.out.println("Multiple Balls Enabled");
+						Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+						extraBall1.setXa(extraBall1.xa *.75);
+						extraBall1.setYa(extraBall1.ya *.75);
+						extraBall1.speed = game.ball.speed;
+						extraBall1.DIAMETER = game.ball.DIAMETER;
+						extraBall1.ballMods = game.ball.ballMods;
+						Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+						extraBall2.setXa(-(extraBall2.xa *.75));
+						extraBall2.setYa(-(extraBall2.ya *.75));
+						extraBall2.speed = game.ball.speed;
+						extraBall2.DIAMETER = game.ball.DIAMETER;
+						extraBall2.ballMods = game.ball.ballMods;
+						Game.activeBalls.add(extraBall1);
+						Game.activeBalls.add(extraBall2);
+						powerupEnd(); // remove the powerup from available powerups display
+						
+					}
+					for (int i=0; i<Game.activeBalls.size();i++){
+						final Ball saveBall = Game.activeBalls.get(i);
+						ActionListener flashTask = new ActionListener() {
+							public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
+								for (int i=0; i<Game.activeBalls.size();i++){
+									final Ball saveBall = Game.activeBalls.get(i);
+								boolean hasExecuted = false; 
+								if (Game.hasFireball.equals(false)){
+								saveBall.setColor(Color.BLACK); hasExecuted = true;}
+								if (saveBall.getColor().equals(Color.BLACK) && hasExecuted == false){
+									saveBall.setColor(Color.RED);}
+								else if (saveBall.getColor().equals(Color.RED)){
+									saveBall.setColor(Color.YELLOW);}
+								else if (saveBall.getColor().equals(Color.YELLOW)){
+									saveBall.setColor(Color.RED);
+								}
+								}
+							}
+						};
+						
+						Timer flashTimer = new Timer(200,flashTask);
+						flashTimer.setRepeats(true);
+						flashTimer.start();
+						//if (!flashTimer.isRunning()){flashTimer.restart();}
+						if (Game.hasFireball.equals(false)){flashTimer.stop();
+						saveBall.setColor(Color.BLACK);}
+						
+						
+						int delay3 = 45000; //milliseconds
+						ActionListener taskPerformer3 = new ActionListener() {
+							public void actionPerformed(ActionEvent evt) {
+								Game.hasFireball = false;
+						        saveBall.setColor(Color.BLACK);
+						    }
+						};
+						Timer timer3 = new Timer(delay3, taskPerformer3);
+						timer3.setRepeats(false);
+						timer3.start();
+						saveBall.setColor(Color.BLACK);
+					}
+					game.droppedPowerups.remove(this);
+					for (int i=0; i< Game.activeBalls.size(); i++){	
+							Game.activeBalls.get(i).DIAMETER = 11;
+							Game.activeBalls.get(i).setBallMods(1);
+							Game.activeBalls.get(i).speed = 2;
+					}	
+	
+						
+					// Action Listener
+					ActionListener boreyMode = new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+							System.out.println("Powerup Over");
+							game.racquet.setRacquetMods(0);
+							game.racquet.setWIDTH(60);
+							for (int i=0; i< Game.activeBalls.size(); i++){	
+								Game.activeBalls.get(i).DIAMETER = 10;
+								Game.activeBalls.get(i).setBallMods(0);
+								Game.activeBalls.get(i).speed = 2;
+								Game.pointMultiplier = 1;
+								game.racquet.setWIDTH(60);
+								game.hasBoreyMode = false;
+						}
+							powerupEnd(); // remove the powerup from available powerups display
+						}
+					};
+					int boreyDuration = 45000; //milliseconds
+					Timer boreyTimer = new Timer(boreyDuration, boreyMode);
+					boreyTimer.setRepeats(false);
+					boreyTimer.start();
+				}
+				game.droppedPowerups.remove(this);
+				break; 
+			case 18: // Lose Extra Points
 				int rand = Game.randInt(0,10);
 				if (rand <= 3){ // Removes 1% of points
 					game.Score -= game.Score * 0.1;
@@ -57,7 +177,7 @@ public class Powerup {
 				}
 				powerupEnd();
 				break;
-			case 17:
+			case 17: // Gain Extra Points
 				int randomNum = Game.randInt(0,10);
 				if (randomNum <= 5){ // add 1,000 points
 					game.Score += 1000;
@@ -575,6 +695,7 @@ public class Powerup {
 		if (ability.equals("Lose a Life")){return 16;}
 		if (ability.equals("Gain Extra Points")){return 17;}
 		if (ability.equals("Lose Extra Points")){return 18;}
+		if (ability.equals("Golden Borey")){return 19;}
 		return 0;
 	}
 	
