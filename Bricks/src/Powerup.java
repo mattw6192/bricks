@@ -132,6 +132,7 @@ public class Powerup {
 					game.droppedPowerups.remove(m);
 					powerupEnd();
 				}else{
+					game.droppedPowerups.remove(this);
 					System.out.println("You have reached the maximum number of missiles.");
 				}
 				break;
@@ -141,7 +142,7 @@ public class Powerup {
 					System.out.println("Lives  "  + (game.Lives + 1));
 					game.Lives += 1;
 					Game.setLifeString(Game.getLifeString()+"*"); //adds a life to the lifestring
-					
+					game.droppedPowerups.remove(this);
 					int delayLifeDisplay = 10; //milliseconds
 					ActionListener lifeDisplayOff = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
@@ -186,7 +187,7 @@ public class Powerup {
 				System.out.println("Fireball Activated");
 				Game.hasFireball = true;
 				powerupEnd(); // remove the powerup from available powerups display
-				
+				game.droppedPowerups.remove(this);
 				for (int i=0; i<Game.activeBalls.size();i++){
 					final Ball saveBall = Game.activeBalls.get(i);
 					
@@ -233,6 +234,7 @@ public class Powerup {
 				
 			case 9: // Double Points
 				System.out.println("Current Multiplier "  + Game.pointMultiplier);
+				game.droppedPowerups.remove(this);
 				if (Game.pointMultiplier <= 4){
 					Game.pointMultiplier = Game.pointMultiplier * 2;
 					System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
@@ -285,6 +287,7 @@ public class Powerup {
 
 					}
 					else{
+						game.droppedPowerups.remove(this);
 							System.out.println("Powerup not available - the ball size is too low.");
 						}
 				}
@@ -324,6 +327,7 @@ public class Powerup {
 				}
 				
 				else{
+					game.droppedPowerups.remove(this);
 					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
 				}
 				
@@ -350,6 +354,7 @@ public class Powerup {
 					
 				}
 				else{
+					game.droppedPowerups.remove(this);
 					System.out.println("Powerup not available - the racquet size is too low.");
 				}
 		
@@ -364,6 +369,7 @@ public class Powerup {
 						
 						
 					}else{
+						
 						System.out.println("Powerup not available - the ball speed is too slow.");
 					}
 				}
@@ -420,6 +426,7 @@ public class Powerup {
 					powerupEnd(); // remove the powerup from available powerups display
 					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
 				}else{
+					game.droppedPowerups.remove(this);
 					System.out.println("Powerup not available - the racquet size is too high.");
 				}
 				
