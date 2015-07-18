@@ -45,6 +45,31 @@ public class Powerup {
 		if (active == true){
 			switch(caseNumber){
 
+			case 16: // Lose a life
+				if (game.Lives > 1){
+					System.out.println("Lives  "  + (game.Lives - 1));
+					game.Lives -= 1;
+					//String tempLifeString = Game.getLifeString();
+					int lifeStringLength = Game.getLifeString().length();
+					Game.setLifeString(Game.getLifeString().substring(0, lifeStringLength -1)); //Removes a life to the lifestring
+					game.droppedPowerups.remove(this);
+					int delayLifeDisplay = 10; //milliseconds
+					ActionListener lifeDisplayOff = new ActionListener() {
+						public void actionPerformed(ActionEvent evt) {
+					        System.out.println("Powerup Ended");
+					        powerupEnd(); // remove the powerup from available powerups display
+					    }
+					};
+					Timer timeLifeDisplay = new Timer(delayLifeDisplay, lifeDisplayOff);
+					timeLifeDisplay.setRepeats(false);
+					timeLifeDisplay.start();
+					
+				}else{
+					game.droppedPowerups.remove(this);
+					System.out.println("The Minimum Limit of lives has been reached");
+				}
+				powerupEnd();
+				break;
 			case 15: // Insanity Mode
 				game.racquet.setRacquetMods(-4);
 				game.racquet.setWIDTH(24);
@@ -522,6 +547,7 @@ public class Powerup {
 		if (ability.equals("Missile")){return 13;}
 		if (ability.equals("Machine Gun")){return 14;}
 		if (ability.equals("Insanity Mode")){return 15;}
+		if (ability.equals("Lose a Life")){return 16;}
 		return 0;
 	}
 	
