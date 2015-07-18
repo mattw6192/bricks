@@ -35,12 +35,99 @@ public class Powerup {
 		try {
 			image = ImageIO.read((getClass().getResource("/images/skull_and_bones2.png")));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 
 	}
 
+	
+	public void Fireball(int timeDelay){
+		Game.hasFireball = true;
+		powerupEnd(); // remove the powerup from available powerups display
+		game.droppedPowerups.remove(this);
+		for (int i=0; i<Game.activeBalls.size();i++){
+			final Ball saveBall = Game.activeBalls.get(i);
+			
+			ActionListener flashTask = new ActionListener() {
+				public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
+					for (int i=0; i<Game.activeBalls.size();i++){
+						final Ball saveBall = Game.activeBalls.get(i);
+					boolean hasExecuted = false; 
+					if (Game.hasFireball.equals(false)){
+					saveBall.setColor(Color.BLACK); hasExecuted = true;}
+					if (saveBall.getColor().equals(Color.BLACK) && hasExecuted == false){
+						saveBall.setColor(Color.RED);}
+					else if (saveBall.getColor().equals(Color.RED)){
+						saveBall.setColor(Color.YELLOW);}
+					else if (saveBall.getColor().equals(Color.YELLOW)){
+						saveBall.setColor(Color.RED);
+					}
+					}
+				}
+			};
+			
+			Timer flashTimer = new Timer(200,flashTask);
+			flashTimer.setRepeats(true);
+			flashTimer.start();
+			//if (!flashTimer.isRunning()){flashTimer.restart();}
+			if (Game.hasFireball.equals(false)){flashTimer.stop();
+			saveBall.setColor(Color.BLACK);}
+			
+			
+			//int delay3 = 20000; //milliseconds
+			ActionListener taskPerformer3 = new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					Game.hasFireball = false;
+			        System.out.println("Powerup Ended");
+			        saveBall.setColor(Color.BLACK);
+			    }
+			};
+			Timer timer3 = new Timer(timeDelay, taskPerformer3);
+			timer3.setRepeats(false);
+			timer3.start();
+			saveBall.setColor(Color.BLACK);
+		}
+	}
+	
+	public void multiBall(int timeDelay, double directionMultiplier){
+		if (Game.activeBalls.size() <= 5){
+			System.out.println("Multiple Balls Enabled");
+			Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+			extraBall1.setXa(extraBall1.getXa() * directionMultiplier);
+			extraBall1.setYa(-(extraBall1.getYa() * directionMultiplier));
+			extraBall1.speed = game.ball.speed;
+			extraBall1.DIAMETER = game.ball.DIAMETER;
+			extraBall1.ballMods = game.ball.ballMods;
+			Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
+			extraBall2.setXa((extraBall1.getXa() * directionMultiplier));
+			extraBall2.setYa(-(extraBall1.getYa() * directionMultiplier));
+			extraBall2.speed = game.ball.speed;
+			extraBall2.DIAMETER = game.ball.DIAMETER;
+			extraBall2.ballMods = game.ball.ballMods;
+			Game.activeBalls.add(extraBall1);
+			Game.activeBalls.add(extraBall2);
+			powerupEnd(); // remove the powerup from available powerups display
+			
+			
+			ActionListener multipleBallsDisplay = new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					System.out.println("Powerup Ended");
+					
+				}
+			};
+			//int multBallDisplayDuration = 3000; // how long the powerup will be displayed on the title
+			Timer timerMultBalls = new Timer(timeDelay, multipleBallsDisplay);
+			timerMultBalls.setRepeats(false);
+			timerMultBalls.start();
+			
+		}
+		
+		else{
+			game.droppedPowerups.remove(this);
+			System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
+		}
+	}
+	
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
@@ -50,95 +137,15 @@ public class Powerup {
 					game.racquet.setRacquetMods(4);
 					game.racquet.setWIDTH(150);
 					game.hasGun = true;
-					Game.hasFireball = true;
-					powerupEnd(); // remove the powerup from available powerups display
-					game.droppedPowerups.remove(this);
-					if (Game.activeBalls.size() <= 5){
-						System.out.println("Multiple Balls Enabled");
-						Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-						extraBall1.setXa(1);
-						extraBall1.setYa(-1);
-						extraBall1.speed = game.ball.speed;
-						extraBall1.DIAMETER = game.ball.DIAMETER;
-						extraBall1.ballMods = game.ball.ballMods;
-						Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-						extraBall2.setXa(-1);
-						extraBall2.setYa(-1);
-						extraBall2.speed = game.ball.speed;
-						extraBall2.DIAMETER = game.ball.DIAMETER;
-						extraBall2.ballMods = game.ball.ballMods;
-						Game.activeBalls.add(extraBall1);
-						Game.activeBalls.add(extraBall2);
-						powerupEnd(); // remove the powerup from available powerups display
-					}else{
-						game.droppedPowerups.remove(this);
-					}
-					if (Game.activeBalls.size() <= 5){
-						System.out.println("Multiple Balls Enabled");
-						Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-						extraBall1.setXa(extraBall1.xa *.75);
-						extraBall1.setYa(extraBall1.ya *.75);
-						extraBall1.speed = game.ball.speed;
-						extraBall1.DIAMETER = game.ball.DIAMETER;
-						extraBall1.ballMods = game.ball.ballMods;
-						Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-						extraBall2.setXa(-(extraBall2.xa *.75));
-						extraBall2.setYa(-(extraBall2.ya *.75));
-						extraBall2.speed = game.ball.speed;
-						extraBall2.DIAMETER = game.ball.DIAMETER;
-						extraBall2.ballMods = game.ball.ballMods;
-						Game.activeBalls.add(extraBall1);
-						Game.activeBalls.add(extraBall2);
-						powerupEnd(); // remove the powerup from available powerups display
-						
-					}
-					for (int i=0; i<Game.activeBalls.size();i++){
-						final Ball saveBall = Game.activeBalls.get(i);
-						ActionListener flashTask = new ActionListener() {
-							public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
-								for (int i=0; i<Game.activeBalls.size();i++){
-									final Ball saveBall = Game.activeBalls.get(i);
-								boolean hasExecuted = false; 
-								if (Game.hasFireball.equals(false)){
-								saveBall.setColor(Color.BLACK); hasExecuted = true;}
-								if (saveBall.getColor().equals(Color.BLACK) && hasExecuted == false){
-									saveBall.setColor(Color.RED);}
-								else if (saveBall.getColor().equals(Color.RED)){
-									saveBall.setColor(Color.YELLOW);}
-								else if (saveBall.getColor().equals(Color.YELLOW)){
-									saveBall.setColor(Color.RED);
-								}
-								}
-							}
-						};
-						
-						Timer flashTimer = new Timer(200,flashTask);
-						flashTimer.setRepeats(true);
-						flashTimer.start();
-						//if (!flashTimer.isRunning()){flashTimer.restart();}
-						if (Game.hasFireball.equals(false)){flashTimer.stop();
-						saveBall.setColor(Color.BLACK);}
-						
-						
-						int delay3 = 45000; //milliseconds
-						ActionListener taskPerformer3 = new ActionListener() {
-							public void actionPerformed(ActionEvent evt) {
-								Game.hasFireball = false;
-						        saveBall.setColor(Color.BLACK);
-						    }
-						};
-						Timer timer3 = new Timer(delay3, taskPerformer3);
-						timer3.setRepeats(false);
-						timer3.start();
-						saveBall.setColor(Color.BLACK);
-					}
+					multiBall(3000,1);
+					multiBall(3000,0.5);
+					Fireball(45000);
 					game.droppedPowerups.remove(this);
 					for (int i=0; i< Game.activeBalls.size(); i++){	
 							Game.activeBalls.get(i).DIAMETER = 11;
 							Game.activeBalls.get(i).setBallMods(1);
 							Game.activeBalls.get(i).speed = 2;
 					}	
-	
 						
 					// Action Listener
 					ActionListener boreyMode = new ActionListener() {
@@ -356,51 +363,7 @@ public class Powerup {
 				
 			case 10: // Fireball - destroys any block one hit
 				System.out.println("Fireball Activated");
-				Game.hasFireball = true;
-				powerupEnd(); // remove the powerup from available powerups display
-				game.droppedPowerups.remove(this);
-				for (int i=0; i<Game.activeBalls.size();i++){
-					final Ball saveBall = Game.activeBalls.get(i);
-					
-					ActionListener flashTask = new ActionListener() {
-						public void actionPerformed(ActionEvent evt){ //controls the flashing of the fireball powerup
-							for (int i=0; i<Game.activeBalls.size();i++){
-								final Ball saveBall = Game.activeBalls.get(i);
-							boolean hasExecuted = false; 
-							if (Game.hasFireball.equals(false)){
-							saveBall.setColor(Color.BLACK); hasExecuted = true;}
-							if (saveBall.getColor().equals(Color.BLACK) && hasExecuted == false){
-								saveBall.setColor(Color.RED);}
-							else if (saveBall.getColor().equals(Color.RED)){
-								saveBall.setColor(Color.YELLOW);}
-							else if (saveBall.getColor().equals(Color.YELLOW)){
-								saveBall.setColor(Color.RED);
-							}
-							}
-						}
-					};
-					
-					Timer flashTimer = new Timer(200,flashTask);
-					flashTimer.setRepeats(true);
-					flashTimer.start();
-					//if (!flashTimer.isRunning()){flashTimer.restart();}
-					if (Game.hasFireball.equals(false)){flashTimer.stop();
-					saveBall.setColor(Color.BLACK);}
-					
-					
-					int delay3 = 20000; //milliseconds
-					ActionListener taskPerformer3 = new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							Game.hasFireball = false;
-					        System.out.println("Powerup Ended");
-					        saveBall.setColor(Color.BLACK);
-					    }
-					};
-					Timer timer3 = new Timer(delay3, taskPerformer3);
-					timer3.setRepeats(false);
-					timer3.start();
-					saveBall.setColor(Color.BLACK);
-				}
+				Fireball(20000);
 				break; 
 				
 			case 9: // Double Points
@@ -465,43 +428,7 @@ public class Powerup {
 				break; 
 				
 			case 7: // Multiple Balls
-				if (Game.activeBalls.size() <= 5){
-					System.out.println("Multiple Balls Enabled");
-					Ball extraBall1 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-					extraBall1.setXa(1);
-					extraBall1.setYa(-1);
-					extraBall1.speed = game.ball.speed;
-					extraBall1.DIAMETER = game.ball.DIAMETER;
-					extraBall1.ballMods = game.ball.ballMods;
-					Ball extraBall2 = new Ball(game, game.activeBalls.get(0).getBounds().x + 5, game.activeBalls.get(0).getBounds().y - 10);
-					extraBall2.setXa(-1);
-					extraBall2.setYa(-1);
-					extraBall2.speed = game.ball.speed;
-					extraBall2.DIAMETER = game.ball.DIAMETER;
-					extraBall2.ballMods = game.ball.ballMods;
-					Game.activeBalls.add(extraBall1);
-					Game.activeBalls.add(extraBall2);
-					powerupEnd(); // remove the powerup from available powerups display
-					
-					
-					ActionListener multipleBallsDisplay = new ActionListener() {
-						public void actionPerformed(ActionEvent evt) {
-							System.out.println("Powerup Ended");
-							
-						}
-					};
-					int multBallDisplayDuration = 3000; // how long the powerup will be displayed on the title
-					Timer timerMultBalls = new Timer(multBallDisplayDuration, multipleBallsDisplay);
-					timerMultBalls.setRepeats(false);
-					timerMultBalls.start();
-					
-				}
-				
-				else{
-					game.droppedPowerups.remove(this);
-					System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
-				}
-				
+				multiBall(3000,1);
 				break; 
 				
 			case 6: // Smaller Paddle
