@@ -368,7 +368,7 @@ public class Game extends JPanel {
 	        }
         }
         if (menu.getStart() == true){
-        	Round2 round = new Round2(TempGame);
+        	Round1 round = new Round1(TempGame);
         	frame.setVisible(true);
         	menu.setStart(false);
         }
