@@ -52,6 +52,8 @@ public class Game extends JPanel {
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
 	static Boolean hasBoreyMode = false;
+	static Boolean hasMagnet = false;
+	static Boolean hasInsanityMode = false;
 	static ArrayList<Ball> activeBalls = new ArrayList<Ball>();
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
@@ -78,6 +80,8 @@ public class Game extends JPanel {
 	static Game TempGame;
 	int saveTempScore = Score;
 	static startMenu4 menu;
+	static Probability probs; 
+	private boolean probsAns;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -127,6 +131,9 @@ public class Game extends JPanel {
 			public void keyTyped(KeyEvent arg0) {}
 		});
 		setFocusable(true);
+	}
+	public int getLives(){
+		return Lives;
 	}
 	
 	@SuppressWarnings("static-access")
@@ -359,7 +366,7 @@ public class Game extends JPanel {
 		frame.setSize(855, 600);
 		frame.setLocation(300, 50);
 		//frame.setLocationRelativeTo(game);
-		
+		probs = new Probability(TempGame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -533,85 +540,182 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = randInt(1,19); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 19;
+		//int tempRandNum2 = 14;
 		switch(tempRandNum2){
 			case 19:
-				System.out.println("Powerup Gained: " + "Golden Borey");
-				Powerup powerup19 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Golden Borey", Color.GREEN);
-				return powerup19;
+				probsAns = probs.checkPowerup(19);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Golden Borey");
+					Powerup powerup19 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Golden Borey", Color.GREEN);
+					return powerup19;
+				}
+				return generatePowerup(currentBrick);
 			case 18:
-				System.out.println("Powerup Gained: " + "Lose Extra Points");
-				Powerup powerup18 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose Extra Points", Color.RED);
-				return powerup18;
+				probsAns = probs.checkPowerup(18);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Lose Extra Points");
+					Powerup powerup18 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose Extra Points", Color.RED);
+					return powerup18;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 17:
-				System.out.println("Powerup Gained: " + "Gain Extra Points");
-				Powerup powerup17 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Gain Extra Points", Color.GREEN);
-				return powerup17;
+				probsAns = probs.checkPowerup(17);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Gain Extra Points");
+					Powerup powerup17 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Gain Extra Points", Color.GREEN);
+					return powerup17;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 16:
-				System.out.println("Powerup Gained: " + "Lose a Life");
-				Powerup powerup16 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose a Life", Color.RED);
-				return powerup16;
+				probsAns = probs.checkPowerup(16);
+				if (probsAns == true){	
+					System.out.println("Powerup Gained: " + "Lose a Life");
+					Powerup powerup16 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose a Life", Color.RED);
+					return powerup16;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 15:
-				System.out.println("Powerup Gained: " + "Insanity Mode");
-				Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
-				return powerup15;
+				probsAns = probs.checkPowerup(15);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Insanity Mode");
+					Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
+					return powerup15;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 14:
-				System.out.println("Powerup Gained: " + "Machine Gun");
-				Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun", Color.GREEN);
-				return powerup14;
+				probsAns = probs.checkPowerup(14);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Machine Gun");
+					Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun", Color.GREEN);
+					return powerup14;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 13:
-				System.out.println("Powerup Gained: " + "Missile");
-				Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile", Color.GREEN);
-				return powerup13;
+				probsAns = probs.checkPowerup(13);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Missile");
+					Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile", Color.GREEN);
+					return powerup13;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 12:
-				System.out.println("Powerup Gained: " + "Extra Life");
-				Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life", Color.GREEN);
-				return powerup12;
+				
+				probsAns = probs.checkPowerup(12);
+				System.out.println("Made it here");
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Extra Life");
+					Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life", Color.GREEN);
+					return powerup12;
+				}
+				System.out.println("Not Alloweed - Selecting New Powerup");
+				return generatePowerup(currentBrick);
+				
 			case 11:
-				System.out.println("Powerup Gained: " + "Metal Ball");
-				Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball", Color.GREEN);
-				return powerup11; 
+				probsAns = probs.checkPowerup(11);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Metal Ball");
+					Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball", Color.GREEN);
+					return powerup11; 
+				}
+				return generatePowerup(currentBrick);
+				
 			case 10:
-				System.out.println("Powerup Gained: " + "Fireball");
-				Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball", Color.GREEN);
-				return powerup10; 
+				probsAns = probs.checkPowerup(10);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Fireball");
+					Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball", Color.GREEN);
+					return powerup10;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 9:
-				System.out.println("Powerup Gained: " + "Double Points");
-				Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points", Color.GREEN);
-				return powerup9; 
+				probsAns = probs.checkPowerup(9);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Double Points");
+					Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points", Color.GREEN);
+					return powerup9; 
+				}
+				return generatePowerup(currentBrick);
+				
 			case 8:
-				System.out.println("Powerup Gained: " + "Ball Decrease");
-				Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease", Color.WHITE);
-				return powerup8; 
+				probsAns = probs.checkPowerup(8);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Ball Decrease");
+					Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease", Color.WHITE);
+					return powerup8;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 7:
-				System.out.println("Powerup Gained: " + "Multiple Balls");
-				Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls", Color.GREEN);
-				return powerup7; 
+				probsAns = probs.checkPowerup(7);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Multiple Balls");
+					Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls", Color.GREEN);
+					return powerup7;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 6:
-				System.out.println("Powerup Gained: " + "Paddle Decrease");
-				Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease", Color.WHITE);
-				return powerup6; 
+				probsAns = probs.checkPowerup(6);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Paddle Decrease");
+					Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease", Color.WHITE);
+					return powerup6;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 5:
-				System.out.println("Powerup Gained: " + "Slow Down");
-				Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down", Color.WHITE);
-				return powerup5; 
+				probsAns = probs.checkPowerup(5);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Slow Down");
+					Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down", Color.WHITE);
+					return powerup5;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 4:
-				System.out.println("Powerup Gained: " + "Speed Up");
-				Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up", Color.WHITE);
-				return powerup4; 
+				probsAns = probs.checkPowerup(4);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Speed Up");
+					Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up", Color.WHITE);
+					return powerup4;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 3:
-				System.out.println("Powerup Gained: " + "Paddle Increase");
-				Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase", Color.GREEN);
-				//Powerup powerup3 = new Powerup(this, 800, 5, 0, "Paddle Increase", Color.GREEN);
-				return powerup3; 
+				probsAns = probs.checkPowerup(3);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Paddle Increase");
+					Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase", Color.GREEN);
+					//Powerup powerup3 = new Powerup(this, 800, 5, 0, "Paddle Increase", Color.GREEN);
+					return powerup3;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 2:
-				System.out.println("Powerup Gained: " + "Ball Increase");
-				Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase", Color.GREEN);
-				return powerup2; 
+				probsAns = probs.checkPowerup(2);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Ball Increase");
+					Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase", Color.GREEN);
+					return powerup2;
+				}
+				return generatePowerup(currentBrick);
+				
 			case 1:
-				System.out.println("Powerup Gained: " + "Magnet");
-				Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet", Color.GREEN);
-				return powerup1; 
+				probsAns = probs.checkPowerup(1);
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Magnet");
+					Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet", Color.GREEN);
+					return powerup1;
+				}
+				return generatePowerup(currentBrick);
+				
 			default:
 				break;
 	}
@@ -643,6 +747,9 @@ public class Game extends JPanel {
 		droppedPowerups.clear();
 		hasFireball = false;
 		hasMetalPower = false;
+		hasInsanityMode = false;
+		hasBoreyMode = false;
+		hasMagnet = false;
 		hasShot = false;
 		missileCount = 0;
 		missiles.clear();

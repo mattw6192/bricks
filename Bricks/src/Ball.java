@@ -101,6 +101,9 @@ public class Ball {
 					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;
+					Game.hasInsanityMode = false;
+					Game.hasBoreyMode = false;
+					Game.hasMagnet = false;
 					Game.droppedPowerups.clear();
 					Game.activeBalls.clear();
 					Game.activeBalls.add(this);

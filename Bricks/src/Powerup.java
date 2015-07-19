@@ -223,6 +223,7 @@ public class Powerup {
 				powerupEnd();
 				break;
 			case 15: // Insanity Mode
+				game.hasInsanityMode = true;
 				game.racquet.setRacquetMods(-4);
 				game.racquet.setWIDTH(24);
 				game.hasFireball = false;
@@ -247,6 +248,7 @@ public class Powerup {
 					public void actionPerformed(ActionEvent evt) {
 						System.out.println("Amazing! You Survived!!! - 10,000 Points!!!");
 						game.Score += 10000;
+						game.hasInsanityMode = false;
 						game.racquet.setRacquetMods(0);
 						game.racquet.setWIDTH(60);
 						for (int i=0; i< Game.activeBalls.size(); i++){	
@@ -566,11 +568,13 @@ public class Powerup {
 
 				break; 
 			case 1: // Magnet
+				game.hasMagnet = true;
 				int delay = 30000; // milliseconds
 				powerupEnd(); // remove the powerup from available powerups display
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hold = false;
+						game.hasMagnet = true;
 				        System.out.println("Powerup Ended");
 				        
 				    }
