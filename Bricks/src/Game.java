@@ -792,6 +792,7 @@ public class Game extends JPanel {
 	
 	public static void nextRound(Game thisGame){
 		overwritePowerupLimits = false;
+		probs.needsCollisions = false;
 		Ball saveBall = activeBalls.get(0);
 		saveBall.setX(thisGame.racquet.getBounds().x);
 		saveBall.setY(thisGame.racquet.getBounds().y - 10);

@@ -99,6 +99,7 @@ public class Ball {
 					System.out.println("Lives left: " + game.Lives);
 					speed = 2;
 					game.overwritePowerupLimits = false;
+					game.probs.needsCollisions = false;
 					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;

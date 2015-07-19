@@ -3,6 +3,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class SidebarMenu extends JPanel {
@@ -13,6 +15,7 @@ public class SidebarMenu extends JPanel {
 	JLabel lblLives;
 	JLabel lblActivePowerups;
 	JLabel lblPowerups;
+	private JButton btnExit;
 
 	/**
 	 * Create the panel.
@@ -55,6 +58,15 @@ public class SidebarMenu extends JPanel {
 		lblPowerups = new JLabel("None");
 		lblPowerups.setBounds(29, 171, 293, 67);
 		add(lblPowerups);
+		
+		btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		btnExit.setBounds(191, 520, 117, 52);
+		add(btnExit);
 
 	}
 }
