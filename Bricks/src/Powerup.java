@@ -172,7 +172,7 @@ public class Powerup {
 				game.droppedPowerups.remove(this);
 				break; 
 			case 18: // Lose Extra Points
-				int rand = Game.randInt(0,10);
+				int rand = Game.probs.randInt(0,10);
 				if (rand <= 3){ // Removes 1% of points
 					game.Score -= game.Score * 0.1;
 				}else if (rand <= 6){ // removes 5% of points
@@ -185,7 +185,7 @@ public class Powerup {
 				powerupEnd();
 				break;
 			case 17: // Gain Extra Points
-				int randomNum = Game.randInt(0,10);
+				int randomNum = Game.probs.randInt(0,10);
 				if (randomNum <= 5){ // add 1,000 points
 					game.Score += 1000;
 				}else if (randomNum <= 8){ // add 2,500 points

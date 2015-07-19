@@ -98,6 +98,7 @@ public class Ball {
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 2;
+					game.overwritePowerupLimits = false;
 					Game.hold = false;
 					Game.hasFireball = false;
 					Game.hasMetalPower = false;

@@ -80,8 +80,10 @@ public class Game extends JPanel {
 	static Game TempGame;
 	int saveTempScore = Score;
 	static startMenu4 menu;
-	static Probability probs; 
+	static Probability probs;
+	static Timer collisionTimer; 
 	private boolean probsAns;
+	static boolean overwritePowerupLimits = false;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -368,7 +370,17 @@ public class Game extends JPanel {
 		//frame.setLocationRelativeTo(game);
 		probs = new Probability(TempGame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		// Action Listener
+		ActionListener collisionDetection = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				probs.needsCollisions = true;
+				overwritePowerupLimits = true;
+			}
+		};
+		int collisionDuration = 30000; //milliseconds
+		collisionTimer = new Timer(collisionDuration, collisionDetection);
+		collisionTimer.setRepeats(false);
+		collisionTimer.start();
 		
 		while (true) { //game loop
 			if (!isPaused){
@@ -399,6 +411,8 @@ public class Game extends JPanel {
 			for (int j = 0; j<activeBalls.size(); j++){
 				for(int i = 0; i<allBricks.size(); i++){ 
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
+						collisionTimer.stop();
+						collisionTimer.restart();
 						final Brick saveBrickForAction = allBricks.get(i);
 						Score += (10 * pointMultiplier);
 						//sactiveBalls.get(j).xa = activeBalls.get(j).xa * (-1);
@@ -426,7 +440,7 @@ public class Game extends JPanel {
 							}
 						}
 					    
-					    boolean havePowerup = game.getPowerup();
+					    boolean havePowerup = game.probs.getPowerup();
 					    if (havePowerup == true){
 					    	Powerup savePower = game.generatePowerup(allBricks.get(i));
 					    	droppedPowerups.add(savePower);
@@ -468,6 +482,7 @@ public class Game extends JPanel {
 			Thread.sleep(10);
 		}   // else statement contains pause feature
 			else{
+				collisionTimer.stop();
 				Thread.sleep(100);
 				frame.setTitle("Game Paused: Press space to continue");
 			}
@@ -508,37 +523,10 @@ public class Game extends JPanel {
 	}
 	
 	
-	public static int randInt(int min, int max) {
-	    int randomNum = randNum.nextInt((max - min) + 1) + min;
-	    return randomNum;
-	}
 	
-	public boolean getPowerup(){
-		int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
-		//int tempRandNum = 7; // use this to automatically receive a powerup everytime a brick is hit by a ball
-		if (tempRandNum == 7 || tempRandNum == 2){ 
-			int delay = 1000; //milliseconds
-			ActionListener taskPerformer = new ActionListener() {
-				public void actionPerformed(ActionEvent evt) {
-					powerupsEnabled = true;
-			    }
-			};
-			
-			if (powerupsEnabled == true){
-				powerupsEnabled = false;
-				Timer timer = new Timer(delay, taskPerformer);
-				timer.setRepeats(false);
-				timer.start();
-				return true;
-			}else{
-				return false;
-			}
-		}
-		return false;	
-	}
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = randInt(1,19); 
+		int tempRandNum2 = probs.checkConditions(probs.randInt(1,100)); 
 		//int tempRandNum2 = randInt(7,10);
 		//int tempRandNum2 = 14;
 		switch(tempRandNum2){
@@ -737,6 +725,7 @@ public class Game extends JPanel {
 	}
 	
 	public static void nextRound(Game thisGame){
+		overwritePowerupLimits = false;
 		Ball saveBall = activeBalls.get(0);
 		saveBall.setX(thisGame.racquet.getBounds().x);
 		saveBall.setY(thisGame.racquet.getBounds().y - 10);
