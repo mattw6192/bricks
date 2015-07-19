@@ -1,6 +1,9 @@
 import java.applet.AudioClip;
+import java.awt.BorderLayout;
 import java.awt.Color; 
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.List;
@@ -30,10 +33,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import javax.swing.Box;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class Game extends JPanel {
@@ -84,6 +93,7 @@ public class Game extends JPanel {
 	static Timer collisionTimer; 
 	private boolean probsAns;
 	static boolean overwritePowerupLimits = false;
+	static SidebarMenu sideMenu;
 
 	public Game() { 
 		activeBalls.add(ball);
@@ -330,6 +340,7 @@ public class Game extends JPanel {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
+		sideMenu = new SidebarMenu();
 		TempGame = game;
 		menu = new startMenu4(frame, true);
 		
@@ -357,16 +368,33 @@ public class Game extends JPanel {
 	        }
         }
         if (menu.getStart() == true){
-        	Round1 round = new Round1(TempGame);
+        	Round2 round = new Round2(TempGame);
         	frame.setVisible(true);
         	menu.setStart(false);
         }
         
         colorBricks();
 		
-		frame.add(game);
-		frame.setSize(855, 600);
-		frame.setLocation(300, 50);
+        JPanel container = new JPanel();
+        container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+        //container.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        game.setSize(515, 600);
+        
+        game.setPreferredSize(game.getSize());
+        game.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        sideMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        sideMenu.setSize(100,600);
+        //panel1.set[Preferred/Maximum/Minimum]Size()
+
+        container.add(game);
+        //container.add(Box.createHorizontalGlue());
+        container.add(sideMenu);
+        //container.setDefaultLocale(gam);
+        frame.getContentPane().add(container);
+		//frame.getContentPane().add(game);
+		//frame.getContentPane().add(menu);
+		frame.setSize(1200, 600);
+		frame.setLocation(100, 50);
 		//frame.setLocationRelativeTo(game);
 		probs = new Probability(TempGame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -387,15 +415,53 @@ public class Game extends JPanel {
 				if (Game.missileCount == 0){
 					if (Game.droppedPowerups.size() > 0){ 
 					frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
+					sideMenu.lblLevel.setText("Level " + Game.Round);
+					sideMenu.lblScore.setText("Score: " + Score);
+					sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
+					sideMenu.lblMissiles.setVisible(false);
+					if (Game.droppedPowerups.isEmpty()){
+						sideMenu.lblPowerups.setText("None");
+					}else{
+						sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
+					}
 					}
 					else{
 						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
+						sideMenu.lblLevel.setText("Level " + Game.Round);
+						sideMenu.lblScore.setText("Score: " + Score);
+						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
+						sideMenu.lblMissiles.setVisible(false);
+						if (Game.droppedPowerups.isEmpty()){
+							sideMenu.lblPowerups.setText("None");
+						}else{
+							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
+						}
 					}
 				}else{
 					if (Game.droppedPowerups.size() > 0){ 
 						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
+						sideMenu.lblLevel.setText("Level " + Game.Round);
+						sideMenu.lblScore.setText("Score: " + Score);
+						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
+						sideMenu.lblMissiles.setText("Missiles: " + missileCount);
+						sideMenu.lblMissiles.setVisible(true);
+						if (Game.droppedPowerups.isEmpty()){
+							sideMenu.lblPowerups.setText("None");
+						}else{
+							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
 						}
+					}
 						else{
+							sideMenu.lblLevel.setText("Level " + Game.Round);
+							sideMenu.lblScore.setText("Score: " + Score);
+							sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
+							sideMenu.lblMissiles.setVisible(true);
+							sideMenu.lblMissiles.setText("Missiles: " + missileCount);
+							if (Game.droppedPowerups.isEmpty()){
+								sideMenu.lblPowerups.setText("None");
+							}else{
+								sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
+							}
 							frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
 						}
 				}
