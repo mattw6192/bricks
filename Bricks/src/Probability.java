@@ -74,7 +74,6 @@ public class Probability {
 				}
 				return false;
 			}else if (powerupNum == 14){
-				System.out.println("Made it");
 				if (Game.hasGun == false){
 					return true;
 				}
