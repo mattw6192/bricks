@@ -32,16 +32,20 @@ public class SidebarMenu extends JPanel {
 		add(txtMenu);
 		txtMenu.setColumns(10);
 		
-		final JButton btnTest = new JButton("Mute/Unmute Sound");
+		final JButton btnTest = new JButton("Mute Sound");
 		btnTest.setBounds(6, 46, 303, 29);
 		btnTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Sound.isMuted==false){
 					Sound.isMuted=true;
+					btnTest.setText("Unmute Sound");
 				}
-				else{Sound.isMuted=false;}
-				
-				
+				else{
+					Sound.isMuted=false;
+					btnTest.setText("Mute Sound");
+				}
+				btnTest.transferFocus();
+				btnExit.transferFocus();
 			}
 		});
 		add(btnTest);
