@@ -414,19 +414,16 @@ public class Game extends JPanel {
 			if (!isPaused){
 				if (Game.missileCount == 0){
 					if (Game.droppedPowerups.size() > 0){ 
-					frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString());
-					sideMenu.lblLevel.setText("Level " + Game.Round);
-					sideMenu.lblScore.setText("Score: " + Score);
-					sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
-					sideMenu.lblMissiles.setVisible(false);
-					if (Game.droppedPowerups.isEmpty()){
-						sideMenu.lblPowerups.setText("None");
+						sideMenu.lblLevel.setText("Level " + Game.Round);
+						sideMenu.lblScore.setText("Score: " + Score);
+						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
+						sideMenu.lblMissiles.setVisible(false);
+						if (Game.droppedPowerups.isEmpty()){
+							sideMenu.lblPowerups.setText("None");
+						}else{
+							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
+						}
 					}else{
-						sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
-					}
-					}
-					else{
-						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None");
 						sideMenu.lblLevel.setText("Level " + Game.Round);
 						sideMenu.lblScore.setText("Score: " + Score);
 						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
@@ -439,7 +436,6 @@ public class Game extends JPanel {
 					}
 				}else{
 					if (Game.droppedPowerups.size() > 0){ 
-						frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+Game.droppedPowerups.toString() + "    Missiles: " + missileCount);
 						sideMenu.lblLevel.setText("Level " + Game.Round);
 						sideMenu.lblScore.setText("Score: " + Score);
 						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
@@ -450,8 +446,7 @@ public class Game extends JPanel {
 						}else{
 							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
 						}
-					}
-						else{
+					}else{
 							sideMenu.lblLevel.setText("Level " + Game.Round);
 							sideMenu.lblScore.setText("Score: " + Score);
 							sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
@@ -462,7 +457,7 @@ public class Game extends JPanel {
 							}else{
 								sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
 							}
-							frame.setTitle("Level " + Game.Round +"     Lives: " + Game.getLifeString() + "   Score: " + Score  + "           Available Powerups:  "+"None" + "    Missiles: " + missileCount);
+							
 						}
 				}
 			game.move();
