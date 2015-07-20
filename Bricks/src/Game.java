@@ -123,7 +123,7 @@ public class Game extends JPanel {
 					 
 					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
-						 Sound.missile.play();
+						 Sound.Play(Sound.missile);
 						 Game.missiles.get(0).setX(racquet.getX() + 25);
 						 Game.missileCount = Game.missileCount - 1;
 						 hasShot = true;
@@ -483,15 +483,15 @@ public class Game extends JPanel {
 							}}
 							
 						if (hasFireball == true && allBricks.get(i).canBeHit == true){
-							Sound.BrickHit.play();
+							Sound.Play(Sound.BrickHit);
 							allBricks.get(i).subtractAllHits();
 						}else if(hasMetalPower == true && allBricks.get(i).canBeHit == true){
 							allBricks.get(i).subtractTwoHits(); // metal ball subtracts two hits
-							Sound.BrickHit.play();
+							Sound.Play(Sound.BrickHit);
 						}else{
 							if (allBricks.get(i).canBeHit == true){
 								allBricks.get(i).subtractHit(); // this is where im subtracting a hit from brick
-								Sound.BrickHit.play();
+								Sound.Play(Sound.BrickHit);
 							}
 						}
 					    

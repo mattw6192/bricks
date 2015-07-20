@@ -640,7 +640,7 @@ public class Powerup {
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
-			Sound.Powerup.play();
+			Sound.Play(Sound.Powerup);
 			setActive(true);
 			setXa(0);
 			setYa(0);

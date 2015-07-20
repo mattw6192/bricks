@@ -3,6 +3,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -31,8 +32,18 @@ public class SidebarMenu extends JPanel {
 		add(txtMenu);
 		txtMenu.setColumns(10);
 		
-		JButton btnTest = new JButton("Mute Sound (No Code)");
+		final JButton btnTest = new JButton("Mute/Unmute Sound");
 		btnTest.setBounds(6, 46, 303, 29);
+		btnTest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Sound.isMuted==false){
+					Sound.isMuted=true;
+				}
+				else{Sound.isMuted=false;}
+				
+				
+			}
+		});
 		add(btnTest);
 		
 		lblLevel = new JLabel("Level: ");

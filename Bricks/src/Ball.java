@@ -132,7 +132,7 @@ public class Ball {
 			if (game.hold == true){
 				game.started = false;
 			}
-			Sound.BALL.play();
+			Sound.Play(Sound.BALL);
 			y = game.racquet.getTopY() - DIAMETER;
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
