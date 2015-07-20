@@ -57,6 +57,7 @@ public class Game extends JPanel {
 	static int Score = 000000;
 	static Boolean hold = false;
 	static ArrayList<Powerup> droppedPowerups = new ArrayList<Powerup>();
+	static ArrayList<Powerup> currentPowerups = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
@@ -535,11 +536,14 @@ public class Game extends JPanel {
 				}	
 		}
 			Thread.sleep(10);
+			frame.setTitle("Brick Breaker");
+			sideMenu.btnPause.setText("Pause Game");
 		}   // else statement contains pause feature
 			else{
 				collisionTimer.stop();
 				Thread.sleep(100);
 				frame.setTitle("Game Paused: Press space to continue");
+				sideMenu.btnPause.setText("Resume Game");
 			}
 		}
 	}

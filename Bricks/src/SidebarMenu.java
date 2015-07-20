@@ -17,6 +17,7 @@ public class SidebarMenu extends JPanel {
 	JLabel lblActivePowerups;
 	JLabel lblPowerups;
 	private JButton btnExit;
+	JButton btnPause;
 
 	/**
 	 * Create the panel.
@@ -32,6 +33,22 @@ public class SidebarMenu extends JPanel {
 		add(txtMenu);
 		txtMenu.setColumns(10);
 		
+		btnPause = new JButton("Pause");
+		btnPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (Game.isPaused==false){
+					Game.isPaused=true;
+					btnPause.setText("Resume Game");
+				}
+				else{
+					Game.isPaused=false;
+					btnPause.setText("Pause Game");
+				}
+				btnPause.transferFocus();
+				btnExit.transferFocus();
+			}
+		});
+		
 		final JButton btnTest = new JButton("Mute Sound");
 		btnTest.setBounds(6, 46, 303, 29);
 		btnTest.addActionListener(new ActionListener() {
@@ -45,6 +62,7 @@ public class SidebarMenu extends JPanel {
 					btnTest.setText("Mute Sound");
 				}
 				btnTest.transferFocus();
+				btnPause.transferFocus();
 				btnExit.transferFocus();
 			}
 		});
@@ -82,6 +100,10 @@ public class SidebarMenu extends JPanel {
 		});
 		btnExit.setBounds(191, 520, 117, 52);
 		add(btnExit);
+		
+		
+		btnPause.setBounds(29, 520, 117, 52);
+		add(btnPause);
 
 	}
 }
