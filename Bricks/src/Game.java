@@ -377,22 +377,16 @@ public class Game extends JPanel {
 		
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
-        //container.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         game.setSize(515, 600);
         
         game.setPreferredSize(game.getSize());
         game.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         sideMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         sideMenu.setSize(100,600);
-        //panel1.set[Preferred/Maximum/Minimum]Size()
 
         container.add(game);
-        //container.add(Box.createHorizontalGlue());
         container.add(sideMenu);
-        //container.setDefaultLocale(gam);
         frame.getContentPane().add(container);
-		//frame.getContentPane().add(game);
-		//frame.getContentPane().add(menu);
 		frame.setSize(1200, 600);
 		frame.setLocation(100, 50);
 		//frame.setLocationRelativeTo(game);
