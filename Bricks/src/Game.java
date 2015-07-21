@@ -57,7 +57,7 @@ public class Game extends JPanel {
 	static int Score = 000000;
 	static Boolean hold = false;
 	static ArrayList<Powerup> droppedPowerups = new ArrayList<Powerup>();
-	static ArrayList<Powerup> currentPowerups = new ArrayList<Powerup>();
+	static ArrayList<Powerup> activePowerups = new ArrayList<Powerup>();
 	static int pointMultiplier = 1;
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
@@ -408,53 +408,30 @@ public class Game extends JPanel {
 		while (true) { //game loop
 			if (!isPaused){
 				if (Game.missileCount == 0){
-					if (Game.droppedPowerups.size() > 0){ 
-						sideMenu.lblLevel.setText("Level " + Game.Round);
-						sideMenu.lblScore.setText("Score: " + Score);
-						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
-						sideMenu.lblMissiles.setVisible(false);
-						if (Game.droppedPowerups.isEmpty()){
-							sideMenu.lblPowerups.setText("None");
-						}else{
-							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
-						}
+					  sideMenu.lblMissiles.setVisible(false);
 					}else{
-						sideMenu.lblLevel.setText("Level " + Game.Round);
-						sideMenu.lblScore.setText("Score: " + Score);
-						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
-						sideMenu.lblMissiles.setVisible(false);
-						if (Game.droppedPowerups.isEmpty()){
-							sideMenu.lblPowerups.setText("None");
-						}else{
-							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
-						}
+					  sideMenu.lblMissiles.setVisible(true);
+					  sideMenu.lblMissiles.setText("Missiles: " + missileCount);
 					}
-				}else{
-					if (Game.droppedPowerups.size() > 0){ 
-						sideMenu.lblLevel.setText("Level " + Game.Round);
-						sideMenu.lblScore.setText("Score: " + Score);
-						sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
-						sideMenu.lblMissiles.setText("Missiles: " + missileCount);
-						sideMenu.lblMissiles.setVisible(true);
-						if (Game.droppedPowerups.isEmpty()){
-							sideMenu.lblPowerups.setText("None");
-						}else{
-							sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
-						}
+
+					if (Game.droppedPowerups.size() > 0){
+					  sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
 					}else{
-							sideMenu.lblLevel.setText("Level " + Game.Round);
-							sideMenu.lblScore.setText("Score: " + Score);
-							sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
-							sideMenu.lblMissiles.setVisible(true);
-							sideMenu.lblMissiles.setText("Missiles: " + missileCount);
-							if (Game.droppedPowerups.isEmpty()){
-								sideMenu.lblPowerups.setText("None");
-							}else{
-								sideMenu.lblPowerups.setText(Game.droppedPowerups.toString());
-							}
-							
-						}
-				}
+					  sideMenu.lblPowerups.setText("None");
+					}
+
+					if (Game.activePowerups.size() > 0){
+					  sideMenu.lblactivePowerups.setVisible(true);
+					  sideMenu.lblCurrentPowerups.setVisible(true); 
+					  sideMenu.lblactivePowerups.setText(Game.activePowerups.toString());
+					}else{
+					  sideMenu.lblactivePowerups.setVisible(false);
+					  sideMenu.lblCurrentPowerups.setVisible(false);  
+					}
+
+					sideMenu.lblLevel.setText("Level " + Game.Round);
+					sideMenu.lblScore.setText("Score: " + Score);
+					sideMenu.lblLives.setText("Lives: " + Game.getLifeString());
 			game.move();
 			game.repaint();
 			

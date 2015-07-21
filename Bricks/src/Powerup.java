@@ -43,7 +43,7 @@ public class Powerup {
 	
 	public void Fireball(int timeDelay){
 		Game.hasFireball = true;
-		powerupEnd(); // remove the powerup from available powerups display
+		//powerupEnd(); // remove the powerup from available powerups display
 		game.droppedPowerups.remove(this);
 		for (int i=0; i<Game.activeBalls.size();i++){
 			final Ball saveBall = Game.activeBalls.get(i);
@@ -80,6 +80,7 @@ public class Powerup {
 					Game.hasFireball = false;
 			        System.out.println("Powerup Ended");
 			        saveBall.setColor(Color.BLACK);
+			        powerupEnd();
 			    }
 			};
 			Timer timer3 = new Timer(timeDelay, taskPerformer3);
@@ -293,6 +294,7 @@ public class Powerup {
 						public void actionPerformed(ActionEvent evt){
 							Game.hasGun = false;
 							timeShot.stop();
+							powerupEnd();
 						}
 					};
 					
@@ -312,6 +314,7 @@ public class Powerup {
 					powerupEnd();
 				}else{
 					game.droppedPowerups.remove(this);
+					powerupEnd();
 					System.out.println("You have reached the maximum number of missiles.");
 				}
 				break;
@@ -337,6 +340,7 @@ public class Powerup {
 					game.droppedPowerups.remove(this);
 					System.out.println("The Maximum Limit of lives has been reached");
 				}
+				powerupEnd();
 				break;
 				
 			case 11: // Metal Ball - deals two hits
@@ -354,6 +358,7 @@ public class Powerup {
 								Game.hasMetalPower = false;
 								saveBall.setColor(Color.BLACK);
 						        System.out.println("Powerup Ended");
+						        powerupEnd();
 						    }
 						};
 						Timer timer4 = new Timer(delay4, taskPerformer4);
@@ -375,7 +380,7 @@ public class Powerup {
 					Game.pointMultiplier = Game.pointMultiplier * 2;
 					System.out.println("Double Points - New Multiplier "  + Game.pointMultiplier);
 					int delay2 = 30000; //milliseconds
-					powerupEnd(); // remove the powerup from available powerups display
+					//powerupEnd(); // remove the powerup from available powerups display
 
 					
 					// End the powerup after the timer finishes
@@ -385,6 +390,7 @@ public class Powerup {
 								Game.pointMultiplier = Game.pointMultiplier / 2;
 							}
 							System.out.println("Powerup Ended");
+							powerupEnd();
 						}
 					};
 
@@ -393,6 +399,7 @@ public class Powerup {
 					timer2.start();
 					
 				}else{
+					powerupEnd();
 					System.out.println("Powerup Not Activated: Current Multiplier is Maxed Out");
 				}
 				
@@ -424,9 +431,11 @@ public class Powerup {
 					}
 					else{
 						game.droppedPowerups.remove(this);
+						powerupEnd();
 						System.out.println("Powerup not available - the ball size is too low.");
 					}
 				}
+				powerupEnd();
 				break; 
 				
 			case 7: // Multiple Balls
@@ -444,7 +453,7 @@ public class Powerup {
 					ActionListener smallPaddleDisplay = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							System.out.println("Powerup Ended");
-							
+							powerupEnd();
 						}
 					};
 					int smallPaddleDisplayDuration = 3000; // milliseconds
@@ -454,6 +463,7 @@ public class Powerup {
 					
 				}
 				else{
+					powerupEnd();
 					game.droppedPowerups.remove(this);
 					System.out.println("Powerup not available - the racquet size is too low.");
 				}
@@ -539,7 +549,7 @@ public class Powerup {
 				Timer largerPaddleDisplay = new Timer(largerPaddleDisplayDuration, largerPaddleDisplayEnd);
 				largerPaddleDisplay.setRepeats(false);
 				largerPaddleDisplay.start();
-		
+				powerupEnd();
 				break; 
 			case 2: // Larger Ball
 				
@@ -570,13 +580,14 @@ public class Powerup {
 			case 1: // Magnet
 				game.hasMagnet = true;
 				int delay = 30000; // milliseconds
-				powerupEnd(); // remove the powerup from available powerups display
+				game.droppedPowerups.remove(this);
+				//powerupEnd(); // remove the powerup from available powerups display
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						game.hold = false;
 						game.hasMagnet = true;
 				        System.out.println("Powerup Ended");
-				        
+				        powerupEnd();
 				    }
 				};
 				Timer timer = new Timer(delay, taskPerformer);
@@ -605,6 +616,7 @@ public class Powerup {
 	public void powerupEnd(){
 		active = false;
 		Game.droppedPowerups.remove(this);
+		Game.activePowerups.remove(this);
 	}
 	
 	public int getPowerNum(){
@@ -640,6 +652,7 @@ public class Powerup {
 		if (collision()){
 			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
 			// This conditional check for collisions with the right side of the racquet
+			game.activePowerups.add(this);
 			Sound.Play(Sound.Powerup);
 			setActive(true);
 			setXa(0);

@@ -18,6 +18,8 @@ public class SidebarMenu extends JPanel {
 	JLabel lblPowerups;
 	private JButton btnExit;
 	JButton btnPause;
+	JLabel lblCurrentPowerups;
+	JLabel lblactivePowerups;
 
 	/**
 	 * Create the panel.
@@ -104,6 +106,14 @@ public class SidebarMenu extends JPanel {
 		
 		btnPause.setBounds(29, 520, 117, 52);
 		add(btnPause);
+		
+		lblCurrentPowerups = new JLabel("Current Powerups:");
+		lblCurrentPowerups.setBounds(29, 237, 144, 16);
+		add(lblCurrentPowerups);
+		
+		lblactivePowerups = new JLabel("None");
+		lblactivePowerups.setBounds(29, 237, 293, 67);
+		add(lblactivePowerups);
 
 	}
 }
