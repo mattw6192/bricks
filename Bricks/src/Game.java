@@ -156,23 +156,24 @@ public class Game extends JPanel {
 			for (int i =0; i<activeBalls.size(); i++){
 				activeBalls.get(i).move();
 			}
-			if (hasShot == true && Game.missiles.size()>0){
-				//for (Missile m : Game.missiles){
-				//for (int i = 0; i<missiles.size();i++){
-					missiles.get(0).move();
-				//}
-			}
-			if (bullets.size()>0){
-				for (int i = 0; i < bullets.size(); i++){
-					bullets.get(i).move();
-				}
-			}
+			
 			//hold = false;
 		}
 		else{
 			for (int i =0; i<activeBalls.size(); i++){
 				activeBalls.get(i).setX((int) racquet.getBounds().getX() + (int) (racquet.getBounds().getWidth() / 2));
 				activeBalls.get(i).setY((int) racquet.getBounds().getY() - (int) (activeBalls.get(i).DIAMETER));
+			}
+		}
+		if (hasShot == true && Game.missiles.size()>0){
+			//for (Missile m : Game.missiles){
+			//for (int i = 0; i<missiles.size();i++){
+				missiles.get(0).move();
+			//}
+		}
+		if (bullets.size()>0){
+			for (int i = 0; i < bullets.size(); i++){
+				bullets.get(i).move();
 			}
 		}
 		racquet.move();
