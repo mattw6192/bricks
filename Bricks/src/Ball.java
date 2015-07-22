@@ -94,6 +94,7 @@ public class Ball {
 					for (int i = 0; i < game.Lives;i++){ 
 						life += "*";
 					}
+					Game.hasSafetyNet = false;
 					Game.setLifeString(life);
 					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);

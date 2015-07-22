@@ -31,7 +31,7 @@ public class SidebarMenu extends JPanel {
 		txtMenu.setEditable(false);
 		txtMenu.setBounds(6, 6, 303, 28);
 		txtMenu.setHorizontalAlignment(SwingConstants.CENTER);
-		txtMenu.setText("Menu (UNDER CONSTRUCTION)");
+		txtMenu.setText("Menu");
 		add(txtMenu);
 		txtMenu.setColumns(10);
 		

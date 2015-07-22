@@ -137,6 +137,11 @@ public class Probability {
 					return true;
 				}
 				return false;
+			}else if (powerupNum == 20){
+				if (game.hasSafetyNet == false){
+					return true;
+				}
+				return false;
 			}
 			return false;
 		}
@@ -205,6 +210,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}
@@ -248,6 +255,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}
@@ -291,6 +300,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}
@@ -334,6 +345,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}
@@ -377,6 +390,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}
@@ -420,6 +435,8 @@ public class Probability {
 				return 18;
 			}else if (randInt <= 99){
 				return 19;
+			}else if (randInt <= 103){
+				return 20;
 			}
 			return 1;
 		}

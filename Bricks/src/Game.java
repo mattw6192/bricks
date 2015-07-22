@@ -58,6 +58,8 @@ public class Game extends JPanel {
 	static Boolean hold = false;
 	static ArrayList<Powerup> droppedPowerups = new ArrayList<Powerup>();
 	static ArrayList<Powerup> activePowerups = new ArrayList<Powerup>();
+	static ArrayList<SafetyNet> safetyList = new ArrayList<SafetyNet>();
+	static Boolean hasSafetyNet = false;
 	static int pointMultiplier = 1;
 	static Boolean hasFireball = false;
 	static Boolean hasMetalPower = false;
@@ -68,6 +70,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
+	
 	
 	static boolean isPaused = false; // true if user has paused the game
 	private static boolean hasQuit = false;  // true if user has quit the game
@@ -209,6 +212,11 @@ public class Game extends JPanel {
 		if (allBricks.isEmpty() == false){
 			for (int i=0; i<allBricks.size();i++){
 				allBricks.get(i).paint(g2d);
+			}
+		}
+		if (safetyList.isEmpty() == false){
+			for(int z = 0; z<safetyList.size(); z++){
+				safetyList.get(z).paint(g2d);
 			}
 		}
 		if (droppedPowerups.isEmpty() == false){
@@ -511,7 +519,16 @@ public class Game extends JPanel {
 							game.nextRoundMessage();
 						}
 					}
-				}	
+				}
+				for (int z = 0; z < safetyList.size();z++){ // checks if the ball hits the safet net
+					if (activeBalls.get(j).getBounds().intersects(safetyList.get(z).getBounds())){
+						activeBalls.get(j).setYa(activeBalls.get(j).getYa() * -1);
+						activeBalls.get(j).setY(safetyList.get(z).getTopY() - activeBalls.get(j).DIAMETER -1);
+						safetyList.get(z).checkHits();
+						
+						
+					}
+				}
 		}
 			Thread.sleep(10);
 			frame.setTitle("Brick Breaker");
@@ -563,10 +580,19 @@ public class Game extends JPanel {
 	
 	
 	public Powerup generatePowerup(Brick currentBrick){
-		int tempRandNum2 = probs.checkConditions(probs.randInt(1,100)); 
+		int tempRandNum2 = probs.checkConditions(probs.randInt(0,103)); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 14;
+		//int tempRandNum2 = 20;
 		switch(tempRandNum2){
+			case 20:
+				probsAns = probs.checkPowerup(20);
+				probsAns = true;
+				if (probsAns == true){
+					System.out.println("Powerup Gained: " + "Safety Net");
+					Powerup powerup20 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Safety Net", Color.GREEN);
+					return powerup20;
+				}
+				return generatePowerup(currentBrick);
 			case 19:
 				probsAns = probs.checkPowerup(19);
 				if (probsAns == true){
@@ -762,6 +788,7 @@ public class Game extends JPanel {
 	}
 	
 	public static void nextRound(Game thisGame){
+		hasSafetyNet = false;
 		overwritePowerupLimits = false;
 		probs.needsCollisions = false;
 		Ball saveBall = activeBalls.get(0);

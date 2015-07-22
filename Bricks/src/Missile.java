@@ -94,10 +94,7 @@ void move() throws IOException {
 				Game.allBricks.get(i).subtractTwoHits();
 				Game.Score += 1;
 				
-				if (Game.allBricks.get(i).getHits() == 4){Game.allBricks.get(i).setColor(Color.BLACK);}
-				if (Game.allBricks.get(i).getHits() == 3){Game.allBricks.get(i).setColor(Color.BLUE);}
-				if (Game.allBricks.get(i).getHits() == 2){Game.allBricks.get(i).setColor(Color.GREEN);} // update the color
-				if (Game.allBricks.get(i).getHits() == 1){Game.allBricks.get(i).setColor(Color.YELLOW);} // for certain hit count
+				game.colorBricks();
 				
 				if (Game.allBricks.get(i).getHits() <= 0){ // remove a brick if its hit counter is 0
 					Game.hideBrick(Game.allBricks.get(i), Game.activeBalls.get(0));

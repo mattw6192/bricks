@@ -132,6 +132,18 @@ public class Powerup {
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
+			case 20: // Safety Net
+				if (game.hasSafetyNet == false){
+					game.hasSafetyNet = true;
+					SafetyNet safeNet = new SafetyNet(game);
+					game.safetyList.add(safeNet);
+					
+				}else{
+					game.activePowerups.remove(this);
+				}
+				game.droppedPowerups.remove(this);
+				//powerupEnd();
+				break;
 			case 19: // Golden Borey
 				if (game.hasBoreyMode == false){	
 					game.hasBoreyMode = true;
@@ -639,6 +651,7 @@ public class Powerup {
 		if (ability.equals("Gain Extra Points")){return 17;}
 		if (ability.equals("Lose Extra Points")){return 18;}
 		if (ability.equals("Golden Borey")){return 19;}
+		if (ability.equals("Safety Net")){return 20;}
 		return 0;
 	}
 	
