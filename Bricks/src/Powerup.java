@@ -364,6 +364,7 @@ public class Powerup {
 					for (int i=0; i<Game.activeBalls.size(); i++){
 						Game.activeBalls.get(i).setColor(Color.lightGray);
 						final Ball saveBall = Game.activeBalls.get(i);
+						saveBall.setColor(Color.LIGHT_GRAY);
 						int delay4 = 30000; //milliseconds
 						ActionListener taskPerformer4 = new ActionListener() {
 							public void actionPerformed(ActionEvent evt) {
