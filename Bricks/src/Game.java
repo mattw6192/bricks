@@ -70,6 +70,7 @@ public class Game extends JPanel {
 	static Random randNum = new Random();
 	Boolean powerupsEnabled = true;
 	static int Round = 1;
+	static int quickHits = 0;
 	
 	
 	static boolean isPaused = false; // true if user has paused the game
@@ -94,7 +95,8 @@ public class Game extends JPanel {
 	int saveTempScore = Score;
 	static startMenu4 menu;
 	static Probability probs;
-	static Timer collisionTimer; 
+	static Timer collisionTimer;
+	static Timer quickHitsTimer;
 	private boolean probsAns;
 	static boolean overwritePowerupLimits = false;
 	static SidebarMenu sideMenu;
@@ -128,7 +130,7 @@ public class Game extends JPanel {
 					 if (missiles.size()>0 && hasShot == false){
 						 //Game.fireMissile();
 						 Sound.Play(Sound.missile);
-						 Game.missiles.get(0).setX(racquet.getX() + 25);
+						 Game.missiles.get(0).setX(racquet.getX() + (racquet.getWIDTH()/2));
 						 Game.missileCount = Game.missileCount - 1;
 						 hasShot = true;
 						 //Game.missiles.remove(0);
@@ -402,10 +404,26 @@ public class Game extends JPanel {
 		//frame.setLocationRelativeTo(game);
 		probs = new Probability(TempGame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		ActionListener quickHitsDetection = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				if (quickHits >= 4){
+					probs.needsCollisions = false;
+					overwritePowerupLimits = false;
+				}
+				quickHits = 0;
+			}
+		};
+		int quickHitsDuration = 15000; //milliseconds
+		quickHitsTimer = new Timer(quickHitsDuration, quickHitsDetection);
+		quickHitsTimer.setRepeats(true);
+		
 		// Action Listener
 		ActionListener collisionDetection = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				probs.needsCollisions = true;
+				quickHitsTimer.start();
+				quickHits = 0; 
 				overwritePowerupLimits = true;
 			}
 		};
@@ -413,6 +431,8 @@ public class Game extends JPanel {
 		collisionTimer = new Timer(collisionDuration, collisionDetection);
 		collisionTimer.setRepeats(false);
 		collisionTimer.start();
+		
+		
 		
 		while (true) { //game loop
 			if (!isPaused){
@@ -453,6 +473,7 @@ public class Game extends JPanel {
 			for (int j = 0; j<activeBalls.size(); j++){
 				for(int i = 0; i<allBricks.size(); i++){ 
 					if (activeBalls.get(j).getBounds().intersects(allBricks.get(i).getBounds())){
+						quickHits += 1;
 						collisionTimer.stop();
 						collisionTimer.restart();
 						final Brick saveBrickForAction = allBricks.get(i);
@@ -520,7 +541,7 @@ public class Game extends JPanel {
 						}
 					}
 				}
-				for (int z = 0; z < safetyList.size();z++){ // checks if the ball hits the safet net
+				for (int z = 0; z < safetyList.size();z++){ // checks if the ball hits the safety net
 					if (activeBalls.get(j).getBounds().intersects(safetyList.get(z).getBounds())){
 						activeBalls.get(j).setYa(activeBalls.get(j).getYa() * -1);
 						activeBalls.get(j).setY(safetyList.get(z).getTopY() - activeBalls.get(j).DIAMETER -1);
@@ -588,7 +609,7 @@ public class Game extends JPanel {
 				probsAns = probs.checkPowerup(20);
 				probsAns = true;
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Safety Net");
+					//System.out.println("Powerup Gained: " + "Safety Net");
 					Powerup powerup20 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Safety Net", Color.GREEN);
 					return powerup20;
 				}
@@ -596,7 +617,7 @@ public class Game extends JPanel {
 			case 19:
 				probsAns = probs.checkPowerup(19);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Golden Borey");
+					//System.out.println("Powerup Gained: " + "Golden Borey");
 					Powerup powerup19 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Golden Borey", Color.GREEN);
 					return powerup19;
 				}
@@ -604,7 +625,7 @@ public class Game extends JPanel {
 			case 18:
 				probsAns = probs.checkPowerup(18);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Lose Extra Points");
+					//System.out.println("Powerup Gained: " + "Lose Extra Points");
 					Powerup powerup18 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose Extra Points", Color.RED);
 					return powerup18;
 				}
@@ -613,7 +634,7 @@ public class Game extends JPanel {
 			case 17:
 				probsAns = probs.checkPowerup(17);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Gain Extra Points");
+					//System.out.println("Powerup Gained: " + "Gain Extra Points");
 					Powerup powerup17 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Gain Extra Points", Color.GREEN);
 					return powerup17;
 				}
@@ -622,7 +643,7 @@ public class Game extends JPanel {
 			case 16:
 				probsAns = probs.checkPowerup(16);
 				if (probsAns == true){	
-					System.out.println("Powerup Gained: " + "Lose a Life");
+					//System.out.println("Powerup Gained: " + "Lose a Life");
 					Powerup powerup16 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Lose a Life", Color.RED);
 					return powerup16;
 				}
@@ -631,7 +652,7 @@ public class Game extends JPanel {
 			case 15:
 				probsAns = probs.checkPowerup(15);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Insanity Mode");
+					//System.out.println("Powerup Gained: " + "Insanity Mode");
 					Powerup powerup15 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Insanity Mode", Color.RED);
 					return powerup15;
 				}
@@ -640,7 +661,7 @@ public class Game extends JPanel {
 			case 14:
 				probsAns = probs.checkPowerup(14);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Machine Gun");
+					//System.out.println("Powerup Gained: " + "Machine Gun");
 					Powerup powerup14 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Machine Gun", Color.GREEN);
 					return powerup14;
 				}
@@ -649,28 +670,26 @@ public class Game extends JPanel {
 			case 13:
 				probsAns = probs.checkPowerup(13);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Missile");
+					//System.out.println("Powerup Gained: " + "Missile");
 					Powerup powerup13 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Missile", Color.GREEN);
 					return powerup13;
 				}
 				return generatePowerup(currentBrick);
 				
 			case 12:
-				
 				probsAns = probs.checkPowerup(12);
-				System.out.println("Made it here");
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Extra Life");
+					//System.out.println("Powerup Gained: " + "Extra Life");
 					Powerup powerup12 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Extra Life", Color.GREEN);
 					return powerup12;
 				}
-				System.out.println("Not Alloweed - Selecting New Powerup");
+				System.out.println("Not Allowed - Selecting New Powerup");
 				return generatePowerup(currentBrick);
 				
 			case 11:
 				probsAns = probs.checkPowerup(11);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Metal Ball");
+					//System.out.println("Powerup Gained: " + "Metal Ball");
 					Powerup powerup11 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Metal Ball", Color.GREEN);
 					return powerup11; 
 				}
@@ -679,7 +698,7 @@ public class Game extends JPanel {
 			case 10:
 				probsAns = probs.checkPowerup(10);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Fireball");
+					//System.out.println("Powerup Gained: " + "Fireball");
 					Powerup powerup10 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Fireball", Color.GREEN);
 					return powerup10;
 				}
@@ -688,7 +707,7 @@ public class Game extends JPanel {
 			case 9:
 				probsAns = probs.checkPowerup(9);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Double Points");
+					//System.out.println("Powerup Gained: " + "Double Points");
 					Powerup powerup9 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Double Points", Color.GREEN);
 					return powerup9; 
 				}
@@ -697,7 +716,7 @@ public class Game extends JPanel {
 			case 8:
 				probsAns = probs.checkPowerup(8);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Ball Decrease");
+					//System.out.println("Powerup Gained: " + "Ball Decrease");
 					Powerup powerup8 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Decrease", Color.WHITE);
 					return powerup8;
 				}
@@ -706,7 +725,7 @@ public class Game extends JPanel {
 			case 7:
 				probsAns = probs.checkPowerup(7);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Multiple Balls");
+					//System.out.println("Powerup Gained: " + "Multiple Balls");
 					Powerup powerup7 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Multiple Balls", Color.GREEN);
 					return powerup7;
 				}
@@ -715,7 +734,7 @@ public class Game extends JPanel {
 			case 6:
 				probsAns = probs.checkPowerup(6);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Paddle Decrease");
+					//System.out.println("Powerup Gained: " + "Paddle Decrease");
 					Powerup powerup6 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Decrease", Color.WHITE);
 					return powerup6;
 				}
@@ -724,7 +743,7 @@ public class Game extends JPanel {
 			case 5:
 				probsAns = probs.checkPowerup(5);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Slow Down");
+					//System.out.println("Powerup Gained: " + "Slow Down");
 					Powerup powerup5 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Slow Down", Color.WHITE);
 					return powerup5;
 				}
@@ -733,7 +752,7 @@ public class Game extends JPanel {
 			case 4:
 				probsAns = probs.checkPowerup(4);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Speed Up");
+					//System.out.println("Powerup Gained: " + "Speed Up");
 					Powerup powerup4 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Speed Up", Color.WHITE);
 					return powerup4;
 				}
@@ -742,7 +761,7 @@ public class Game extends JPanel {
 			case 3:
 				probsAns = probs.checkPowerup(3);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Paddle Increase");
+					//System.out.println("Powerup Gained: " + "Paddle Increase");
 					Powerup powerup3 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Paddle Increase", Color.GREEN);
 					//Powerup powerup3 = new Powerup(this, 800, 5, 0, "Paddle Increase", Color.GREEN);
 					return powerup3;
@@ -752,7 +771,7 @@ public class Game extends JPanel {
 			case 2:
 				probsAns = probs.checkPowerup(2);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Ball Increase");
+					//System.out.println("Powerup Gained: " + "Ball Increase");
 					Powerup powerup2 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Ball Increase", Color.GREEN);
 					return powerup2;
 				}
@@ -761,7 +780,7 @@ public class Game extends JPanel {
 			case 1:
 				probsAns = probs.checkPowerup(1);
 				if (probsAns == true){
-					System.out.println("Powerup Gained: " + "Magnet");
+					//System.out.println("Powerup Gained: " + "Magnet");
 					Powerup powerup1 = new Powerup(this, currentBrick.getBounds().x, currentBrick.getBounds().y, 0, "Magnet", Color.GREEN);
 					return powerup1;
 				}

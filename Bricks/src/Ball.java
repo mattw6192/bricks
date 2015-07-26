@@ -96,7 +96,6 @@ public class Ball {
 					}
 					Game.hasSafetyNet = false;
 					Game.setLifeString(life);
-					this.setColor(Color.BLACK);
 					System.out.println("Lives left: " + game.Lives);
 					speed = 2;
 					game.overwritePowerupLimits = false;
@@ -115,10 +114,9 @@ public class Ball {
 					game.racquet.setWIDTH(60);
 					game.racquet.racquetMods = 0;
 					game.racquet.setX(100);
-					this.setColor(Color.BLACK);
 					setX(20);
 					setY(320);
-					this.setColor(Color.BLACK);
+					//this.setColor(Color.BLACK);
 					game.hasShot = false;
 					game.bullets.clear();
 					game.hasGun = false;

@@ -14,17 +14,19 @@ public class SafetyNet {
 	private Color FILLCOLOR;
 	private int hitsLeft;
 	private Boolean ALIVE = true;
+	private Powerup thisParent;
 	
 
 	int racquetMods = 0;
 	// paddleMods represents the modifications made to the paddle length
 	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
 
-	public SafetyNet(Game game) {
+	public SafetyNet(Game game, Powerup parent) {
 		this.game = game;
 		setX(0);
 		FILLCOLOR = Color.LIGHT_GRAY;
 		hitsLeft = 2;
+		thisParent = parent;
 	}
 	
 	public void setRacquetMods(int num){
@@ -109,6 +111,8 @@ public class SafetyNet {
 	public void deleteNet(){
 		game.safetyList.remove(this);
 		game.activePowerups.remove(this);
+		game.hasSafetyNet = false;
+		game.activePowerups.remove(thisParent);
 	}
 	
 	public void checkHits(){

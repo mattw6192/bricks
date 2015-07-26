@@ -96,7 +96,7 @@ public class Probability {
 				}
 				return false;
 			}else if (powerupNum == 11){
-				if (game.hasMetalPower == false){
+				if (game.hasMetalPower == false && game.hasFireball){
 					return true;
 				}
 				return false;

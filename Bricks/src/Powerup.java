@@ -125,6 +125,7 @@ public class Powerup {
 		
 		else{
 			game.droppedPowerups.remove(this);
+			game.activePowerups.remove(this);
 			System.out.println("Powerup Not Enabled!: Too many balls currently in play.");
 		}
 	}
@@ -135,7 +136,7 @@ public class Powerup {
 			case 20: // Safety Net
 				if (game.hasSafetyNet == false){
 					game.hasSafetyNet = true;
-					SafetyNet safeNet = new SafetyNet(game);
+					SafetyNet safeNet = new SafetyNet(game, this);
 					game.safetyList.add(safeNet);
 					
 				}else{
@@ -173,14 +174,18 @@ public class Powerup {
 								Game.pointMultiplier = 1;
 								game.racquet.setWIDTH(60);
 								game.hasBoreyMode = false;
+								game.activePowerups.remove(this);
 						}
 							powerupEnd(); // remove the powerup from available powerups display
+							game.activePowerups.remove(this);
 						}
 					};
-					int boreyDuration = 45000; //milliseconds
+					int boreyDuration = 20000; //milliseconds
 					Timer boreyTimer = new Timer(boreyDuration, boreyMode);
 					boreyTimer.setRepeats(false);
 					boreyTimer.start();
+				}else{
+					game.activePowerups.remove(this);
 				}
 				game.droppedPowerups.remove(this);
 				break; 
@@ -231,6 +236,7 @@ public class Powerup {
 					
 				}else{
 					game.droppedPowerups.remove(this);
+					game.activePowerups.remove(this);
 					System.out.println("The Minimum Limit of lives has been reached");
 				}
 				powerupEnd();
@@ -273,6 +279,7 @@ public class Powerup {
 							Game.pointMultiplier = 1;
 					}
 						powerupEnd(); // remove the powerup from available powerups display
+						game.activePowerups.remove(this);
 					}
 				};
 				int DelayDuration = 60000; //milliseconds
@@ -306,6 +313,7 @@ public class Powerup {
 						public void actionPerformed(ActionEvent evt){
 							Game.hasGun = false;
 							timeShot.stop();
+							game.activePowerups.remove(this);
 							powerupEnd();
 						}
 					};
@@ -313,6 +321,8 @@ public class Powerup {
 					Timer gunTime = new Timer(timeForGun, endGun);
 					gunTime.setRepeats(false);
 					gunTime.start();
+				}else{
+					game.activePowerups.remove(this);
 				}
 				break;
 				
@@ -322,10 +332,11 @@ public class Powerup {
 					Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
 					Game.missiles.add(m);
 					game.setMissileCount(game.getMissileCount() + 1);
-					game.droppedPowerups.remove(m);
+					game.droppedPowerups.remove(this);
 					powerupEnd();
 				}else{
 					game.droppedPowerups.remove(this);
+					game.activePowerups.remove(this);
 					powerupEnd();
 					System.out.println("You have reached the maximum number of missiles.");
 				}
@@ -350,6 +361,7 @@ public class Powerup {
 					
 				}else{
 					game.droppedPowerups.remove(this);
+					game.activePowerups.remove(this);
 					System.out.println("The Maximum Limit of lives has been reached");
 				}
 				powerupEnd();
@@ -371,6 +383,7 @@ public class Powerup {
 								Game.hasMetalPower = false;
 								saveBall.setColor(Color.BLACK);
 						        System.out.println("Powerup Ended");
+						        game.activePowerups.remove(this);
 						        powerupEnd();
 						    }
 						};
@@ -378,6 +391,8 @@ public class Powerup {
 						timer4.setRepeats(false);
 						timer4.start();
 					}	
+				}else{
+					game.activePowerups.remove(this);
 				}
 				break;
 				
@@ -403,6 +418,7 @@ public class Powerup {
 								Game.pointMultiplier = Game.pointMultiplier / 2;
 							}
 							System.out.println("Powerup Ended");
+							game.activePowerups.remove(this);
 							powerupEnd();
 						}
 					};
@@ -413,6 +429,7 @@ public class Powerup {
 					
 				}else{
 					powerupEnd();
+					game.activePowerups.remove(this);
 					System.out.println("Powerup Not Activated: Current Multiplier is Maxed Out");
 				}
 				
@@ -498,7 +515,6 @@ public class Powerup {
 				}
 				powerupEnd(); // remove the powerup from available powerups display
 				
-				
 				ActionListener slowDownDisplayEnd = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						System.out.println("Powerup Ended");	
@@ -512,9 +528,6 @@ public class Powerup {
 				break; 
 				
 			case 4: // Speed Up
-				
-				
-				
 				for (int i=0; i< Game.activeBalls.size();i++){
 					if (Game.activeBalls.get(i).speed < 3.5){
 						Game.activeBalls.get(i).speed += 0.5;
@@ -600,6 +613,7 @@ public class Powerup {
 						game.hold = false;
 						game.hasMagnet = true;
 				        System.out.println("Powerup Ended");
+				        game.activePowerups.remove(this);
 				        powerupEnd();
 				    }
 				};
