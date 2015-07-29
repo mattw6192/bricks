@@ -302,6 +302,7 @@ public class Powerup {
 								MachineGun mgRight = new MachineGun(game,game.racquet.getX() + game.racquet.getWIDTH() - 10,game.racquet.getTopY());
 								Game.bullets.add(mgLeft);
 								Game.bullets.add(mgRight);
+								Sound.Play(Sound.machineGun);
 							}
 						}
 					};

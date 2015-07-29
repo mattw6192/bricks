@@ -6,6 +6,7 @@ public class Sound {
 	public static final AudioClip BrickHit = Applet.newAudioClip(Sound.class.getResource("sounds/Brick_Hit.wav"));
 	public static final AudioClip Powerup = Applet.newAudioClip(Sound.class.getResource("sounds/Powerup.wav"));
 	public static final AudioClip missile = Applet.newAudioClip(Sound.class.getResource("sounds/missile.wav"));
+	public static final AudioClip machineGun = Applet.newAudioClip(Sound.class.getResource("sounds/machineGun.wav"));
 	static boolean isMuted = false;
 	
 	//public Sound(){

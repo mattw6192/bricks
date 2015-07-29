@@ -603,7 +603,7 @@ public class Game extends JPanel {
 	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = probs.checkConditions(probs.randInt(0,103)); 
 		//int tempRandNum2 = randInt(7,10);
-		//int tempRandNum2 = 20;
+		//int tempRandNum2 = 14;
 		switch(tempRandNum2){
 			case 20:
 				probsAns = probs.checkPowerup(20);
