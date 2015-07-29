@@ -6,6 +6,9 @@ import java.awt.Color;
 import javax.swing.UIManager;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class PowerupInstructions extends JPanel {
@@ -58,6 +61,18 @@ public class PowerupInstructions extends JPanel {
 		txtrYouBetterLeave.setText("YOU BETTER LEAVE\nTHIS ONE ALONE BOY.\nIF YA KNOW WHATS \nGOOD FOR YA.");
 		txtrYouBetterLeave.setBounds(240, 264, 164, 75);
 		add(txtrYouBetterLeave);
+		
+		JButton btnIndividualPowerups = new JButton("Individual Powerups");
+		btnIndividualPowerups.setBounds(32, 347, 164, 29);
+		add(btnIndividualPowerups);
+		
+		JButton btnPlayGame = new JButton("Play Game");
+		btnPlayGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnPlayGame.setBounds(240, 347, 164, 29);
+		add(btnPlayGame);
 		
 		
 
