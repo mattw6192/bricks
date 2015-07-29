@@ -52,18 +52,18 @@ public class PowerupInstructions extends JPanel {
 		
 		JLabel lblI = new JLabel();
 		lblI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skull_and_bones2.png")));
-		lblI.setBounds(99, 264, 41, 25);
+		lblI.setBounds(99, 376, 41, 25);
 		add(lblI);
 		
 		JTextArea txtrYouBetterLeave = new JTextArea();
 		txtrYouBetterLeave.setEditable(false);
 		txtrYouBetterLeave.setBackground(UIManager.getColor("Button.background"));
 		txtrYouBetterLeave.setText("YOU BETTER LEAVE\nTHIS ONE ALONE BOY.\nIF YA KNOW WHATS \nGOOD FOR YA.");
-		txtrYouBetterLeave.setBounds(240, 264, 164, 75);
+		txtrYouBetterLeave.setBounds(240, 376, 164, 75);
 		add(txtrYouBetterLeave);
 		
 		JButton btnIndividualPowerups = new JButton("Individual Powerups");
-		btnIndividualPowerups.setBounds(32, 347, 164, 29);
+		btnIndividualPowerups.setBounds(32, 463, 164, 29);
 		add(btnIndividualPowerups);
 		
 		JButton btnPlayGame = new JButton("Play Game");
@@ -71,7 +71,7 @@ public class PowerupInstructions extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnPlayGame.setBounds(240, 347, 164, 29);
+		btnPlayGame.setBounds(240, 463, 164, 29);
 		add(btnPlayGame);
 		
 		
