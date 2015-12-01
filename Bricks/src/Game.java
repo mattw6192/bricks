@@ -102,6 +102,7 @@ public class Game extends JPanel {
 	static SidebarMenu sideMenu;
 
 	public Game() { 
+		this.requestFocus();
 		activeBalls.add(ball);
 		addKeyListener(new KeyListener() {
 			public void keyTyped(KeyEvent e) {
@@ -390,7 +391,6 @@ public class Game extends JPanel {
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
         game.setSize(515, 600);
-        
         game.setPreferredSize(game.getSize());
         game.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         sideMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -404,7 +404,7 @@ public class Game extends JPanel {
 		//frame.setLocationRelativeTo(game);
 		probs = new Probability(TempGame);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		game.grabFocus();
 		ActionListener quickHitsDetection = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (quickHits >= 4){
