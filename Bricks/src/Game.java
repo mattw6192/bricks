@@ -1,48 +1,29 @@
-import java.applet.AudioClip;
-import java.awt.BorderLayout;
 import java.awt.Color; 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.List;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
 
-import javax.print.attribute.standard.Media;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
-import javax.swing.Box;
-import javax.swing.JButton;
+
 
 @SuppressWarnings("serial")
 public class Game extends JPanel {
@@ -74,7 +55,7 @@ public class Game extends JPanel {
 	
 	
 	static boolean isPaused = false; // true if user has paused the game
-	private static boolean hasQuit = false;  // true if user has quit the game
+	//private static boolean hasQuit = false;  // true if user has quit the game
 	
 	static boolean hasShot = false; // missile stuff
 	static int missileCount = 0;   // missile stuff
@@ -243,7 +224,7 @@ public class Game extends JPanel {
 		BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
 	     String line = in.readLine();
 	     int numTracker = 0;
-	     String subLine = line.substring(2).trim();
+	     //String subLine = line.substring(2).trim();
 	     while(line != null){
 	       String[] ar=line.split(":");
 	       if (numTracker < 9){
