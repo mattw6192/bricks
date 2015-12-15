@@ -1,11 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
-import java.awt.Color;
 import javax.swing.UIManager;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
