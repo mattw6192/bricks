@@ -15,6 +15,12 @@ public class MachineGun {
 	static final int DIAMETER = 10; //was 10 when missile was red square (increasing diameter without overall size might enable destroying nearby bricks
 	public static BufferedImage image;
 
+	/**
+	 * initializes the information for the machine gun
+	 * @param game
+	 * @param X
+	 * @param Y
+	 */
 	public MachineGun(Game game, int X, int Y){
 		this.game = game;
 		this.x = X;
@@ -27,8 +33,12 @@ public class MachineGun {
 		}
 		
 	}
-	
-void move() throws IOException {
+
+	/**
+	 * moves the machine gun bullets
+	 * @throws IOException
+	 */
+	void move() throws IOException {
 		
 		
 		if (y - ya < - 150){
@@ -50,38 +60,75 @@ void move() throws IOException {
 		y = y - ya;
 	}
 
+	/**
+	 * returns the X coordinates of the machine gun
+	 * @return
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * sets the X coordinates of the machine gun
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * returns the Y coordinates of the machine gun
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * sets the Y coordinates of the machine gun
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * returns the delta (change) value of the X coordinates
+	 * @return
+	 */
 	public int getXa() {
 		return xa;
 	}
 
+	/**
+	 * sets the delta (change) value of the X coordinates
+	 * @param xa
+	 */
 	public void setXa(int xa) {
 		this.xa = xa;
 	}
 
+	/**
+	 * returns the delta (change) value of the Y coordinates
+	 * @return
+	 */
 	public int getYa() {
 		return ya;
 	}
 
+	/**
+	 * sets the delta (change) value of the Y coordinates
+	 * @param ya
+	 */
 	public void setYa(int ya) {
 		this.ya = ya;
 	}
 	
+	/**
+	 * checks for collisions with bricks
+	 * @return
+	 * @throws IOException
+	 */
 	private boolean collision() throws IOException {
 		if (Game.bullets.size()>0){
 			
@@ -118,10 +165,18 @@ void move() throws IOException {
 		}return false;
 	}
 	
+	/**
+	 * returns the bounds of the object
+	 * @return
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, DIAMETER, DIAMETER);
 	}
 	
+	/**
+	 * paints the object onto the screen
+	 * @param g
+	 */
 	public void paint(Graphics2D g) {
 		g.drawImage(image, x, y, null);
 		//g.setColor(Color.RED);

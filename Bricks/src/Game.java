@@ -132,10 +132,19 @@ public class Game extends JPanel {
 		});
 		setFocusable(true);
 	}
+	
+	/**
+	 * Returns the number of lives the player has
+	 * @return
+	 */
 	public int getLives(){
 		return Lives;
 	}
 	
+	/**
+	 * Controls the ball movement if the game is in an active state
+	 * @throws IOException
+	 */
 	@SuppressWarnings("static-access")
 	private void move() throws IOException {
 		if (started == true){
@@ -166,6 +175,10 @@ public class Game extends JPanel {
 		racquet.move();
 	}
 
+	/**
+	 * Checks to see if any lives remain. If no lives remain it returns True, returns False otherwise.
+	 * @return
+	 */
 	public boolean isGameOver(){
 		if (Lives <= 0){
 			return true;
@@ -174,14 +187,25 @@ public class Game extends JPanel {
 		}
 	}
 	
+	/**
+	 * returns the string value for the life string that is displayed on the status bar
+	 * @return
+	 */
 	public static String getLifeString() {
 		return lifeString;
 	}
 
+	/**
+	 * allows for setting the value of the life string that is displayed in the status bar
+	 * @param lifeString
+	 */
 	public static void setLifeString(String lifeString) {
 		Game.lifeString = lifeString;
 	}
 	
+	/**
+	 * Graphics device that paints all the objects onto the screen
+	 */
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -220,6 +244,10 @@ public class Game extends JPanel {
 		}
 	}
 	
+	/**
+	 * Takes a high score and processes the information, and updates the high score page as necessary
+	 * @throws IOException
+	 */
 	public void processHighScores()  throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
 	     String line = in.readLine();
@@ -285,6 +313,12 @@ public class Game extends JPanel {
 		TempscoreWindow.setVisible(true);
 	}
 	
+	/**
+	 * checks for duplicate scores in the high scores space and handles them accordingly
+	 * @param saveOldUser
+	 * @param finalUser
+	 * @param tempScore
+	 */
 	public void checkForCopies(String saveOldUser, String finalUser, int tempScore){
 		if (saveOldUser != null){
 			scores.put(tempScore, saveOldUser);
@@ -300,11 +334,18 @@ public class Game extends JPanel {
 		}
 	}
 	
+	/**
+	 * ends the game and kills the program
+	 * @throws IOException
+	 */
 	public void gameOver()  throws IOException { 		//read in the list of scores to the scores arraylist
 		processHighScores();
 		System.exit(ABORT);
 	}
 	
+	/**
+	 * writes the high scores to the high scores page
+	 */
 	public void writeHighScores(){
 		//finally, write all the scores to the scores file
 				try {
@@ -320,10 +361,17 @@ public class Game extends JPanel {
 					catch (IOException e1) {}
 	}
 	
+	/**
+	 * A visual pop up box that tells the user to prepare for the next round
+	 */
 	public void nextRoundMessage(){
 		JOptionPane.showMessageDialog(this, "Now get ready for the next round!", "Great Job!", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
+	/**
+	 * All conditions for winning the game have been met, so the high score is processed and a popup message with congrats is displayed
+	 * @throws IOException
+	 */
 	public void gameWon() throws IOException {
 		//read in the list of scores to the scores arraylist
 		processHighScores();
@@ -331,6 +379,12 @@ public class Game extends JPanel {
 		System.exit(ABORT);
 	}
 
+	/**
+	 * This is the main game execution method, it includes the main game loop as well
+	 * @param args
+	 * @throws InterruptedException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws InterruptedException, IOException {
 		frame = new JFrame("Brick Breaker");
 		Game game = new Game();
@@ -545,8 +599,13 @@ public class Game extends JPanel {
 		}
 	}
 	
-
-	// This method checks for collisions with the sides of bricks and changes the course of the ball accordingly 
+ 
+	/**
+	 * This method checks for collisions with the sides of bricks and changes the course of the ball accordingly
+	 * @param tempBrick
+	 * @param tempBall
+	 * @return
+	 */
 	public static boolean checkSideHits(Brick tempBrick, Ball tempBall){
 		if (((tempBall.getBounds().getX()) >= (tempBrick.getBounds().getX() + tempBrick.getBounds().getWidth() - 2)) ){ // right side
 			tempBall.setXa((tempBall.getXa() * (-1)));
@@ -561,6 +620,10 @@ public class Game extends JPanel {
 		}
 		return false;
 	}
+	
+	/**
+	 * This method sets the colors of each brick according to its hit count
+	 */
 	public static void colorBricks(){
 		for(int i = 0; i<allBricks.size(); i++){ //update the color for certain hit count
 			if (allBricks.get(i).getHits() == 4){allBricks.get(i).setColor(Color.BLACK);}
@@ -570,6 +633,12 @@ public class Game extends JPanel {
 		}
 	}
 	
+	/**
+	 * This checks for normal hits between a brick and the ball 
+	 * and offsets the ball when such a hit occurs so the ball doesnt warp inside of a brick and cause issues
+	 * @param tempBrick
+	 * @param tempBall
+	 */
 	public static void checkNormalHits(Brick tempBrick, Ball tempBall){
 		if(tempBall.getBounds().getY() <= (tempBrick.getBounds().getY() + 2) ){ // top
 			tempBall.setY((int) (tempBrick.getBounds().getY() - tempBall.DIAMETER));
@@ -578,9 +647,11 @@ public class Game extends JPanel {
 		}
 	}
 	
-	
-	
-	
+	/**
+	 * This is the powerhorse for generating powerups. Randomized powerup selection and creation
+	 * @param currentBrick
+	 * @return
+	 */
 	public Powerup generatePowerup(Brick currentBrick){
 		int tempRandNum2 = probs.checkConditions(probs.randInt(0,103)); 
 		//int tempRandNum2 = randInt(7,10);
@@ -773,20 +844,37 @@ public class Game extends JPanel {
 		return null;
 	}
 	
+	/**
+	 * hides a brick once it has been destroyed
+	 * @param newbrick
+	 * @param saveBall
+	 */
 	public static void hideBrick(Brick newbrick, Ball saveBall){
 		newbrick.getBounds().setBounds(-10, -10, 0, 0);
 		newbrick.setAlive(false);
 		newbrick = null;
 	}
 
+	/**
+	 * returns the number of missiles the user has
+	 * @return
+	 */
 	public int getMissileCount() {
 		return missileCount;
 	}
 
+	/**
+	 * sets the number of missiles the user has
+	 * @param missileCount
+	 */
 	public void setMissileCount(int missileCount) {
 		this.missileCount = missileCount;
 	}
 	
+	/**
+	 * resets the game for the next round and loads the proper game board
+	 * @param thisGame
+	 */
 	public static void nextRound(Game thisGame){
 		hasSafetyNet = false;
 		overwritePowerupLimits = false;

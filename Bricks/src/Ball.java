@@ -19,6 +19,12 @@ public class Ball {
 	private Color c;
 	Clip audioClip;
 
+	/**
+	 * initializes the ball information
+	 * @param game
+	 * @param X
+	 * @param Y
+	 */
 	public Ball(Game game, int X, int Y) {
 		this.game = game;
 		x = X;
@@ -30,31 +36,56 @@ public class Ball {
 
 	}
 	
-	
+	/**
+	 * sets the number for the ball modifications/ ball size
+	 * @param num
+	 */
 	public void setBallMods(int num){
 		ballMods = num;
 	}
 	
+	/**
+	 * sets the color of the ball
+	 * @param c
+	 */
 	public void setColor(Color c){
 		this.c = c; 
 	}
 	
+	/**
+	 * returns the color of the ball
+	 * @return
+	 */
 	public Color getColor(){
 		return this.c;
 	}
 
+	/**
+	 * adds an additional ball modification to the ball
+	 */
 	public void addBallMod(){
 		ballMods = ballMods + 1;
 	}
 	
+	/**
+	 * removes a ball modification from the ball
+	 */
 	public void SubtractBallMod(){
 		ballMods = ballMods - 1;
 	}
 	
+	/**
+	 * returns the number of ball modifications the ball has
+	 * @return
+	 */
 	public int getBallMods(){
 		return ballMods;
 	}
 	
+	/**
+	 * workhorse for ball movement
+	 * @throws IOException
+	 */
 	void move() throws IOException {
 		if (x + xa < 0)
 			xa =  speed;
@@ -145,48 +176,91 @@ public class Ball {
 	}
 	
 	
-
+	/**
+	 * returns the X coordinate of the ball
+	 * @return
+	 */
 	public double getX() {
 		return x;
 	}
 
+	/**
+	 * sets the X coordinate of the ball
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * returns the y coordinate for the ball
+	 * @return
+	 */
 	public double getY() {
 		return y;
 	}
 
+	/**
+	 * sets the Y coordinate for the ball
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * returns the delta (change) value of the X coordinate
+	 * @return
+	 */
 	public double getXa() {
 		return xa;
 	}
 
+	/**
+	 * sets the delta (change) value of the X coordinate
+	 * @param d
+	 */
 	public void setXa(double d) {
 		this.xa = d;
 	}
 
+	/**
+	 * gets the delta (change) value of the Y coordinate
+	 * @return
+	 */
 	public double getYa() {
 		return ya;
 	}
 
+	/**
+	 * sets the delta (change) value of the Y coordinate
+	 * @param ya
+	 */
 	public void setYa(double ya) {
 		this.ya = ya;
 	}
 
+	/**
+	 * checks collisions of the racquet and the ball
+	 * @return
+	 */
 	private boolean collision() {
 		return game.racquet.getBounds().intersects(getBounds());
 	}
 	
+	/**
+	 * paints the ball onto the screen
+	 * @param g
+	 */
 	public void paint(Graphics2D g) {
 		g.setColor(c);
 		g.fillOval((int) x, (int) y, DIAMETER, DIAMETER);
 	}
 	
+	/**
+	 * returns the calculated bounds of the ball
+	 * @return
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, DIAMETER, DIAMETER);
 	}
