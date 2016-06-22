@@ -11,14 +11,28 @@ public class Probability {
 	static Random randNum = new Random();
 	Boolean needsCollisions = false;
 	
+		/**
+		 * initializes the probability object
+		 * @param thisGame
+		 */
 		public Probability(Game thisGame){
 			game = thisGame;
 		}
+		/**
+		 * generates a random number within the given range
+		 * @param min
+		 * @param max
+		 * @return
+		 */
 		public static int randInt(int min, int max) {
 		    int randomNum = randNum.nextInt((max - min) + 1) + min;
 		    return randomNum;
 		}
 		
+		/**
+		 * creates a powerup if the probability matches certain circumstances
+		 * @return
+		 */
 		public boolean getPowerup(){
 			int tempRandNum = randInt(1,10); // random number has to be 2 or 7 to get a powerup  (20% chance).
 			//int tempRandNum = 7; // use this to automatically receive a powerup everytime a brick is hit by a ball
@@ -43,7 +57,11 @@ public class Probability {
 			return false;	
 		}
 		
-		
+		/**
+		 * verifies that a new powerup would not violate certain constraints, if it does not, it returns true; else false
+		 * @param powerupNum
+		 * @return
+		 */
 		public boolean checkPowerup(int powerupNum){
 			if (powerupNum == 1){
 				if (game.hasMagnet == false){
@@ -146,7 +164,11 @@ public class Probability {
 			return false;
 		}
 		
-		
+		/**
+		 * checks the game conditions to determine the probability of certain powerups
+		 * @param randInt
+		 * @return
+		 */
 		public int checkConditions(int randInt){
 			if (needsCollisions == true){
 				System.out.println("No Collision Conditions"); // Not enough Collisions - probability adjusted to help hit bricks easier
@@ -171,6 +193,11 @@ public class Probability {
 			return normalConditions(randInt);
 		}
 		
+		/**
+		 * selects powerups if the RND num is within a range. This is for normal conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int normalConditions(int randInt){
 			if (randInt <= 5){
 				return 1;
@@ -216,6 +243,11 @@ public class Probability {
 			return 1;
 		}
 		
+		/**
+		 * selects powerups with scaled probabilities for slow conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int slowConditions(int randInt){
 			if (randInt <= 4){
 				return 1;
@@ -261,6 +293,11 @@ public class Probability {
 			return 1;
 		}
 		
+		/**
+		 * selects powerups with scaled probabilities for small ball conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int smallBallConditions(int randInt){
 			if (randInt <= 4){
 				return 1;
@@ -306,6 +343,11 @@ public class Probability {
 			return 1;
 		}
 		
+		/**
+		 * selects powerups with scaled probabilities for small paddle conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int smallPaddleConditions(int randInt){
 			if (randInt <= 4){
 				return 1;
@@ -351,6 +393,11 @@ public class Probability {
 			return 1;
 		}
 		
+		/**
+		 * selects powerups with scaled probabilities for fast conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int fastConditions(int randInt){
 			if (randInt <= 4){
 				return 1;
@@ -396,6 +443,11 @@ public class Probability {
 			return 1;
 		}
 		
+		/**
+		 * selects powerups with scaled probabilities for low collision conditions
+		 * @param randInt
+		 * @return
+		 */
 		public int lowCollisionConditions(int randInt){
 			if (randInt <= 4){
 				return 1;

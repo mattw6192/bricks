@@ -23,6 +23,15 @@ public class Powerup {
 	Color FillColor; // Color of the powerup
 	public static BufferedImage image;
 
+	/**
+	 * initializes the Powerup stats
+	 * @param game
+	 * @param X
+	 * @param Y
+	 * @param time
+	 * @param powerup
+	 * @param color
+	 */
 	public Powerup(Game game, int X, int Y, int time, String powerup, Color color) {
 		this.game = game;
 		x = X;
@@ -41,6 +50,10 @@ public class Powerup {
 	}
 
 	
+	/**
+	 * extra controls for the actions of the Fireball powerup
+	 * @param timeDelay
+	 */
 	public void Fireball(int timeDelay){
 		Game.hasFireball = true;
 		//powerupEnd(); // remove the powerup from available powerups display
@@ -90,6 +103,11 @@ public class Powerup {
 		}
 	}
 	
+	/**
+	 * extra controls for the actions of the multiball powerup
+	 * @param timeDelay
+	 * @param directionMultiplier
+	 */
 	public void multiBall(int timeDelay, double directionMultiplier){
 		if (Game.activeBalls.size() <= 5){
 			System.out.println("Multiple Balls Enabled");
@@ -130,6 +148,10 @@ public class Powerup {
 		}
 	}
 	
+	/**
+	 * interprets the powerup number (RND generated) and performs that action
+	 * @param caseNumber
+	 */
 	public void performAction(int caseNumber){
 		if (active == true){
 			switch(caseNumber){
@@ -629,6 +651,10 @@ public class Powerup {
 	}
 	}
 	
+	/**
+	 * sets the powerup status as true/false to state if it is active or not
+	 * @param status
+	 */
 	public void setActive(Boolean status){
 		active = status;
 		setXa(0);
@@ -636,17 +662,27 @@ public class Powerup {
 		//System.out.println("Powerup Activated");
 	}
 	
+	/**
+	 * returns the powerup name
+	 */
 	@Override
 	public String toString(){
 		return this.ability;
 	}
 	
+	/**
+	 * ends the powerup
+	 */
 	public void powerupEnd(){
 		active = false;
 		Game.droppedPowerups.remove(this);
 		Game.activePowerups.remove(this);
 	}
 	
+	/**
+	 * returns a number based on the name of the powerup
+	 * @return
+	 */
 	public int getPowerNum(){
 		if (ability.equals("Magnet")){return 1;};
 		if (ability.equals("Ball Increase")){return 2;};
@@ -671,6 +707,9 @@ public class Powerup {
 		return 0;
 	}
 	
+	/**
+	 * controls the movement of the powerup
+	 */
 	void move() {
 		
 		
@@ -695,42 +734,82 @@ public class Powerup {
 		y = y + ya;
 	}
 
+	/**
+	 * returns the X coordinate
+	 * @return
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * sets the X coordinate
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * returns the Y coordinate
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * sets the Y coordinate
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * returns the delta (change) of the X coordinate
+	 * @return
+	 */
 	public int getXa() {
 		return xa;
 	}
 
+	/**
+	 * sets the delta (change) of the X coordinate
+	 * @param xa
+	 */
 	public void setXa(int xa) {
 		this.xa = xa;
 	}
 
+	/**
+	 * returns the delta (change) of the Y coordinate
+	 * @return
+	 */
 	public int getYa() {
 		return ya;
 	}
 
+	/**
+	 * sets the delta (change) of the Y coordinate
+	 * @param ya
+	 */
 	public void setYa(int ya) {
 		this.ya = ya;
 	}
 
+	/**
+	 * checks for collisions with the racquet
+	 * @return
+	 */
 	private boolean collision() {
 		return game.racquet.getBounds().intersects(getBounds());
 	}
 
+	/**
+	 * paints the powerup on the screen
+	 * @param g
+	 */
 	public void paint(Graphics2D g) {
 		if (ability == "Insanity Mode"){
 			g.drawImage(image, x, y, null);
@@ -741,6 +820,10 @@ public class Powerup {
 		}
 	}
 	
+	/**
+	 * returns the bounds of the powerup
+	 * @return
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, DIAMETER, DIAMETER);
 	}

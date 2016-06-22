@@ -15,6 +15,12 @@ public class Missile {
 	static final int DIAMETER = 10; //was 10 when missile was red square (increasing diameter without overall size might enable destroying nearby bricks
 	//public static BufferedImage image;
 
+	/**
+	 * initializes the missile object attributes
+	 * @param game
+	 * @param X
+	 * @param Y
+	 */
 	public Missile(Game game, int X, int Y){
 		this.game = game;
 		this.x = X;
@@ -28,6 +34,11 @@ public class Missile {
 		
 	}
 	
+	
+/**
+ * controls movement of the missile object
+ * @throws IOException
+ */
 void move() throws IOException {
 		
 		
@@ -52,38 +63,75 @@ void move() throws IOException {
 		y = y - ya;
 	}
 
+	/**
+	 * returns the X coordinate of the missile
+	 * @return
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * sets the X coordinate of the missile
+	 * @param x
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * returns the Y coordinate of the missile
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * sets the Y coordinate of the missile
+	 * @param y
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * returns the delta (change) of the X coordinate
+	 * @return
+	 */
 	public int getXa() {
 		return xa;
 	}
 
+	/**
+	 * sets the delta (change) of the X coordinate
+	 * @param xa
+	 */
 	public void setXa(int xa) {
 		this.xa = xa;
 	}
 
+	/**
+	 * returns the delta (change) of the Y coordinate
+	 * @return
+	 */
 	public int getYa() {
 		return ya;
 	}
 
+	/**
+	 * sets the delta (change) of the Y coordinate
+	 * @param ya
+	 */
 	public void setYa(int ya) {
 		this.ya = ya;
 	}
 	
+	/**
+	 * checks for collisions with bricks and reacts accordingly
+	 * @return
+	 * @throws IOException
+	 */
 	private boolean collision() throws IOException {
 		if (Game.missiles.size()>0){
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
@@ -114,10 +162,18 @@ void move() throws IOException {
 		}return false;
 	}
 	
+	/**
+	 * returns the bounds of the missile
+	 * @return
+	 */
 	public Rectangle getBounds() {
 		return new Rectangle(x, y, DIAMETER, DIAMETER);
 	}
 	
+	/**
+	 * paints the missile on the screen
+	 * @param g
+	 */
 	public void paint(Graphics2D g) {
 		//g.drawImage(image, x, y, null);
 		g.setColor(Color.RED);

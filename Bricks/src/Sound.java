@@ -13,16 +13,28 @@ public class Sound {
 		
 	//}
 	
+	/**
+	 * plays the sound
+	 * @param sound
+	 */
 	public static void Play(AudioClip sound) {
 		if (isMuted==false){
 			sound.play();
 		}
 	}
 
+	/**
+	 * returns the status of isMuted (boolean)
+	 * @return
+	 */
 	public static boolean isMuted() {
 		return isMuted;
 	}
 
+	/**
+	 * sets the muted status of the sound
+	 * @param isMuted
+	 */
 	public static void setMuted(boolean isMuted) {
 		isMuted = isMuted;
 	}
