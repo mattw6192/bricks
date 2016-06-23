@@ -3,72 +3,100 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.JButton;
+
+import java.awt.Frame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class PowerupInstructions extends JPanel {
+public class PowerupInstructions extends javax.swing.JDialog {
 	private final JLabel lblGreen = new JLabel();
+	/**
+	 * @wbp.nonvisual location=256,451
+	 */
+	
 	
 
 	/**
 	 * Create the panel.
 	 */
-	public PowerupInstructions() {
+	public PowerupInstructions(java.awt.Frame parent, boolean modal, startMenu4 tempMenu, boolean ifStarted, Frame tempFrame) {
+		super(parent, modal);
 		setBackground(UIManager.getColor("Button.background"));
-		setLayout(null);
-		lblGreen.setBounds(99, 45, 61, 16);
+		getContentPane().setLayout(null);
+		lblGreen.setBounds(45, 45, 61, 16);
 		lblGreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/green powerup.png")));
-		add(lblGreen);
+		getContentPane().add(lblGreen);
 		
 		
 		
-		JLabel lblPowerupInformation = new JLabel("Powerup Information");
-		lblPowerupInformation.setBounds(164, 6, 131, 16);
-		add(lblPowerupInformation);
+		//JLabel lblPowerupInformation = new JLabel("Powerup Information");
+		//lblPowerupInformation.setBounds(164, 6, 131, 16);
+		//getContentPane().add(lblPowerupInformation);
 		
 		JTextArea txtrGreenColoredPowerups = new JTextArea();
 		txtrGreenColoredPowerups.setEditable(false);
 		txtrGreenColoredPowerups.setBackground(UIManager.getColor("Button.background"));
-		txtrGreenColoredPowerups.setText("Green colored powerups\nare beneficial.");
-		txtrGreenColoredPowerups.setBounds(240, 45, 164, 68);
-		add(txtrGreenColoredPowerups);
+		txtrGreenColoredPowerups.setText("Green colored powerups provide benefits");
+		txtrGreenColoredPowerups.setBounds(150, 45, 260, 50);
+		getContentPane().add(txtrGreenColoredPowerups);
 		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/white powerup.png")));
-		lblNewLabel.setBounds(99, 157, 61, 16);
-		add(lblNewLabel);
+		lblNewLabel.setBounds(45, 100, 61, 16);
+		getContentPane().add(lblNewLabel);
 		
 		JTextArea txtrWhitePowerupsAre = new JTextArea();
 		txtrWhitePowerupsAre.setEditable(false);
 		txtrWhitePowerupsAre.setBackground(UIManager.getColor("Button.background"));
-		txtrWhitePowerupsAre.setText("White colored powerups \nare neutral.");
-		txtrWhitePowerupsAre.setBounds(240, 157, 164, 50);
-		add(txtrWhitePowerupsAre);
+		txtrWhitePowerupsAre.setText("White colored powerups are neutral.");
+		txtrWhitePowerupsAre.setBounds(150, 97, 250, 50);
+		getContentPane().add(txtrWhitePowerupsAre);
+		
+		JLabel lblNewLabel2 = new JLabel();
+		lblNewLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/red powerup.png")));
+		lblNewLabel2.setBounds(45, 150, 61, 16);
+		getContentPane().add(lblNewLabel2);
+		
+		JTextArea txtrRedPowerupsAre = new JTextArea();
+		txtrRedPowerupsAre.setEditable(false);
+		txtrRedPowerupsAre.setBackground(UIManager.getColor("Button.background"));
+		txtrRedPowerupsAre.setText("Red colored powerups are provide disadvantages.");
+		txtrRedPowerupsAre.setBounds(150, 147, 325, 50);
+		getContentPane().add(txtrRedPowerupsAre);
 		
 		JLabel lblI = new JLabel();
 		lblI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/skull_and_bones2.png")));
-		lblI.setBounds(99, 376, 41, 25);
-		add(lblI);
+		lblI.setBounds(45, 190, 41, 25);
+		getContentPane().add(lblI);
 		
 		JTextArea txtrYouBetterLeave = new JTextArea();
 		txtrYouBetterLeave.setEditable(false);
 		txtrYouBetterLeave.setBackground(UIManager.getColor("Button.background"));
-		txtrYouBetterLeave.setText("YOU BETTER LEAVE\nTHIS ONE ALONE BOY.\nIF YA KNOW WHATS \nGOOD FOR YA.");
-		txtrYouBetterLeave.setBounds(240, 376, 164, 75);
-		add(txtrYouBetterLeave);
+		txtrYouBetterLeave.setText("TOP SECRET");
+		txtrYouBetterLeave.setBounds(150, 197, 164, 50);
+		getContentPane().add(txtrYouBetterLeave);
 		
-		JButton btnIndividualPowerups = new JButton("Individual Powerups");
-		btnIndividualPowerups.setBounds(32, 463, 164, 29);
-		add(btnIndividualPowerups);
+		JButton btnPowerupsList = new JButton("Powerups List");
+		btnPowerupsList.setBounds(125, 250, 200, 29);
+		getContentPane().add(btnPowerupsList);
+		
+		JButton btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				System.exit(0);
+			}
+		});
+		btnQuit.setBounds(32, 300, 164, 29);
+		getContentPane().add(btnQuit);
 		
 		JButton btnPlayGame = new JButton("Play Game");
 		btnPlayGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnPlayGame.setBounds(240, 463, 164, 29);
-		add(btnPlayGame);
+		btnPlayGame.setBounds(240, 300, 164, 29);
+		getContentPane().add(btnPlayGame);
 		
 		
 

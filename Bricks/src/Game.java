@@ -402,6 +402,12 @@ public class Game extends JPanel {
 		TempGame = game;
 		menu = new startMenu4(frame, true);
 		
+		////////////// Testing Area //////////
+		PowerupInstructions kks = new PowerupInstructions(frame, true, menu, false, frame);
+		kks.setSize(500, 400);
+		kks.setTitle("Powerup Information");
+		kks.setVisible(true);
+		////////////// END TESTING //////////
 		
 		//highscore stuff
 		HighScores scoreWindow = new HighScores(frame, true, menu, false, frame);
