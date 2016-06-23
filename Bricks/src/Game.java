@@ -268,11 +268,11 @@ public class Game extends JPanel {
 	     
 	     Integer min = Collections.min(scores.keySet());
 	     
-	     
 		//this part adds the high score to the list
 		if (Score > min){
-			EnterName nameBox = new EnterName(frame, true);
+			EnterName2 nameBox = new EnterName2(frame, true);
 			nameBox.setLocationRelativeTo(frame);
+			nameBox.setSize(425, 300);
 			nameBox.setVisible(true);
 			String user = nameBox.getUserName();
 			String saveOldUser = null;
@@ -300,9 +300,10 @@ public class Game extends JPanel {
 		if (scores.size()>10){ //trims the scores list to be the top 10
 			scores.remove(min);
 		}
+		System.out.println(scores);
 		//Collections.sort(scores.keySet());
 		//Collections.reverseOrder(scores.keySet());
-		writeHighScores();
+		writeHighScores(TempscoreWindow);
 		HighScores scoreWindow = new HighScores(frame, true, menu, true,frame);
 		TempscoreWindow = scoreWindow;
 		scoreWindow.setLocationRelativeTo(TempGame);
@@ -346,11 +347,19 @@ public class Game extends JPanel {
 	/**
 	 * writes the high scores to the high scores page
 	 */
-	public void writeHighScores(){
+	public void writeHighScores(HighScores window){
 		//finally, write all the scores to the scores file
+		window.jTextArea1.removeAll();	
+		int scorePlace = 1;
+		for (Map.Entry<Integer,String> entry : scores.entrySet()) {
+	          window.jTextArea1.append(scorePlace + "." + entry.getValue() + ": " + entry.getKey().toString());
+	          scorePlace += 1;
+	          //line = in.readLine();
+	       }
+				
 				try {
 					FileWriter fileToSave = new FileWriter("scores.dat");
-					int scorePlace = 1;
+					scorePlace = 1;
 					for (Map.Entry<Integer,String> entry : scores.entrySet()) {
 					    fileToSave.append(scorePlace + "."+ entry.getValue() + ": " + entry.getKey().toString());
 					    fileToSave.write("\n");
@@ -358,7 +367,8 @@ public class Game extends JPanel {
 					}
 					fileToSave.close();
 					}
-					catch (IOException e1) {}
+					catch (IOException e1) {System.out.println(e1);} /// this is a problem
+			
 	}
 	
 	/**

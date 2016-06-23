@@ -92,6 +92,7 @@ public class HighScores extends javax.swing.JDialog{
         jTextArea1.setRows(5);
  
         BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
+        //jTextArea1.removeAll();
         String line = in.readLine();
         while(line != null){
           jTextArea1.append(line + "\n");
@@ -151,7 +152,7 @@ public class HighScores extends javax.swing.JDialog{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel scoreLabel;
     private javax.swing.JButton closeButton;
     private javax.swing.JButton exitButton;
