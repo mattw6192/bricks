@@ -9,17 +9,11 @@ public class SafetyNet {
 	private int WIDTH = 853;
 	private int HEIGHT = 10;
 	private int x = 0;
-	private int xa = 0;
 	private Game game;
 	private Color FILLCOLOR;
 	private int hitsLeft;
 	private Boolean ALIVE = true;
 	private Powerup thisParent;
-	
-
-	int racquetMods = 0;
-	// paddleMods represents the modifications made to the paddle length
-	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
 
 	/**
 	 * initializes the safety net powerup
@@ -35,49 +29,11 @@ public class SafetyNet {
 	}
 	
 	/**
-	 * sets the number for racquet mods 
-	 * @param num
-	 */
-	public void setRacquetMods(int num){
-		racquetMods = num;
-	}
-	
-	/**
 	 * returns the x coordinate of the safety net
 	 * @return
 	 */
 	public int getX() {
 		return x;
-	}
-
-	/**
-	 * adds a racquet mod 
-	 */
-	public void addRacquetMod(){
-		racquetMods = racquetMods + 1;
-	}
-	
-	/**
-	 * removes a racquet mod
-	 */
-	public void SubtractRacquetMod(){
-		racquetMods = racquetMods - 1;
-	}
-	
-	/**
-	 * returns the number of racquet mods
-	 * @return
-	 */
-	public int getRacquetMods(){
-		return racquetMods;
-	}
-	
-	/**
-	 * controls movement 
-	 */
-	public void move() {
-		if (getX() + xa > 0 && getX() + xa < game.getWidth() - getWIDTH())
-			setX(getX() + xa);
 	}
 
 	/**
@@ -91,22 +47,6 @@ public class SafetyNet {
 		}
 	}
 
-	/**
-	 * stops movement when key released
-	 * @param e
-	 */
-	public void keyReleased(KeyEvent e) {
-		xa = 0;
-	}
-
-	public void MousePressed(MouseEvent e){
-	}
-	
-	public void MouseClicked(MouseEvent e){
-	}
-	
-	public void keyPressed(KeyEvent e) {
-	}
 
 	/**
 	 * returns the bounds of the net

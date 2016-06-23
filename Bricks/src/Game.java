@@ -300,7 +300,7 @@ public class Game extends JPanel {
 		if (scores.size()>10){ //trims the scores list to be the top 10
 			scores.remove(min);
 		}
-		System.out.println(scores);
+		//System.out.println(scores);
 		//Collections.sort(scores.keySet());
 		//Collections.reverseOrder(scores.keySet());
 		writeHighScores(TempscoreWindow);
@@ -351,11 +351,11 @@ public class Game extends JPanel {
 		//finally, write all the scores to the scores file
 		window.jTextArea1.removeAll();	
 		int scorePlace = 1;
-		for (Map.Entry<Integer,String> entry : scores.entrySet()) {
-	          window.jTextArea1.append(scorePlace + "." + entry.getValue() + ": " + entry.getKey().toString());
-	          scorePlace += 1;
+		//for (Map.Entry<Integer,String> entry : scores.entrySet()) {
+	   //       window.jTextArea1.append(scorePlace + "." + entry.getValue() + ": " + entry.getKey().toString());
+	    //      scorePlace += 1;
 	          //line = in.readLine();
-	       }
+	      // }
 				
 				try {
 					FileWriter fileToSave = new FileWriter("scores.dat");
@@ -367,7 +367,7 @@ public class Game extends JPanel {
 					}
 					fileToSave.close();
 					}
-					catch (IOException e1) {System.out.println(e1);} /// this is a problem
+					catch (IOException e1) {} /// this is a problem
 			
 	}
 	
