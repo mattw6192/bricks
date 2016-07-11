@@ -403,10 +403,15 @@ public class Game extends JPanel {
 		menu = new startMenu4(frame, true);
 		
 		////////////// Testing Area //////////
-		PowerupInstructions kks = new PowerupInstructions(frame, true, menu, false, frame);
-		kks.setSize(500, 400);
-		kks.setTitle("Powerup Information");
-		kks.setVisible(true);
+		//PowerupInstructions kks = new PowerupInstructions(frame, true, menu, false, frame);
+		//kks.setSize(500, 400);
+		//kks.setTitle("Powerup Information");
+		//kks.setVisible(true);
+		
+		powerupsList ssk = new powerupsList(frame, true, menu, false, frame);
+		ssk.setSize(700, 350);
+		ssk.setTitle("Powerups List");
+		ssk.setVisible(true);
 		////////////// END TESTING //////////
 		
 		//highscore stuff
