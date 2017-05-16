@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class Racquet {
+public class Paddle{
 	private static final int Y = 530;
 	private int WIDTH = 60;
 	private int HEIGHT = 10;
@@ -18,16 +18,30 @@ public class Racquet {
 	// -1 means the size has been decreased once, 0 means no changes, 1 represents one size increase, etc
 
 	/**
-	 * initializes the racquet
+	 * initializes the paddle
 	 * @param game
 	 */
-	public Racquet(Game game) {
+	public Paddle(Game game) {
 		this.game = game;
 		setX(100);
 	}
+
+	public void increaseSize(){
+		int increaseAmount = (int) (getWIDTH() * 0.25);
+		checkEdges(increaseAmount);
+		setWIDTH((int) (getWIDTH() * 1.25));
+		addRacquetMod();
+		System.out.println("Paddle Increase - New level "  + racquetMods);
+	}
+
+	public void checkEdges(int num){
+		if (getX() > 400){
+			setX((int) getX() - num);
+		}
+	}
 	
 	/**
-	 * sets the number for the modifications to the racquet
+	 * sets the number for the modifications to the paddle
 	 * @param num
 	 */
 	public void setRacquetMods(int num){
@@ -43,7 +57,7 @@ public class Racquet {
 	}
 
 	/**
-	 * adds an additional modification to the racquet
+	 * adds an additional modification to the paddle
 	 */
 	public void addRacquetMod(){
 		racquetMods = racquetMods + 1;
@@ -54,7 +68,7 @@ public class Racquet {
 	}
 	
 	/**
-	 * returns the number representation for the racquet modifications
+	 * returns the number representation for the paddle modifications
 	 * @return
 	 */
 	public int getRacquetMods(){
@@ -62,7 +76,7 @@ public class Racquet {
 	}
 	
 	/**
-	 * controls movement of the racquet
+	 * controls movement of the paddle
 	 */
 	public void move() {
 		if (getX() + xa > 0 && getX() + xa < game.getWidth() - getWIDTH())
@@ -70,7 +84,7 @@ public class Racquet {
 	}
 
 	/**
-	 * paints the racquet to the screen
+	 * paints the paddle to the screen
 	 * @param g
 	 */
 	public void paint(Graphics2D g) {
@@ -79,7 +93,7 @@ public class Racquet {
 	}
 
 	/**
-	 * updates the delta (change) in racquet to nothing when the key is released
+	 * updates the delta (change) in paddle to nothing when the key is released
 	 * @param e
 	 */
 	public void keyReleased(KeyEvent e) {
@@ -93,7 +107,7 @@ public class Racquet {
 	}
 	
 	/**
-	 * moves the racquet when arrow keys are pressed
+	 * moves the paddle when arrow keys are pressed
 	 * @param e
 	 */
 	public void keyPressed(KeyEvent e) {
@@ -104,7 +118,7 @@ public class Racquet {
 	}
 
 	/**
-	 * returns the bounds of the racquet
+	 * returns the bounds of the paddle
 	 * @return
 	 */
 	public Rectangle getBounds() {
@@ -121,7 +135,7 @@ public class Racquet {
 
 
 	/**
-	 * returns the Width of the racquet
+	 * returns the Width of the paddle
 	 * @return
 	 */
 	public int getWIDTH() {
@@ -130,10 +144,11 @@ public class Racquet {
 
 	
 	/**
-	 * sets the width of the racquet
+	 * sets the width of the paddle
 	 * @param num
 	 */
 	public void setWIDTH(int num) {
+		checkEdges(num);
 		WIDTH = num;
 	}
 

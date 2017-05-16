@@ -85,7 +85,7 @@ public class SidebarMenu extends JPanel {
 		lblMissiles.setBounds(149, 143, 160, 16);
 		add(lblMissiles);
 		
-		lblActivePowerups = new JLabel("Availiable Powerups:");
+		lblActivePowerups = new JLabel("Available Powerups:");
 		lblActivePowerups.setBounds(29, 171, 144, 16);
 		add(lblActivePowerups);
 		

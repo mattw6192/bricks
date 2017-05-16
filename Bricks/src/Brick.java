@@ -42,23 +42,15 @@ public class Brick {
 	/**
 	 * removes one from the number of hits the brick can take
 	 */
-	public void subtractHit(){
-		this.hits -= 1;
+	public void subtractHit(int newHits){
+
+		if (newHits == -1){
+			this.hits = 0;
+		}else{
+			this.hits -= newHits;
+		}
 	}
-	
-	/** 
-	 * removes two from the number of hits the brick can take
-	 */
-	public void subtractTwoHits(){
-		this.hits -= 2;
-	}
-	
-	/**
-	 * subtracts all of the possible hits the brick can take
-	 */
-	public void subtractAllHits(){
-		this.hits = 0;
-	}
+
 
 	/**
 	 * initializes the brick information

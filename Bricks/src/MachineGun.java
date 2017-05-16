@@ -45,8 +45,8 @@ public class MachineGun {
 			
 		}
 		if (collision()){
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
+			// These conditionals check for collisions with the side of the paddle -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the paddle
 			//Game.bullets.remove(this);
 			//game.hasShot = false;
 			//Game.hasShot = false;
@@ -137,7 +137,7 @@ public class MachineGun {
 			
 				
 			if (Game.bullets.get(j).getBounds().intersects(Game.allBricks.get(i).getBounds())){
-				Game.allBricks.get(i).subtractHit();
+				Game.allBricks.get(i).subtractHit(1);
 				Game.Score += 1;
 				Game.bullets.remove(j);
 				

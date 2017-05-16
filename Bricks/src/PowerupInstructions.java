@@ -1,4 +1,3 @@
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -20,7 +19,7 @@ public class PowerupInstructions extends javax.swing.JDialog {
 	/**
 	 * Create the panel.
 	 */
-	public PowerupInstructions(java.awt.Frame parent, boolean modal, startMenu4 tempMenu, boolean ifStarted, Frame tempFrame) {
+	public PowerupInstructions(java.awt.Frame parent, boolean modal, StartMenu tempMenu, boolean ifStarted, Frame tempFrame) {
 		super(parent, modal);
 		setBackground(UIManager.getColor("Button.background"));
 		getContentPane().setLayout(null);

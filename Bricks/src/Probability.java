@@ -74,7 +74,7 @@ public class Probability {
 				}
 				return false;
 			}else if (powerupNum == 3){
-				if (game.racquet.getRacquetMods() < 7){
+				if (game.paddle.getRacquetMods() < 7){
 					return true;
 				}
 				return false;
@@ -89,7 +89,7 @@ public class Probability {
 				}
 				return false;
 			}else if (powerupNum == 6){
-				if (game.racquet.racquetMods >= -3){
+				if (game.paddle.racquetMods >= -3){
 					return true;
 				}
 				return false;
@@ -173,7 +173,7 @@ public class Probability {
 			if (needsCollisions == true){
 				System.out.println("No Collision Conditions"); // Not enough Collisions - probability adjusted to help hit bricks easier
 				return lowCollisionConditions(randInt);  
-			}else if (game.activeBalls.get(0).speed == 2 && game.activeBalls.get(0).ballMods == 0 && game.racquet.racquetMods == 0){
+			}else if (game.activeBalls.get(0).speed == 2 && game.activeBalls.get(0).ballMods == 0 && game.paddle.racquetMods == 0){
 				System.out.println("Normal Conditions");
 				return normalConditions(randInt); // no modifications require probability adjustments
 			}else if (game.activeBalls.get(0).speed < 2){
@@ -182,14 +182,14 @@ public class Probability {
 			}else if (game.activeBalls.get(0).ballMods < 0){
 				System.out.println("Small Ball Conditions");
 				return smallBallConditions(randInt); // ball too small - probability adjusted for larger ball
-			}else if (game.racquet.racquetMods < -1){
+			}else if (game.paddle.racquetMods < -1){
 				System.out.println("Small Paddle Conditions");
-				return smallPaddleConditions(randInt); // racquet too small - probability adjusted for larger paddle
+				return smallPaddleConditions(randInt); // paddle too small - probability adjusted for larger paddle
 			}else if (game.activeBalls.get(0).speed > 3 && game.hasInsanityMode == false){
 				System.out.println("Fast Conditions");
 				return fastConditions(randInt); // ball too fast - probability adjusted for slowing down -- only activates if insanity mode not activated
 			}
-			System.out.println("No Conditions Selected - Assuming Normal Condtions");
+			System.out.println("No Conditions Selected - Assuming Normal Conditions");
 			return normalConditions(randInt);
 		}
 		

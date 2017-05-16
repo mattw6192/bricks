@@ -2,7 +2,6 @@ import java.awt.Frame;
 import java.io.IOException;
 
 import javax.swing.JTable;
-import javax.swing.table.TableColumn;
 
 import java.awt.BorderLayout;
 
@@ -15,7 +14,7 @@ public class powerupsList extends javax.swing.JDialog{
 
 	boolean hasStarted;
 	Frame parentFrame;
-	startMenu4 menu;
+	StartMenu menu;
 	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
@@ -23,7 +22,7 @@ public class powerupsList extends javax.swing.JDialog{
      * Creates new form HighScores
      * @throws IOException 
      */
-    public powerupsList(java.awt.Frame parent, boolean modal, startMenu4 tempMenu, boolean ifStarted, Frame tempFrame) throws IOException {
+    public powerupsList(java.awt.Frame parent, boolean modal, StartMenu tempMenu, boolean ifStarted, Frame tempFrame) throws IOException {
 
     	String[] columnNames = {"ID Number",
                 "Powerup",

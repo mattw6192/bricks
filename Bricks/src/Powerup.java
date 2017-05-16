@@ -170,8 +170,8 @@ public class Powerup {
 			case 19: // Golden Borey
 				if (game.hasBoreyMode == false){	
 					game.hasBoreyMode = true;
-					game.racquet.setRacquetMods(4);
-					game.racquet.setWIDTH(150);
+					game.paddle.setRacquetMods(4);
+					game.paddle.setWIDTH(150);
 					game.hasGun = true;
 					multiBall(3000,1);
 					multiBall(3000,0.5);
@@ -187,15 +187,14 @@ public class Powerup {
 					ActionListener boreyMode = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							System.out.println("Powerup Over");
-							game.racquet.setRacquetMods(0);
-							game.racquet.setWIDTH(60);
+							game.paddle.setRacquetMods(0);
+							game.paddle.setWIDTH(60);
+							game.hasBoreyMode = false;
 							for (int i=0; i< Game.activeBalls.size(); i++){	
 								Game.activeBalls.get(i).DIAMETER = 10;
 								Game.activeBalls.get(i).setBallMods(0);
 								Game.activeBalls.get(i).speed = 2;
 								Game.pointMultiplier = 1;
-								game.racquet.setWIDTH(60);
-								game.hasBoreyMode = false;
 								game.activePowerups.remove(this);
 						}
 							powerupEnd(); // remove the powerup from available powerups display
@@ -211,7 +210,7 @@ public class Powerup {
 				}
 				game.droppedPowerups.remove(this);
 				break; 
-			case 18: // Lose Extra Points
+			case 18: // Lose Points
 				int rand = Game.probs.randInt(0,10);
 				if (rand <= 3){ // Removes 1% of points
 					game.Score -= game.Score * 0.1;
@@ -265,8 +264,8 @@ public class Powerup {
 				break;
 			case 15: // Insanity Mode
 				game.hasInsanityMode = true;
-				game.racquet.setRacquetMods(-4);
-				game.racquet.setWIDTH(24);
+				game.paddle.setRacquetMods(-4);
+				game.paddle.setWIDTH(24);
 				game.hasFireball = false;
 				game.hasMetalPower = false;
 				game.hasGun = false;
@@ -290,14 +289,14 @@ public class Powerup {
 						System.out.println("Amazing! You Survived!!! - 10,000 Points!!!");
 						game.Score += 10000;
 						game.hasInsanityMode = false;
-						game.racquet.setRacquetMods(0);
-						game.racquet.setWIDTH(60);
+						game.paddle.setRacquetMods(0);
+						game.paddle.setWIDTH(60);
 						for (int i=0; i< Game.activeBalls.size(); i++){	
 							Game.activeBalls.get(i).DIAMETER = 10;
 							Game.activeBalls.get(i).setBallMods(0);
 							Game.activeBalls.get(i).speed = 2;
-							Game.activeBalls.get(i).setX((int) game.racquet.getBounds().getX() + (int) (game.racquet.getBounds().getWidth() / 2));
-							Game.activeBalls.get(i).setY((int) game.racquet.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
+							Game.activeBalls.get(i).setX((int) game.paddle.getBounds().getX() + (int) (game.paddle.getBounds().getWidth() / 2));
+							Game.activeBalls.get(i).setY((int) game.paddle.getBounds().getY() - (int) (game.activeBalls.get(i).DIAMETER));
 							Game.pointMultiplier = 1;
 					}
 						powerupEnd(); // remove the powerup from available powerups display
@@ -320,8 +319,8 @@ public class Powerup {
 					ActionListener shootGun = new ActionListener(){
 						public void actionPerformed(ActionEvent evt){
 							if (Game.hasGun == true){
-								MachineGun mgLeft = new MachineGun(game,game.racquet.getX(),game.racquet.getTopY());
-								MachineGun mgRight = new MachineGun(game,game.racquet.getX() + game.racquet.getWIDTH() - 10,game.racquet.getTopY());
+								MachineGun mgLeft = new MachineGun(game,game.paddle.getX(),game.paddle.getTopY());
+								MachineGun mgRight = new MachineGun(game,game.paddle.getX() + game.paddle.getWIDTH() - 10,game.paddle.getTopY());
 								Game.bullets.add(mgLeft);
 								Game.bullets.add(mgRight);
 								Sound.Play(Sound.machineGun);
@@ -352,7 +351,7 @@ public class Powerup {
 				
 			case 13: // Missiles
 				if (Game.missileCount <= 4){
-					Missile m = new Missile(game,game.racquet.getX(),game.racquet.getTopY());
+					Missile m = new Missile(game,game.paddle.getX(),game.paddle.getTopY());
 					Game.missiles.add(m);
 					game.setMissileCount(game.getMissileCount() + 1);
 					game.droppedPowerups.remove(this);
@@ -496,10 +495,10 @@ public class Powerup {
 				break; 
 				
 			case 6: // Smaller Paddle
-				if (game.racquet.racquetMods >= -3){
-					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * .8));
-					game.racquet.SubtractRacquetMod();
-					System.out.println("Racquet Decrease - New level "  + game.racquet.racquetMods + " WIDTH " + game.racquet.getWIDTH());
+				if (game.paddle.racquetMods >= -3){
+					game.paddle.setWIDTH((int) (game.paddle.getWIDTH() * .8));
+					game.paddle.SubtractRacquetMod();
+					System.out.println("Paddle Decrease - New level "  + game.paddle.racquetMods + " WIDTH " + game.paddle.getWIDTH());
 					powerupEnd(); // remove the powerup from available powerups display
 					
 					
@@ -518,7 +517,7 @@ public class Powerup {
 				else{
 					powerupEnd();
 					game.droppedPowerups.remove(this);
-					System.out.println("Powerup not available - the racquet size is too low.");
+					System.out.println("Powerup not available - the paddle size is too low.");
 				}
 		
 				break; 
@@ -575,18 +574,12 @@ public class Powerup {
 				
 			case 3: // Larger Paddle
 				
-				if (game.racquet.racquetMods < 7){
-					if (game.racquet.getX() > 400){
-						double increaseAmount = game.racquet.getWIDTH() * 0.25;
-						game.racquet.setX((int) game.racquet.getX() - (int) increaseAmount);
-					}
-					game.racquet.setWIDTH((int) (game.racquet.getWIDTH() * 1.25));
-					game.racquet.addRacquetMod();
+				if (game.paddle.racquetMods < 7){
+					game.paddle.increaseSize();
 					powerupEnd(); // remove the powerup from available powerups display
-					System.out.println("Racquet Increase - New level "  + game.racquet.racquetMods);
 				}else{
 					game.droppedPowerups.remove(this);
-					System.out.println("Powerup not available - the racquet size is too high.");
+					System.out.println("Powerup not available - the paddle size is too high.");
 				}
 				
 				ActionListener largerPaddleDisplayEnd = new ActionListener() {
@@ -701,7 +694,7 @@ public class Powerup {
 		if (ability.equals("Insanity Mode")){return 15;}
 		if (ability.equals("Lose a Life")){return 16;}
 		if (ability.equals("Gain Extra Points")){return 17;}
-		if (ability.equals("Lose Extra Points")){return 18;}
+		if (ability.equals("Lose Points")){return 18;}
 		if (ability.equals("Golden Borey")){return 19;}
 		if (ability.equals("Safety Net")){return 20;}
 		return 0;
@@ -718,8 +711,8 @@ public class Powerup {
 			powerupEnd();
 		}
 		if (collision()){
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
+			// These conditionals check for collisions with the side of the paddle -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the paddle
 			game.activePowerups.add(this);
 			Sound.Play(Sound.Powerup);
 			setActive(true);
@@ -799,11 +792,11 @@ public class Powerup {
 	}
 
 	/**
-	 * checks for collisions with the racquet
+	 * checks for collisions with the paddle
 	 * @return
 	 */
 	private boolean collision() {
-		return game.racquet.getBounds().intersects(getBounds());
+		return game.paddle.getBounds().intersects(getBounds());
 	}
 
 	/**

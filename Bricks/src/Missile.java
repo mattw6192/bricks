@@ -48,8 +48,8 @@ void move() throws IOException {
 			//Game.missileCount = Game.missileCount - 1;
 		}
 		if (collision()){
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
+			// These conditionals check for collisions with the side of the paddle -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the paddle
 			//Game.missiles.remove(this);
 			//game.hasShot = false;
 			//Game.hasShot = false;
@@ -136,7 +136,7 @@ void move() throws IOException {
 		if (Game.missiles.size()>0){
 		for(int i = 0; i<Game.allBricks.size(); i++){ 
 			if (Game.missiles.get(0).getBounds().intersects(Game.allBricks.get(i).getBounds())){
-				Game.allBricks.get(i).subtractTwoHits();
+				Game.allBricks.get(i).subtractHit(2);
 				Game.Score += 1;
 				
 				game.colorBricks();

@@ -135,9 +135,9 @@ public class Ball {
 					Game.activeBalls.add(this);
 					ballMods = 0;
 					DIAMETER = 12;
-					game.racquet.setWIDTH(60);
-					game.racquet.racquetMods = 0;
-					game.racquet.setX(100);
+					game.paddle.setWIDTH(60);
+					game.paddle.racquetMods = 0;
+					game.paddle.setX(100);
 					setX(20);
 					setY(320);
 					//this.setColor(Color.BLACK);
@@ -146,6 +146,7 @@ public class Ball {
 					game.hasGun = false;
 					game.missileCount = 0;
 					game.missiles.clear();
+					game.repaint();
 				}
 				if (Game.activeBalls.size() > 1){
 					Game.activeBalls.remove(this);
@@ -156,14 +157,14 @@ public class Ball {
 				game.started = false;
 			}
 			Sound.Play(Sound.BALL);
-			y = game.racquet.getTopY() - DIAMETER;
-			// These conditionals check for collisions with the side of the racquet -- If such a collision occurs, the ball completely reverses
-			// This conditional check for collisions with the right side of the racquet
-			if (((getBounds().getX()) >= (game.racquet.getBounds().getX() + game.racquet.getBounds().getWidth() - 2)) ){
+			y = game.paddle.getTopY() - DIAMETER;
+			// These conditionals check for collisions with the side of the paddle -- If such a collision occurs, the ball completely reverses
+			// This conditional check for collisions with the right side of the paddle
+			if (((getBounds().getX()) >= (game.paddle.getBounds().getX() + game.paddle.getBounds().getWidth() - 2)) ){
 				ya = ya * (-1);
 				xa = xa * (-1);
-			// This conditional checks for collisions with the left side of the racquet
-			}else if (((getBounds().getX() + DIAMETER) <= (game.racquet.getBounds().getX() + 3))){
+			// This conditional checks for collisions with the left side of the paddle
+			}else if (((getBounds().getX() + DIAMETER) <= (game.paddle.getBounds().getX() + 3))){
 				ya = ya * (-1);
 				xa = xa * (-1);
 			}
@@ -241,11 +242,11 @@ public class Ball {
 	}
 
 	/**
-	 * checks collisions of the racquet and the ball
+	 * checks collisions of the paddle and the ball
 	 * @return
 	 */
 	private boolean collision() {
-		return game.racquet.getBounds().intersects(getBounds());
+		return game.paddle.getBounds().intersects(getBounds());
 	}
 	
 	/**

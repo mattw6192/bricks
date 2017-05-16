@@ -6,9 +6,9 @@ import java.awt.event.MouseEvent;
 
 public class SafetyNet {
 	private static final int Y = 550;
-	private int WIDTH = 853;
+	private int WIDTH = 850;
 	private int HEIGHT = 10;
-	private int x = 0;
+	private int x = 10;
 	private Game game;
 	private Color FILLCOLOR;
 	private int hitsLeft;
@@ -22,7 +22,7 @@ public class SafetyNet {
 	 */
 	public SafetyNet(Game game, Powerup parent) {
 		this.game = game;
-		setX(0);
+		setX(2);
 		FILLCOLOR = Color.LIGHT_GRAY;
 		hitsLeft = 2;
 		thisParent = parent;

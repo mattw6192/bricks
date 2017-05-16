@@ -16,12 +16,12 @@ public class HighScores extends javax.swing.JDialog{
 
 	boolean hasStarted;
 	Frame parentFrame;
-	startMenu4 menu;
+	StartMenu menu;
     /**
      * Creates new form HighScores
      * @throws IOException 
      */
-    public HighScores(java.awt.Frame parent, boolean modal, startMenu4 tempMenu, boolean ifStarted, Frame tempFrame) throws IOException {
+    public HighScores(java.awt.Frame parent, boolean modal, StartMenu tempMenu, boolean ifStarted, Frame tempFrame) throws IOException {
         super(parent, modal);
         initComponents();
         hasStarted = ifStarted;
@@ -90,8 +90,14 @@ public class HighScores extends javax.swing.JDialog{
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+
+        //String curDir = System.getProperty("user.dir");
+        String testDir = "/Users/Matt/IdeaProjects/bricks/Bricks/scores.dat";
+        //System.out.println("dir " + curDir);
+        //System.out.println("dir " + testDir);
+
  
-        BufferedReader in = new BufferedReader(new FileReader("scores.dat"));
+        BufferedReader in = new BufferedReader(new FileReader("./Bricks/scores.dat"));
         //jTextArea1.removeAll();
         String line = in.readLine();
         while(line != null){

@@ -2,11 +2,11 @@ import java.awt.Frame;
 
 @SuppressWarnings("serial")
 public class Instructions extends javax.swing.JDialog {
-    static startMenu4 saveFrame;
+    static StartMenu saveFrame;
     /**
      * Creates new form Instructions
      */
-    public Instructions(Frame parent, boolean modal, startMenu4 menu) {
+    public Instructions(Frame parent, boolean modal, StartMenu menu) {
         super(parent, modal);
         initComponents();
         saveFrame = menu;
